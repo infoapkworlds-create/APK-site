@@ -1,20 +1,21 @@
-// Bootstrap: loads the app and, if anything fails at startup or per request,
-// returns the real error text instead of an opaque platform 500.
+// Bootstrap: no top-level await (Vercel may require() this entrypoint).
+// Loads the app lazily and returns the real error text on failure.
 import http from 'node:http';
 
-let handler = null;
-let bootError = null;
-try {
-  ({ appHandler: handler } = await import('./app.js'));
-} catch (err) {
-  bootError = err;
-  console.error('BOOT ERROR:', err);
+let appPromise = null;
+function loadApp() {
+  if (!appPromise) appPromise = import('./app.js');
+  return appPromise;
 }
+loadApp().catch((err) => console.error('BOOT ERROR:', err));
 
 const server = http.createServer(async (req, res) => {
-  if (bootError) {
+  let handler;
+  try {
+    ({ appHandler: handler } = await loadApp());
+  } catch (err) {
     res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
-    return res.end('BOOT ERROR\n' + (bootError.stack || String(bootError)));
+    return res.end('BOOT ERROR\n' + (err.stack || String(err)));
   }
   try {
     await handler(req, res);
