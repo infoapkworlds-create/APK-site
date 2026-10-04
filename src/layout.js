@@ -136,6 +136,15 @@ export function page(o) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${o.title}</title>
 <meta name="description" content="${o.description}">
+<meta name="google-site-verification" content="jS5SQakfXRhkImoOZzvBX6qluXHCTlTRo-TaaHyKXCQ">
+<meta name="msvalidate.01" content="25038A8801D42437BBC34723A41AC6C4">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K601WNC1HR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-K601WNC1HR');
+</script>
 <link rel="canonical" href="${canonical}">
 ${index ? '' : raw('<meta name="robots" content="noindex, follow">\n')}<meta property="og:type" content="${o.ogType || 'website'}">
 <meta property="og:site_name" content="${config.siteName}">
