@@ -1,28 +1,30 @@
 import { DatabaseSync } from 'node:sqlite';
 import path from 'node:path';
 import fs from 'node:fs';
+import os from 'node:os';
+import { fileURLToPath } from 'node:url';
 import { config } from './config.js';
 
 const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
-let DB_FILE = path.join(config.dataDir, 'site.db');
+const SRC_DIR = path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
+const DB_CANDIDATES = [
+  fileURLToPath(new URL('../data/site.db', import.meta.url)),
+  path.join(config.dataDir, 'site.db'),
+  path.join(process.cwd(), 'data', 'site.db'),
+  path.join(SRC_DIR, '..', 'data', 'site.db'),
+];
+let DB_FILE = DB_CANDIDATES.find((p) => fs.existsSync(p)) || DB_CANDIDATES[0];
+export const dbInfo = { source: DB_FILE, found: fs.existsSync(DB_FILE), candidates: DB_CANDIDATES };
 
 if (isServerless) {
-  const tmpDb = path.join('/tmp', 'site.db');
-  try {
-    if (!fs.existsSync(tmpDb)) {
-      const sourceDb = fs.existsSync(DB_FILE)
-        ? DB_FILE
-        : path.join(process.cwd(), 'data', 'site.db');
-      if (fs.existsSync(sourceDb)) {
-        fs.copyFileSync(sourceDb, tmpDb);
-      }
+  const tmpDb = path.join(os.tmpdir(), 'site.db');
+  if (!fs.existsSync(tmpDb)) {
+    if (!dbInfo.found) {
+      throw new Error('site.db not found in deployment. Looked in: ' + DB_CANDIDATES.join(', ') + ' | cwd=' + process.cwd());
     }
-    if (fs.existsSync(tmpDb)) {
-      DB_FILE = tmpDb;
-    }
-  } catch (err) {
-    console.error('Serverless DB setup notice:', err.message);
+    fs.copyFileSync(DB_FILE, tmpDb);
   }
+  DB_FILE = tmpDb;
 }
 
 const SCHEMA = `
