@@ -35,6 +35,7 @@ export const config = {
   root: ROOT,
   dataDir: DATA_DIR,
   apkDir: path.join(DATA_DIR, 'apk'),
+  cdnBaseUrl: (process.env.CDN_BASE_URL || '').replace(/\/$/, ''), // e.g. https://cdn.apkworlds.co.uk or Cloudflare R2 bucket URL
   port: Number(process.env.PORT || 3000),
   siteUrl: (process.env.SITE_URL || 'https://www.apkworlds.co.uk').replace(/\/$/, ''),
   // When set (e.g. "droidshelf.example"), requests on any other host get a 301 to it.
