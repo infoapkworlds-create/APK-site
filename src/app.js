@@ -25,7 +25,7 @@ import {
 } from './lib/security.js';
 import { getAppIcon, getFavicon, getRealIconFile } from './icons.js';
 import { handleScreenshotRequest } from './screenshots.js';
-import { createMockApk } from './lib/apk-generator.js';
+import { createMockApk, generateMockApkBuffer } from './lib/apk-generator.js';
 import { page } from './layout.js';
 import { html, raw } from './lib/html.js';
 
@@ -346,14 +346,6 @@ export async function appHandler(req, res) {
       const fileRow = one(`SELECT f.*, a.slug, a.name, a.package_name, v.version AS v_version FROM apk_files f JOIN apps a ON a.id=f.app_id LEFT JOIN versions v ON v.id=f.version_id WHERE f.id=? AND f.status='active'`, fileId);
       if (fileRow && fileRow.scan_status !== 'flagged') {
         const filePath = path.join(config.apkDir, fileRow.filename);
-        if (!fs.existsSync(filePath)) {
-          await createMockApk(filePath, {
-            packageName: fileRow.package_name || `com.app.${fileRow.slug}`,
-            versionName: fileRow.v_version || '1.0.0',
-            appName: fileRow.name,
-            targetSize: 200_000,
-          });
-        }
         if (fs.existsSync(filePath)) {
           run(`INSERT INTO events (type, app_id, detail) VALUES ('download_click', ?, ?)`, fileRow.app_id, fileRow.filename);
           res.writeHead(200, {
@@ -362,6 +354,21 @@ export async function appHandler(req, res) {
             'Content-Length': fs.statSync(filePath).size,
           });
           return fs.createReadStream(filePath).pipe(res);
+        } else {
+          // In-memory instant delivery for serverless environments
+          const apkBuffer = generateMockApkBuffer({
+            packageName: fileRow.package_name || `com.app.${fileRow.slug}`,
+            versionName: fileRow.v_version || '1.0.0',
+            appName: fileRow.name,
+            targetSize: 250_000,
+          });
+          run(`INSERT INTO events (type, app_id, detail) VALUES ('download_click', ?, ?)`, fileRow.app_id, fileRow.filename);
+          res.writeHead(200, {
+            'Content-Type': 'application/vnd.android.package-archive',
+            'Content-Disposition': `attachment; filename="${encodeURIComponent(fileRow.filename)}"`,
+            'Content-Length': apkBuffer.length,
+          });
+          return res.end(apkBuffer);
         }
       }
     }
