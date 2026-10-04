@@ -4,9 +4,11 @@ import path from 'node:path';
 import { one } from './db.js';
 
 const ICONS_DIR = path.join(process.cwd(), 'data', 'icons');
-if (!fs.existsSync(ICONS_DIR)) {
-  fs.mkdirSync(ICONS_DIR, { recursive: true });
-}
+try {
+  if (!fs.existsSync(ICONS_DIR)) {
+    fs.mkdirSync(ICONS_DIR, { recursive: true });
+  }
+} catch {}
 
 // 1. Handcrafted, pixel-perfect vector logos for top Android apps
 const BRAND_ICONS = {

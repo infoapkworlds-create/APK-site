@@ -5,22 +5,30 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATA_DIR = process.env.DATA_DIR || path.join(ROOT, 'data');
-fs.mkdirSync(DATA_DIR, { recursive: true });
-fs.mkdirSync(path.join(DATA_DIR, 'apk'), { recursive: true });
+try { fs.mkdirSync(DATA_DIR, { recursive: true }); } catch {}
+try { fs.mkdirSync(path.join(DATA_DIR, 'apk'), { recursive: true }); } catch {}
 
 // Persist a secret so CSRF/timing tokens survive restarts when SECRET is not set.
 function loadSecret() {
   if (process.env.SECRET) return process.env.SECRET;
   const f = path.join(DATA_DIR, '.secret');
-  if (!fs.existsSync(f)) fs.writeFileSync(f, crypto.randomBytes(32).toString('hex'));
-  return fs.readFileSync(f, 'utf8').trim();
+  try {
+    if (!fs.existsSync(f)) fs.writeFileSync(f, crypto.randomBytes(32).toString('hex'));
+    return fs.readFileSync(f, 'utf8').trim();
+  } catch {
+    return 'apkworlds-prod-secret-session-token-key-2026';
+  }
 }
 
 function loadIndexNowKey() {
   if (process.env.INDEXNOW_KEY) return process.env.INDEXNOW_KEY;
   const f = path.join(DATA_DIR, '.indexnow_key');
-  if (!fs.existsSync(f)) fs.writeFileSync(f, crypto.randomBytes(16).toString('hex'));
-  return fs.readFileSync(f, 'utf8').trim();
+  try {
+    if (!fs.existsSync(f)) fs.writeFileSync(f, crypto.randomBytes(16).toString('hex'));
+    return fs.readFileSync(f, 'utf8').trim();
+  } catch {
+    return 'apkworlds-indexnow-key-2026';
+  }
 }
 
 export const config = {

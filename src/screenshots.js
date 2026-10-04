@@ -8,12 +8,16 @@ const SCREENSHOTS_DIR = path.join(process.cwd(), 'data', 'screenshots');
 const ICONS_DIR = path.join(process.cwd(), 'data', 'icons');
 
 // Ensure directories exist
-if (!fs.existsSync(SCREENSHOTS_DIR)) {
-  fs.mkdirSync(SCREENSHOTS_DIR, { recursive: true });
-}
-if (!fs.existsSync(ICONS_DIR)) {
-  fs.mkdirSync(ICONS_DIR, { recursive: true });
-}
+try {
+  if (!fs.existsSync(SCREENSHOTS_DIR)) {
+    fs.mkdirSync(SCREENSHOTS_DIR, { recursive: true });
+  }
+} catch {}
+try {
+  if (!fs.existsSync(ICONS_DIR)) {
+    fs.mkdirSync(ICONS_DIR, { recursive: true });
+  }
+} catch {}
 
 // In-flight fetch tracker to avoid duplicate parallel scrapes
 const pendingFetches = new Map();
@@ -71,11 +75,18 @@ export async function scrapeGooglePlayScreenshots(packageName) {
  */
 export async function ensureRealScreenshots(slug, packageName) {
   const appDir = path.join(SCREENSHOTS_DIR, slug);
-  if (!fs.existsSync(appDir)) {
-    fs.mkdirSync(appDir, { recursive: true });
-  }
+  try {
+    if (!fs.existsSync(appDir)) {
+      fs.mkdirSync(appDir, { recursive: true });
+    }
+  } catch {}
 
-  const existing = fs.readdirSync(appDir).filter((f) => f.endsWith('.webp') || f.endsWith('.jpg') || f.endsWith('.png'));
+  let existing = [];
+  try {
+    if (fs.existsSync(appDir)) {
+      existing = fs.readdirSync(appDir).filter((f) => f.endsWith('.webp') || f.endsWith('.jpg') || f.endsWith('.png'));
+    }
+  } catch {}
   if (existing.length >= 3) {
     return existing.sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
   }
@@ -115,8 +126,10 @@ export async function ensureRealScreenshots(slug, packageName) {
               if (buf.length >= 12000) {
                 const filename = `${downloadedFiles.length + 1}.webp`;
                 const filePath = path.join(appDir, filename);
-                fs.writeFileSync(filePath, buf);
-                downloadedFiles.push(filename);
+                try {
+                  fs.writeFileSync(filePath, buf);
+                  downloadedFiles.push(filename);
+                } catch {}
               }
             }
           } catch {}
@@ -233,4 +246,7 @@ export async function handleScreenshotRequest(req, res, slug, filename) {
       return fs.createReadStream(safeFile).pipe(res);
     }
   }
+
+  res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+  return res.end('Screenshot not found');
 }

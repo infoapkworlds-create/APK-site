@@ -3,10 +3,29 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { config } from './config.js';
 
-const DB_FILE = path.join(config.dataDir, 'site.db');
+const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+let DB_FILE = path.join(config.dataDir, 'site.db');
+
+if (isServerless) {
+  const tmpDb = path.join('/tmp', 'site.db');
+  try {
+    if (!fs.existsSync(tmpDb)) {
+      const sourceDb = fs.existsSync(DB_FILE)
+        ? DB_FILE
+        : path.join(process.cwd(), 'data', 'site.db');
+      if (fs.existsSync(sourceDb)) {
+        fs.copyFileSync(sourceDb, tmpDb);
+      }
+    }
+    if (fs.existsSync(tmpDb)) {
+      DB_FILE = tmpDb;
+    }
+  } catch (err) {
+    console.error('Serverless DB setup notice:', err.message);
+  }
+}
 
 const SCHEMA = `
-PRAGMA journal_mode = WAL;
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS users (
@@ -273,24 +292,42 @@ CREATE TABLE IF NOT EXISTS indexnow_log (
 `;
 
 export const db = new DatabaseSync(DB_FILE);
-db.exec(SCHEMA);
+try {
+  db.exec('PRAGMA foreign_keys = ON;');
+  db.exec('PRAGMA journal_mode = WAL;');
+  db.exec(SCHEMA);
+} catch (err) {
+  // Readonly or serverless notice
+  console.log('Database init status:', err.message);
+}
 
 export const one = (sql, ...p) => db.prepare(sql).get(...p);
 export const all = (sql, ...p) => db.prepare(sql).all(...p);
 export const run = (sql, ...p) => db.prepare(sql).run(...p);
 
 export function tx(fn) {
-  db.exec('BEGIN');
-  try { const r = fn(); db.exec('COMMIT'); return r; }
-  catch (e) { db.exec('ROLLBACK'); throw e; }
+  try { db.exec('BEGIN'); } catch {}
+  try {
+    const r = fn();
+    try { db.exec('COMMIT'); } catch {}
+    return r;
+  } catch (e) {
+    try { db.exec('ROLLBACK'); } catch {}
+    throw e;
+  }
 }
 
-const empty = one('SELECT COUNT(*) AS n FROM apps').n === 0;
+let empty = false;
+try {
+  empty = one('SELECT COUNT(*) AS n FROM apps')?.n === 0;
+} catch {}
 const reseed = process.argv.includes('--reseed');
 if (empty || reseed) {
   const { seed } = await import('./seed.js');
   if (reseed) {
-    for (const t of ['alternatives', 'comparisons', 'versions', 'apk_files', 'reviews', 'apps', 'guides', 'categories', 'developers']) db.exec(`DELETE FROM ${t}`);
+    for (const t of ['alternatives', 'comparisons', 'versions', 'apk_files', 'reviews', 'apps', 'guides', 'categories', 'developers']) {
+      try { db.exec(`DELETE FROM ${t}`); } catch {}
+    }
   }
   await seed({ run, one });
   console.log('Database seeded.');

@@ -166,7 +166,7 @@ function render404(req) {
   });
 }
 
-const server = http.createServer(async (req, res) => {
+export async function appHandler(req, res) {
   const ip = req.headers['x-forwarded-for']?.split(',')[0].trim() || req.socket.remoteAddress || '127.0.0.1';
   const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   let pathname = parsedUrl.pathname;
@@ -177,10 +177,11 @@ const server = http.createServer(async (req, res) => {
     return res.end();
   }
 
-  // Canonical host enforcement
+  // Canonical host enforcement (skip on local dev and Vercel preview domains)
   const reqHost = req.headers.host ? req.headers.host.split(':')[0] : '';
   const isLocalHost = reqHost === 'localhost' || reqHost === '127.0.0.1' || reqHost === '0.0.0.0';
-  if (!isLocalHost && config.canonicalHost && req.headers.host !== config.canonicalHost) {
+  const isVercelHost = reqHost.endsWith('.vercel.app');
+  if (!isLocalHost && !isVercelHost && config.canonicalHost && req.headers.host !== config.canonicalHost) {
     const proto = config.forceHttps ? 'https' : 'http';
     res.writeHead(301, { Location: `${proto}://${config.canonicalHost}${req.url}` });
     return res.end();
@@ -754,8 +755,12 @@ const server = http.createServer(async (req, res) => {
 
   res.writeHead(result.status || 200, { 'Content-Type': 'text/html; charset=utf-8' });
   res.end(result.html);
-});
+}
 
-server.listen(config.port, () => {
-  console.log(`${config.siteName} server running on ${config.siteUrl} (port ${config.port})`);
-});
+export const server = http.createServer(appHandler);
+
+if (!process.env.VERCEL && !process.env.AWS_LAMBDA_FUNCTION_NAME) {
+  server.listen(config.port, () => {
+    console.log(`${config.siteName} server running on ${config.siteUrl} (port ${config.port})`);
+  });
+}

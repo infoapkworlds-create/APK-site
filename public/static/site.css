@@ -1,0 +1,2837 @@
+/* ==========================================================================
+   APKPure Theme - High Performance, Modern Android APK Discovery Platform
+   ========================================================================== */
+
+:root {
+  /* APKPure Signature Palette */
+  --primary: #24c78d;
+  --primary-hover: #1db47e;
+  --primary-dark: #158055;
+  --primary-light: #e8f8f2;
+  --primary-subtle: #f0fdf8;
+  --primary-glow: rgba(36, 199, 141, 0.28);
+
+  /* APKPure Header & Surface Palette */
+  --header-bg: #182337;
+  --header-nav-border: #233149;
+  --header-text: #ffffff;
+  --header-muted: #94a3b8;
+
+  /* Surfaces & Typography */
+  --bg: #f4f6f9;
+  --card-bg: #ffffff;
+  --border: #e6ebf1;
+  --border-light: #f1f4f8;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+
+  /* Accents */
+  --star-gold: #ffb800;
+  --danger: #ef4444;
+  --danger-light: #fee2e2;
+  --success: #24c78d;
+
+  /* Sizing & Radius */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --max-w: 1240px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 3px 12px rgba(24, 35, 55, 0.05);
+  --shadow-hover: 0 8px 24px rgba(24, 35, 55, 0.09);
+  --shadow-dl: 0 4px 16px rgba(36, 199, 141, 0.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--text);
+  background-color: var(--bg);
+  line-height: 1.6;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Accessibility */
+.skip {
+  position: absolute;
+  top: -999px;
+  left: 0;
+  background: var(--primary);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  z-index: 1000;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 0 0 6px 0;
+}
+.skip:focus { top: 0; }
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+a { color: var(--primary-dark); text-decoration: none; transition: color 0.15s ease; }
+a:hover { color: var(--primary); }
+
+/* ==========================================================================
+   Header & Navigation (APKPure Slate Navy Style)
+   ========================================================================== */
+.site-header {
+  background: var(--header-bg);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+.hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+}
+
+/* Brand Logo */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  color: #fff;
+  transition: opacity 0.2s ease;
+}
+.logo:hover {
+  opacity: 0.95;
+}
+.logo-icon {
+  display: block;
+  border-radius: 8.5px;
+  box-shadow: 0 0 14px rgba(0, 229, 255, 0.4), 0 2px 6px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
+}
+.logo:hover .logo-icon {
+  transform: scale(1.06) rotate(-2deg);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.6), 0 0 10px rgba(255, 42, 77, 0.45);
+}
+.logo-name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  display: flex;
+  align-items: baseline;
+}
+.brand-apk {
+  color: #00d2ff;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 12px rgba(0, 210, 255, 0.35);
+}
+.brand-worlds {
+  color: #ffffff;
+  font-weight: 800;
+}
+.logo-badge {
+  background: linear-gradient(135deg, #ff2a4d, #c20a20);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 900;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(255, 42, 77, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Header Search Input */
+.hdr-search {
+  flex: 1;
+  max-width: 480px;
+}
+.hdr-search-box {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: #ffffff;
+  border-radius: var(--radius-pill);
+  padding: 0.25rem 0.35rem 0.25rem 0.85rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.hdr-search-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+}
+.hdr-search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 0.4rem 0.25rem;
+  font-size: 0.95rem;
+  color: var(--text);
+  min-width: 0;
+}
+.hdr-search-box input::placeholder {
+  color: #94a3b8;
+}
+.hdr-search-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 0.45rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.hdr-search-btn:hover {
+  background: var(--primary-hover);
+}
+
+/* Header Actions */
+.hdr-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.btn-hdr-submit {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(36, 199, 141, 0.15);
+  border: 1px solid var(--primary);
+  color: #4ade80;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+.btn-hdr-submit:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Sub-Navigation Strip (Top Nav) */
+.topnav {
+  border-top: 1px solid var(--header-nav-border);
+  padding: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.topnav ul {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.topnav a {
+  display: block;
+  padding: 0.65rem 0.9rem;
+  color: var(--header-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  transition: all 0.15s ease;
+}
+.topnav a:hover,
+.topnav a[aria-current="page"] {
+  color: #fff;
+  border-bottom-color: var(--primary);
+}
+
+/* Mobile Menu */
+.menu { display: none; position: relative; }
+.menu summary { list-style: none; cursor: pointer; padding: 0.5rem; color: #fff; }
+.menu summary::-webkit-details-marker { display: none; }
+.menu summary span { display: block; width: 22px; height: 2.5px; background: #fff; margin: 4px 0; border-radius: 2px; }
+.menu nav {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  box-shadow: var(--shadow-hover);
+  min-width: 200px;
+}
+.menu nav ul { list-style: none; margin: 0; padding: 0; }
+.menu nav li { margin: 0.5rem 0; }
+.menu nav a { color: var(--text); font-weight: 600; text-decoration: none; }
+.menu nav a:hover { color: var(--primary); }
+
+@media (max-width: 768px) {
+  .topnav { display: none; }
+  .menu { display: block; }
+  .btn-hdr-submit { display: none; }
+}
+
+/* ==========================================================================
+   APKPure Hero & Spotlight Section
+   ========================================================================== */
+/* ==========================================================================
+   APKPure Two-Column Homepage Design (Matches APKPure.com Exactly)
+   ========================================================================== */
+.pure-home-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 24px;
+  margin: 1.25rem 0 3rem;
+  align-items: start;
+}
+@media (max-width: 1024px) {
+  .pure-home-layout {
+    grid-template-columns: 100%;
+    gap: 1.5rem;
+  }
+}
+
+.pure-main-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+/* 1. Top Featured Carousel / Hero Banner */
+.pure-hero-slider {
+  background: #0b0f19;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  position: relative;
+  user-select: none;
+}
+.pure-slider-track {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  overflow: hidden;
+}
+.pure-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.45s ease-in-out, visibility 0.45s ease-in-out;
+  z-index: 1;
+}
+.pure-slide.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 2;
+}
+.pure-banner-link {
+  display: block;
+  text-decoration: none;
+  width: 100%;
+  height: 360px;
+}
+.pure-banner-img {
+  display: block;
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.pure-banner-link:hover .pure-banner-img {
+  transform: scale(1.02);
+}
+.pure-banner-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.75) 35%, rgba(15, 23, 42, 0.96) 100%);
+  padding: 1.5rem 1.25rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 3;
+}
+.pure-banner-app {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+  flex: 1;
+}
+.pure-banner-app .icon {
+  border-radius: 13px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+}
+.pure-banner-info {
+  min-width: 0;
+}
+.pure-banner-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+.pure-banner-title a {
+  color: #fff;
+  text-decoration: none;
+}
+.pure-banner-title a:hover {
+  color: var(--primary);
+}
+.pure-banner-sub {
+  margin: 0.15rem 0 0;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pure-banner-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.pure-banner-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.25s ease;
+}
+.pure-banner-dots .dot:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+.pure-banner-dots .dot.active {
+  background: var(--primary);
+  width: 20px;
+  border-radius: 5px;
+}
+.btn-pure-dl {
+  background: var(--primary);
+  color: #fff;
+  padding: 0.5rem 1.4rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  box-shadow: 0 2px 8px var(--primary-glow);
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.btn-pure-dl:hover {
+  background: var(--primary-hover);
+  color: #fff;
+  transform: translateY(-1px);
+}
+/* Slider arrow buttons */
+.pure-slider-arrow {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 1.25rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.25s ease;
+}
+.pure-hero-slider:hover .pure-slider-arrow {
+  opacity: 0.9;
+}
+.pure-slider-arrow:hover {
+  opacity: 1 !important;
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: translateY(-50%) scale(1.08);
+}
+.pure-slider-arrow.prev {
+  left: 12px;
+}
+.pure-slider-arrow.next {
+  right: 12px;
+}
+@media (max-width: 640px) {
+  .pure-slider-track,
+  .pure-banner-link,
+  .pure-banner-img {
+    height: 280px;
+  }
+  .pure-slider-arrow {
+    opacity: 0.75;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+}
+
+/* 2. Common White Box Shelf Sections */
+.pure-shelf-sec {
+  background: #fff;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  padding: 1.15rem 1.25rem;
+}
+.pure-sec-hdr {
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pure-sec-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.pure-sec-title a {
+  color: #1e293b;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s ease;
+}
+.pure-sec-title a:hover {
+  color: var(--primary);
+}
+.pure-sec-title .arrow {
+  color: #94a3b8;
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+.pure-sec-title a:hover .arrow {
+  color: var(--primary);
+  transform: translateX(3px);
+}
+
+/* 3. Horizontal Icon Shelves (Discover, Popular Games, Popular Apps) */
+.pure-icon-shelf {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 12px;
+  align-items: flex-start;
+}
+@media (max-width: 820px) {
+  .pure-icon-shelf {
+    display: flex;
+    overflow-x: auto;
+    gap: 14px;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.5rem;
+  }
+  .pure-shelf-card {
+    flex: 0 0 76px;
+    scroll-snap-align: start;
+  }
+}
+.pure-shelf-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  gap: 6px;
+  min-width: 0;
+}
+.pure-shelf-card .icon {
+  width: 66px;
+  height: 66px;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-light);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.pure-shelf-card:hover .icon {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+.pure-shelf-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 80px;
+  word-break: break-word;
+  transition: color 0.15s ease;
+}
+.pure-shelf-card:hover .pure-shelf-name {
+  color: var(--primary);
+}
+.pure-shelf-rating {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ea580c;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  line-height: 1;
+}
+.pure-star {
+  color: #f59e0b;
+  font-size: 0.85rem;
+}
+
+/* 4. Tri-Column Compact Lists (Latest Updated Games/Apps, Pre-registration) */
+.pure-tri-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px 14px;
+}
+@media (max-width: 768px) {
+  .pure-tri-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.pure-mini-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  text-decoration: none;
+  min-width: 0;
+  transition: background 0.15s ease;
+}
+.pure-mini-card:hover {
+  background: #f8fafc;
+}
+.pure-mini-card .icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-light);
+}
+.pure-mini-meta {
+  flex: 1;
+  min-width: 0;
+}
+.pure-mini-title {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+.pure-mini-card:hover .pure-mini-title {
+  color: var(--primary);
+}
+.pure-mini-ver {
+  margin: 0;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+.pure-mini-date {
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--text-light);
+  line-height: 1.3;
+}
+.pure-prereg-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  border: 1px solid #bbf7d0;
+  margin-top: 2px;
+}
+
+/* 5. 2-Column Articles Grid */
+.pure-articles-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 640px) {
+  .pure-articles-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.pure-article-card {
+  display: flex;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+  min-width: 0;
+}
+.pure-article-card:hover {
+  background: #f8fafc;
+}
+.pure-article-thumb {
+  width: 120px;
+  height: 74px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 6px;
+  background: #1e293b;
+}
+.pure-article-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.pure-article-card:hover .pure-article-img {
+  transform: scale(1.06);
+}
+.thumb-art-1 { background: linear-gradient(135deg, #0f172a 0%, #3b82f6 100%); }
+.thumb-art-2 { background: linear-gradient(135deg, #14532d 0%, #22c55e 100%); }
+.thumb-art-3 { background: linear-gradient(135deg, #701a75 0%, #ec4899 100%); }
+.thumb-art-4 { background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%); }
+.pure-article-tag {
+  position: relative;
+  z-index: 2;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+.pure-article-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.pure-article-title {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.pure-article-card:hover .pure-article-title {
+  color: var(--primary);
+}
+.pure-article-date {
+  font-size: 0.74rem;
+  color: var(--text-light);
+}
+
+/* 6. Partner Developers Cards */
+.pure-dev-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  text-decoration: none;
+  min-width: 0;
+  transition: background 0.15s ease;
+}
+.pure-dev-card:hover {
+  background: #f8fafc;
+}
+.pure-dev-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+.avatar-bg-1 { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+.avatar-bg-2 { background: linear-gradient(135deg, #059669, #047857); }
+.avatar-bg-3 { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
+.avatar-bg-4 { background: linear-gradient(135deg, #ea580c, #c2410c); }
+.avatar-bg-5 { background: linear-gradient(135deg, #db2777, #be185d); }
+.avatar-bg-6 { background: linear-gradient(135deg, #0891b2, #0e7490); }
+.pure-dev-name {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+.pure-dev-card:hover .pure-dev-name {
+  color: var(--primary);
+}
+.pure-dev-meta {
+  margin: 0;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* ==========================================================================
+   APKPure Right Sidebar Widgets
+   ========================================================================== */
+.pure-sidebar-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+/* Sidebar App Promo Widget */
+.pure-promo-box {
+  background: #fff;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  padding: 1.15rem;
+}
+.pure-promo-top {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+.pure-promo-icon {
+  flex-shrink: 0;
+}
+.pure-promo-text {
+  flex: 1;
+  min-width: 0;
+}
+.pure-promo-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.pure-promo-title {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pure-promo-score {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #ea580c;
+  flex-shrink: 0;
+}
+.pure-promo-sub {
+  margin: 0.15rem 0 0;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-pure-promo-dl {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(135deg, #24c78d 0%, #1db47e 100%);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.86rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(36, 199, 141, 0.4);
+  margin-bottom: 0.85rem;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.btn-pure-promo-dl:hover {
+  background: #1db47e;
+  transform: translateY(-1px);
+  color: #fff;
+}
+.pure-promo-social {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 0.5rem;
+  border-top: 1px solid #f1f5f9;
+}
+.soc-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+.soc-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Sidebar Sections & Lists */
+.pure-side-sec {
+  background: #fff;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  padding: 1.15rem 1rem;
+}
+.pure-side-hdr {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+.pure-side-title {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 800;
+}
+.pure-side-title a {
+  color: #1e293b;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s ease;
+}
+.pure-side-title a:hover {
+  color: var(--primary);
+}
+.pure-side-title .arrow {
+  color: #94a3b8;
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Editor's Pick Top Hero in Sidebar */
+.pure-rec-hero {
+  display: block;
+  text-decoration: none;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 0.85rem;
+  border: 1px solid var(--border);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.pure-rec-hero:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+.pure-rec-banner {
+  height: 125px;
+  overflow: hidden;
+  background: #000;
+}
+.pure-rec-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.pure-rec-body {
+  padding: 0.65rem 0.85rem;
+  background: #fff;
+}
+.pure-rec-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.pure-rec-name {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pure-rec-rating {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #ea580c;
+  flex-shrink: 0;
+}
+.pure-rec-sub {
+  margin: 0.2rem 0 0;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Sidebar Stacked List Items */
+.pure-side-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pure-side-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 6px;
+  border-radius: 8px;
+  text-decoration: none;
+  min-width: 0;
+  transition: background 0.15s ease;
+}
+.pure-side-item:hover {
+  background: #f8fafc;
+}
+.pure-side-item .icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-light);
+}
+.pure-side-meta {
+  flex: 1;
+  min-width: 0;
+}
+.pure-side-name {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+.pure-side-item:hover .pure-side-name {
+  color: var(--primary);
+}
+.pure-side-sub {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+.pure-side-rating {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #ea580c;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.pure-price-tag {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #2563eb;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.pure-price-tag.free {
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  border-color: #bbf7d0;
+}
+
+/* ==========================================================================
+   APKPure App Card Design (Grid & Lists)
+   ========================================================================== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.15rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.15rem;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: #cbd5e1;
+}
+
+.app-card {
+  display: flex;
+  gap: 0.95rem;
+  align-items: center;
+  position: relative;
+  min-height: 84px;
+  padding: 0.85rem 1.15rem;
+}
+.app-card .icon {
+  border-radius: 13px;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-light);
+}
+
+.app-card-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+}
+.app-card-title {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-card-title a {
+  text-decoration: none;
+  color: var(--text);
+  transition: color 0.15s ease;
+}
+.app-card-title a:hover {
+  color: var(--primary);
+}
+
+.app-card-meta {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+.app-card-meta a { text-decoration: none; color: var(--text-muted); }
+.app-card-meta a:hover { color: var(--primary); }
+
+.app-card-bottom {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+  margin: 0;
+}
+.app-card-sep {
+  color: var(--text-light);
+  font-size: 0.75rem;
+}
+.app-card-size {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Green APKPure "Download" Button on Cards */
+.btn-apk-dl {
+  flex-shrink: 0;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  border: 1px solid #a7f3d0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.45rem 1.05rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  line-height: 1.2;
+}
+.btn-apk-dl:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px var(--primary-glow);
+}
+
+/* ==========================================================================
+   Ratings (APKPure Google Play Gold Star Style)
+   ========================================================================== */
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  line-height: 1;
+}
+.rating.none { color: var(--text-light); font-size: 0.82rem; }
+.rating.few { color: var(--text-light); font-size: 0.82rem; }
+
+.stars {
+  color: var(--star-gold);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+.rating-score {
+  font-weight: 800;
+  color: var(--text);
+}
+.rating-votes {
+  color: var(--text-light);
+  font-weight: normal;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Category Pills (APKPure Emoji Badges)
+   ========================================================================== */
+.category-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 1.25rem 0;
+}
+.cat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s ease;
+}
+.cat-emoji { font-size: 1.1rem; }
+.cat-pill:hover {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+.cat-pill:hover .cat-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.cat-count {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #f1f5f9;
+  color: var(--text-muted);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-pill);
+}
+
+/* ==========================================================================
+   Section Headers
+   ========================================================================== */
+.home-section {
+  margin-bottom: 3.25rem;
+}
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 2px solid var(--border);
+}
+.section-head h2 {
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.01em;
+}
+.section-sub {
+  margin: 0.25rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+.link-more {
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.92rem;
+  color: var(--primary-dark);
+}
+.link-more:hover { color: var(--primary); }
+
+/* ==========================================================================
+   APKPure App Detail Page Showcase
+   ========================================================================== */
+.app { margin: 1.5rem 0; }
+
+.apk-detail-hero {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 2rem;
+}
+
+.apk-hero-main {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+@media (max-width: 768px) {
+  .apk-hero-main { flex-direction: column; align-items: center; text-align: center; }
+}
+
+.apk-hero-icon-wrap .icon {
+  border-radius: 22px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-light);
+}
+
+.apk-hero-info { flex: 1; min-width: 0; }
+.apk-app-title {
+  font-size: 2.15rem;
+  font-weight: 800;
+  margin: 0 0 0.4rem;
+  line-height: 1.2;
+}
+.apk-title-tag {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 0.9rem;
+  font-weight: 800;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  vertical-align: middle;
+}
+
+.apk-dev-meta {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0 0 0.65rem;
+}
+.dev-name { font-weight: 700; color: var(--text); }
+.verified-badge {
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  margin-left: 0.35rem;
+}
+
+.apk-hero-ratings {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.85rem;
+}
+.apk-rating-divider { color: var(--text-light); }
+.apk-reviews-link { font-size: 0.88rem; font-weight: 600; color: var(--text-muted); }
+
+.apk-hero-summary {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0 0 1.5rem;
+}
+
+/* Giant APKPure Green Download Button */
+.apk-hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+.btn-apk-hero-dl {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, #24c78d 0%, #1db47e 100%);
+  color: #fff;
+  border-radius: var(--radius-pill);
+  padding: 0.85rem 2.25rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: var(--shadow-dl);
+  transition: all 0.2s ease;
+}
+.btn-apk-hero-dl:hover {
+  background: #1db47e;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(36, 199, 141, 0.45);
+  color: #fff;
+}
+.btn-size-tag {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  font-weight: 600;
+}
+
+.apk-safety-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid #bbf7d0;
+}
+
+/* Horizontal Quick Specs Strip (APKPure style) */
+.apk-quick-specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.spec-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.spec-val {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.spec-val code {
+  font-family: inherit;
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Sub-Navigation Tabs (APKPure Style)
+   ========================================================================== */
+.subnav {
+  margin: 1.75rem 0;
+  border-bottom: 2px solid var(--border);
+}
+.subnav ul {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.subnav a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding-bottom: 0.75rem;
+  display: block;
+  border-bottom: 3px solid transparent;
+  transition: all 0.15s ease;
+}
+.subnav a:hover,
+.subnav a[aria-current="page"] {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* Download Box & Facts Table */
+.app-top {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+@media (max-width: 768px) { .app-top { grid-template-columns: 1fr; } }
+
+.dlbox {
+  background: var(--primary-subtle);
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.dlbox .btn { width: 100%; font-size: 1.05rem; }
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin: 0;
+}
+.facts dt { font-size: 0.85rem; color: var(--text-light); margin: 0; }
+.facts dd { font-weight: 700; color: var(--text); margin: 0 0 0.5rem; }
+
+/* ==========================================================================
+   Pros & Cons Section
+   ========================================================================== */
+.proscons-section { margin: 2.25rem 0; }
+.proscons-section h2 { margin: 0 0 1rem; font-size: 1.4rem; color: #111827; }
+.proscons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 768px) { .proscons { grid-template-columns: 1fr; } }
+
+.pro-card, .con-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+}
+.pro-card {
+  border-top: 4px solid var(--primary);
+  background: #fbfdfc;
+}
+.con-card {
+  border-top: 4px solid var(--danger);
+  background: #fffafa;
+}
+.pro-card h3 {
+  margin: 0 0 1rem;
+  color: var(--primary-dark);
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+.con-card h3 {
+  margin: 0 0 1rem;
+  color: #b91c1c;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+.pros, .cons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pros li, .cons li {
+  position: relative;
+  padding-left: 1.75rem;
+  line-height: 1.5;
+  font-size: 0.95rem;
+  color: #334155;
+}
+.pros li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+.cons li::before {
+  content: "✕";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--danger);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   Buttons & Generic Elements
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  min-height: 44px;
+  transition: all 0.15s ease;
+}
+.btn.primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-dl);
+}
+.btn.primary:hover {
+  background: var(--primary-hover);
+  color: #fff;
+}
+.btn.secondary {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  border-color: #a7f3d0;
+}
+.btn.secondary:hover {
+  background: var(--primary);
+  color: #fff;
+}
+.btn.danger { background: var(--danger); color: #fff; border-color: var(--danger); }
+.btn.sm { padding: 0.4rem 0.85rem; font-size: 0.85rem; min-height: 32px; }
+
+/* Breadcrumbs */
+.crumbs { padding: 0.85rem 0; font-size: 0.88rem; color: var(--text-muted); }
+.crumbs ol { display: flex; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; gap: 0.5rem; }
+.crumbs li+li::before { content: "/"; margin-right: 0.5rem; color: #cbd5e1; }
+.crumbs a { text-decoration: none; color: var(--text-muted); }
+.crumbs a:hover { color: var(--primary); }
+
+/* ==========================================================================
+   Rating Breakdown Bars & Reviews
+   ========================================================================== */
+.dist { display: flex; flex-direction: column; gap: 0.4rem; max-width: 480px; margin: 1rem 0; }
+.dist .bar { display: flex; align-items: center; gap: 0.75rem; font-size: 0.85rem; font-weight: 600; }
+.dist meter { flex: 1; height: 10px; border-radius: 5px; }
+.dist meter::-webkit-meter-optimum-value { background: var(--primary); border-radius: 5px; }
+
+.reviews { list-style: none; padding: 0; margin: 1.5rem 0; }
+.review {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+.review h3 { margin: 0.25rem 0 0.5rem; font-size: 1.1rem; }
+.rstars { color: var(--star-gold); letter-spacing: 2px; margin: 0; font-size: 1.1rem; }
+
+/* ==========================================================================
+   Guide Cards & Trust Banner
+   ========================================================================== */
+.guide-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+.guide-card {
+  display: flex;
+  flex-direction: column;
+}
+.guide-card .guide-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  align-self: flex-start;
+  margin-bottom: 0.65rem;
+}
+.guide-card h3 { margin: 0 0 0.5rem; font-size: 1.15rem; }
+.guide-card h3 a { color: var(--text); }
+.guide-card h3 a:hover { color: var(--primary); }
+.guide-card .sum { flex: 1; font-size: 0.92rem; color: var(--text-muted); margin: 0 0 1rem; }
+
+.home-trust {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin: 3.5rem 0 2rem;
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+.trust-badge {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 0.75rem;
+}
+.home-trust h2 { font-size: 1.85rem; font-weight: 800; margin: 0 0 2rem; color: #111827; }
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  text-align: left;
+}
+.trust-item .trust-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.trust-item h3 { margin: 0 0 0.5rem; font-size: 1.15rem; color: #1e293b; }
+.trust-item p { margin: 0; font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
+.trust-links { margin-top: 2rem; font-size: 0.9rem; color: var(--text-light); }
+.trust-links a { font-weight: 600; color: var(--text-muted); }
+
+/* ==========================================================================
+   APKPure Footer (Slate Navy)
+   ========================================================================== */
+.site-footer {
+  background: var(--header-bg);
+  color: var(--header-muted);
+  padding: 3.5rem 0 1.75rem;
+  margin-top: 4.5rem;
+  border-top: 3px solid var(--primary);
+}
+.f-top {
+  display: grid;
+  grid-template-columns: 1.2fr 2.8fr;
+  gap: 3rem;
+  margin-bottom: 2.5rem;
+}
+@media (max-width: 900px) {
+  .f-top { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+.f-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+.f-brand-title {
+  color: #fff;
+  font-size: 1.35rem;
+  font-weight: 800;
+  display: flex;
+  align-items: baseline;
+}
+.f-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin: 0 0 1.25rem;
+}
+.f-badge {
+  display: inline-block;
+  background: rgba(36, 199, 141, 0.15);
+  border: 1px solid var(--primary);
+  color: #4ade80;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+}
+
+.f-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.75rem;
+}
+.f-col h3 {
+  color: #fff;
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 800;
+}
+.f-col ul { list-style: none; margin: 0; padding: 0; }
+.f-col li { margin-bottom: 0.55rem; }
+.f-col a { color: #cbd5e1; font-size: 0.9rem; text-decoration: none; }
+.f-col a:hover { color: var(--primary); }
+
+.f-bottom {
+  border-top: 1px solid var(--header-nav-border);
+  padding-top: 1.75rem;
+  font-size: 0.85rem;
+  text-align: center;
+  color: #64748b;
+}
+.f-bottom p { margin: 0 0 0.4rem; }
+.f-disclaimer { font-size: 0.8rem; }
+
+/* ==========================================================================
+   Forms, Tables, Admin & Filter Bar
+   ========================================================================== */
+.tablewrap { overflow-x: auto; margin: 1.5rem 0; }
+table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--border); border-radius: 8px; }
+th, td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); text-align: left; }
+th { background: #f8fafc; font-weight: 700; color: #334155; }
+tr:last-child td { border-bottom: none; }
+
+.faq { margin: 2rem 0; }
+.faq details { background: #fff; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.75rem; padding: 0.85rem 1.25rem; }
+.faq summary { font-weight: 700; cursor: pointer; color: #1e293b; }
+.faq p { margin: 0.75rem 0 0; color: var(--text-muted); }
+
+.form { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem; margin: 1.5rem 0; }
+.field { margin-bottom: 1.25rem; }
+.field label { display: block; font-weight: 700; font-size: 0.95rem; margin-bottom: 0.35rem; }
+.field input, .field select, .field textarea {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 1rem;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: 2px solid var(--primary);
+  border-color: transparent;
+}
+
+.filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  box-shadow: var(--shadow-sm);
+}
+.filter-group { flex: 1; min-width: 160px; }
+.filter-group label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.35rem; }
+.filter-group select, .filter-group input { width: 100%; padding: 0.55rem; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+
+/* Autocomplete Suggest Box */
+.suggest-box {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-hover);
+  z-index: 200;
+  overflow: hidden;
+}
+.suggest-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  text-decoration: none;
+  color: var(--text);
+  border-bottom: 1px solid var(--border-light);
+}
+.suggest-row:hover, .suggest-row.is-active {
+  background: var(--primary-subtle);
+}
+.suggest-icon { border-radius: 8px; flex-shrink: 0; }
+.suggest-title { font-weight: 700; font-size: 0.95rem; }
+.suggest-meta { font-size: 0.82rem; color: var(--text-muted); }
+.suggest-footer {
+  display: block;
+  padding: 0.65rem 1rem;
+  background: #f8fafc;
+  color: var(--primary-dark);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   APKPure App Screenshots Gallery Carousel
+   ========================================================================== */
+.apk-screenshots-sec {
+  background: #fff;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  padding: 1.25rem 1.35rem 1.5rem;
+  margin: 1.5rem 0;
+  position: relative;
+}
+.apk-screenshots-sec .apk-sec-hdr {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+.apk-screenshots-sec .apk-sec-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1e293b;
+  letter-spacing: -0.01em;
+}
+.apk-gallery-wrapper {
+  position: relative;
+  width: 100%;
+}
+.apk-gallery-track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  padding: 4px 2px 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.apk-gallery-track::-webkit-scrollbar {
+  display: none;
+}
+.apk-screenshot-item {
+  flex: 0 0 auto;
+  margin: 0;
+  scroll-snap-align: start;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: #0f172a;
+  cursor: pointer;
+  height: 230px;
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.apk-screenshot-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+}
+.apk-screenshot-img {
+  height: 230px;
+  width: auto;
+  max-width: 480px;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+/* Circular floating arrows (matching APKPure screenshot) */
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #1e293b;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 900;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+.gallery-arrow:hover {
+  background: #ffffff;
+  color: var(--primary);
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.24);
+}
+.gallery-arrow.prev {
+  left: 8px;
+  display: none;
+}
+.gallery-arrow.next {
+  right: 8px;
+}
+@media (max-width: 640px) {
+  .apk-screenshot-item.landscape {
+    width: 290px;
+    height: 163px;
+  }
+  .apk-screenshot-item.portrait {
+    width: 160px;
+    height: 285px;
+  }
+  .gallery-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+}
+
+/* Lightbox Modal */
+.apk-lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lbFadeIn 0.2s ease;
+}
+.apk-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.apk-lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.apk-lightbox-img {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  object-fit: contain;
+}
+.apk-lightbox-close {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+.apk-lightbox-close:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+}
+@keyframes lbFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==========================================================================
+   APKPure Style: Guides, Articles & Magazine Layout
+   ========================================================================== */
+.guide-hub-header {
+  margin-bottom: 2rem;
+}
+.guide-hub-kicker {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 0.75rem;
+}
+.guide-filter-bar {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+}
+.guide-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1rem;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+.guide-pill:hover,
+.guide-pill.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+/* Hero Magazine Showcase */
+.guide-hero-showcase {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+@media (max-width: 900px) {
+  .guide-hero-showcase {
+    grid-template-columns: 1fr;
+  }
+}
+.guide-hero-primary {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.guide-hero-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+.guide-hero-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #0f172a;
+  display: block;
+}
+.guide-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.guide-hero-primary:hover .guide-hero-img {
+  transform: scale(1.03);
+}
+.guide-badge-featured {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(36, 199, 141, 0.95);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.guide-hero-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.guide-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 0.65rem;
+  flex-wrap: wrap;
+}
+.guide-read-time {
+  color: var(--text-light);
+}
+.guide-hero-title {
+  font-size: 1.45rem;
+  line-height: 1.35;
+  margin: 0 0 0.75rem;
+  font-weight: 800;
+}
+.guide-hero-title a {
+  color: var(--text);
+}
+.guide-hero-title a:hover {
+  color: var(--primary);
+}
+.guide-hero-sum {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0 0 1.25rem;
+  flex: 1;
+}
+.guide-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  color: var(--primary-dark);
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+.guide-hero-cta:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* Hero Sidebar */
+.guide-hero-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.guide-sidebar-heading {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin: 0 0 0.25rem;
+  color: var(--text);
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+.guide-hero-subcard {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  display: flex;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.guide-hero-subcard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+.guide-subcard-thumb {
+  flex-shrink: 0;
+  width: 120px;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #0f172a;
+}
+.guide-subcard-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+.guide-hero-subcard:hover .guide-subcard-thumb img {
+  transform: scale(1.05);
+}
+.guide-subcard-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.guide-subcard-info h4 {
+  font-size: 0.95rem;
+  line-height: 1.35;
+  margin: 0 0 0.35rem;
+  font-weight: 700;
+}
+.guide-subcard-info h4 a {
+  color: var(--text);
+}
+.guide-subcard-info h4 a:hover {
+  color: var(--primary);
+}
+.guide-subcard-sum {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Magazine Grid */
+.guide-section-block {
+  margin-bottom: 3.5rem;
+}
+.guide-section-header {
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0.75rem;
+}
+.guide-section-header h2 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  margin: 0 0 0.3rem;
+  color: var(--text);
+}
+.guide-magazine-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+.guide-magazine-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.guide-magazine-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: #cbd5e1;
+}
+.guide-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #0f172a;
+  overflow: hidden;
+  display: block;
+}
+.guide-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.guide-magazine-card:hover .guide-card-media img {
+  transform: scale(1.05);
+}
+.guide-topic-tag {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: rgba(24, 35, 55, 0.85);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.55rem;
+  border-radius: 4px;
+}
+.guide-topic-tag.app-tag {
+  background: rgba(36, 199, 141, 0.9);
+}
+.guide-media-icon {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  border: 2px solid #ffffff;
+  background: #ffffff;
+}
+.guide-media-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.guide-magazine-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.guide-magazine-body h3 {
+  font-size: 1.15rem;
+  line-height: 1.4;
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+}
+.guide-magazine-body h3 a {
+  color: var(--text);
+}
+.guide-magazine-body h3 a:hover {
+  color: var(--primary);
+}
+.guide-card-excerpt {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0 0 1rem;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.guide-card-action {
+  border-top: 1px solid var(--border-light);
+  padding-top: 0.75rem;
+}
+.guide-action-link {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+.guide-action-link:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+.guide-verified-badge {
+  color: var(--primary-dark);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+/* Trust Banner */
+.guide-trust-banner {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-card);
+  margin: 2rem 0;
+}
+.guide-trust-inner {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+.guide-trust-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+.guide-trust-content h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+.guide-trust-content p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+/* Guide Article Detail Hero Banner */
+.article-hero-banner {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin: 1.75rem 0;
+  background: #0f172a;
+  box-shadow: var(--shadow-card);
+}
+.article-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   APKPure Style: Category Hub
+   ========================================================================== */
+.cat-section-block {
+  margin-bottom: 2.5rem;
+}
+.cat-section-head {
+  margin-bottom: 1.25rem;
+}
+.cat-section-head h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 0 0.25rem;
+  color: var(--text);
+}
+.cat-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.25rem;
+}
+.cat-hub-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.cat-hub-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary);
+}
+.cat-card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+.cat-emoji-badge {
+  font-size: 1.75rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.cat-card-titles {
+  flex: 1;
+  min-width: 0;
+}
+.cat-card-titles h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.cat-card-titles h3 a {
+  color: var(--text);
+}
+.cat-card-titles h3 a:hover {
+  color: var(--primary);
+}
+.cat-count-pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-pill);
+}
+.cat-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin: 0 0 1rem;
+  flex: 1;
+}
+.cat-preview-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--bg);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.85rem;
+}
+.cat-preview-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.cat-preview-icons {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+.cat-mini-thumb {
+  display: block;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.15s ease;
+  flex-shrink: 0;
+}
+.cat-mini-thumb:hover {
+  transform: scale(1.15);
+}
+.cat-mini-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cat-card-footer {
+  border-top: 1px solid var(--border-light);
+  padding-top: 0.75rem;
+}
+.cat-explore-btn {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+.cat-explore-btn:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   APKPure Style: Developer Directory
+   ========================================================================== */
+.dev-directory-stats {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.dev-stat-badge {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  box-shadow: var(--shadow-sm);
+}
+.dev-stat-badge strong {
+  color: var(--text);
+  font-weight: 800;
+  margin-right: 0.35rem;
+}
+.dev-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+.dev-hub-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.dev-hub-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  border-color: #cbd5e1;
+}
+.dev-card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.65rem;
+}
+.dev-card-header-info {
+  flex: 1;
+  min-width: 0;
+}
+.dev-card-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+.dev-card-title a {
+  color: var(--text);
+}
+.dev-card-title a:hover {
+  color: var(--primary);
+}
+.dev-meta-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.pure-verified-tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+.dev-rating-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #334155;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+}
+.dev-rating-tag .pure-star {
+  color: var(--star-gold);
+}
+.dev-catalog-count {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin: 0 0 0.65rem;
+}
+.dev-bio-excerpt {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin: 0 0 1rem;
+  flex: 1;
+}
+.dev-apps-preview-block {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--bg);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.85rem;
+}
+.dev-preview-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.dev-preview-icons {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+.dev-mini-thumb {
+  display: block;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.15s ease;
+  flex-shrink: 0;
+}
+.dev-mini-thumb:hover {
+  transform: scale(1.15);
+}
+.dev-mini-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dev-card-footer {
+  border-top: 1px solid var(--border-light);
+  padding-top: 0.75rem;
+}
+.dev-profile-link {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+.dev-profile-link:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* Developer Profile Page Head */
+.dev-profile-top {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
