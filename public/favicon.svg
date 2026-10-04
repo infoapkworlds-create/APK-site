@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="favCyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#0088FF"/>
+    </linearGradient>
+    <linearGradient id="favRed" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF2A4D"/>
+      <stop offset="100%" stop-color="#C20A20"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Dark cosmic badge -->
+  <rect width="32" height="32" rx="7.5" fill="#0A0E17"/>
+
+  <!-- Back orbit (subtle depth) -->
+  <path d="M 17 8 C 23 9, 27 12, 27 16" fill="none" stroke="#00C8FF" stroke-width="0.8" opacity="0.4" stroke-linecap="round"/>
+  <path d="M 18 9 C 23 10, 26 13, 26 16" fill="none" stroke="url(#favRed)" stroke-width="1.2" opacity="0.3" stroke-linecap="round"/>
+
+  <!-- APK Bold Lettering -->
+  <!-- A -->
+  <path d="M 6 22.5 L 9.3 10 L 11.7 10 L 15 22.5 L 12.6 22.5 L 12 19.8 L 9 19.8 L 8.4 22.5 Z M 9.5 17.6 L 11.5 17.6 L 10.5 13.2 Z" fill="url(#favCyan)"/>
+  <!-- P -->
+  <path d="M 14.2 22.5 L 14.2 10 L 18.5 10 C 20.6 10, 22 11.4, 22 13.5 C 22 15.6, 20.6 17, 18.5 17 L 16.5 17 L 16.5 22.5 Z M 16.5 15 L 18.2 15 C 19.3 15, 20 14.4, 20 13.5 C 20 12.6, 19.3 12, 18.2 12 L 16.5 12 Z" fill="url(#favCyan)"/>
+  <!-- K -->
+  <path d="M 21.2 22.5 L 21.2 10 L 23.5 10 L 23.5 15.3 L 26.6 10 L 29.5 10 L 25.8 15.8 L 29.8 22.5 L 26.9 22.5 L 23.8 17.2 L 23.5 17.8 L 23.5 22.5 Z" fill="url(#favCyan)"/>
+
+  <!-- Front Dynamic Orbit Swoosh -->
+  <!-- Outer Cyan Rim -->
+  <path d="M 16 7.5 C 10 7.5, 5 10, 5 15 C 5 20.5, 11 26.5, 23 27.5 C 26.5 27.8, 29.5 26.5, 30 25 C 30 24.5, 29.5 24.5, 29 24.8 C 27 25.6, 24 26, 21 25.8 C 10.5 24.8, 6.2 19.2, 6.2 15 C 6.2 11, 10.5 8.5, 16 8.5 Z" fill="#00E5FF"/>
+  <!-- Inner Red Ribbon -->
+  <path d="M 16.5 8 C 11 8.2, 6.5 11, 6.5 15 C 6.5 19.5, 11.5 25.2, 22 26.3 C 25.5 26.6, 28.5 25.5, 29.5 24.5 C 29 24, 28 24, 26 24.3 C 18 25, 10 21, 8.5 16 C 7.8 13.5, 9 11.5, 11.8 9.5 C 13.2 8.5, 15 8.1, 16.5 8 Z" fill="url(#favRed)"/>
+</svg>
