@@ -759,8 +759,10 @@ export async function appHandler(req, res) {
 
 export const server = http.createServer(appHandler);
 
-if (!process.env.VERCEL && !process.env.AWS_LAMBDA_FUNCTION_NAME) {
+if (!process.env.NO_LISTEN) {
   server.listen(config.port, () => {
     console.log(`${config.siteName} server running on ${config.siteUrl} (port ${config.port})`);
   });
 }
+
+export default server;
