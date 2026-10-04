@@ -2,11 +2,13 @@ import { config } from '../config.js';
 import * as D from '../lib/data.js';
 import { run, all } from '../db.js';
 
-export function getIndexableUrls() {
+export function getCategorizedUrls() {
   const base = config.siteUrl;
-  const urls = [];
+  const main = [];
+  const apps = [];
+  const games = [];
+  const guides = [];
 
-  // Query actual latest dates across main segments for natural hub timestamps
   const latestAppDateRow = all(`SELECT MAX(updated_at) as latest_upd, MAX(published_at) as latest_pub FROM apps WHERE status='published'`)[0];
   const latestAppDate = (latestAppDateRow?.latest_upd || '2026-10-02').slice(0, 10);
   const latestGuideDateRow = all(`SELECT MAX(COALESCE(updated_at, published_at)) as latest FROM guides WHERE status='published'`)[0];
@@ -16,8 +18,8 @@ export function getIndexableUrls() {
   const latestGameDateRow = all(`SELECT MAX(a.updated_at) as latest FROM apps a JOIN categories c ON c.id=a.category_id WHERE a.status='published' AND (a.app_type='game' OR c.kind='game')`)[0];
   const latestGameDate = (latestGameDateRow?.latest || '2026-10-01').slice(0, 10);
 
-  const add = (path, lastmod, priority = '0.7', changefreq = 'weekly') => {
-    urls.push({
+  const add = (targetList, path, lastmod, priority = '0.7', changefreq = 'weekly') => {
+    targetList.push({
       loc: base + path,
       lastmod: lastmod ? String(lastmod).slice(0, 10) : latestAppDate,
       priority,
@@ -25,34 +27,34 @@ export function getIndexableUrls() {
     });
   };
 
-  // 1. Dynamic hubs with high crawl priority
-  add('/', latestAppDate, '1.0', 'daily');
-  add('/apps/', latestAppDate, '0.9', 'daily');
-  add('/games/', latestGameDate, '0.9', 'daily');
-  add('/categories/', '2026-09-28', '0.8', 'weekly');
-  add('/latest/', latestAppDate, '0.9', 'daily');
-  add('/updated/', latestAppDate, '0.9', 'daily');
-  add('/popular/', '2026-10-02', '0.9', 'daily');
-  add('/reviews/', latestReviewDate, '0.8', 'weekly');
-  add('/guides/', latestGuideDate, '0.9', 'weekly');
-  add('/developers/', '2026-09-30', '0.8', 'weekly');
-  add('/compare/', '2026-09-20', '0.8', 'weekly');
-  add('/alternatives/', '2026-09-20', '0.8', 'weekly');
-  add('/sitemap/', '2026-10-02', '0.5', 'weekly');
+  // 1. Main Hubs & Core Pages
+  add(main, '/', latestAppDate, '1.0', 'daily');
+  add(main, '/apps/', latestAppDate, '0.9', 'daily');
+  add(main, '/games/', latestGameDate, '0.9', 'daily');
+  add(main, '/categories/', '2026-09-28', '0.8', 'weekly');
+  add(main, '/latest/', latestAppDate, '0.9', 'daily');
+  add(main, '/updated/', latestAppDate, '0.9', 'daily');
+  add(main, '/popular/', '2026-10-02', '0.9', 'daily');
+  add(main, '/reviews/', latestReviewDate, '0.8', 'weekly');
+  add(main, '/guides/', latestGuideDate, '0.9', 'weekly');
+  add(main, '/developers/', '2026-09-30', '0.8', 'weekly');
+  add(main, '/compare/', '2026-09-20', '0.8', 'weekly');
+  add(main, '/alternatives/', '2026-09-20', '0.8', 'weekly');
+  add(main, '/sitemap/', '2026-10-02', '0.5', 'weekly');
 
-  // 2. Static governance & policy pages (established late 2025, refreshed August 2026)
-  add('/about/', '2026-08-25', '0.5', 'monthly');
-  add('/contact/', '2026-08-25', '0.5', 'monthly');
-  add('/editorial-policy/', '2026-08-15', '0.4', 'monthly');
-  add('/review-policy/', '2026-08-15', '0.4', 'monthly');
-  add('/download-policy/', '2026-08-18', '0.4', 'monthly');
-  add('/privacy/', '2026-08-18', '0.4', 'monthly');
-  add('/terms/', '2026-08-18', '0.4', 'monthly');
-  add('/cookies/', '2026-08-18', '0.4', 'monthly');
-  add('/copyright/', '2026-08-20', '0.4', 'monthly');
-  add('/disclaimer/', '2026-08-20', '0.4', 'monthly');
+  // Governance & Policy pages
+  add(main, '/about/', '2026-08-25', '0.5', 'monthly');
+  add(main, '/contact/', '2026-08-25', '0.5', 'monthly');
+  add(main, '/editorial-policy/', '2026-08-15', '0.4', 'monthly');
+  add(main, '/review-policy/', '2026-08-15', '0.4', 'monthly');
+  add(main, '/download-policy/', '2026-08-18', '0.4', 'monthly');
+  add(main, '/privacy/', '2026-08-18', '0.4', 'monthly');
+  add(main, '/terms/', '2026-08-18', '0.4', 'monthly');
+  add(main, '/cookies/', '2026-08-18', '0.4', 'monthly');
+  add(main, '/copyright/', '2026-08-20', '0.4', 'monthly');
+  add(main, '/disclaimer/', '2026-08-20', '0.4', 'monthly');
 
-  // 3. Categories (dynamic per-category lastmod based on max app update inside it)
+  // Categories
   const catLastMods = new Map(all(`
     SELECT c.id, MAX(COALESCE(a.updated_at, a.published_at)) AS latest
     FROM categories c
@@ -63,60 +65,67 @@ export function getIndexableUrls() {
   for (const c of D.listCategories()) {
     if (D.categoryIndex(c).index) {
       const catMod = catLastMods.get(c.id) || '2026-09-10';
-      add(c.kind === 'game' ? `/games/${c.slug}/` : `/apps/${c.slug}/`, catMod, '0.8', 'weekly');
+      add(main, c.kind === 'game' ? `/games/${c.slug}/` : `/apps/${c.slug}/`, catMod, '0.8', 'weekly');
     }
   }
 
-  // 4. Developers
+  // Developers
   for (const d of D.listDevelopers()) {
     if (D.developerIndex(d).index) {
-      add(`/developer/${d.slug}/`, d.updated_at || d.created_at, '0.7', 'weekly');
+      add(main, `/developer/${d.slug}/`, d.updated_at || d.created_at, '0.7', 'weekly');
     }
   }
 
-  // 5. Guides
-  for (const g of D.listGuides(25000)) {
-    add(`/guides/${g.slug}/`, g.updated_at || g.published_at, '0.8', 'weekly');
-  }
-
-  // 6. Comparisons
+  // Comparisons
   for (const cmp of D.listComparisons()) {
     if (D.comparisonIndex(cmp).index) {
-      add(`/compare/${cmp.slug}/`, cmp.updated_at || cmp.published_at, '0.7', 'monthly');
+      add(main, `/compare/${cmp.slug}/`, cmp.updated_at || cmp.published_at, '0.7', 'monthly');
     }
   }
 
-  // 7. Apps & Subpages (optimized with bulk maps for high-performance generation)
+  // 2. Guides
+  for (const g of D.listGuides(25000)) {
+    add(guides, `/guides/${g.slug}/`, g.updated_at || g.published_at, '0.8', 'weekly');
+  }
+
+  // 3. Apps & Games catalog
   const T = config.thresholds;
   const versionCounts = new Map(all(`SELECT app_id, COUNT(*) AS n FROM versions GROUP BY app_id`).map(r => [r.app_id, r.n]));
   const altCounts = new Map(all(`SELECT app_id, COUNT(*) AS n FROM alternatives GROUP BY app_id`).map(r => [r.app_id, r.n]));
   const activeApkApps = new Set(all(`SELECT DISTINCT app_id FROM apk_files WHERE status='active'`).map(r => r.app_id));
 
   for (const app of D.listApps()) {
+    const isGame = app.app_type === 'game' || app.cat_kind === 'game';
+    const targetList = isGame ? games : apps;
     const appMod = app.updated_at || app.published_at;
+
     if (D.appIndex(app).index) {
-      add(`/apps/${app.slug}/`, appMod, '0.8', 'weekly');
+      add(targetList, `/apps/${app.slug}/`, appMod, '0.8', 'weekly');
     }
     if (D.reviewsIndex(app).index) {
-      add(`/apps/${app.slug}/reviews/`, appMod, '0.6', 'weekly');
+      add(targetList, `/apps/${app.slug}/reviews/`, appMod, '0.6', 'weekly');
     }
     if ((versionCounts.get(app.id) || 0) >= T.minVersionsForIndex) {
-      add(`/apps/${app.slug}/versions/`, app.version_updated_on || appMod, '0.7', 'monthly');
+      add(targetList, `/apps/${app.slug}/versions/`, app.version_updated_on || appMod, '0.7', 'monthly');
     }
     if ((altCounts.get(app.id) || 0) >= T.minAlternativesForIndex) {
-      add(`/apps/${app.slug}/alternatives/`, appMod, '0.6', 'monthly');
+      add(targetList, `/apps/${app.slug}/alternatives/`, appMod, '0.6', 'monthly');
     }
     if (app.download_type === 'authorized_apk' && activeApkApps.has(app.id)) {
-      add(`/apps/${app.slug}/download/`, appMod, '0.7', 'weekly');
+      add(targetList, `/apps/${app.slug}/download/`, appMod, '0.7', 'weekly');
     }
   }
 
-  return urls;
+  return { main, apps, games, guides };
 }
 
-export function sitemapXml() {
-  const urls = getIndexableUrls();
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+export function getIndexableUrls() {
+  const cats = getCategorizedUrls();
+  return [...cats.main, ...cats.apps, ...cats.games, ...cats.guides];
+}
+
+export function formatUrlset(urls) {
+  return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url>
     <loc>${u.loc}</loc>
@@ -125,7 +134,51 @@ ${urls.map((u) => `  <url>
     <priority>${u.priority || '0.7'}</priority>
   </url>`).join('\n')}
 </urlset>`;
-  return xml;
+}
+
+export function sitemapIndexXml() {
+  const base = config.siteUrl;
+  const today = new Date().toISOString().slice(0, 10);
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>${base}/sitemap-main.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${base}/sitemap-apps.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${base}/sitemap-games.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${base}/sitemap-guides.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
+</sitemapindex>`;
+}
+
+export function sitemapMainXml() {
+  return formatUrlset(getCategorizedUrls().main);
+}
+
+export function sitemapAppsXml() {
+  return formatUrlset(getCategorizedUrls().apps);
+}
+
+export function sitemapGamesXml() {
+  return formatUrlset(getCategorizedUrls().games);
+}
+
+export function sitemapGuidesXml() {
+  return formatUrlset(getCategorizedUrls().guides);
+}
+
+export function sitemapXml() {
+  // Returns sitemapindex by default for standard /sitemap.xml
+  return sitemapIndexXml();
 }
 
 export function rssXml() {
