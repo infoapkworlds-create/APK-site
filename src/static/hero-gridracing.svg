@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" width="860" height="380">
+  <defs>
+    <linearGradient id="g_grid_bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#18181B"/>
+      <stop offset="40%" stop-color="#27272A"/>
+      <stop offset="100%" stop-color="#09090B"/>
+    </linearGradient>
+    <linearGradient id="g_red_strip" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#DC2626"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="860" height="380" fill="url(#g_grid_bg)"/>
+
+  <!-- Speed Trails / Diagonal Racing Stripes -->
+  <polygon points="340,0 480,0 280,380 140,380" fill="#DC2626" opacity="0.85"/>
+  <polygon points="500,0 540,0 340,380 300,380" fill="#EF4444" opacity="0.6"/>
+  <polygon points="560,0 580,0 380,380 360,380" fill="#F8FAFC" opacity="0.2"/>
+
+  <!-- Checkerboard Flag Pattern Accent -->
+  <g transform="translate(620, 40)" opacity="0.2">
+    <rect x="0" y="0" width="30" height="30" fill="#FFF"/>
+    <rect x="30" y="30" width="30" height="30" fill="#FFF"/>
+    <rect x="60" y="0" width="30" height="30" fill="#FFF"/>
+    <rect x="90" y="30" width="30" height="30" fill="#FFF"/>
+  </g>
+
+  <!-- Large Stylized Title: GRID AUTOSPORT -->
+  <g transform="translate(60, 70)">
+    <text x="0" y="90" font-family="'Impact', 'Arial Black', sans-serif" font-size="105" font-weight="900" fill="#FFFFFF" letter-spacing="4">GRID</text>
+    <text x="0" y="145" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" font-size="28" font-weight="900" fill="#EF4444" letter-spacing="8">AUTOSPORT</text>
+    <text x="0" y="185" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" font-size="16" font-weight="700" fill="#A1A1AA" letter-spacing="2">PRO RACING SIMULATOR</text>
+  </g>
+
+  <!-- High Speed GT Racing Car Silhouette -->
+  <g transform="translate(480, 160)">
+    <!-- Car Body -->
+    <path d="M40,70 Q100,20 180,20 Q240,25 280,45 L320,60 Q340,68 335,80 L20,80 Q10,80 20,70 Z" fill="#EF4444"/>
+    <path d="M110,25 L160,25 L210,48 L100,48 Z" fill="#09090B"/>
+    <rect x="18" y="45" width="25" height="6" fill="#F8FAFC"/> <!-- Spoiler -->
+    <!-- Headlight Beam -->
+    <polygon points="330,68 460,50 460,95 330,75" fill="#FEF08A" opacity="0.25"/>
+    <!-- Wheels -->
+    <circle cx="80" cy="80" r="22" fill="#18181B" stroke="#71717A" stroke-width="5"/>
+    <circle cx="270" cy="80" r="22" fill="#18181B" stroke="#71717A" stroke-width="5"/>
+    <circle cx="80" cy="80" r="8" fill="#F8FAFC"/>
+    <circle cx="270" cy="80" r="8" fill="#F8FAFC"/>
+  </g>
+</svg>

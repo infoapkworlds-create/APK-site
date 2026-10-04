@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" width="860" height="380">
+  <defs>
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0284C7"/>
+      <stop offset="60%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#BAE6FD"/>
+    </linearGradient>
+    <linearGradient id="sunGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="hillGrad1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#B45309"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </linearGradient>
+    <linearGradient id="hillGrad2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#92400E"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF1F2"/>
+      <stop offset="30%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#991B1B"/>
+    </linearGradient>
+    <linearGradient id="bikeRider" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FACC15"/>
+      <stop offset="100%" stop-color="#EAB308"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky and Sun Background -->
+  <rect width="860" height="380" fill="url(#skyGrad)"/>
+  <circle cx="720" cy="90" r="70" fill="url(#sunGrad)" opacity="0.6"/>
+
+  <!-- Clouds -->
+  <path d="M120,70 Q150,50 180,70 Q210,50 240,70 Q260,60 280,80 L120,80 Z" fill="#FFFFFF" opacity="0.45"/>
+  <path d="M380,90 Q405,75 430,90 Q455,75 480,90 Q495,80 510,100 L380,100 Z" fill="#FFFFFF" opacity="0.35"/>
+
+  <!-- Rolling Sand Hills and Terrain -->
+  <path d="M0,260 Q240,180 500,280 T860,220 L860,380 L0,380 Z" fill="url(#hillGrad1)"/>
+  <path d="M0,310 Q320,230 620,330 T860,280 L860,380 L0,380 Z" fill="url(#hillGrad2)"/>
+
+  <!-- Dust and Speed particles -->
+  <ellipse cx="600" cy="270" rx="45" ry="15" fill="#FDE68A" opacity="0.35"/>
+  <ellipse cx="640" cy="285" rx="60" ry="20" fill="#FDE68A" opacity="0.25"/>
+
+  <!-- Giant Stylized 3D Logo "BIKE RACE" -->
+  <g transform="translate(60, 50)">
+    <!-- 3D drop shadow -->
+    <text x="6" y="106" font-family="'Impact', 'Arial Black', sans-serif" font-size="105" font-weight="900" fill="#450A0A" letter-spacing="3">BIKE</text>
+    <text x="0" y="100" font-family="'Impact', 'Arial Black', sans-serif" font-size="105" font-weight="900" fill="url(#textGrad)" stroke="#FFFFFF" stroke-width="5" letter-spacing="3">BIKE</text>
+
+    <text x="6" y="206" font-family="'Impact', 'Arial Black', sans-serif" font-size="110" font-weight="900" fill="#450A0A" letter-spacing="4">RACE</text>
+    <text x="0" y="200" font-family="'Impact', 'Arial Black', sans-serif" font-size="110" font-weight="900" fill="url(#textGrad)" stroke="#FFFFFF" stroke-width="5" letter-spacing="4">RACE</text>
+  </g>
+
+  <!-- Jumping Stunt Motorcycle Rider -->
+  <g transform="translate(480, 25)">
+    <!-- Helmet -->
+    <ellipse cx="140" cy="70" rx="22" ry="24" fill="url(#bikeRider)"/>
+    <path d="M142,66 L160,66 L160,78 L142,78 Z" fill="#0F172A"/>
+    <path d="M125,76 Q130,92 157,106 L147,124 L123,114 L115,92 Z" fill="#1E3A8A"/>
+    <!-- Arms -->
+    <line x1="136" y1="100" x2="168" y2="120" stroke="#1E40AF" stroke-width="12" stroke-linecap="round"/>
+    <line x1="125" y1="96" x2="149" y2="112" stroke="#1E40AF" stroke-width="12" stroke-linecap="round"/>
+
+    <!-- Motorcycle Frame -->
+    <polygon points="90,200 145,140 190,170 150,210" fill="#DC2626"/>
+    <polygon points="145,140 180,125 195,150 165,165" fill="#EF4444"/>
+    <line x1="75" y1="210" x2="145" y2="140" stroke="#E2E8F0" stroke-width="9" stroke-linecap="round"/>
+    <line x1="145" y1="140" x2="225" y2="190" stroke="#E2E8F0" stroke-width="9" stroke-linecap="round"/>
+    <line x1="165" y1="120" x2="225" y2="190" stroke="#334155" stroke-width="8"/>
+
+    <!-- Rear Wheel -->
+    <circle cx="75" cy="210" r="38" fill="none" stroke="#0F172A" stroke-width="18"/>
+    <circle cx="75" cy="210" r="28" fill="none" stroke="#64748B" stroke-width="4"/>
+    <circle cx="75" cy="210" r="8" fill="#F8FAFC"/>
+    <line x1="75" y1="182" x2="75" y2="238" stroke="#94A3B8" stroke-width="3"/>
+    <line x1="47" y1="210" x2="103" y2="210" stroke="#94A3B8" stroke-width="3"/>
+
+    <!-- Front Wheel in Air -->
+    <circle cx="230" cy="190" r="38" fill="none" stroke="#0F172A" stroke-width="18"/>
+    <circle cx="230" cy="190" r="28" fill="none" stroke="#64748B" stroke-width="4"/>
+    <circle cx="230" cy="190" r="8" fill="#F8FAFC"/>
+    <line x1="230" y1="162" x2="230" y2="218" stroke="#94A3B8" stroke-width="3"/>
+    <line x1="202" y1="190" x2="258" y2="190" stroke="#94A3B8" stroke-width="3"/>
+
+    <!-- Exhaust Pipe and Flame -->
+    <line x1="115" y1="185" x2="75" y2="195" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+    <polygon points="72,194 50,192 65,198" fill="#F59E0B"/>
+    <polygon points="68,194 58,193 65,196" fill="#EF4444"/>
+  </g>
+</svg>

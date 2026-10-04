@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" width="100%" height="100%">
+  <defs>
+    <linearGradient id="hdrCyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="50%" stop-color="#00A3FF"/>
+      <stop offset="100%" stop-color="#0077EE"/>
+    </linearGradient>
+    <linearGradient id="hdrRedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF2A4D"/>
+      <stop offset="60%" stop-color="#E8142F"/>
+      <stop offset="100%" stop-color="#B80018"/>
+    </linearGradient>
+    <filter id="hdrGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.2" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Left Icon Emblem (scaled inside 70x70) -->
+  <g transform="translate(4, 2) scale(0.66)">
+    <!-- Dark rounded badge background -->
+    <rect width="100" height="100" rx="22" fill="#0A0E17" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+
+    <!-- Back orbital curve -->
+    <path d="M 52 24 C 68 28, 80 37, 80 47 C 80 50, 77 54, 73 57" 
+          fill="none" stroke="#00C8FF" stroke-width="2" opacity="0.5"/>
+    <path d="M 54 27 C 67 31, 76 39, 76 47 C 76 49, 74 52, 71 55" 
+          fill="none" stroke="url(#hdrRedGrad)" stroke-width="3" opacity="0.4"/>
+
+    <!-- APK Typography -->
+    <path d="M 22 66 L 31.5 35 L 38.5 35 L 48 66 L 41 66 L 39.2 59.5 L 30.8 59.5 L 29 66 Z M 32.2 54.2 L 37.8 54.2 L 35 43.5 Z" fill="url(#hdrCyanGrad)"/>
+    <path d="M 45 66 L 45 35 L 56.5 35 C 61.5 35, 65 38.2, 65 43.5 C 65 48.8, 61.5 52, 56.5 52 L 51.5 52 L 51.5 66 Z M 51.5 46.5 L 56 46.5 C 58.5 46.5, 60 45.2, 60 43.5 C 60 41.8, 58.5 40.5, 56 40.5 L 51.5 40.5 Z" fill="url(#hdrCyanGrad)"/>
+    <path d="M 66 66 L 66 35 L 72.5 35 L 72.5 48 L 80.5 35 L 88.5 35 L 78.5 49.5 L 89 66 L 81 66 L 73.5 53.5 L 72.5 55 L 72.5 66 Z" fill="url(#hdrCyanGrad)"/>
+
+    <!-- Front Orbit Swoosh -->
+    <path d="M 46 22.5 C 30 22.5, 17 29, 17 43 C 17 58, 33 76, 68 79.5 C 78 80.5, 87 77, 88.5 73.5 C 89 72, 88 71.5, 86 72.2 C 80 74.5, 72 75.8, 63 75.2 C 32 72.5, 19.5 56, 19.5 43 C 19.5 31, 31 24.5, 46 24.5 Z" 
+          fill="#00E5FF" filter="url(#hdrGlow)"/>
+    <path d="M 47 24 C 32 24.5, 20 31, 20 43 C 20 56.5, 35 73.5, 66 76.5 C 76.5 77.5, 85 74.5, 88 72 C 86.5 70.8, 83 70.8, 77 71.8 C 52 74, 30 62, 26 48 C 24 41, 27 34, 35 28.5 C 39 25.8, 43.5 24.5, 47 24 Z" 
+          fill="url(#hdrRedGrad)"/>
+  </g>
+
+  <!-- Typography: APKworlds Text -->
+  <text x="80" y="46" font-family="-apple-system,BlinkMacSystemFont,'Montserrat','Segoe UI',Roboto,Helvetica,sans-serif" font-size="30" font-weight="900" letter-spacing="-0.5">
+    <tspan fill="#00C8FF">APK</tspan><tspan fill="#FFFFFF">worlds</tspan>
+  </text>
+  
+  <!-- Sleek Tagline / Badge -->
+  <rect x="228" y="27" width="46" height="20" rx="5" fill="rgba(0,200,255,0.15)" stroke="#00C8FF" stroke-width="1.2"/>
+  <text x="251" y="41.5" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" font-size="10.5" font-weight="900" fill="#00E5FF" text-anchor="middle" letter-spacing="1">PRO</text>
+</svg>
