@@ -1,5 +1,9 @@
 {
   "functions": {
+    "src/app.js": {
+      "includeFiles": "data/{site.db,icons/**}",
+      "maxDuration": 15
+    },
     "src/server.js": {
       "includeFiles": "data/{site.db,icons/**}",
       "maxDuration": 15

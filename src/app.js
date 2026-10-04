@@ -759,3 +759,5 @@ export async function appHandler(req, res) {
 
 export const server = http.createServer(appHandler);
 
+export default appHandler;
+
