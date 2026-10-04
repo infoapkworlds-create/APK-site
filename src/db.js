@@ -305,7 +305,14 @@ try {
 
 export const one = (sql, ...p) => db.prepare(sql).get(...p);
 export const all = (sql, ...p) => db.prepare(sql).all(...p);
-export const run = (sql, ...p) => db.prepare(sql).run(...p);
+export const run = (sql, ...p) => {
+  try {
+    return db.prepare(sql).run(...p);
+  } catch (err) {
+    // Suppress write errors in serverless/read-only environment
+    return null;
+  }
+};
 
 export function tx(fn) {
   try { db.exec('BEGIN'); } catch {}
