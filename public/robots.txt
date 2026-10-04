@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /static/
+Allow: /icons/
+Allow: /screenshots/
+Disallow: /admin/
+Disallow: /action/
+Disallow: /search/
+Disallow: /dl/
+Disallow: /api/
+
+Sitemap: https://www.apkworlds.co.uk/sitemap.xml
