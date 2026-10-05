@@ -362,6 +362,22 @@ export async function appHandler(req, res) {
     return res.end(sitemapAppsPartXml(4));
   }
 
+  if (pathname === '/sitemap-apps-5.xml') {
+    res.writeHead(200, {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600',
+    });
+    return res.end(sitemapAppsPartXml(5));
+  }
+
+  if (pathname === '/sitemap-apps-6.xml') {
+    res.writeHead(200, {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600',
+    });
+    return res.end(sitemapAppsPartXml(6));
+  }
+
   if (pathname === '/sitemap-games.xml') {
     res.writeHead(200, {
       'Content-Type': 'application/xml; charset=utf-8',

@@ -136,13 +136,29 @@ ${urls.map((u) => `  <url>
 </urlset>`;
 }
 
-export function getAppChunks(numChunks = 4) {
+export function getAppChunks(numChunks = 6) {
   const { apps } = getCategorizedUrls();
+
+  // Group URLs strictly by App profile so an app's profile and subpages stay together
+  const appGroups = [];
+  let currentGroup = null;
+
+  for (const u of apps) {
+    const m = u.loc.match(/\/apps\/([^\/]+)\//);
+    const slug = m ? m[1] : 'other';
+    if (!currentGroup || currentGroup.slug !== slug) {
+      currentGroup = { slug, urls: [] };
+      appGroups.push(currentGroup);
+    }
+    currentGroup.urls.push(u);
+  }
+
   const chunks = Array.from({ length: numChunks }, () => []);
-  const chunkSize = Math.ceil(apps.length / numChunks);
-  for (let i = 0; i < apps.length; i++) {
-    const chunkIdx = Math.floor(i / chunkSize);
-    chunks[Math.min(chunkIdx, numChunks - 1)].push(apps[i]);
+  const groupChunkSize = Math.ceil(appGroups.length / numChunks);
+
+  for (let i = 0; i < appGroups.length; i++) {
+    const cIdx = Math.min(Math.floor(i / groupChunkSize), numChunks - 1);
+    chunks[cIdx].push(...appGroups[i].urls);
   }
   return chunks;
 }
@@ -173,6 +189,14 @@ export function sitemapIndexXml() {
     <lastmod>${today}</lastmod>
   </sitemap>
   <sitemap>
+    <loc>${base}/sitemap-apps-5.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${base}/sitemap-apps-6.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
+  <sitemap>
     <loc>${base}/sitemap-games.xml</loc>
     <lastmod>${today}</lastmod>
   </sitemap>
@@ -192,7 +216,7 @@ export function sitemapAppsXml() {
 }
 
 export function sitemapAppsPartXml(partNumber = 1) {
-  const chunks = getAppChunks(4);
+  const chunks = getAppChunks(6);
   const selected = chunks[partNumber - 1] || [];
   return formatUrlset(selected);
 }
