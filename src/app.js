@@ -75,6 +75,7 @@ import {
   sitemapXml,
   sitemapMainXml,
   sitemapAppsXml,
+  sitemapAppsPartXml,
   sitemapGamesXml,
   sitemapGuidesXml,
   rssXml,
@@ -327,6 +328,38 @@ export async function appHandler(req, res) {
       'Cache-Control': 'public, max-age=3600',
     });
     return res.end(sitemapAppsXml());
+  }
+
+  if (pathname === '/sitemap-apps-1.xml') {
+    res.writeHead(200, {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600',
+    });
+    return res.end(sitemapAppsPartXml(1));
+  }
+
+  if (pathname === '/sitemap-apps-2.xml') {
+    res.writeHead(200, {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600',
+    });
+    return res.end(sitemapAppsPartXml(2));
+  }
+
+  if (pathname === '/sitemap-apps-3.xml') {
+    res.writeHead(200, {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600',
+    });
+    return res.end(sitemapAppsPartXml(3));
+  }
+
+  if (pathname === '/sitemap-apps-4.xml') {
+    res.writeHead(200, {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600',
+    });
+    return res.end(sitemapAppsPartXml(4));
   }
 
   if (pathname === '/sitemap-games.xml') {

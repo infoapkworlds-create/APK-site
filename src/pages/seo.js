@@ -136,6 +136,17 @@ ${urls.map((u) => `  <url>
 </urlset>`;
 }
 
+export function getAppChunks(numChunks = 4) {
+  const { apps } = getCategorizedUrls();
+  const chunks = Array.from({ length: numChunks }, () => []);
+  const chunkSize = Math.ceil(apps.length / numChunks);
+  for (let i = 0; i < apps.length; i++) {
+    const chunkIdx = Math.floor(i / chunkSize);
+    chunks[Math.min(chunkIdx, numChunks - 1)].push(apps[i]);
+  }
+  return chunks;
+}
+
 export function sitemapIndexXml() {
   const base = config.siteUrl;
   const today = new Date().toISOString().slice(0, 10);
@@ -146,7 +157,19 @@ export function sitemapIndexXml() {
     <lastmod>${today}</lastmod>
   </sitemap>
   <sitemap>
-    <loc>${base}/sitemap-apps.xml</loc>
+    <loc>${base}/sitemap-apps-1.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${base}/sitemap-apps-2.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${base}/sitemap-apps-3.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${base}/sitemap-apps-4.xml</loc>
     <lastmod>${today}</lastmod>
   </sitemap>
   <sitemap>
@@ -166,6 +189,12 @@ export function sitemapMainXml() {
 
 export function sitemapAppsXml() {
   return formatUrlset(getCategorizedUrls().apps);
+}
+
+export function sitemapAppsPartXml(partNumber = 1) {
+  const chunks = getAppChunks(4);
+  const selected = chunks[partNumber - 1] || [];
+  return formatUrlset(selected);
 }
 
 export function sitemapGamesXml() {
