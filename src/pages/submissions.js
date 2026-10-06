@@ -38,11 +38,11 @@ ${submitted ? html`
   <div class="form-row">
     <div class="field">
       <label for="dev_name">Developer / Organization Name <span class="req">*</span></label>
-      <input id="dev_name" name="developer_name" type="text" required placeholder="e.g. Signal Messenger LLC">
+      <input id="dev_name" name="name" type="text" required placeholder="e.g. Signal Messenger LLC">
     </div>
     <div class="field">
       <label for="dev_email">Developer Official Email <span class="req">*</span></label>
-      <input id="dev_email" name="developer_email" type="email" required placeholder="contact@yourdomain.com">
+      <input id="dev_email" name="email" type="email" required placeholder="contact@yourdomain.com">
       <p class="field-help">Used for verification and editorial questions.</p>
     </div>
   </div>
