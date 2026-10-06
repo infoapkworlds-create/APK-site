@@ -23,13 +23,15 @@ ${submitted ? html`
     <p>Thank you for submitting your application. Our editorial team will review the details against our quality and security guidelines. We do not automatically publish submissions.</p>
   </div>
 ` : html`
-<form class="form submission-form" action="/action/submit-app" method="post">
-  <input type="hidden" name="_csrf" value="${token}">
-  <input type="hidden" name="_stamp" value="${stamp}">
+<form class="form submission-form" action="https://api.web3forms.com/submit" method="POST">
+  <input type="hidden" name="access_key" value="e057c862-4648-4afe-8195-724c07c1b26d">
+  <input type="hidden" name="from_name" value="${config.siteName} App Submission">
+  <input type="hidden" name="subject" value="New Android App Submitted for Editorial Review">
+  <input type="hidden" name="redirect" value="${config.siteUrl}/submit-app/?submitted=1">
 
   <div class="field sr-only-hp" aria-hidden="true" style="display:none;">
     <label for="trap_sub">Leave empty</label>
-    <input type="text" id="trap_sub" name="trap_field" tabindex="-1" autocomplete="off">
+    <input type="text" id="trap_sub" name="botcheck" tabindex="-1" autocomplete="off">
   </div>
 
   <h2>1. Developer and Contact Details</h2>
@@ -156,13 +158,15 @@ ${submitted ? html`
     <p>Thank you for your suggestion. We regularly review community requests and add apps that meet our editorial criteria.</p>
   </div>
 ` : html`
-<form class="form" action="/action/request-app" method="post">
-  <input type="hidden" name="_csrf" value="${token}">
-  <input type="hidden" name="_stamp" value="${stamp}">
+<form class="form" action="https://api.web3forms.com/submit" method="POST">
+  <input type="hidden" name="access_key" value="e057c862-4648-4afe-8195-724c07c1b26d">
+  <input type="hidden" name="from_name" value="${config.siteName} App Request">
+  <input type="hidden" name="subject" value="New App Catalog Request Received">
+  <input type="hidden" name="redirect" value="${config.siteUrl}/request-app/?submitted=1">
 
   <div class="field sr-only-hp" aria-hidden="true" style="display:none;">
     <label for="trap_req">Leave empty</label>
-    <input type="text" id="trap_req" name="trap_field" tabindex="-1" autocomplete="off">
+    <input type="text" id="trap_req" name="botcheck" tabindex="-1" autocomplete="off">
   </div>
 
   <div class="field">
@@ -230,13 +234,15 @@ ${submitted ? html`
     <p>Thank you for your report. Our team investigates every submission and takes corrective action where required.</p>
   </div>
 ` : html`
-<form class="form" action="/action/report-app" method="post">
-  <input type="hidden" name="_csrf" value="${token}">
-  <input type="hidden" name="_stamp" value="${stamp}">
+<form class="form" action="https://api.web3forms.com/submit" method="POST">
+  <input type="hidden" name="access_key" value="e057c862-4648-4afe-8195-724c07c1b26d">
+  <input type="hidden" name="from_name" value="${config.siteName} App Report Desk">
+  <input type="hidden" name="subject" value="URGENT: Broken App / DMCA / Content Report">
+  <input type="hidden" name="redirect" value="${config.siteUrl}/report-app/?submitted=1">
 
   <div class="field sr-only-hp" aria-hidden="true" style="display:none;">
     <label for="trap_rep">Leave empty</label>
-    <input type="text" id="trap_rep" name="trap_field" tabindex="-1" autocomplete="off">
+    <input type="text" id="trap_rep" name="botcheck" tabindex="-1" autocomplete="off">
   </div>
 
   <div class="field">

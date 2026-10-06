@@ -126,13 +126,14 @@ ${sent ? html`
     <h2>Send Us a Direct Message</h2>
     <p class="small text-muted">Complete the secure form below to transmit an inquiry directly into our departmental ticketing system.</p>
 
-    <form class="form" action="/action/contact" method="post">
-      <input type="hidden" name="_csrf" value="${token}">
-      <input type="hidden" name="_stamp" value="${stamp}">
+    <form class="form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="e057c862-4648-4afe-8195-724c07c1b26d">
+      <input type="hidden" name="from_name" value="${config.siteName} Contact Desk">
+      <input type="hidden" name="redirect" value="${config.siteUrl}/contact/?sent=1">
 
       <div class="field sr-only-hp" aria-hidden="true" style="display:none;">
         <label for="trap_c">Leave blank</label>
-        <input type="text" id="trap_c" name="trap_field" tabindex="-1" autocomplete="off">
+        <input type="text" id="trap_c" name="botcheck" tabindex="-1" autocomplete="off">
       </div>
 
       <div class="field">
@@ -152,7 +153,7 @@ ${sent ? html`
 
       <div class="field">
         <label for="c_body">Detailed Message <span class="req">*</span></label>
-        <textarea id="c_body" name="body" rows="6" required placeholder="Describe your inquiry, report, or suggestion in detail. Include specific URLs if referencing an application or guide..."></textarea>
+        <textarea id="c_body" name="message" rows="6" required placeholder="Describe your inquiry, report, or suggestion in detail. Include specific URLs if referencing an application or guide..."></textarea>
       </div>
 
       <button type="submit" class="btn primary" style="width: 100%; margin-top: 0.5rem;">Transmit Secure Message</button>
