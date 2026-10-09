@@ -271,32 +271,108 @@ a:hover { color: var(--primary); }
   border-bottom-color: var(--primary);
 }
 
-/* Mobile Menu */
+/* Mobile Menu - Hamburger Button */
 .menu { display: none; position: relative; }
 .menu summary { list-style: none; cursor: pointer; padding: 0.5rem; color: #fff; }
 .menu summary::-webkit-details-marker { display: none; }
-.menu summary span { display: block; width: 22px; height: 2.5px; background: #fff; margin: 4px 0; border-radius: 2px; }
+.menu summary span { display: block; width: 22px; height: 2.5px; background: #fff; margin: 4px 0; border-radius: 2px; transition: all 0.25s ease; }
+
+/* Full-screen overlay drawer for mobile */
 .menu nav {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   right: 0;
-  top: 100%;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 0.75rem 1rem;
-  box-shadow: var(--shadow-hover);
-  min-width: 200px;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #0d131f;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.5rem 2rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
-.menu nav ul { list-style: none; margin: 0; padding: 0; }
-.menu nav li { margin: 0.5rem 0; }
-.menu nav a { color: var(--text); font-weight: 600; text-decoration: none; }
-.menu nav a:hover { color: var(--primary); }
+
+/* Close button inside drawer */
+.menu nav::before {
+  content: '✕';
+  display: block;
+  position: absolute;
+  top: 1.1rem;
+  right: 1.25rem;
+  color: #94a3b8;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.menu nav ul {
+  list-style: none;
+  margin: 3.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.menu nav li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.menu nav a {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0.25rem;
+  color: #e2e8f0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.menu nav a:hover,
+.menu nav a[aria-current="page"] {
+  color: var(--primary);
+}
+
+/* Backdrop overlay when menu is open */
+details.menu[open] > summary::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+}
+
+/* Hamburger → X animation when open */
+details.menu[open] summary span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+details.menu[open] summary span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+details.menu[open] summary span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* Drawer header title */
+.menu nav::after {
+  content: 'Navigation';
+  position: absolute;
+  top: 1.35rem;
+  left: 1.5rem;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
 
 @media (max-width: 768px) {
   .topnav { display: none; }
   .menu { display: block; }
   .btn-hdr-submit { display: none; }
 }
+
 
 /* ==========================================================================
    APKPure Hero & Spotlight Section

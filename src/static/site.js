@@ -11,6 +11,25 @@
     }[m]));
   }
 
+  // 0. Mobile Nav Drawer — close when a link is tapped or outside area clicked
+  const mobileMenu = document.querySelector('details.menu');
+  if (mobileMenu) {
+    // Close when any nav link inside drawer is tapped
+    mobileMenu.querySelectorAll('nav a').forEach((link) => {
+      link.addEventListener('click', () => { mobileMenu.removeAttribute('open'); });
+    });
+    // Close when tapping the backdrop (summary::before pseudo-element area)
+    mobileMenu.querySelector('summary').addEventListener('click', (e) => {
+      // already handled by <details> toggle — nothing extra needed
+    });
+    // Close if user taps outside the drawer nav
+    document.addEventListener('click', (e) => {
+      if (mobileMenu.hasAttribute('open') && !mobileMenu.contains(e.target)) {
+        mobileMenu.removeAttribute('open');
+      }
+    });
+  }
+
   // 1. Search suggestions autocomplete
   const inputs = document.querySelectorAll('input[data-suggest]');
   inputs.forEach((input) => {
