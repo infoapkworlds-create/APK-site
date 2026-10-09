@@ -161,6 +161,7 @@ ${index ? '' : raw('<meta name="robots" content="noindex, follow">\n')}<meta pro
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
 <link rel="alternate" type="application/rss+xml" title="${config.siteName} RSS Feed" href="/rss.xml">
 <link rel="stylesheet" href="/static/site.css?v=${ASSET_V}">
 <script src="/static/site.js?v=${ASSET_V}" defer></script>

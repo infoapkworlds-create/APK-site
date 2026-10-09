@@ -381,5 +381,44 @@
       });
     }
   });
+
+  // 7. PWA Install Prompt Banner
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (localStorage.getItem('pwa_prompt_dismissed')) return;
+
+    const banner = document.createElement('div');
+    banner.className = 'pwa-install-banner';
+    banner.innerHTML = `
+      <div class="pwa-install-content">
+        <img src="/favicon.svg" alt="APKworlds" width="36" height="36" class="pwa-icon">
+        <div class="pwa-text">
+          <strong>Install APKworlds</strong>
+          <span>Fast, free access to verified APKs & guides</span>
+        </div>
+        <div class="pwa-actions">
+          <button type="button" class="btn primary btn-sm pwa-install-btn">Install</button>
+          <button type="button" class="pwa-close-btn" aria-label="Dismiss">&times;</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(banner);
+
+    banner.querySelector('.pwa-install-btn').addEventListener('click', async () => {
+      banner.remove();
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+      }
+    });
+
+    banner.querySelector('.pwa-close-btn').addEventListener('click', () => {
+      banner.remove();
+      localStorage.setItem('pwa_prompt_dismissed', Date.now());
+    });
+  });
 })();
 

@@ -19,6 +19,13 @@ function getArticleThumb(art) {
   if (art.slug.includes('pubg')) return '/screenshots/pubg-mobile/1.webp';
   if (art.slug.includes('subway-surfers')) return '/screenshots/subway-surfers/1.webp';
   if (art.slug.includes('grid-autosport')) return '/screenshots/grid-autosport/1.webp';
+  if (art.slug.includes('parse-error')) return '/screenshots/brawl-stars/1.webp';
+  if (art.slug.includes('downgrade')) return '/screenshots/whatsapp/1.webp';
+  if (art.slug.includes('xapk')) return '/screenshots/call-of-duty-mobile/1.webp';
+  if (art.slug.includes('slow-or-old')) return '/screenshots/vlc-for-android/1.webp';
+  if (art.slug.includes('app-not-installed')) return '/screenshots/free-fire-max/1.webp';
+  if (art.slug.includes('pc-windows')) return '/screenshots/capcut/1.webp';
+  if (art.slug.includes('backup')) return '/screenshots/remini/1.webp';
   const match = art.slug.match(/how-to-download-([a-z0-9-]+)-apk/);
   if (match) return `/screenshots/${match[1]}/1.webp`;
   return '/screenshots/among-us/1.webp';
@@ -100,12 +107,14 @@ export function homePage(req) {
     SELECT g.* FROM guides g
     WHERE g.status='published'
     ORDER BY CASE 
-      WHEN g.slug = 'how-to-download-among-us-apk' THEN 1
-      WHEN g.slug = 'how-to-download-pubg-mobile-apk' THEN 2
-      WHEN g.slug = 'how-to-download-bike-race-motorcycle-games-apk' THEN 3
-      WHEN g.slug = 'how-to-download-drag-racing-classic-apk' THEN 4
-      ELSE 5 END ASC, g.id ASC
-    LIMIT 4
+      WHEN g.slug = 'how-to-fix-parse-error-when-installing-apk' THEN 1
+      WHEN g.slug = 'how-to-install-xapk-files-on-android' THEN 2
+      WHEN g.slug = 'how-to-fix-app-not-installed-error-android' THEN 3
+      WHEN g.slug = 'how-to-downgrade-android-app-to-older-version' THEN 4
+      WHEN g.slug = 'best-android-apps-for-slow-or-old-phones' THEN 5
+      WHEN g.slug = 'how-to-install-apk-on-pc-windows' THEN 6
+      ELSE 7 END ASC, g.published_at DESC
+    LIMIT 6
   `);
 
   // 8. Partner Developers (3 columns x 2 rows = 6 devs with authentic ratings)

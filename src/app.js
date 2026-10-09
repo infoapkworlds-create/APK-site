@@ -299,6 +299,18 @@ export async function appHandler(req, res) {
     return res.end(getFavicon());
   }
 
+  // Web App Manifest: /manifest.json
+  if (pathname === '/manifest.json') {
+    const manifestPath = path.join(__dirname, '..', 'public', 'manifest.json');
+    if (fs.existsSync(manifestPath)) {
+      res.writeHead(200, {
+        'Content-Type': 'application/manifest+json; charset=utf-8',
+        'Cache-Control': 'public, max-age=86400',
+      });
+      return fs.createReadStream(manifestPath).pipe(res);
+    }
+  }
+
   // SEO: /robots.txt
   if (pathname === '/robots.txt') {
     res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
