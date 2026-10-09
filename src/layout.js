@@ -148,7 +148,7 @@ export function page(o) {
   gtag('config', 'G-K601WNC1HR');
 </script>
 <link rel="canonical" href="${canonical}">
-${index ? '' : raw('<meta name="robots" content="noindex, follow">\n')}<meta property="og:type" content="${o.ogType || 'website'}">
+${index ? raw('<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">\n') : raw('<meta name="robots" content="noindex, follow">\n')}<meta property="og:type" content="${o.ogType || 'website'}">
 <meta property="og:site_name" content="${config.siteName}">
 <meta property="og:title" content="${o.title}">
 <meta property="og:description" content="${o.description}">
