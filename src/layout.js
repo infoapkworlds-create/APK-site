@@ -2,7 +2,7 @@ import { html, raw, esc, fmtDate, isoDate, fmtBytes } from './lib/html.js';
 import { config } from './config.js';
 
 export const abs = (p) => config.siteUrl + p;
-const ASSET_V = '4';
+const ASSET_V = '5';
 
 export function logoMark(size = 36) {
   return raw(`<svg class="logo-icon" width="${size}" height="${size}" viewBox="0 0 32 32" aria-hidden="true">
@@ -56,11 +56,20 @@ function header(path) {
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap hdr">
-    <a class="logo" href="/" aria-label="${config.siteName} home">
-      ${logoMark(36)}
-      <span class="logo-name"><span class="brand-apk">APK</span><span class="brand-worlds">worlds</span></span>
-      <span class="logo-badge">PRO</span>
-    </a>
+    <div class="hdr-main">
+      <a class="logo" href="/" aria-label="${config.siteName} home">
+        ${logoMark(36)}
+        <span class="logo-name"><span class="brand-apk">APK</span><span class="brand-worlds">worlds</span></span>
+        <span class="logo-badge">PRO</span>
+      </a>
+      <div class="hdr-actions">
+        <a href="/submit-app/" class="btn-hdr-submit">+ Submit APK</a>
+        <details class="menu">
+          <summary aria-label="Menu"><span></span><span></span><span></span></summary>
+          <nav aria-label="Main menu"><ul>${NAV.map(([h, l]) => html`<li><a href="${h}"${path.startsWith(h) ? raw(' aria-current="page"') : ''}>${l}</a></li>`)}<li><a href="/search/">Search</a></li></ul></nav>
+        </details>
+      </div>
+    </div>
     <form class="hdr-search" action="/search/" method="get" role="search">
       <label class="sr" for="hq">Search apps</label>
       <div class="hdr-search-box">
@@ -69,13 +78,6 @@ function header(path) {
         <button type="submit" aria-label="Search" class="hdr-search-btn">Search</button>
       </div>
     </form>
-    <div class="hdr-actions">
-      <a href="/submit-app/" class="btn-hdr-submit">+ Submit APK</a>
-      <details class="menu">
-        <summary aria-label="Menu"><span></span><span></span><span></span></summary>
-        <nav aria-label="Main menu"><ul>${NAV.map(([h, l]) => html`<li><a href="${h}"${path.startsWith(h) ? raw(' aria-current="page"') : ''}>${l}</a></li>`)}<li><a href="/search/">Search</a></li></ul></nav>
-      </details>
-    </div>
   </div>
   <nav class="wrap topnav" aria-label="Sections">
     <ul>${NAV.map(([h, l]) => html`<li><a href="${h}"${path.startsWith(h) ? raw(' aria-current="page"') : ''}>${l}</a></li>`)}</ul>
