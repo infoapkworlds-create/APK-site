@@ -49,6 +49,11 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 body {
   margin: 0;
   font-family: var(--font-sans);
@@ -386,19 +391,24 @@ details.menu[open] summary span:nth-child(3) {
   gap: 24px;
   margin: 1.25rem 0 3rem;
   align-items: start;
+  max-width: 100%;
+  overflow: hidden;
 }
 @media (max-width: 1024px) {
   .pure-home-layout {
-    grid-template-columns: 100%;
-    gap: 1.5rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    margin: 0.75rem 0 2rem;
   }
 }
 
 .pure-main-col {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 /* 1. Top Featured Carousel / Hero Banner */
@@ -655,15 +665,17 @@ details.menu[open] summary span:nth-child(3) {
 }
 @media (max-width: 820px) {
   .pure-icon-shelf {
-    display: flex;
-    overflow-x: auto;
-    gap: 14px;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 0.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
   }
   .pure-shelf-card {
-    flex: 0 0 76px;
-    scroll-snap-align: start;
+    flex: unset;
+  }
+}
+@media (max-width: 400px) {
+  .pure-icon-shelf {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
   }
 }
 .pure-shelf-card {
@@ -676,8 +688,10 @@ details.menu[open] summary span:nth-child(3) {
   min-width: 0;
 }
 .pure-shelf-card .icon {
-  width: 66px;
-  height: 66px;
+  width: 100%;
+  max-width: 66px;
+  height: auto;
+  aspect-ratio: 1;
   border-radius: 14px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   border: 1px solid var(--border-light);
@@ -688,7 +702,7 @@ details.menu[open] summary span:nth-child(3) {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 .pure-shelf-name {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--text);
   line-height: 1.25;
@@ -697,7 +711,7 @@ details.menu[open] summary span:nth-child(3) {
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  max-width: 80px;
+  max-width: 100%;
   word-break: break-word;
   transition: color 0.15s ease;
 }
@@ -724,7 +738,13 @@ details.menu[open] summary span:nth-child(3) {
   grid-template-columns: repeat(3, 1fr);
   gap: 10px 14px;
 }
-@media (max-width: 768px) {
+@media (max-width: 820px) {
+  .pure-tri-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+@media (max-width: 480px) {
   .pure-tri-grid {
     grid-template-columns: 1fr;
   }
