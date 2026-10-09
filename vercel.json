@@ -1,11 +1,11 @@
 {
   "functions": {
     "src/app.js": {
-      "includeFiles": "data/{site.db,icons/**}",
+      "includeFiles": "{data/{site.db,icons/**},src/static/**}",
       "maxDuration": 15
     },
     "src/server.js": {
-      "includeFiles": "data/{site.db,icons/**}",
+      "includeFiles": "{data/{site.db,icons/**},src/static/**}",
       "maxDuration": 15
     }
   }
