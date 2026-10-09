@@ -301,14 +301,23 @@ export async function appHandler(req, res) {
 
   // Web App Manifest: /manifest.json
   if (pathname === '/manifest.json') {
-    const manifestPath = path.join(__dirname, '..', 'public', 'manifest.json');
-    if (fs.existsSync(manifestPath)) {
-      res.writeHead(200, {
-        'Content-Type': 'application/manifest+json; charset=utf-8',
-        'Cache-Control': 'public, max-age=86400',
-      });
-      return fs.createReadStream(manifestPath).pipe(res);
-    }
+    res.writeHead(200, {
+      'Content-Type': 'application/manifest+json; charset=utf-8',
+      'Cache-Control': 'public, max-age=86400',
+    });
+    return res.end(JSON.stringify({
+      name: 'APKworlds',
+      short_name: 'APKworlds',
+      description: 'Discover and download safe, verified Android APKs and guides.',
+      start_url: '/',
+      display: 'standalone',
+      background_color: '#0d131f',
+      theme_color: '#182337',
+      icons: [
+        { src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml' },
+        { src: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' }
+      ]
+    }));
   }
 
   // SEO: /robots.txt
