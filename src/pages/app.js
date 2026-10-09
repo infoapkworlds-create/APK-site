@@ -292,11 +292,27 @@ export function appPage(req, app) {
 </article>`;
 
   const titleBits = ['Features', app.version ? 'Version' : null, 'Download'].filter(Boolean);
+  const ldList = [appLd(app, { reviews: [], screenshots })];
+  if (faqs && faqs.length) {
+    ldList.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: f.a,
+        },
+      })),
+    });
+  }
+
   return page({
     title: `${app.name} for Android: ${titleBits.slice(0, -1).join(', ')} and ${titleBits.at(-1)}`,
     description: `${app.summary} Developer, ${app.version ? 'version, ' : ''}pros and cons, alternatives and official download links.`.slice(0, 300),
     path: `/apps/${app.slug}/`, index: idx.index, crumbs: appCrumbs(app),
-    ld: [appLd(app, { reviews: [], screenshots })],
+    ld: ldList,
     ogImage: screenshots[0]?.src || `/icons/${app.slug}.svg`,
     body,
   });
