@@ -374,8 +374,51 @@ details.menu[open] summary span:nth-child(3) {
 
 @media (max-width: 768px) {
   .topnav { display: none; }
-  .menu { display: block; }
+  .menu { display: block; flex-shrink: 0; }
   .btn-hdr-submit { display: none; }
+  .hdr {
+    gap: 0.5rem;
+    padding: 0.5rem 0.5rem;
+  }
+  .logo {
+    gap: 0.35rem;
+    flex-shrink: 0;
+  }
+  .logo-icon {
+    width: 28px;
+    height: 28px;
+  }
+  .logo-name {
+    font-size: 1.1rem;
+  }
+  .logo-badge {
+    display: none;
+  }
+  .hdr-search {
+    flex: 1;
+    min-width: 0;
+    max-width: none;
+  }
+  .hdr-search-box {
+    padding: 0.15rem 0.25rem 0.15rem 0.5rem;
+  }
+  .hdr-search-icon {
+    width: 14px;
+    height: 14px;
+    margin-right: 0.25rem;
+  }
+  .hdr-search-box input {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.15rem;
+  }
+  .hdr-search-btn {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.75rem;
+  }
+  .hdr-actions {
+    gap: 0.25rem;
+    flex-shrink: 0;
+  }
 }
 
 
