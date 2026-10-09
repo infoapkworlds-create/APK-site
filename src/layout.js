@@ -138,6 +138,7 @@ export function page(o) {
 <meta name="description" content="${o.description}">
 <meta name="google-site-verification" content="jS5SQakfXRhkImoOZzvBX6qluXHCTlTRo-TaaHyKXCQ">
 <meta name="msvalidate.01" content="25038A8801D42437BBC34723A41AC6C4">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4766868021895107" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K601WNC1HR"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
