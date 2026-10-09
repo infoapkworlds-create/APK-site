@@ -11,6 +11,25 @@
     }[m]));
   }
 
+  // 0. Mobile Nav Drawer — close when a link is tapped or outside area clicked
+  const mobileMenu = document.querySelector('details.menu');
+  if (mobileMenu) {
+    // Close when any nav link inside drawer is tapped
+    mobileMenu.querySelectorAll('nav a').forEach((link) => {
+      link.addEventListener('click', () => { mobileMenu.removeAttribute('open'); });
+    });
+    // Close when tapping the backdrop (summary::before pseudo-element area)
+    mobileMenu.querySelector('summary').addEventListener('click', (e) => {
+      // already handled by <details> toggle — nothing extra needed
+    });
+    // Close if user taps outside the drawer nav
+    document.addEventListener('click', (e) => {
+      if (mobileMenu.hasAttribute('open') && !mobileMenu.contains(e.target)) {
+        mobileMenu.removeAttribute('open');
+      }
+    });
+  }
+
   // 1. Search suggestions autocomplete
   const inputs = document.querySelectorAll('input[data-suggest]');
   inputs.forEach((input) => {
@@ -380,6 +399,45 @@
         }
       });
     }
+  });
+
+  // 7. PWA Install Prompt Banner
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (localStorage.getItem('pwa_prompt_dismissed')) return;
+
+    const banner = document.createElement('div');
+    banner.className = 'pwa-install-banner';
+    banner.innerHTML = `
+      <div class="pwa-install-content">
+        <img src="/favicon.svg" alt="APKworlds" width="36" height="36" class="pwa-icon">
+        <div class="pwa-text">
+          <strong>Install APKworlds</strong>
+          <span>Fast, free access to verified APKs & guides</span>
+        </div>
+        <div class="pwa-actions">
+          <button type="button" class="btn primary btn-sm pwa-install-btn">Install</button>
+          <button type="button" class="pwa-close-btn" aria-label="Dismiss">&times;</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(banner);
+
+    banner.querySelector('.pwa-install-btn').addEventListener('click', async () => {
+      banner.remove();
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+      }
+    });
+
+    banner.querySelector('.pwa-close-btn').addEventListener('click', () => {
+      banner.remove();
+      localStorage.setItem('pwa_prompt_dismissed', Date.now());
+    });
   });
 })();
 

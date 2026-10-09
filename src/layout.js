@@ -2,7 +2,7 @@ import { html, raw, esc, fmtDate, isoDate, fmtBytes } from './lib/html.js';
 import { config } from './config.js';
 
 export const abs = (p) => config.siteUrl + p;
-const ASSET_V = '5';
+const ASSET_V = '6';
 
 export function logoMark(size = 36) {
   return raw(`<svg class="logo-icon" width="${size}" height="${size}" viewBox="0 0 32 32" aria-hidden="true">
