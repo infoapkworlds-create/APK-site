@@ -1,5 +1,5 @@
 import { html, raw, fmtBytes } from '../lib/html.js';
-import { page, icon, catUrl, abs, orgLd } from '../layout.js';
+import { page, icon, catUrl, abs, orgLd, adBanner728x90, adNativeWidget } from '../layout.js';
 import * as D from '../lib/data.js';
 import { all } from '../db.js';
 import { config } from '../config.js';
@@ -237,6 +237,9 @@ export function homePage(req) {
       </div>
     </section>
 
+    <!-- Mid-Feed 728x90 Banner Advertisement -->
+    ${adBanner728x90()}
+
     <!-- Section 2: Popular Games in Last 24 Hours -->
     <section class="pure-shelf-sec">
       <div class="pure-sec-hdr">
@@ -328,6 +331,9 @@ export function homePage(req) {
       </div>
     </section>
 
+    <!-- Sponsored Native Widget Recommendations -->
+    ${adNativeWidget()}
+
     <!-- Section 7: Partner Developers -->
     <section class="pure-shelf-sec">
       <div class="pure-sec-hdr">
@@ -370,6 +376,13 @@ export function homePage(req) {
   <!-- ==================== RIGHT SIDEBAR COLUMN ==================== -->
   <aside class="pure-sidebar-col">
 
+    <!-- Sponsored Direct Ad Card -->
+    <div class="pure-side-sec" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff; border: 1px solid rgba(255,255,255,0.1); text-align: center; padding: 1.25rem 1rem;">
+      <span style="display: inline-block; font-size: 0.65rem; font-weight: 800; background: var(--primary); color: #0d131f; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; margin-bottom: 0.5rem;">Sponsored Special</span>
+      <h3 style="font-size: 1.05rem; margin: 0 0 0.4rem; color: #fff; font-weight: 800;">Fast Direct Downloads</h3>
+      <p style="font-size: 0.8rem; color: #94a3b8; margin: 0 0 0.85rem; line-height: 1.4;">Access top trending games & verified premium software at maximum speed.</p>
+      <a href="https://www.profitableratecpmnetwork.com/kjxe5ve2?key=6a1ca707b7a4c8be813dfff5b8321342" target="_blank" rel="noopener sponsored" class="btn primary" style="display: block; width: 100%; box-sizing: border-box; text-align: center; font-size: 0.88rem; font-weight: 700; padding: 0.6rem 1rem;">Explore Now &rarr;</a>
+    </div>
 
     <!-- Sidebar Widget 2: Weekly Editor's Recommendation -->
     <div class="pure-side-sec">

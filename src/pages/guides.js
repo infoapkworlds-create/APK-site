@@ -1,5 +1,5 @@
 import { html, raw, fmtDate, isoDate } from '../lib/html.js';
-import { page, faqBlock, appGrid, abs, orgLd, icon } from '../layout.js';
+import { page, faqBlock, appGrid, abs, orgLd, icon, adBanner728x90, adNativeWidget } from '../layout.js';
 import * as D from '../lib/data.js';
 import * as L from '../lib/links.js';
 import { config } from '../config.js';
@@ -265,7 +265,13 @@ export function guideDetailPage(req, guide) {
     ${raw(guide.body_html)}
   </div>
 
+  <!-- Mid-Article 728x90 Banner -->
+  ${adBanner728x90()}
+
   ${faqBlock(faqs)}
+
+  <!-- Sponsored Native Recommendations Widget -->
+  ${adNativeWidget()}
 
   ${relatedApps.length ? html`
   <section class="guide-related">

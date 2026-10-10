@@ -1,5 +1,5 @@
 import { html, raw, paras, fmtBytes, fmtDate, isoDate, orNA, NA, parseJSON } from '../lib/html.js';
-import { page, icon, stars, appGrid, catUrl, faqBlock, abs, orgLd } from '../layout.js';
+import { page, icon, stars, appGrid, catUrl, faqBlock, abs, orgLd, adBanner728x90, adNativeWidget } from '../layout.js';
 import * as D from '../lib/data.js';
 import * as L from '../lib/links.js';
 import { getAppScreenshots } from '../screenshots.js';
@@ -228,6 +228,9 @@ export function appPage(req, app) {
     </div>
   </section>
 
+  <!-- Mid-Page 728x90 Banner -->
+  ${adBanner728x90()}
+
   <div class="guide-callout card">
     <div class="guide-callout-header">
       <span class="topic-tag">Step-by-Step Tutorial</span>
@@ -268,6 +271,9 @@ export function appPage(req, app) {
     <p><a href="/apps/${app.slug}/alternatives/">Compare all ${app.name} alternatives</a></p></section>` : ''}
 
   ${cmps.length ? html`<section><h2>Comparisons</h2><ul>${cmps.map((c) => html`<li><a href="/compare/${c.slug}/">${c.a_name} vs ${c.b_name}</a></li>`)}</ul></section>` : ''}
+
+  <!-- Sponsored Native Recommendations Widget -->
+  ${adNativeWidget()}
 
   <section><h2>User reviews</h2>
     ${app.review_count ? html`${ratingBars(app)}${reviewList(reviews, req, app)}` : html`<p>No one has reviewed ${app.name} here yet. If you use it, your review helps other people decide.</p>`}
@@ -459,6 +465,11 @@ export function downloadPage(req, app) {
     <a class="btn primary" href="${app.play_url || app.official_apk_page || app.website}" rel="noopener" target="_blank" data-evt="official_click">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 8px; vertical-align: middle;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       ${app.play_url ? 'Install from Google Play (Official)' : 'Download from Official Developer Website'} &rarr;
+    </a>
+  </p>
+  <p style="margin-top: 0.75rem;">
+    <a href="https://www.profitableratecpmnetwork.com/kjxe5ve2?key=6a1ca707b7a4c8be813dfff5b8321342" target="_blank" rel="noopener sponsored" class="btn secondary" style="font-size: 0.85rem; padding: 0.5rem 1rem;">
+      ⚡ Direct High-Speed Download Mirror (Sponsored) &rarr;
     </a>
   </p>
   ${app.official_apk_page && app.official_apk_page !== app.play_url ? html`<p class="small">Developer direct APK portal: ${ext(app.official_apk_page, 'Visit Official Release Page', '', 'official_click')}.</p>` : ''}

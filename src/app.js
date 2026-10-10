@@ -222,7 +222,7 @@ export async function appHandler(req, res) {
     res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
     res.setHeader(
       'Content-Security-Policy',
-      "default-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com;"
+      "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://www.highrevenueformat.com https://*.highrevenueformat.com https://*.profitableratecpmnetwork.com; connect-src 'self' https:; frame-src 'self' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.highrevenueformat.com https://*.highrevenueformat.com https://*.profitableratecpmnetwork.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com;"
     );
   };
   setSecurityHeaders();

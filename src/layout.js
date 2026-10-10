@@ -2,7 +2,7 @@ import { html, raw, esc, fmtDate, isoDate, fmtBytes } from './lib/html.js';
 import { config } from './config.js';
 
 export const abs = (p) => config.siteUrl + p;
-const ASSET_V = '6';
+const ASSET_V = '7';
 
 export function logoMark(size = 36) {
   return raw(`<svg class="logo-icon" width="${size}" height="${size}" viewBox="0 0 32 32" aria-hidden="true">
@@ -168,6 +168,8 @@ ${index ? raw('<meta name="robots" content="index, follow, max-image-preview:lar
 <link rel="stylesheet" href="/static/site.css?v=${ASSET_V}">
 <script src="/static/site.js?v=${ASSET_V}" defer></script>
 ${ld.map(jsonld)}
+<!-- Popunder / Smart Ad Tag -->
+<script src="https://pl31752776.profitableratecpmnetwork.com/59/a2/f5/59a2f5922773e31544c805d48d508364.js"></script>
 </head>
 <body>
 ${header(o.path)}
@@ -176,9 +178,39 @@ ${o.crumbs ? breadcrumbs(o.crumbs) : ''}
 ${o.body}
 </main>
 ${footer()}
+<!-- Social Bar / Sticky Notification Tag -->
+<script src="https://pl31752773.profitableratecpmnetwork.com/04/9d/77/049d772dfd76275dbc19a53d62937f43.js"></script>
 </body>
 </html>`;
   return { status: o.status || 200, html: doc.s, index };
+}
+
+export function adBanner728x90() {
+  return html`
+<div class="ad-container-728" style="margin: 1.5rem auto; text-align: center; max-width: 728px; min-height: 90px; overflow: hidden; background: rgba(0,0,0,0.03); border-radius: 8px; padding: 6px 0;">
+  <div style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Advertisement</div>
+  ${raw(`
+    <script>
+      atOptions = {
+        'key' : '054ba0db8eafe0b7180d6ff25715f17e',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+    </script>
+    <script src="https://www.highrevenueformat.com/054ba0db8eafe0b7180d6ff25715f17e/invoke.js"></script>
+  `)}
+</div>`;
+}
+
+export function adNativeWidget() {
+  return html`
+<div class="ad-native-container" style="margin: 2rem auto; max-width: 100%; overflow: hidden; background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 1rem; box-shadow: var(--shadow-sm);">
+  <div style="font-size: 0.7rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">Sponsored Recommendations</div>
+  <div id="container-5b163803fff9244d297b0b5b7becb8ba"></div>
+  ${raw(`<script async="async" data-cfasync="false" src="https://pl31752774.profitableratecpmnetwork.com/5b163803fff9244d297b0b5b7becb8ba/invoke.js"></script>`)}
+</div>`;
 }
 
 // ---------- shared components ----------
