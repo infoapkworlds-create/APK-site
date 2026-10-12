@@ -127,12 +127,7 @@ export function getIndexableUrls() {
 export function formatUrlset(urls) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u) => `  <url>
-    <loc>${u.loc}</loc>
-    <lastmod>${u.lastmod}</lastmod>
-    <changefreq>${u.changefreq || 'weekly'}</changefreq>
-    <priority>${u.priority || '0.7'}</priority>
-  </url>`).join('\n')}
+${urls.map((u) => `<url><loc>${u.loc}</loc><lastmod>${u.lastmod}</lastmod></url>`).join('\n')}
 </urlset>`;
 }
 
@@ -159,6 +154,43 @@ export function getAppChunks(numChunks = 6) {
   for (let i = 0; i < appGroups.length; i++) {
     const cIdx = Math.min(Math.floor(i / groupChunkSize), numChunks - 1);
     chunks[cIdx].push(...appGroups[i].urls);
+  }
+  return chunks;
+}
+
+export function getGameChunks(numChunks = 3) {
+  const { games } = getCategorizedUrls();
+  const gameGroups = [];
+  let currentGroup = null;
+
+  for (const u of games) {
+    const m = u.loc.match(/\/apps\/([^\/]+)\//);
+    const slug = m ? m[1] : 'other';
+    if (!currentGroup || currentGroup.slug !== slug) {
+      currentGroup = { slug, urls: [] };
+      gameGroups.push(currentGroup);
+    }
+    currentGroup.urls.push(u);
+  }
+
+  const chunks = Array.from({ length: numChunks }, () => []);
+  const groupChunkSize = Math.ceil(gameGroups.length / numChunks);
+
+  for (let i = 0; i < gameGroups.length; i++) {
+    const cIdx = Math.min(Math.floor(i / groupChunkSize), numChunks - 1);
+    chunks[cIdx].push(...gameGroups[i].urls);
+  }
+  return chunks;
+}
+
+export function getGuideChunks(numChunks = 2) {
+  const { guides } = getCategorizedUrls();
+  const chunks = Array.from({ length: numChunks }, () => []);
+  const chunkSize = Math.ceil(guides.length / numChunks);
+
+  for (let i = 0; i < guides.length; i++) {
+    const cIdx = Math.min(Math.floor(i / chunkSize), numChunks - 1);
+    chunks[cIdx].push(guides[i]);
   }
   return chunks;
 }
@@ -197,11 +229,23 @@ export function sitemapIndexXml() {
     <lastmod>${today}</lastmod>
   </sitemap>
   <sitemap>
-    <loc>${base}/sitemap-games.xml</loc>
+    <loc>${base}/sitemap-games-1.xml</loc>
     <lastmod>${today}</lastmod>
   </sitemap>
   <sitemap>
-    <loc>${base}/sitemap-guides.xml</loc>
+    <loc>${base}/sitemap-games-2.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${base}/sitemap-games-3.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${base}/sitemap-guides-1.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${base}/sitemap-guides-2.xml</loc>
     <lastmod>${today}</lastmod>
   </sitemap>
 </sitemapindex>`;
@@ -225,8 +269,20 @@ export function sitemapGamesXml() {
   return formatUrlset(getCategorizedUrls().games);
 }
 
+export function sitemapGamesPartXml(partNumber = 1) {
+  const chunks = getGameChunks(3);
+  const selected = chunks[partNumber - 1] || [];
+  return formatUrlset(selected);
+}
+
 export function sitemapGuidesXml() {
   return formatUrlset(getCategorizedUrls().guides);
+}
+
+export function sitemapGuidesPartXml(partNumber = 1) {
+  const chunks = getGuideChunks(2);
+  const selected = chunks[partNumber - 1] || [];
+  return formatUrlset(selected);
 }
 
 export function sitemapXml() {
