@@ -77,7 +77,9 @@ import {
   sitemapAppsXml,
   sitemapAppsPartXml,
   sitemapGamesXml,
+  sitemapGamesPartXml,
   sitemapGuidesXml,
+  sitemapGuidesPartXml,
   rssXml,
   robotsTxt,
 } from './pages/seo.js';
@@ -407,12 +409,52 @@ export async function appHandler(req, res) {
     return res.end(sitemapGamesXml());
   }
 
+  if (pathname === '/sitemap-games-1.xml') {
+    res.writeHead(200, {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600',
+    });
+    return res.end(sitemapGamesPartXml(1));
+  }
+
+  if (pathname === '/sitemap-games-2.xml') {
+    res.writeHead(200, {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600',
+    });
+    return res.end(sitemapGamesPartXml(2));
+  }
+
+  if (pathname === '/sitemap-games-3.xml') {
+    res.writeHead(200, {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600',
+    });
+    return res.end(sitemapGamesPartXml(3));
+  }
+
   if (pathname === '/sitemap-guides.xml') {
     res.writeHead(200, {
       'Content-Type': 'application/xml; charset=utf-8',
       'Cache-Control': 'public, max-age=3600',
     });
     return res.end(sitemapGuidesXml());
+  }
+
+  if (pathname === '/sitemap-guides-1.xml') {
+    res.writeHead(200, {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600',
+    });
+    return res.end(sitemapGuidesPartXml(1));
+  }
+
+  if (pathname === '/sitemap-guides-2.xml') {
+    res.writeHead(200, {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600',
+    });
+    return res.end(sitemapGuidesPartXml(2));
   }
 
   // SEO: /rss.xml & /feed.xml
