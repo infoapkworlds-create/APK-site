@@ -4540,4 +4540,171 @@ tr:last-child td { border-bottom: none; }
   border-color: #24344d;
 }
 
+/* ==========================================================================
+   0/70 Detections Clean Security Seal (E-E-A-T Trust Booster)
+   ========================================================================== */
+.security-seal-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 1rem 1.25rem;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+  margin: 1.25rem 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.security-seal-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.security-seal-info {
+  flex: 1;
+}
+
+.security-seal-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+  color: #166534;
+  font-size: 0.95rem;
+}
+
+.seal-green-pill {
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: #16a34a;
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.security-seal-desc {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #15803d;
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   What's New in Latest Update Card (Google QDF Freshness Booster)
+   ========================================================================== */
+.whats-new-card {
+  margin: 1.25rem 0;
+  padding: 1.25rem 1.4rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.whats-new-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.65rem;
+}
+
+.whats-new-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.whats-new-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: rgba(37,99,235,0.08);
+  color: #2563eb;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(37,99,235,0.2);
+}
+
+.whats-new-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  line-height: 1.7;
+  font-size: 0.88rem;
+  color: var(--text);
+}
+
+/* ==========================================================================
+   Sitelinks Quick Jump Bar (Google Search Sitelinks Expander)
+   ========================================================================== */
+.sitelinks-jump-bar {
+  margin: 1.25rem 0;
+}
+
+.sitelinks-jump-bar ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.jump-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.45rem 0.95rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  transition: all 0.15s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.jump-pill:hover {
+  background: var(--bg-alt);
+  border-color: #3b82f6;
+  color: #2563eb;
+  transform: translateY(-1px);
+}
+
+/* Dark mode overrides */
+[data-theme="dark"] .security-seal-card {
+  background: #064e3b;
+  border-color: #047857;
+}
+[data-theme="dark"] .security-seal-heading {
+  color: #a7f3d0;
+}
+[data-theme="dark"] .security-seal-desc {
+  color: #6ee7b7;
+}
+[data-theme="dark"] .whats-new-card {
+  background: #111a2e;
+  border-color: #24344d;
+}
+[data-theme="dark"] .jump-pill {
+  background: #111a2e;
+  border-color: #24344d;
+  color: #cbd5e1;
+}
+[data-theme="dark"] .jump-pill:hover {
+  background: #1a273f;
+  border-color: #3b82f6;
+  color: #60a5fa;
+}
+
+
 

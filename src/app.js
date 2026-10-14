@@ -496,6 +496,29 @@ export async function appHandler(req, res) {
     return res.end(suggestApi(req));
   }
 
+  // API: IndexNow Push Trigger
+  if (pathname === '/api/indexnow-ping') {
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    const host = 'www.apkworlds.co.uk';
+    const key = config.indexNowKey || 'adda586927efa645e1386f736c7fa549';
+    fetch('https://api.indexnow.org/indexnow', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({
+        host,
+        key,
+        keyLocation: `https://${host}/${key}.txt`,
+        urlList: [
+          `https://${host}/`,
+          `https://${host}/compare/`,
+          `https://${host}/collections/`,
+          `https://${host}/tools/apk-error-solver/`
+        ]
+      })
+    }).catch(() => {});
+    return res.end(JSON.stringify({ ok: true, message: 'Ping sent to IndexNow' }));
+  }
+
   // API: Anonymous Beacon Event
   if (pathname === '/api/event' && req.method === 'POST') {
     try {
