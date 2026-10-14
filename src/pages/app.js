@@ -58,6 +58,10 @@ export function appLd(app, { reviews = [], withRating = true, screenshots = [] }
     applicationCategory: app.app_type === 'game' ? 'GameApplication' : (LD_CAT[app.cat_slug] || 'UtilitiesApplication'),
     image: abs(`/icons/${app.slug}.webp`),
     author: { '@type': 'Organization', name: app.dev_name, url: app.dev_website || abs(`/developer/${app.dev_slug}/`) },
+    potentialAction: {
+      '@type': 'DownloadAction',
+      target: abs(`/apps/${app.slug}/download/`),
+    },
   };
   if (screenshots && screenshots.length) {
     o.screenshot = screenshots.map((s) => abs(s.src));
@@ -464,6 +468,37 @@ export function appPage(req, app) {
   ${sameDev.length ? html`<section><h2>More from ${app.dev_name}</h2>${appGrid(sameDev, { summary: false })}${devPageIndexed ? html`<p><a href="/developer/${app.dev_slug}/">All apps by ${app.dev_name}</a></p>` : ''}</section>` : ''}
   ${related.length ? html`<section><h2>Similar ${app.app_type === 'game' ? 'games' : 'apps'}</h2>${appGrid(related)}</section>` : ''}
   ${guides.length ? html`<section><h2>Related guides</h2><ul>${guides.map((g) => html`<li><a href="/guides/${g.slug}/">${g.title}</a></li>`)}</ul></section>` : ''}
+
+  <!-- Topical Authority Silo Hub -->
+  <section class="topical-silo-box card" style="margin: 2rem 0; padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px;">
+    <h3 style="margin-top: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+      <span>🧭</span> ${app.name} Topical Resource Hub &amp; Direct Links
+    </h3>
+    <p style="font-size: 0.92rem; color: var(--muted); margin-bottom: 1rem;">
+      Essential links, guides, historical releases, and verified packages for ${app.name}:
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.75rem;">
+      <a href="/apps/${app.slug}/download/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>⚡</span> Direct APK Download
+      </a>
+      <a href="/apps/${app.slug}/versions/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>📦</span> All Old Versions Archive
+      </a>
+      <a href="/apps/${app.slug}/alternatives/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>🔄</span> Best Similar Alternatives
+      </a>
+      <a href="/tools/apk-error-solver/?app=${app.slug}" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>🛠️</span> APK Error Solver Tool
+      </a>
+      <a href="${catUrl({ kind: app.cat_kind, slug: app.cat_slug })}" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>📁</span> Top ${app.cat_name} Apps
+      </a>
+      <a href="/guides/how-to-install-apk/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>📖</span> Step-by-Step Install Guide
+      </a>
+    </div>
+  </section>
+
   ${faqBlock(allFaqs)}
 
   <aside class="source">
@@ -475,6 +510,33 @@ export function appPage(req, app) {
 
   const titleBits = ['Features', app.version ? 'Version' : null, 'Download'].filter(Boolean);
   const ldList = [appLd(app, { reviews: [], screenshots })];
+  ldList.push({
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to Download and Install ${app.name} APK on Android`,
+    description: `Step-by-step guide to download and install verified ${app.name} APK on any Android phone.`,
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: `Download ${app.name} APK Package`,
+        text: `Tap the download button on APKWorlds to get the verified ${app.name} APK package from secure edge mirrors.`,
+        url: abs(`/apps/${app.slug}/download/`),
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'Allow Unknown Apps in Android Settings',
+        text: 'Go to Settings > Security > Install Unknown Apps and toggle your browser or File Manager to Allow permission.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: `Install and Launch ${app.name}`,
+        text: `Open your Downloads folder, tap the ${app.name} APK file, and tap Install. Launch the app once finished.`,
+      },
+    ],
+  });
   if (allFaqs && allFaqs.length) {
     ldList.push({
       '@context': 'https://schema.org',
@@ -494,6 +556,7 @@ export function appPage(req, app) {
     title: `${app.name} APK ${app.version ? 'v' + app.version : 'Latest'} for Android - Free Download [Official]`,
     description: `Download ${app.name} APK ${app.version ? 'v' + app.version : 'latest version'} for Android. 100% verified virus-free package, fast multi-CDN download mirrors, and official signatures.`.slice(0, 300),
     path: `/apps/${app.slug}/`, index: idx.index, crumbs: appCrumbs(app),
+    keywords: `${app.name} apk, download ${app.name}, descargar ${app.name} apk gratis, baixar ${app.name} atualizado, unduh ${app.name} apk, ${app.name} apk download latest version`,
     ld: ldList,
     ogImage: screenshots[0]?.src || `/icons/${app.slug}.svg`,
     body,
@@ -759,10 +822,45 @@ ${socialShareBar(`Download ${app.name} APK`, `/apps/${app.slug}/download/`)}
 <!-- App Version Update Notification Subscription Box -->
 ${appUpdateAlertBox(app)}
 <p><a href="/apps/${app.slug}/">Back to ${app.name} details</a> · <a href="/apps/${app.slug}/versions/">${app.name} version history</a> · <a href="/download-policy/">Our download policy</a></p>`;
+
+  const downloadLd = [
+    appLd(app),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: `How to Install ${app.name} APK on Android`,
+      description: `Step-by-step instructions to safely install the official verified ${app.name} APK package on your Android device.`,
+      step: [
+        {
+          '@type': 'HowToStep',
+          position: 1,
+          name: 'Download Verified APK Mirror',
+          text: `Choose a high-speed download mirror on this page to download the latest ${app.name} APK file.`,
+          url: abs(`/apps/${app.slug}/download/`),
+        },
+        {
+          '@type': 'HowToStep',
+          position: 2,
+          name: 'Authorize Unknown Apps',
+          text: 'If prompted by Android Security, tap Settings and allow installation from this source.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 3,
+          name: 'Complete Package Installation',
+          text: `Tap Install in the Android package installer dialog and open ${app.name} once complete.`,
+        },
+      ],
+    },
+  ];
+
   return page({
     title: `Download ${app.name} APK for Android (${app.version ? 'v' + app.version + ' ' : ''}Direct High-Speed Package)`,
     description: `Direct download ${app.name} APK package for Android. Verified SHA-256 digital signature, zero malware, and multi-threaded fast download mirrors.`.slice(0, 300),
-    path: `/apps/${app.slug}/download/`, index: idx.index && !reqV, crumbs: appCrumbs(app, ['Download', `/apps/${app.slug}/download/`]), body,
+    path: `/apps/${app.slug}/download/`, index: idx.index && !reqV, crumbs: appCrumbs(app, ['Download', `/apps/${app.slug}/download/`]),
+    keywords: `download ${app.name} apk, ${app.name} apk direct download, descargar ${app.name} apk, baixar ${app.name} apk gratis, ${app.name} android package`,
+    ld: downloadLd,
+    body,
   });
 }
 import { one } from '../db.js';

@@ -2,7 +2,7 @@ import { html, raw, esc, fmtDate, isoDate, fmtBytes } from './lib/html.js';
 import { config } from './config.js';
 
 export const abs = (p) => config.siteUrl + p;
-const ASSET_V = '12';
+const ASSET_V = '13';
 
 export function logoMark(size = 36) {
   return raw(`<svg class="logo-icon" width="${size}" height="${size}" viewBox="0 0 32 32" aria-hidden="true">
@@ -146,6 +146,15 @@ export function page(o) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${o.title}</title>
 <meta name="description" content="${o.description}">
+<meta name="keywords" content="${o.keywords || 'download apk, apk free download, descargar apk gratis, baixar apk atualizado, unduh apk terbaru, android apps safe apk'}">
+<!-- Core Web Vitals Preconnect & DNS-Prefetch Optimization -->
+<link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<link rel="dns-prefetch" href="//pl31752776.profitableratecpmnetwork.com">
+<link rel="dns-prefetch" href="//pl31752774.profitableratecpmnetwork.com">
+<link rel="dns-prefetch" href="//pl31752773.profitableratecpmnetwork.com">
+<link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
 <meta name="google-site-verification" content="jS5SQakfXRhkImoOZzvBX6qluXHCTlTRo-TaaHyKXCQ">
 <meta name="msvalidate.01" content="25038A8801D42437BBC34723A41AC6C4">
 <meta name="google-adsense-account" content="ca-pub-4766868021895107">

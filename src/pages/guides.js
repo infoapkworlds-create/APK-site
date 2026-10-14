@@ -216,7 +216,7 @@ function renderTableOfContents(htmlContent) {
   });
 
   if (headings.length < 2) {
-    return { tocHtml: '', bodyWithAnchors };
+    return { tocHtml: '', bodyWithAnchors, headings };
   }
 
   const tocHtml = html`
@@ -229,7 +229,7 @@ function renderTableOfContents(htmlContent) {
   </ol>
 </div>`;
 
-  return { tocHtml, bodyWithAnchors };
+  return { tocHtml, bodyWithAnchors, headings };
 }
 
 export function guideDetailPage(req, guide) {
@@ -237,7 +237,7 @@ export function guideDetailPage(req, guide) {
   const relatedGuides = L.relatedGuides(guide, 3);
   const faqs = JSON.parse(guide.faq_json || '[]');
   const coverImg = getGuideCoverImage(guide);
-  const { tocHtml, bodyWithAnchors } = renderTableOfContents(guide.body_html);
+  const { tocHtml, bodyWithAnchors, headings = [] } = renderTableOfContents(guide.body_html);
 
   const articleLd = {
     '@context': 'https://schema.org',
@@ -259,6 +259,24 @@ export function guideDetailPage(req, guide) {
       '@id': abs(`/guides/${guide.slug}/`),
     },
   };
+
+  let howToLd = null;
+  if (guide.slug.startsWith('how-to-') && headings.length >= 2) {
+    howToLd = {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: guide.title,
+      description: guide.summary || guide.meta_description,
+      image: abs(coverImg),
+      step: headings.map((h, i) => ({
+        '@type': 'HowToStep',
+        position: i + 1,
+        name: h.text,
+        url: abs(`/guides/${guide.slug}/#${h.anchor}`),
+        text: `Step ${i + 1}: ${h.text}. Follow detailed steps in our verified Android tutorial.`,
+      })),
+    };
+  }
 
   const faqLd = faqs.length ? {
     '@context': 'https://schema.org',
@@ -331,7 +349,8 @@ export function guideDetailPage(req, guide) {
     description: guide.meta_description,
     path: `/guides/${guide.slug}/`,
     crumbs: [['Home', '/'], ['Guides', '/guides/'], [guide.title, `/guides/${guide.slug}/`]],
-    ld: [articleLd, ...(faqLd ? [faqLd] : [])],
+    keywords: `${guide.title.toLowerCase()}, android guide, how to apk, apk installation, android tutorial`,
+    ld: [articleLd, ...(howToLd ? [howToLd] : []), ...(faqLd ? [faqLd] : [])],
     body,
   });
 }
