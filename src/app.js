@@ -301,6 +301,20 @@ export async function appHandler(req, res) {
     return res.end(getFavicon());
   }
 
+  // PWA Service Worker: /sw.js
+  if (pathname === '/sw.js') {
+    res.writeHead(200, {
+      'Content-Type': 'application/javascript; charset=utf-8',
+      'Cache-Control': 'public, max-age=0, must-revalidate',
+      'Service-Worker-Allowed': '/',
+    });
+    const swPath = path.join(__dirname, '..', 'public', 'sw.js');
+    if (fs.existsSync(swPath)) {
+      return res.end(fs.readFileSync(swPath, 'utf8'));
+    }
+    return res.end('// Service worker active');
+  }
+
   // Web App Manifest: /manifest.json
   if (pathname === '/manifest.json') {
     res.writeHead(200, {
@@ -308,7 +322,7 @@ export async function appHandler(req, res) {
       'Cache-Control': 'public, max-age=86400',
     });
     return res.end(JSON.stringify({
-      name: 'APKworlds',
+      name: 'APKworlds - Android APK Downloader',
       short_name: 'APKworlds',
       description: 'Discover and download safe, verified Android APKs and guides.',
       start_url: '/',
@@ -316,8 +330,10 @@ export async function appHandler(req, res) {
       background_color: '#0d131f',
       theme_color: '#182337',
       icons: [
-        { src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml' },
-        { src: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' }
+        { src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
+        { src: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
+        { src: '/static/apple-touch-icon.png', sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
+        { src: '/static/logo.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
       ]
     }));
   }

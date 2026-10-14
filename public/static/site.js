@@ -500,5 +500,53 @@
       themeToggle.setAttribute('aria-label', nextTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
     });
   }
+
+  // 11. PWA Service Worker Registration & Install Button
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+
+  let deferredInstallPrompt = null;
+  const pwaBtn = document.getElementById('pwaInstallBtn');
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    if (pwaBtn) pwaBtn.style.display = 'inline-flex';
+  });
+
+  if (pwaBtn) {
+    pwaBtn.addEventListener('click', async () => {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        const { outcome } = await deferredInstallPrompt.userChoice;
+        if (outcome === 'accepted') {
+          pwaBtn.style.display = 'none';
+        }
+        deferredInstallPrompt = null;
+      } else {
+        alert('To install APKWorlds App: Tap your browser menu (⋮) and select "Add to Home screen" or "Install App".');
+      }
+    });
+  }
+
+  // 12. Social Share Link Copy
+  document.querySelectorAll('.btn-share.copy').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const url = btn.getAttribute('data-copy-url') || window.location.href;
+      try {
+        await navigator.clipboard.writeText(url);
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = `<span>✓ Copied!</span>`;
+        setTimeout(() => {
+          btn.innerHTML = originalHtml;
+        }, 2000);
+      } catch {
+        // Fallback prompt
+        window.prompt('Copy this link:', url);
+      }
+    });
+  });
 })();
 

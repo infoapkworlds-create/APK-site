@@ -3175,3 +3175,352 @@ tr:last-child td { border-bottom: none; }
 .dl-ready-pulse {
   animation: dlPulse 0.5s ease-in-out;
 }
+
+/* ==========================================================================
+   PWA Install Header Button
+   ========================================================================== */
+.btn-pwa-install {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.35);
+}
+.btn-pwa-install:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.45);
+}
+
+/* ==========================================================================
+   Social Share Bar
+   ========================================================================== */
+.social-share-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 1.25rem 0;
+  padding: 10px 14px;
+  background: var(--bg-surface, #f8fafc);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 10px;
+}
+.social-share-bar .share-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.btn-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.btn-share:hover {
+  transform: translateY(-1px);
+  opacity: 0.92;
+}
+.btn-share.wa {
+  background: #25d366;
+  color: #ffffff;
+}
+.btn-share.tg {
+  background: #229ed9;
+  color: #ffffff;
+}
+.btn-share.copy {
+  background: var(--bg-card, #ffffff);
+  color: var(--text, #1e293b);
+  border: 1px solid var(--border, #cbd5e1);
+}
+
+/* ==========================================================================
+   Old Versions Archive Section
+   ========================================================================== */
+.old-versions-section {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.06));
+}
+.old-ver-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.old-ver-hdr h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.old-ver-hdr .view-all-link {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary, #059669);
+  text-decoration: none;
+}
+.old-ver-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 1.25rem 0 1rem 0;
+}
+.old-ver-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--bg-surface, #f8fafc);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+.old-ver-row:hover {
+  background: var(--primary-subtle, #f0fdf4);
+}
+.old-ver-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.old-ver-num {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--text, #0f172a);
+  background: rgba(0,0,0,0.06);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.old-ver-date {
+  font-size: 0.84rem;
+  color: var(--text-muted, #64748b);
+}
+.old-ver-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted, #94a3b8);
+}
+.btn-old-ver-dl {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: var(--primary, #059669);
+  color: #ffffff;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+.btn-old-ver-dl:hover {
+  transform: translateY(-1px);
+}
+.old-ver-footer {
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* ==========================================================================
+   Modern FAQ Accordion
+   ========================================================================== */
+.faq-section {
+  margin: 2.5rem 0;
+  padding: 1.5rem;
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 12px;
+}
+.faq-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border, #e2e8f0);
+}
+.faq-title {
+  margin: 0;
+  font-size: 1.3rem;
+}
+.faq-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--primary-subtle, #f0fdf4);
+  color: var(--primary, #059669);
+  padding: 3px 8px;
+  border-radius: 9999px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.faq-item {
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 8px;
+  background: var(--bg-surface, #f8fafc);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.faq-item[open] {
+  border-color: var(--primary, #10b981);
+  background: var(--bg-card, #ffffff);
+}
+.faq-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--text, #1e293b);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.faq-summary::-webkit-details-marker {
+  display: none;
+}
+.faq-chevron {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  color: var(--text-muted, #94a3b8);
+}
+.faq-item[open] .faq-chevron {
+  transform: rotate(180deg);
+  color: var(--primary, #10b981);
+}
+.faq-answer {
+  padding: 0 16px 14px 16px;
+  color: var(--text-muted, #475569);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.faq-answer p {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Download Help Bar (Broken link & Update)
+   ========================================================================== */
+.dl-help-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--border, #e2e8f0);
+}
+.btn-help-link {
+  font-size: 0.85rem;
+  color: var(--text-muted, #64748b);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.btn-help-link:hover {
+  color: var(--primary, #059669);
+}
+.dl-help-dot {
+  color: var(--border, #cbd5e1);
+}
+
+/* Dark mode overrides for new elements */
+[data-theme="dark"] .social-share-bar {
+  background: #151f32;
+  border-color: #24344d;
+}
+[data-theme="dark"] .btn-share.copy {
+  background: #1a273e;
+  color: #f1f5f9;
+  border-color: #334155;
+}
+[data-theme="dark"] .old-versions-section {
+  background: #111a2e;
+  border-color: #24344d;
+}
+[data-theme="dark"] .old-ver-row {
+  background: #152238;
+  border-color: #24344d;
+}
+[data-theme="dark"] .old-ver-row:hover {
+  background: #1c2b48;
+}
+[data-theme="dark"] .old-ver-num {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f1f5f9;
+}
+[data-theme="dark"] .faq-section {
+  background: #111a2e;
+  border-color: #24344d;
+}
+[data-theme="dark"] .faq-hdr {
+  border-bottom-color: #24344d;
+}
+[data-theme="dark"] .faq-item {
+  background: #152238;
+  border-color: #24344d;
+}
+[data-theme="dark"] .faq-item[open] {
+  background: #18263f;
+  border-color: #10b981;
+}
+[data-theme="dark"] .faq-summary {
+  color: #f1f5f9;
+}
+[data-theme="dark"] .faq-answer {
+  color: #cbd5e1;
+}
+[data-theme="dark"] .dl-help-bar {
+  border-top-color: #24344d;
+}
+[data-theme="dark"] .btn-help-link {
+  color: #94a3b8;
+}
+[data-theme="dark"] .btn-help-link:hover {
+  color: #34d399;
+}
+[data-theme="dark"] .suggest-box {
+  background: #111a2e !important;
+  border-color: #24344d !important;
+}
+[data-theme="dark"] .suggest-row {
+  color: #f1f5f9 !important;
+  border-bottom-color: #1e293b !important;
+}
+[data-theme="dark"] .suggest-row:hover,
+[data-theme="dark"] .suggest-row.is-active {
+  background: #1c2b48 !important;
+}
+[data-theme="dark"] .suggest-footer {
+  background: #152238 !important;
+  color: #34d399 !important;
+  border-top: 1px solid #24344d !important;
+}

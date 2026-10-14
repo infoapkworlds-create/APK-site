@@ -2,7 +2,7 @@ import { html, raw, esc, fmtDate, isoDate, fmtBytes } from './lib/html.js';
 import { config } from './config.js';
 
 export const abs = (p) => config.siteUrl + p;
-const ASSET_V = '8';
+const ASSET_V = '9';
 
 export function logoMark(size = 36) {
   return raw(`<svg class="logo-icon" width="${size}" height="${size}" viewBox="0 0 32 32" aria-hidden="true">
@@ -63,6 +63,10 @@ function header(path) {
         <span class="logo-badge">PRO</span>
       </a>
       <div class="hdr-actions">
+        <button type="button" id="pwaInstallBtn" class="btn-pwa-install" aria-label="Install App" title="Install APKWorlds App" style="display:none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg>
+          <span>Install</span>
+        </button>
         <button type="button" id="themeToggleBtn" class="btn-theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
           <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -270,9 +274,52 @@ export const appGrid = (apps, opts) => apps.length
 
 export const catUrl = (c) => (c.kind === 'game' ? `/games/${c.slug}/` : `/apps/${c.slug}/`);
 
-export function faqBlock(faqs, heading = 'Frequently asked questions') {
+export function socialShareBar(title, path, text = '') {
+  const encUrl = encodeURIComponent(abs(path));
+  const encTitle = encodeURIComponent(title);
+  const waText = encodeURIComponent(`${title} - Free Download for Android APK: ${abs(path)}`);
+  return html`
+<div class="social-share-bar">
+  <span class="share-label">Share:</span>
+  <a href="https://api.whatsapp.com/send?text=${waText}" target="_blank" rel="noopener nofollow" class="btn-share wa" aria-label="Share on WhatsApp" title="Share on WhatsApp">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    <span>WhatsApp</span>
+  </a>
+  <a href="https://t.me/share/url?url=${encUrl}&text=${encTitle}" target="_blank" rel="noopener nofollow" class="btn-share tg" aria-label="Share on Telegram" title="Share on Telegram">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.196 1.006.128.832.946z"/></svg>
+    <span>Telegram</span>
+  </a>
+  <button type="button" class="btn-share copy" data-copy-url="${abs(path)}" aria-label="Copy Link" title="Copy Link to Clipboard">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+    <span>Copy Link</span>
+  </button>
+</div>`;
+}
+
+export function faqBlock(faqs, heading = 'Frequently Asked Questions') {
   if (!faqs?.length) return '';
-  return html`<section class="faq"><h2>${heading}</h2>${faqs.map((f) => html`<details><summary>${f.q}</summary><p>${f.a}</p></details>`)}</section>`;
+  return html`
+<section class="faq-section" id="faq">
+  <div class="faq-hdr">
+    <h2 class="faq-title">${heading}</h2>
+    <span class="faq-badge">${faqs.length} Answers</span>
+  </div>
+  <div class="faq-list">
+    ${faqs.map((f, i) => html`
+      <details class="faq-item" ${i === 0 ? raw('open') : ''}>
+        <summary class="faq-summary">
+          <span class="faq-question">${f.q}</span>
+          <span class="faq-chevron" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </summary>
+        <div class="faq-answer">
+          <p>${f.a}</p>
+        </div>
+      </details>
+    `)}
+  </div>
+</section>`;
 }
 
 export function dated(published, updated) {
