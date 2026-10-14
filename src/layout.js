@@ -2,7 +2,7 @@ import { html, raw, esc, fmtDate, isoDate, fmtBytes } from './lib/html.js';
 import { config } from './config.js';
 
 export const abs = (p) => config.siteUrl + p;
-const ASSET_V = '10';
+const ASSET_V = '11';
 
 export function logoMark(size = 36) {
   return raw(`<svg class="logo-icon" width="${size}" height="${size}" viewBox="0 0 32 32" aria-hidden="true">
@@ -109,7 +109,7 @@ function footer() {
     <div class="f-links-grid">
       ${col('Top Discoveries', [['/popular/', 'Top Charts'], ['/latest/', 'Latest Apps'], ['/updated/', 'Recently Updated'], ['/games/', 'Android Games'], ['/apps/', 'Android Apps']])}
       ${col('Categories', [['/categories/', 'All Categories'], ['/apps/communication/', 'Communication'], ['/apps/tools/', 'Tools & Utilities'], ['/apps/security/', 'VPN & Security'], ['/apps/productivity/', 'Productivity']])}
-      ${col('Articles & How-To', [['/guides/', 'Android Guides'], ['/guides/how-to-install-apk/', 'How to Install APK'], ['/guides/how-to-check-app-permissions/', 'App Permissions'], ['/guides/how-to-update-android-apps/', 'Update APK Files']])}
+      ${col('Articles & How-To', [['/guides/', 'Android Guides'], ['/guides/how-to-install-apk/', 'How to Install APK'], ['/guides/how-to-check-app-permissions/', 'App Permissions'], ['/guides/how-to-update-android-apps/', 'Update APK Files'], ['/tools/apk-inspector/', 'APK Hash Inspector']])}
       ${col('Company & Legal', [['/about/', 'About Us'], ['/editorial-policy/', 'Editorial Policy'], ['/download-policy/', 'Download Policy'], ['/copyright/', 'DMCA & Copyright'], ['/privacy/', 'Privacy Policy'], ['/contact/', 'Contact Support']])}
     </div>
   </div>
@@ -194,6 +194,37 @@ ${footer()}
   </div>
   <div class="sticky-ad-body">
     ${adBanner728x90()}
+  </div>
+</div>
+<!-- Anti-AdBlock Honeypot Element -->
+<div class="pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links ad-text" style="position:absolute!important; top:-9999px!important; left:-9999px!important; width:1px!important; height:1px!important;" aria-hidden="true"></div>
+<!-- Polite Anti-AdBlock Shield Modal -->
+<div id="adblockBackdrop" class="adblock-modal-backdrop" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="adblockTitle">
+  <div class="adblock-modal-card">
+    <div class="adblock-modal-icon">🛡️</div>
+    <h3 id="adblockTitle" class="adblock-modal-title">Please Support APKWorlds</h3>
+    <p class="adblock-modal-desc">
+      We noticed you are using an <strong>AdBlocker</strong>. APKWorlds provides 100% free, high-speed, and verified virus-free Android APK downloads.
+      Advertising keeps our high-speed global CDN servers running 24/7 without requiring paid subscriptions.
+    </p>
+    <div class="adblock-modal-steps">
+      <div class="adblock-step">
+        <span class="adblock-step-num">1</span>
+        <span>Click on your AdBlock extension icon in browser toolbar</span>
+      </div>
+      <div class="adblock-step">
+        <span class="adblock-step-num">2</span>
+        <span>Select <strong>"Pause on this site"</strong> or disable for <code>apkworlds.co.uk</code></span>
+      </div>
+      <div class="adblock-step">
+        <span class="adblock-step-num">3</span>
+        <span>Refresh the page to continue fast downloads</span>
+      </div>
+    </div>
+    <div class="adblock-modal-actions">
+      <button type="button" id="adblockReloadBtn" class="btn primary adblock-btn">I've Whitelisted APKWorlds &bull; Refresh</button>
+      <button type="button" id="adblockDismissBtn" class="adblock-btn-secondary">Continue with limited speed &rarr;</button>
+    </div>
   </div>
 </div>
 <!-- Social Bar / Sticky Notification Tag -->

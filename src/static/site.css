@@ -3938,3 +3938,450 @@ tr:last-child td { border-bottom: none; }
 [data-theme="dark"] .steps-list {
   color: #cbd5e1;
 }
+
+/* ==========================================================================
+   Phone Compatibility Checker Widget
+   ========================================================================== */
+.compat-checker-card {
+  margin: 1.25rem 0;
+  padding: 1.15rem 1.35rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.compat-checker-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.compat-checker-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--text);
+}
+
+.compat-req-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: #f1f5f9;
+  color: #475569;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+}
+
+.compat-pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 0.85rem;
+}
+
+.btn-compat-pill {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-compat-pill:hover {
+  background: var(--border);
+  border-color: #94a3b8;
+}
+
+.btn-compat-pill.selected {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(37,99,235,0.25);
+}
+
+.compat-result-box {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.compat-status {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.compat-status.ok {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+}
+
+.compat-status.warn {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+}
+
+.compat-icon {
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+/* ==========================================================================
+   Multi-CDN Download Mirror Selector
+   ========================================================================== */
+.mirrors-card {
+  margin: 1.25rem 0;
+  text-align: left;
+}
+
+.mirrors-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+.mirrors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.mirror-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.85rem 1.15rem;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.mirror-item:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.mirror-item.mirror-primary {
+  border-color: #10b981;
+  background: linear-gradient(180deg, rgba(16,185,129,0.03) 0%, rgba(16,185,129,0.08) 100%);
+}
+
+.mirror-item.mirror-primary:hover {
+  border-color: #059669;
+  background: linear-gradient(180deg, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0.15) 100%);
+}
+
+.mirror-item.mirror-sponsored {
+  border-color: #f59e0b;
+  background: linear-gradient(180deg, rgba(245,158,11,0.03) 0%, rgba(245,158,11,0.08) 100%);
+}
+
+.mirror-item.mirror-sponsored:hover {
+  border-color: #d97706;
+  background: linear-gradient(180deg, rgba(245,158,11,0.08) 0%, rgba(245,158,11,0.15) 100%);
+}
+
+.mirror-item.mirror-official {
+  border-color: #3b82f6;
+  background: linear-gradient(180deg, rgba(59,130,246,0.03) 0%, rgba(59,130,246,0.08) 100%);
+}
+
+.mirror-item.mirror-official:hover {
+  border-color: #2563eb;
+  background: linear-gradient(180deg, rgba(59,130,246,0.08) 0%, rgba(59,130,246,0.15) 100%);
+}
+
+.mirror-icon-box {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-alt);
+  border-radius: 8px;
+}
+
+.mirror-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mirror-title {
+  font-weight: 700;
+  font-size: 0.96rem;
+  color: var(--text);
+}
+
+.mirror-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.mirror-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 9px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.mirror-tag.tag-fast {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.mirror-tag.tag-turbo {
+  background: #f59e0b;
+  color: #ffffff;
+}
+
+.mirror-tag.tag-google {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Polite Anti-AdBlock Shield Modal
+   ========================================================================== */
+.adblock-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 14, 23, 0.78);
+  backdrop-filter: blur(5px);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  animation: fadeInModal 0.25s ease-out;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.adblock-modal-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  max-width: 520px;
+  width: 100%;
+  padding: 2rem;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+  text-align: center;
+}
+
+.adblock-modal-icon {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+.adblock-modal-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  margin: 0 0 0.6rem 0;
+  color: var(--text);
+}
+
+.adblock-modal-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+}
+
+.adblock-modal-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  text-align: left;
+  background: var(--bg-alt);
+  padding: 1rem 1.15rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+  font-size: 0.88rem;
+}
+
+.adblock-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.adblock-step-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.adblock-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.adblock-btn {
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.adblock-btn-secondary {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0.3rem;
+}
+
+.adblock-btn-secondary:hover {
+  color: var(--text);
+}
+
+/* ==========================================================================
+   APK Inspector Dropzone
+   ========================================================================== */
+.apk-dropzone {
+  border: 2px dashed #3b82f6;
+  border-radius: 16px;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background: var(--bg-surface);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.apk-dropzone.dragover {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.05);
+  transform: scale(1.01);
+}
+
+.dropzone-icon {
+  margin-bottom: 1rem;
+}
+
+.dropzone-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem 0;
+  color: var(--text);
+}
+
+.dropzone-sub {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin-bottom: 1.5rem;
+}
+
+.dropzone-privacy-badge {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+}
+
+/* Dark mode overrides */
+[data-theme="dark"] .compat-checker-card {
+  background: #111a2e;
+  border-color: #24344d;
+}
+[data-theme="dark"] .compat-req-badge {
+  background: #1a273f;
+  color: #94a3b8;
+  border-color: #2d3f5d;
+}
+[data-theme="dark"] .btn-compat-pill {
+  background: #152238;
+  border-color: #24344d;
+  color: #cbd5e1;
+}
+[data-theme="dark"] .btn-compat-pill:hover {
+  background: #1e304f;
+}
+[data-theme="dark"] .btn-compat-pill.selected {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+}
+[data-theme="dark"] .compat-status.ok {
+  background: #064e3b;
+  border-color: #047857;
+  color: #a7f3d0;
+}
+[data-theme="dark"] .compat-status.warn {
+  background: #451a03;
+  border-color: #78350f;
+  color: #fde68a;
+}
+[data-theme="dark"] .mirror-item {
+  background: #111a2e;
+  border-color: #24344d;
+  color: #f1f5f9;
+}
+[data-theme="dark"] .mirror-icon-box {
+  background: #1a273f;
+}
+[data-theme="dark"] .adblock-modal-card {
+  background: #111a2e;
+  border-color: #24344d;
+}
+[data-theme="dark"] .adblock-modal-steps {
+  background: #152238;
+  border-color: #24344d;
+}
+[data-theme="dark"] .apk-dropzone {
+  background: #111a2e;
+  border-color: #3b82f6;
+}
+[data-theme="dark"] .apk-dropzone.dragover {
+  background: #15293d;
+  border-color: #10b981;
+}
+

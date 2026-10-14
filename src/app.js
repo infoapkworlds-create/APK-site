@@ -58,6 +58,7 @@ import {
 import { guidesHubPage, guideDetailPage } from './pages/guides.js';
 import { searchPage, suggestApi } from './pages/search.js';
 import { submitAppPage, requestAppPage, reportAppPage } from './pages/submissions.js';
+import { apkInspectorPage } from './pages/tools.js';
 import {
   aboutPage,
   contactPage,
@@ -853,6 +854,8 @@ export async function appHandler(req, res) {
     result = disclaimerPage(req);
   } else if (pathname === '/sitemap/') {
     result = sitemapHtmlPage(req);
+  } else if (pathname === '/tools/apk-inspector/' || pathname === '/tools/apk-inspector') {
+    result = apkInspectorPage(req);
   }
 
   // 4. Comparison page: /compare/:slug/

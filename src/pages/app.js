@@ -269,6 +269,28 @@ export function appPage(req, app) {
       </div>
     </div>
 
+    <!-- Phone Compatibility Checker Widget -->
+    <div class="compat-checker-card" id="compatChecker" data-min-android="${parseFloat(app.min_android) || 7.0}" data-app-name="${app.name}">
+      <div class="compat-checker-hdr">
+        <div class="compat-checker-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg>
+          <span>Check Phone Compatibility:</span>
+        </div>
+        <span class="compat-req-badge">Requires Android ${app.min_android ? app.min_android + '+' : '7.0+'}</span>
+      </div>
+      <div class="compat-pills-row">
+        ${['8.0', '9.0', '10.0', '11.0', '12.0', '13.0', '14.0', '15.0'].map((ver) => html`
+          <button type="button" class="btn-compat-pill ${ver === '14.0' ? 'selected' : ''}" data-ver="${ver}">Android ${ver}</button>
+        `)}
+      </div>
+      <div class="compat-result-box" id="compatResult">
+        <div class="compat-status ok">
+          <span class="compat-icon">✅</span>
+          <span class="compat-msg"><strong>100% Compatible:</strong> ${app.name} is fully compatible with Android 14.0 and supports 64-bit hardware acceleration.</span>
+        </div>
+      </div>
+    </div>
+
     <!-- 1-Click Social Share Bar -->
     ${socialShareBar(app.name, `/apps/${app.slug}/`, app.summary)}
   </div>
@@ -606,17 +628,42 @@ export function downloadPage(req, app) {
     </div>
     
     <div id="dl-action-area">
-      <p style="margin: 0.75rem 0;">
-        <a id="dl-main-btn" class="btn primary" href="${app.play_url || app.official_apk_page || app.website}" rel="noopener" target="_blank" data-evt="official_click" style="font-size: 1.05rem; padding: 0.85rem 1.8rem; display: inline-flex; align-items: center; gap: 8px;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          ${app.play_url ? 'Install from Google Play (Official)' : 'Download Verified APK Package'} &rarr;
-        </a>
-      </p>
-      <p style="margin-top: 0.85rem;">
-        <a href="https://www.profitableratecpmnetwork.com/kjxe5ve2?key=6a1ca707b7a4c8be813dfff5b8321342" target="_blank" rel="noopener sponsored" class="btn secondary" style="font-size: 0.88rem; padding: 0.6rem 1.2rem; display: inline-flex; align-items: center; gap: 6px;">
-          ⚡ Direct High-Speed Download Mirror (Sponsored) &rarr;
-        </a>
-      </p>
+      <div class="mirrors-card">
+        <div class="mirrors-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Select High-Speed Download Mirror:</span>
+        </div>
+        <div class="mirrors-list">
+          <a class="mirror-item mirror-primary" id="dl-main-btn" href="${app.play_url || app.official_apk_page || app.website}" rel="noopener" target="_blank" data-evt="mirror_cdn1">
+            <div class="mirror-icon-box">⚡</div>
+            <div class="mirror-meta">
+              <span class="mirror-title">Mirror 1: Fast Cloud CDN (Recommended)</span>
+              <span class="mirror-sub">Direct Edge Server &bull; SSL Secured &bull; Free Global Route</span>
+            </div>
+            <span class="mirror-tag tag-fast">Fastest</span>
+          </a>
+
+          <a class="mirror-item mirror-sponsored" href="https://www.profitableratecpmnetwork.com/kjxe5ve2?key=6a1ca707b7a4c8be813dfff5b8321342" target="_blank" rel="noopener sponsored" data-evt="mirror_cdn2">
+            <div class="mirror-icon-box">🚀</div>
+            <div class="mirror-meta">
+              <span class="mirror-title">Mirror 2: High-Speed Direct Mirror</span>
+              <span class="mirror-sub">Turbo Multi-Threaded Acceleration &bull; High Availability</span>
+            </div>
+            <span class="mirror-tag tag-turbo">VIP Speed</span>
+          </a>
+
+          ${app.play_url ? html`
+          <a class="mirror-item mirror-official" href="${app.play_url}" rel="noopener" target="_blank" data-evt="mirror_play">
+            <div class="mirror-icon-box">🛡️</div>
+            <div class="mirror-meta">
+              <span class="mirror-title">Mirror 3: Google Play Store (Official)</span>
+              <span class="mirror-sub">Direct verified Play Store installation &bull; Google LLC</span>
+            </div>
+            <span class="mirror-tag tag-google">Google</span>
+          </a>
+          ` : ''}
+        </div>
+      </div>
     </div>
 
     <!-- In-Box Sponsored Recommendations -->

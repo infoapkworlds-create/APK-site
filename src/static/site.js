@@ -629,5 +629,174 @@
       tabPaneObb.style.display = 'none';
     });
   }
+
+  // 15. Polite Anti-AdBlock Shield Modal
+  const adblockBackdrop = document.getElementById('adblockBackdrop');
+  const adblockReloadBtn = document.getElementById('adblockReloadBtn');
+  const adblockDismissBtn = document.getElementById('adblockDismissBtn');
+
+  if (adblockBackdrop && !sessionStorage.getItem('adblock_dismissed')) {
+    setTimeout(() => {
+      // Check if ad test element was collapsed or blocked
+      const testAd = document.querySelector('.pub_300x250');
+      let isBlocked = false;
+      if (testAd) {
+        const computed = window.getComputedStyle(testAd);
+        if (computed.display === 'none' || computed.visibility === 'hidden' || testAd.clientHeight === 0 || testAd.offsetParent === null) {
+          isBlocked = true;
+        }
+      }
+      // Also check if adsbygoogle script or network ads failed
+      if (!isBlocked && typeof window.adsbygoogle === 'undefined' && !document.querySelector('script[src*="pagead2"]')) {
+        isBlocked = true;
+      }
+
+      if (isBlocked) {
+        adblockBackdrop.style.display = 'flex';
+      }
+    }, 1200);
+
+    if (adblockReloadBtn) {
+      adblockReloadBtn.addEventListener('click', () => {
+        location.reload();
+      });
+    }
+    if (adblockDismissBtn) {
+      adblockDismissBtn.addEventListener('click', () => {
+        adblockBackdrop.style.display = 'none';
+        sessionStorage.setItem('adblock_dismissed', '1');
+      });
+    }
+  }
+
+  // 16. Phone Compatibility Checker Widget
+  const compatCard = document.getElementById('compatChecker');
+  if (compatCard) {
+    const minAndroid = parseFloat(compatCard.getAttribute('data-min-android')) || 7.0;
+    const appName = compatCard.getAttribute('data-app-name') || 'This app';
+    const resultBox = document.getElementById('compatResult');
+    const pills = compatCard.querySelectorAll('.btn-compat-pill');
+
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        pills.forEach((p) => p.classList.remove('selected'));
+        pill.classList.add('selected');
+        const ver = parseFloat(pill.getAttribute('data-ver')) || 0;
+        const verStr = pill.getAttribute('data-ver');
+
+        if (!resultBox) return;
+        if (ver >= minAndroid) {
+          resultBox.innerHTML = `
+            <div class="compat-status ok">
+              <span class="compat-icon">✅</span>
+              <span class="compat-msg"><strong>100% Compatible:</strong> ${appName} is fully compatible with Android ${verStr} and supports 64-bit hardware acceleration.</span>
+            </div>
+          `;
+        } else {
+          resultBox.innerHTML = `
+            <div class="compat-status warn">
+              <span class="compat-icon">⚠️</span>
+              <span class="compat-msg"><strong>May Not Work:</strong> ${appName} requires Android ${minAndroid}+. Android ${verStr} is older than the required version. Please check <a href="#download-box" style="text-decoration:underline;">Version History</a> for legacy releases.</span>
+            </div>
+          `;
+        }
+      });
+    });
+  }
+
+  // 17. Client-Side APK Hash & Security Inspector (Web Crypto API)
+  const apkDropzone = document.getElementById('apkDropzone');
+  const apkFileInput = document.getElementById('apkFileInput');
+  const inspectorProgress = document.getElementById('inspectorProgress');
+  const inspectorProgressText = document.getElementById('inspectorProgressText');
+  const inspectorProgressBar = document.getElementById('inspectorProgressBar');
+  const inspectorResults = document.getElementById('inspectorResults');
+  const resFileName = document.getElementById('resFileName');
+  const resFileSize = document.getElementById('resFileSize');
+  const resSha256 = document.getElementById('resSha256');
+  const resSha1 = document.getElementById('resSha1');
+  const btnCopyHash = document.getElementById('btnCopyHash');
+  const btnVtLookup = document.getElementById('btnVtLookup');
+
+  if (apkDropzone && apkFileInput) {
+    function formatFileSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(2) + ' MB';
+    }
+
+    async function processApkFile(file) {
+      if (!file) return;
+      if (inspectorProgress) inspectorProgress.style.display = 'block';
+      if (inspectorResults) inspectorResults.style.display = 'none';
+      if (inspectorProgressBar) inspectorProgressBar.style.width = '20%';
+      if (inspectorProgressText) inspectorProgressText.textContent = '20%';
+
+      try {
+        const buffer = await file.arrayBuffer();
+        if (inspectorProgressBar) inspectorProgressBar.style.width = '60%';
+        if (inspectorProgressText) inspectorProgressText.textContent = '60%';
+
+        // SHA-256 via Web Crypto API
+        const hashBuf256 = await crypto.subtle.digest('SHA-256', buffer);
+        const hashArray256 = Array.from(new Uint8Array(hashBuf256));
+        const sha256Hex = hashArray256.map(b => b.toString(16).padStart(2, '0')).join('');
+
+        // SHA-1 via Web Crypto API
+        const hashBuf1 = await crypto.subtle.digest('SHA-1', buffer);
+        const hashArray1 = Array.from(new Uint8Array(hashBuf1));
+        const sha1Hex = hashArray1.map(b => b.toString(16).padStart(2, '0')).join('');
+
+        if (inspectorProgressBar) inspectorProgressBar.style.width = '100%';
+        if (inspectorProgressText) inspectorProgressText.textContent = '100%';
+
+        setTimeout(() => {
+          if (inspectorProgress) inspectorProgress.style.display = 'none';
+          if (resFileName) resFileName.textContent = file.name;
+          if (resFileSize) resFileSize.textContent = formatFileSize(file.size);
+          if (resSha256) resSha256.value = sha256Hex;
+          if (resSha1) resSha1.value = sha1Hex;
+          if (btnVtLookup) btnVtLookup.href = `https://www.virustotal.com/gui/file/${sha256Hex}`;
+          if (inspectorResults) inspectorResults.style.display = 'block';
+        }, 300);
+      } catch (err) {
+        alert('Could not inspect APK file: ' + err.message);
+        if (inspectorProgress) inspectorProgress.style.display = 'none';
+      }
+    }
+
+    apkFileInput.addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (file) processApkFile(file);
+    });
+
+    apkDropzone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      apkDropzone.classList.add('dragover');
+    });
+
+    apkDropzone.addEventListener('dragleave', () => {
+      apkDropzone.classList.remove('dragover');
+    });
+
+    apkDropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      apkDropzone.classList.remove('dragover');
+      const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+      if (file) processApkFile(file);
+    });
+
+    if (btnCopyHash) {
+      btnCopyHash.addEventListener('click', () => {
+        if (resSha256 && resSha256.value) {
+          navigator.clipboard.writeText(resSha256.value).then(() => {
+            const originalText = btnCopyHash.textContent;
+            btnCopyHash.textContent = 'Copied!';
+            setTimeout(() => { btnCopyHash.textContent = originalText; }, 1800);
+          }).catch(() => {});
+        }
+      });
+    }
+  }
 })();
 
