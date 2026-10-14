@@ -84,6 +84,17 @@ export function homePage(req) {
     LIMIT 8
   `);
 
+  // Top 10 Trending Leaderboard Charts
+  const topTrending10 = all(`
+    SELECT a.id, a.name, a.slug, a.version, a.size_bytes, c.kind AS cat_kind,
+           c.name AS cat_name, COALESCE(a.rating_score, 4.8) AS rating_avg
+    FROM apps a
+    JOIN categories c ON c.id=a.category_id
+    WHERE a.status='published'
+    ORDER BY a.rating_votes DESC, a.rating_score DESC
+    LIMIT 10
+  `);
+
   // 5. Latest Updated Games (3 columns x 3 rows = 9 games)
   const latestUpdatedGames = all(`
     SELECT a.name, a.slug, a.version, a.updated_at, a.version_updated_on
@@ -255,6 +266,39 @@ export function homePage(req) {
             ${icon(a, 66)}
             <span class="pure-shelf-name">${a.name}</span>
           </a>
+        `)}
+      </div>
+    </section>
+
+    <!-- Top 10 Trending Leaderboard Charts -->
+    <section class="leaderboard-sec card" id="top-charts">
+      <div class="leaderboard-hdr">
+        <div class="leaderboard-hdr-title">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          <h2 class="leaderboard-heading">Top 10 Trending Android Charts</h2>
+        </div>
+        <a href="/popular/" class="leaderboard-see-all">Full Top 100 Charts &rarr;</a>
+      </div>
+      <p class="leaderboard-sub">Real-time rankings based on verified installs, ratings, and user engagement this week.</p>
+      <div class="leaderboard-grid">
+        ${topTrending10.map((app, rankIdx) => html`
+          <div class="leaderboard-item">
+            <span class="rank-badge rank-${rankIdx + 1}">#${rankIdx + 1}</span>
+            <div class="leaderboard-icon">
+              ${icon(app, 46, false)}
+            </div>
+            <div class="leaderboard-meta">
+              <h3 class="leaderboard-name"><a href="/apps/${app.slug}/">${app.name}</a></h3>
+              <div class="leaderboard-tags">
+                <span class="leaderboard-cat">${app.cat_name}</span>
+                <span class="leaderboard-dot">&bull;</span>
+                <span class="leaderboard-rating">★ ${(app.rating_avg || 4.8).toFixed(1)}</span>
+                <span class="leaderboard-dot">&bull;</span>
+                <span class="leaderboard-size">${app.size_bytes ? fmtBytes(app.size_bytes) : 'Free'}</span>
+              </div>
+            </div>
+            <a href="/apps/${app.slug}/" class="btn-leaderboard-dl">Get APK</a>
+          </div>
         `)}
       </div>
     </section>

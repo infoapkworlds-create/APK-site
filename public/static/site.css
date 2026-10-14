@@ -3524,3 +3524,417 @@ tr:last-child td { border-bottom: none; }
   color: #34d399 !important;
   border-top: 1px solid #24344d !important;
 }
+
+/* ==========================================================================
+   Homepage Top 10 Trending Leaderboard
+   ========================================================================== */
+.leaderboard-sec {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: var(--shadow-sm);
+}
+.leaderboard-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 0.25rem;
+}
+.leaderboard-hdr-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.leaderboard-heading {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+.leaderboard-see-all {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary, #059669);
+  text-decoration: none;
+}
+.leaderboard-sub {
+  margin: 0 0 1.25rem 0;
+  color: var(--text-muted, #64748b);
+  font-size: 0.88rem;
+}
+.leaderboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 12px;
+}
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--bg-surface, #f8fafc);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 10px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.leaderboard-item:hover {
+  transform: translateY(-2px);
+  background: var(--primary-subtle, #f0fdf4);
+}
+.rank-badge {
+  font-size: 0.82rem;
+  font-weight: 800;
+  min-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #e2e8f0;
+  color: #475569;
+  flex-shrink: 0;
+}
+.rank-badge.rank-1 {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.4);
+}
+.rank-badge.rank-2 {
+  background: linear-gradient(135deg, #94a3b8, #64748b);
+  color: #ffffff;
+}
+.rank-badge.rank-3 {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  color: #ffffff;
+}
+.leaderboard-icon {
+  flex-shrink: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.leaderboard-meta {
+  flex: 1;
+  min-width: 0;
+}
+.leaderboard-name {
+  margin: 0 0 4px 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.leaderboard-name a {
+  color: var(--text, #0f172a);
+  text-decoration: none;
+}
+.leaderboard-tags {
+  font-size: 0.78rem;
+  color: var(--text-muted, #64748b);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.leaderboard-rating {
+  color: #f59e0b;
+  font-weight: 700;
+}
+.btn-leaderboard-dl {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: var(--primary, #059669);
+  color: #ffffff;
+  border-radius: 6px;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: opacity 0.15s ease;
+}
+.btn-leaderboard-dl:hover {
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   1-Click Instant Star Rating Widget
+   ========================================================================== */
+.instant-rating-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0 10px 0;
+  flex-wrap: wrap;
+}
+.instant-rating-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.instant-stars {
+  display: inline-flex;
+  gap: 2px;
+}
+.btn-star {
+  background: none;
+  border: none;
+  padding: 2px 3px;
+  font-size: 1.25rem;
+  color: #cbd5e1;
+  cursor: pointer;
+  line-height: 1;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+.btn-star:hover,
+.btn-star.active {
+  color: #f59e0b;
+  transform: scale(1.15);
+}
+.instant-rating-status {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted, #64748b);
+}
+
+/* ==========================================================================
+   App Update Notification Alert Box
+   ========================================================================== */
+.app-alert-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 1.5rem;
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 12px;
+  margin: 2rem 0;
+  box-shadow: var(--shadow-sm);
+}
+.alert-box-icon {
+  background: rgba(16, 185, 129, 0.1);
+  padding: 10px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.alert-box-content {
+  flex: 1;
+}
+.alert-box-title {
+  margin: 0 0 6px 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+.alert-box-desc {
+  margin: 0 0 1rem 0;
+  font-size: 0.88rem;
+  color: var(--text-muted, #64748b);
+  line-height: 1.5;
+}
+.alert-form-inputs {
+  display: flex;
+  gap: 8px;
+  max-width: 520px;
+}
+.alert-form-inputs input {
+  flex: 1;
+  padding: 9px 14px;
+  border: 1px solid var(--border, #cbd5e1);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  background: var(--bg-surface, #ffffff);
+  color: var(--text, #0f172a);
+}
+.alert-form-inputs button {
+  padding: 9px 18px;
+  font-weight: 700;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+.alert-privacy-note {
+  margin: 8px 0 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted, #94a3b8);
+}
+
+/* ==========================================================================
+   X vs Y Comparison Cards
+   ========================================================================== */
+.comparisons-sec {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+.comparisons-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.comparisons-hdr h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.compare-hub-link {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary, #059669);
+  text-decoration: none;
+}
+.comparison-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+.comparison-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--bg-surface, #f8fafc);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 10px;
+  transition: transform 0.15s ease;
+}
+.comparison-card:hover {
+  transform: translateY(-2px);
+  background: var(--primary-subtle, #f0fdf4);
+}
+.cmp-names {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+.cmp-vs-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: #f59e0b;
+  color: #ffffff;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+.btn-compare-now {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary, #059669);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Interactive Install Guide Tabs (APK vs OBB)
+   ========================================================================== */
+.install-guide-tabs {
+  margin: 2rem 0 1.5rem 0;
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+.install-guide-tabs h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.3rem;
+}
+.tabs-nav {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid var(--border, #e2e8f0);
+  margin-bottom: 1.25rem;
+  overflow-x: auto;
+}
+.tab-btn {
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-muted, #64748b);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  margin-bottom: -2px;
+}
+.tab-btn.is-active {
+  color: var(--primary, #059669);
+  border-bottom-color: var(--primary, #059669);
+}
+.steps-list {
+  padding-left: 1.25rem;
+  line-height: 1.7;
+  font-size: 0.94rem;
+  color: var(--text, #1e293b);
+}
+.steps-list li {
+  margin-bottom: 0.65rem;
+}
+
+/* ==========================================================================
+   Dark Mode Overrides for Leaderboard, Tabs, Ratings, Alerts
+   ========================================================================== */
+[data-theme="dark"] .leaderboard-sec {
+  background: #111a2e;
+  border-color: #24344d;
+}
+[data-theme="dark"] .leaderboard-item {
+  background: #152238;
+  border-color: #24344d;
+}
+[data-theme="dark"] .leaderboard-item:hover {
+  background: #1c2b48;
+}
+[data-theme="dark"] .leaderboard-name a {
+  color: #f1f5f9;
+}
+[data-theme="dark"] .rank-badge:not(.rank-1):not(.rank-2):not(.rank-3) {
+  background: #24344d;
+  color: #94a3b8;
+}
+[data-theme="dark"] .btn-star {
+  color: #475569;
+}
+[data-theme="dark"] .app-alert-box {
+  background: #111a2e;
+  border-color: #24344d;
+}
+[data-theme="dark"] .alert-form-inputs input {
+  background: #152238;
+  border-color: #334155;
+  color: #f1f5f9;
+}
+[data-theme="dark"] .comparisons-sec {
+  background: #111a2e;
+  border-color: #24344d;
+}
+[data-theme="dark"] .comparison-card {
+  background: #152238;
+  border-color: #24344d;
+}
+[data-theme="dark"] .comparison-card:hover {
+  background: #1c2b48;
+}
+[data-theme="dark"] .install-guide-tabs {
+  background: #111a2e;
+  border-color: #24344d;
+}
+[data-theme="dark"] .tabs-nav {
+  border-bottom-color: #24344d;
+}
+[data-theme="dark"] .tab-btn {
+  color: #94a3b8;
+}
+[data-theme="dark"] .tab-btn.is-active {
+  color: #34d399;
+  border-bottom-color: #34d399;
+}
+[data-theme="dark"] .steps-list {
+  color: #cbd5e1;
+}

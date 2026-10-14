@@ -23,6 +23,31 @@ const appCrumbs = (app, extra) => {
 const ext = (href, label, cls = '', evt = '') =>
   html`<a href="${href}" class="${cls}" rel="noopener" ${evt ? raw(`data-evt="${evt}"`) : ''}>${label}</a>`;
 
+export function appUpdateAlertBox(app) {
+  return html`
+<div class="app-alert-box card">
+  <div class="alert-box-icon">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+  </div>
+  <div class="alert-box-content">
+    <h3 class="alert-box-title">Get Notified on New Version of ${app.name}</h3>
+    <p class="alert-box-desc">Never miss a new security patch, performance fix, or feature update. Enter your email to receive an instant alert when a newer verified APK drops.</p>
+    <form class="alert-box-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="e057c862-4648-4afe-8195-724c07c1b26d">
+      <input type="hidden" name="subject" value="New Version Alert Subscription: ${app.name}">
+      <input type="hidden" name="app_name" value="${app.name}">
+      <input type="hidden" name="app_slug" value="${app.slug}">
+      <div class="alert-form-inputs">
+        <label for="alert_email_${app.slug}" class="sr">Your Email Address</label>
+        <input type="email" id="alert_email_${app.slug}" name="email" placeholder="Enter email for update alerts..." required autocomplete="email">
+        <button type="submit" class="btn primary">Notify Me</button>
+      </div>
+      <p class="alert-privacy-note">🔒 Zero spam. You will only receive genuine version updates for ${app.name}.</p>
+    </form>
+  </div>
+</div>`;
+}
+
 export function appLd(app, { reviews = [], withRating = true, screenshots = [] } = {}) {
   const o = {
     '@context': 'https://schema.org',
@@ -127,6 +152,13 @@ export function appPage(req, app) {
   const perms = parseJSON(app.permissions_json), faqs = parseJSON(app.faq_json);
   const alts = D.alternativesFor(app.id);
   const cmps = L.comparisonsFor(app.id);
+  const cmpList = cmps.length ? cmps : (alts.length ? alts.slice(0, 3).map((alt) => ({
+    slug: `${app.slug}-vs-${alt.slug}`,
+    a_name: app.name,
+    a_slug: app.slug,
+    b_name: alt.name,
+    b_slug: alt.slug
+  })) : []);
   const related = L.relatedApps(app, 6);
   const sameDev = L.moreFromDeveloper(app, 6);
   const guides = L.guidesForApp(app, 4);
@@ -187,6 +219,17 @@ export function appPage(req, app) {
           ${stars(app.rating_avg, app.review_count)}
           <span class="apk-rating-divider">·</span>
           <a href="/apps/${app.slug}/reviews/" class="apk-reviews-link">${app.review_count ? `${app.review_count.toLocaleString('en-US')} reviews` : `Review this app`}</a>
+        </div>
+        <div class="instant-rating-box" data-app-id="${app.id}" data-app-name="${app.name}">
+          <span class="instant-rating-label">Quick Rate:</span>
+          <div class="instant-stars" role="radiogroup" aria-label="Rate ${app.name}">
+            <button type="button" class="btn-star" data-star="1" aria-label="1 star">★</button>
+            <button type="button" class="btn-star" data-star="2" aria-label="2 stars">★</button>
+            <button type="button" class="btn-star" data-star="3" aria-label="3 stars">★</button>
+            <button type="button" class="btn-star" data-star="4" aria-label="4 stars">★</button>
+            <button type="button" class="btn-star" data-star="5" aria-label="5 stars">★</button>
+          </div>
+          <span class="instant-rating-status" aria-live="polite"></span>
         </div>
         <p class="apk-hero-summary">${app.summary}</p>
         <div class="apk-hero-actions">
@@ -305,7 +348,25 @@ export function appPage(req, app) {
     <ul class="alts">${alts.map((a) => html`<li><a href="/apps/${a.slug}/">${a.name}</a>: ${a.reason}</li>`)}</ul>
     <p><a href="/apps/${app.slug}/alternatives/">Compare all ${app.name} alternatives</a></p></section>` : ''}
 
-  ${cmps.length ? html`<section><h2>Comparisons</h2><ul>${cmps.map((c) => html`<li><a href="/compare/${c.slug}/">${c.a_name} vs ${c.b_name}</a></li>`)}</ul></section>` : ''}
+  ${cmpList.length ? html`
+  <section class="comparisons-sec" id="comparisons">
+    <div class="comparisons-hdr">
+      <h2>Compare ${app.name} with Top Alternatives</h2>
+      <a href="/compare/" class="compare-hub-link">All Head-to-Head Comparisons &rarr;</a>
+    </div>
+    <div class="comparison-cards-grid">
+      ${cmpList.map((c) => html`
+        <div class="comparison-card">
+          <div class="cmp-names">
+            <span class="cmp-app-a">${c.a_name}</span>
+            <span class="cmp-vs-badge">VS</span>
+            <span class="cmp-app-b">${c.b_name}</span>
+          </div>
+          <a href="/compare/${c.slug}/" class="btn-compare-now">Compare Specs &rarr;</a>
+        </div>
+      `)}
+    </div>
+  </section>` : ''}
 
   <!-- Sponsored Native Recommendations Widget -->
   ${adNativeWidget()}
@@ -340,6 +401,9 @@ export function appPage(req, app) {
       <a href="/apps/${app.slug}/versions/">See complete release changelog &amp; all ${distinctVersions.length || 1} versions &rarr;</a>
     </div>
   </section>
+
+  <!-- App Version Update Notification Subscription Box -->
+  ${appUpdateAlertBox(app)}
 
   ${sameDev.length ? html`<section><h2>More from ${app.dev_name}</h2>${appGrid(sameDev, { summary: false })}${devPageIndexed ? html`<p><a href="/developer/${app.dev_slug}/">All apps by ${app.dev_name}</a></p>` : ''}</section>` : ''}
   ${related.length ? html`<section><h2>Similar ${app.app_type === 'game' ? 'games' : 'apps'}</h2>${appGrid(related)}</section>` : ''}
@@ -581,19 +645,38 @@ export function downloadPage(req, app) {
 <!-- 1-Click Social Share Bar -->
 ${socialShareBar(`Download ${app.name} APK`, `/apps/${app.slug}/download/`)}
 
-<section><h2>How to install</h2>
-<ol>
-  <li>Download the file from the official link above.</li>
-  <li>Check that the file size${hosted ? ' and SHA-256 hash' : ''} match the details on this page or the developer's site.</li>
-  <li>Open the APK from your browser's downloads or a file manager.</li>
-  <li>If Android asks, allow installs from that app (the setting is usually called <em>Install unknown apps</em>).</li>
-  <li>Press Install, then review the permissions the app requests when you first open it.</li>
-</ol>
+<section class="install-guide-tabs" id="install-guide">
+  <h2>Installation Instructions &amp; Setup</h2>
+  <div class="tabs-nav" role="tablist">
+    <button type="button" class="tab-btn is-active" id="tabBtnApk" role="tab" aria-selected="true">Standard APK (1-Click Install)</button>
+    <button type="button" class="tab-btn" id="tabBtnObb" role="tab" aria-selected="false">Large Game (APK + OBB Setup)</button>
+  </div>
+
+  <div class="tab-pane is-active" id="tabPaneApk" role="tabpanel">
+    <ol class="steps-list">
+      <li><strong>Download:</strong> Tap the verified download button above to get the official <code>${app.name}</code> APK file.</li>
+      <li><strong>Enable Unknown Sources:</strong> On your Android phone, go to <em>Settings &gt; Security &gt; Install Unknown Apps</em> and allow your browser or File Manager.</li>
+      <li><strong>Install:</strong> Tap the downloaded file in your notification drawer or download manager, then press <strong>Install</strong>.</li>
+      <li><strong>Open:</strong> Launch <code>${app.name}</code> and enjoy!</li>
+    </ol>
+  </div>
+
+  <div class="tab-pane" id="tabPaneObb" role="tabpanel" style="display:none;">
+    <ol class="steps-list">
+      <li><strong>Install APK:</strong> Download and install the base APK file first, but <em>do not launch the app yet</em>.</li>
+      <li><strong>Locate OBB Data:</strong> If the game has additional OBB data or ZIP archive, extract the <code>main.xxx.${app.package_name || 'package'}.obb</code> file.</li>
+      <li><strong>Move to Android/obb:</strong> Using a file manager (like ZArchiver or Files by Google), copy the game folder into <code>Internal Storage / Android / obb / ${app.package_name || 'game.package.name'} /</code>.</li>
+      <li><strong>Launch &amp; Play:</strong> Open the game. It will automatically detect the cache files and load immediately without download errors.</li>
+    </ol>
+  </div>
+</section>
+
 <div class="notice ok">
   <p>📖 <strong>Dedicated Installation Guide:</strong> Need detailed instructions or error fixes? Read our complete <a href="/guides/how-to-download-${app.slug}-apk/">How to Download &amp; Install ${app.name} APK Guide</a> covering system requirements, permissions, and step-by-step troubleshooting.</p>
 </div>
-<p>Menus differ between phone makers and Android versions. Our <a href="/guides/how-to-install-apk/">step-by-step APK installation guide</a> covers the differences, and <a href="/guides/how-to-check-apk-file/">checking an APK file</a> explains hashes and signatures.</p>
-</section>
+
+<!-- App Version Update Notification Subscription Box -->
+${appUpdateAlertBox(app)}
 <p><a href="/apps/${app.slug}/">Back to ${app.name} details</a> · <a href="/apps/${app.slug}/versions/">${app.name} version history</a> · <a href="/download-policy/">Our download policy</a></p>`;
   return page({
     title: `Download ${app.name} APK for Android: File Details and Official Source`,

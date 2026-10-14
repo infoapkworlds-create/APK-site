@@ -548,5 +548,86 @@
       }
     });
   });
+
+  // 13. 1-Click Instant Star Rating
+  const ratingBox = document.querySelector('.instant-rating-box');
+  if (ratingBox) {
+    const appId = ratingBox.getAttribute('data-app-id');
+    const appName = ratingBox.getAttribute('data-app-name');
+    const starBtns = ratingBox.querySelectorAll('.btn-star');
+    const statusMsg = ratingBox.querySelector('.instant-rating-status');
+    const storageKey = `rated_app_${appId}`;
+    const previousRating = localStorage.getItem(storageKey);
+
+    function highlightStars(count) {
+      starBtns.forEach((btn, idx) => {
+        if (idx < count) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    if (previousRating) {
+      highlightStars(Number(previousRating));
+      if (statusMsg) statusMsg.textContent = `✓ You rated this ${previousRating}★`;
+    }
+
+    starBtns.forEach((btn) => {
+      btn.addEventListener('mouseenter', () => {
+        const val = Number(btn.getAttribute('data-star'));
+        highlightStars(val);
+      });
+
+      btn.addEventListener('click', () => {
+        const val = Number(btn.getAttribute('data-star'));
+        highlightStars(val);
+        localStorage.setItem(storageKey, String(val));
+        if (statusMsg) {
+          statusMsg.innerHTML = `<span style="color:#059669; font-weight:700;">✓ Thanks for rating ${val}★!</span>`;
+        }
+        try {
+          fetch('/api/event', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ type: 'rate', detail: `${appId}:${val}` }),
+            keepalive: true
+          }).catch(() => {});
+        } catch {}
+      });
+    });
+
+    ratingBox.addEventListener('mouseleave', () => {
+      const current = localStorage.getItem(storageKey);
+      highlightStars(current ? Number(current) : 0);
+    });
+  }
+
+  // 14. Installation Guide Tab Switcher
+  const tabBtnApk = document.getElementById('tabBtnApk');
+  const tabBtnObb = document.getElementById('tabBtnObb');
+  const tabPaneApk = document.getElementById('tabPaneApk');
+  const tabPaneObb = document.getElementById('tabPaneObb');
+
+  if (tabBtnApk && tabBtnObb && tabPaneApk && tabPaneObb) {
+    tabBtnApk.addEventListener('click', () => {
+      tabBtnApk.classList.add('is-active');
+      tabBtnApk.setAttribute('aria-selected', 'true');
+      tabBtnObb.classList.remove('is-active');
+      tabBtnObb.setAttribute('aria-selected', 'false');
+      tabPaneApk.style.display = 'block';
+      tabPaneObb.style.display = 'none';
+    });
+
+    tabBtnObb.addEventListener('click', () => {
+      tabBtnObb.classList.add('is-active');
+      tabBtnObb.setAttribute('aria-selected', 'true');
+      tabBtnApk.classList.remove('is-active');
+      tabBtnApk.setAttribute('aria-selected', 'false');
+      tabPaneObb.style.display = 'block';
+      tabPaneObb.style.display = 'none';
+    });
+  }
 })();
 
