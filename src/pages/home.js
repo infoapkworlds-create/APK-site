@@ -222,6 +222,28 @@ export function homePage(req) {
       <button type="button" class="pure-slider-arrow next" aria-label="Next slide" title="Next slide">&#10095;</button>
     </div>
 
+    <!-- Trending Searches Bar -->
+    <div class="trending-pills-bar" style="margin: 1.25rem 0 0.5rem 0; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+      <span style="font-size: 0.85rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 4px;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Trending:
+      </span>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+        ${[
+          ['Free Fire MAX', '/search/?q=Free+Fire'],
+          ['WhatsApp', '/apps/whatsapp/'],
+          ['CapCut Pro', '/apps/capcut/'],
+          ['Subway Surfers', '/apps/subway-surfers/'],
+          ['Roblox', '/apps/roblox/'],
+          ['Minecraft', '/apps/minecraft/'],
+          ['8 Ball Pool', '/apps/8-ball-pool/'],
+          ['Fast VPN', '/search/?q=vpn'],
+          ['Snapseed', '/apps/snapseed/'],
+          ['TikTok', '/apps/tiktok/']
+        ].map(([txt, link]) => html`<a href="${link}" class="trend-pill" style="font-size: 0.78rem; padding: 4px 10px; background: rgba(0,0,0,0.04); border: 1px solid var(--border); border-radius: 20px; color: var(--fg); text-decoration: none; transition: all 0.15s ease;">${txt}</a>`)}
+      </div>
+    </div>
+
     <!-- Section 1: Discover -->
     <section class="pure-shelf-sec">
       <div class="pure-sec-hdr">

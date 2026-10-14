@@ -206,11 +206,38 @@ ${fallbackAppGuides.length ? html`
   });
 }
 
+function renderTableOfContents(htmlContent) {
+  const headings = [];
+  const bodyWithAnchors = String(htmlContent || '').replace(/<h2([^>]*)>(.*?)<\/h2>/gi, (match, attrs, text) => {
+    const cleanText = text.replace(/<[^>]+>/g, '').trim();
+    const anchor = 'section-' + (headings.length + 1);
+    headings.push({ text: cleanText, anchor });
+    return `<h2 id="${anchor}"${attrs}>${text}</h2>`;
+  });
+
+  if (headings.length < 2) {
+    return { tocHtml: '', bodyWithAnchors };
+  }
+
+  const tocHtml = html`
+<div class="guide-toc-box" style="margin: 1.5rem 0 2rem 0; padding: 1.25rem 1.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow-sm);">
+  <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px;">
+    <span>📑</span> Table of Contents (Quick Navigation)
+  </div>
+  <ol style="margin: 0; padding-left: 1.25rem; line-height: 1.85; font-size: 0.95rem;">
+    ${headings.map((h) => html`<li style="margin-bottom: 4px;"><a href="#${h.anchor}" style="text-decoration: none; color: var(--primary); font-weight: 500;">${h.text}</a></li>`)}
+  </ol>
+</div>`;
+
+  return { tocHtml, bodyWithAnchors };
+}
+
 export function guideDetailPage(req, guide) {
   const relatedApps = L.appsForGuide(guide);
   const relatedGuides = L.relatedGuides(guide, 3);
   const faqs = JSON.parse(guide.faq_json || '[]');
   const coverImg = getGuideCoverImage(guide);
+  const { tocHtml, bodyWithAnchors } = renderTableOfContents(guide.body_html);
 
   const articleLd = {
     '@context': 'https://schema.org',
@@ -261,8 +288,10 @@ export function guideDetailPage(req, guide) {
     </div>
   </header>
 
+  ${tocHtml}
+
   <div class="article-body">
-    ${raw(guide.body_html)}
+    ${raw(bodyWithAnchors)}
   </div>
 
   <!-- Mid-Article 728x90 Banner -->

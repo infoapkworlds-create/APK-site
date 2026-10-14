@@ -2,7 +2,7 @@ import { html, raw, esc, fmtDate, isoDate, fmtBytes } from './lib/html.js';
 import { config } from './config.js';
 
 export const abs = (p) => config.siteUrl + p;
-const ASSET_V = '7';
+const ASSET_V = '8';
 
 export function logoMark(size = 36) {
   return raw(`<svg class="logo-icon" width="${size}" height="${size}" viewBox="0 0 32 32" aria-hidden="true">
@@ -63,6 +63,10 @@ function header(path) {
         <span class="logo-badge">PRO</span>
       </a>
       <div class="hdr-actions">
+        <button type="button" id="themeToggleBtn" class="btn-theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
         <a href="/submit-app/" class="btn-hdr-submit">+ Submit APK</a>
         <details class="menu">
           <summary aria-label="Menu"><span></span><span></span><span></span></summary>
@@ -178,6 +182,16 @@ ${o.crumbs ? breadcrumbs(o.crumbs) : ''}
 ${o.body}
 </main>
 ${footer()}
+<!-- Mobile Closeable Sticky Bottom Ad Banner -->
+<div class="sticky-bottom-ad" id="stickyBottomAd">
+  <div class="sticky-ad-bar">
+    <span class="sticky-ad-tag">Sponsored</span>
+    <button type="button" class="sticky-ad-close" id="stickyAdClose" aria-label="Close Advertisement">&times;</button>
+  </div>
+  <div class="sticky-ad-body">
+    ${adBanner728x90()}
+  </div>
+</div>
 <!-- Social Bar / Sticky Notification Tag -->
 <script src="https://pl31752773.profitableratecpmnetwork.com/04/9d/77/049d772dfd76275dbc19a53d62937f43.js"></script>
 </body>

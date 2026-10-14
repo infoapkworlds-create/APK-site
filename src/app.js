@@ -831,7 +831,7 @@ export async function appHandler(req, res) {
     result = termsPage(req);
   } else if (pathname === '/cookies/') {
     result = cookiePolicyPage(req);
-  } else if (pathname === '/copyright/') {
+  } else if (pathname === '/copyright/' || pathname === '/dmca/') {
     result = copyrightPage(req);
   } else if (pathname === '/disclaimer/') {
     result = disclaimerPage(req);

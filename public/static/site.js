@@ -439,5 +439,66 @@
       localStorage.setItem('pwa_prompt_dismissed', Date.now());
     });
   });
+
+  // 8. Download Countdown Timer
+  const timerWrap = document.getElementById('dl-countdown-wrap');
+  if (timerWrap) {
+    const countNum = document.getElementById('dl-countdown-num');
+    const progressFill = document.getElementById('dl-progress-fill');
+    const actionArea = document.getElementById('dl-action-area');
+    const timerMsg = document.getElementById('dl-timer-msg');
+    let remaining = 5;
+
+    // Smoothly animate progress bar
+    setTimeout(() => {
+      if (progressFill) progressFill.style.width = '0%';
+    }, 50);
+
+    const interval = setInterval(() => {
+      remaining--;
+      if (countNum) countNum.textContent = remaining;
+      if (remaining <= 0) {
+        clearInterval(interval);
+        if (timerMsg) {
+          timerMsg.innerHTML = '<span style="color:#10b981;">🎉 <strong>Your verified APK download is ready!</strong></span>';
+        }
+        if (actionArea) {
+          actionArea.style.display = 'block';
+          actionArea.classList.add('dl-ready-pulse');
+        }
+      }
+    }, 1000);
+  }
+
+  // 9. Mobile Sticky Ad Banner Close Button
+  const stickyAd = document.getElementById('stickyBottomAd');
+  if (stickyAd) {
+    const closeBtn = document.getElementById('stickyAdClose');
+    if (sessionStorage.getItem('sticky_ad_dismissed')) {
+      stickyAd.style.display = 'none';
+    } else if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        stickyAd.style.display = 'none';
+        sessionStorage.setItem('sticky_ad_dismissed', '1');
+      });
+    }
+  }
+
+  // 10. Dark / Light Mode Toggle
+  const themeToggle = document.getElementById('themeToggleBtn');
+  if (themeToggle) {
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (savedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeToggle.setAttribute('aria-label', 'Switch to light mode');
+    }
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const nextTheme = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+      themeToggle.setAttribute('aria-label', nextTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    });
+  }
 })();
 

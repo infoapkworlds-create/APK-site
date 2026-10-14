@@ -47,6 +47,21 @@
   --shadow-dl: 0 4px 16px rgba(36, 199, 141, 0.35);
 }
 
+[data-theme="dark"] {
+  --bg: #0b1120;
+  --card-bg: #131d31;
+  --border: #1e293b;
+  --border-light: #182337;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --primary-light: rgba(36, 199, 141, 0.15);
+  --primary-subtle: rgba(36, 199, 141, 0.08);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 3px 12px rgba(0, 0, 0, 0.5);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
 *, *::before, *::after { box-sizing: border-box; }
 
 html, body {
@@ -3062,4 +3077,101 @@ tr:last-child td { border-bottom: none; }
 }
 .pwa-close-btn:hover {
   color: #fff;
+}
+
+/* ==========================================================================
+   Theme Toggle Button
+   ========================================================================== */
+.btn-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  flex-shrink: 0;
+}
+.btn-theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+.theme-icon-sun { display: none; }
+.theme-icon-moon { display: block; }
+[data-theme="dark"] .theme-icon-sun { display: block; color: #ffb800; }
+[data-theme="dark"] .theme-icon-moon { display: none; }
+
+/* ==========================================================================
+   Mobile Sticky Bottom Ad Banner
+   ========================================================================== */
+.sticky-bottom-ad {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: rgba(24, 35, 55, 0.98);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.35);
+  padding: 4px 8px 6px 8px;
+  display: block;
+}
+.sticky-ad-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 728px;
+  margin: 0 auto 2px auto;
+  padding: 0 4px;
+}
+.sticky-ad-tag {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+.sticky-ad-close {
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.sticky-ad-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+.sticky-ad-body .ad-container-728 {
+  margin: 0 auto !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+/* ==========================================================================
+   Trending Pills & Download Animation
+   ========================================================================== */
+.trend-pill:hover {
+  background: var(--primary) !important;
+  color: #ffffff !important;
+  border-color: var(--primary) !important;
+  transform: translateY(-1px);
+}
+@keyframes dlPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+.dl-ready-pulse {
+  animation: dlPulse 0.5s ease-in-out;
 }
