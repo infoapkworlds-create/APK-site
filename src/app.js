@@ -58,7 +58,8 @@ import {
 import { guidesHubPage, guideDetailPage } from './pages/guides.js';
 import { searchPage, suggestApi } from './pages/search.js';
 import { submitAppPage, requestAppPage, reportAppPage } from './pages/submissions.js';
-import { apkInspectorPage } from './pages/tools.js';
+import { apkInspectorPage, apkErrorSolverPage } from './pages/tools.js';
+import { collectionsHubPage, collectionDetailPage } from './pages/collections.js';
 import {
   aboutPage,
   contactPage,
@@ -856,13 +857,31 @@ export async function appHandler(req, res) {
     result = sitemapHtmlPage(req);
   } else if (pathname === '/tools/apk-inspector/' || pathname === '/tools/apk-inspector') {
     result = apkInspectorPage(req);
+  } else if (pathname === '/tools/apk-error-solver/' || pathname === '/tools/apk-error-solver') {
+    result = apkErrorSolverPage(req);
+  } else if (pathname === '/collections/' || pathname === '/collections') {
+    result = collectionsHubPage(req);
+  } else if (pathname === '/region-restricted/' || pathname === '/region-restricted') {
+    result = collectionDetailPage(req, 'region-restricted-apps');
+  }
+
+  // Collections detail: /collections/:slug/
+  else if (pathname.startsWith('/collections/')) {
+    const slug = pathname.slice('/collections/'.length).replace(/\/$/, '');
+    if (slug) result = collectionDetailPage(req, slug);
+    else result = collectionsHubPage(req);
   }
 
   // 4. Comparison page: /compare/:slug/
   else if (pathname.startsWith('/compare/')) {
     const slug = pathname.slice(9).replace(/\/$/, '');
-    const cmp = D.getComparison(slug);
-    if (cmp) result = comparisonPage(req, cmp);
+    if (!slug) {
+      result = compareHub();
+    } else {
+      const cmp = D.getComparison(slug);
+      if (cmp) result = comparisonPage(req, cmp);
+      else result = compareHub();
+    }
   }
 
   // 5. Developer page: /developer/:slug/

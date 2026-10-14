@@ -798,5 +798,141 @@
       });
     }
   }
+
+  // 18. Battle Arena Voting Poll
+  const battleArena = document.getElementById('battleArena');
+  if (battleArena) {
+    const slug = battleArena.getAttribute('data-slug');
+    const storageKey = 'battle_vote_' + slug;
+    const voteBtns = battleArena.querySelectorAll('.btn-vote-fighter');
+
+    if (localStorage.getItem(storageKey)) {
+      voteBtns.forEach((b) => {
+        b.disabled = true;
+        b.style.opacity = '0.7';
+      });
+    }
+
+    voteBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (localStorage.getItem(storageKey)) return;
+        localStorage.setItem(storageKey, btn.getAttribute('data-fighter'));
+        voteBtns.forEach((b) => {
+          b.disabled = true;
+          b.style.opacity = '0.7';
+        });
+        btn.innerHTML = '✓ Voted!';
+      });
+    });
+  }
+
+  // 19. Interactive APK Error Solver
+  const errorPicker = document.getElementById('errorPicker');
+  const brandPicker = document.getElementById('brandPicker');
+  const solTitle = document.getElementById('solTitle');
+  const solDeviceTag = document.getElementById('solDeviceTag');
+  const solContent = document.getElementById('solContent');
+
+  if (errorPicker && brandPicker && solTitle && solDeviceTag && solContent) {
+    const solutions = {
+      parse: {
+        title: 'How to Fix "Problem Parsing the Package"',
+        cause: 'This error occurs when the downloaded APK requires a newer Android version than the one installed on your phone, or if the download was interrupted before reaching 100%.',
+        steps: [
+          'Check OS Compatibility: Compare your phone\'s Android version (Settings > About Phone > Software Information) against the app\'s minimum requirement on APKWorlds. If your Android is older, download a legacy build from our Version History.',
+          'Re-download from Mirror 1: Interrupted Wi-Fi downloads create incomplete byte files. Tap the Download button again and ensure the file size matches the size recorded on our download page.',
+          'Allow Unknown Sources: Open phone Settings > Security > Install Unknown Apps > find your browser or File Manager > toggle Allow from this source to ON.',
+          'Clear Package Installer Cache: Go to Settings > Apps > Filter: Show System Apps > Package Installer > Storage > Clear Cache.'
+        ]
+      },
+      corrupt: {
+        title: 'How to Fix "App Not Installed as Package Appears to be Corrupt"',
+        cause: 'A cryptographic signature mismatch is occurring because a different build or older version is already installed on your device, or the APK binary was corrupted.',
+        steps: [
+          'Uninstall Existing App Version: If you already have the app or an older mod installed, you MUST completely uninstall it first before installing the new APK package.',
+          'Remove Leftover App Data: Go to Settings > Storage > Cached Data > Clear to eliminate old configuration conflicts.',
+          'Restart Your Device: A quick reboot clears the Android Package Manager cache daemon.',
+          'Reinstall via Verified Mirror: Download the fresh verified APK package from APKWorlds and tap Install.'
+        ]
+      },
+      protect: {
+        title: 'How to Bypass "Blocked by Play Protect (Unsafe App)"',
+        cause: 'Google Play Protect automatically flags third-party sideloaded apps because they are distributed outside Google Play Store billing channels.',
+        steps: [
+          'Instant 1-Tap Bypass: When the red or yellow warning dialog appears, tap "More details" (small arrow at the bottom).',
+          'Tap "Install anyway (unsafe)": The app will immediately finish installation without issues.',
+          'Permanent Whitelist: Open Google Play Store > tap your Profile icon in top-right > tap "Play Protect" > tap the Settings Gear icon in top-right > toggle OFF "Scan apps with Play Protect".'
+        ]
+      },
+      pending: {
+        title: 'How to Fix "Download Pending or Stuck at 99%"',
+        cause: 'Network connection timeouts, aggressive battery savers pausing background browser tasks, or corrupted Download Manager cache.',
+        steps: [
+          'Clear Download Manager Cache: Go to Settings > Apps > (Menu: Show System Apps) > Download Manager > Storage > Clear Data & Cache.',
+          'Disable Battery Optimization: Settings > Battery > Battery Optimization > select your browser (Chrome/Brave) > choose "Don\'t optimize" so background downloads are never suspended.',
+          'Use Direct High-Speed Mirror: Tap "Mirror 2 (High-Speed Direct Mirror)" on our download page for multi-threaded direct HTTP download.'
+        ]
+      },
+      obb: {
+        title: 'How to Fix "XAPK / OBB Validation Failed (Resource Missing)"',
+        cause: 'High-graphics 3D games require both a base APK file and additional OBB cache data files located in the Android filesystem.',
+        steps: [
+          'Install Base APK First: Install the main APK package, but do NOT launch the game yet.',
+          'Extract OBB Folder: If the download is a .ZIP or .XAPK archive, extract the .obb file using ZArchiver or Files by Google.',
+          'Move to Android/obb: Move the game folder to: Internal Storage > Android > obb > [game.package.name] / main.xxx.obb.',
+          'Grant Storage Permissions: Go to Settings > Apps > find the game > Permissions > toggle Storage/Files to ALLOW.'
+        ]
+      },
+      abi: {
+        title: 'How to Fix "INSTALL_FAILED_NO_MATCHING_ABIS"',
+        cause: 'The APK binary was compiled for 64-bit ARM (arm64-v8a) processors, but your device or Android emulator runs on 32-bit (armeabi-v7a) or x86 architecture.',
+        steps: [
+          'Download Universal APK Build: Always look for "Universal" or "armeabi-v7a" labeled APK releases on APKWorlds.',
+          'Check Device CPU Architecture: Install AIDA64 or CPU-Z from our site to verify whether your CPU is 64-bit (ARM64) or 32-bit (ARMv7).',
+          'Emulator Users: In BlueStacks / LDPlayer / Nox, switch emulator settings from 32-bit instance to 64-bit Pie or Android 12 instance.'
+        ]
+      }
+    };
+
+    let currentErr = 'parse';
+    let currentBrand = 'Samsung';
+
+    function renderSolution() {
+      const data = solutions[currentErr] || solutions.parse;
+      solTitle.textContent = data.title;
+      solDeviceTag.textContent = currentBrand + ' Optimized';
+
+      const stepsHtml = data.steps.map((s) => `<li>${s}</li>`).join('');
+      solContent.innerHTML = `
+        <p><strong>Root Cause:</strong> ${data.cause}</p>
+        <div style="background:var(--bg-alt); padding:1.25rem; border-radius:10px; border:1px solid var(--border); margin:1rem 0;">
+          <h4 style="margin-top:0; font-size:1rem; color:#2563eb;">Step-by-Step Resolution (${currentBrand}):</h4>
+          <ol style="margin-bottom:0; padding-left:1.25rem; line-height:1.7;">
+            ${stepsHtml}
+          </ol>
+        </div>
+      `;
+    }
+
+    const errBtns = errorPicker.querySelectorAll('.btn-error-pill');
+    errBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        errBtns.forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        currentErr = btn.getAttribute('data-err');
+        renderSolution();
+      });
+    });
+
+    const brandBtns = brandPicker.querySelectorAll('.btn-brand-pill');
+    brandBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        brandBtns.forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        currentBrand = btn.textContent.split(' (')[0];
+        renderSolution();
+      });
+    });
+  }
 })();
 

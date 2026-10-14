@@ -1,5 +1,5 @@
 import { html, raw } from '../lib/html.js';
-import { page } from '../layout.js';
+import { page, adNativeWidget } from '../layout.js';
 import { config } from '../config.js';
 
 export function apkInspectorPage(req) {
@@ -102,3 +102,143 @@ export function apkInspectorPage(req) {
     body,
   });
 }
+
+export function apkErrorSolverPage(req) {
+  const body = html`
+<header class="page-head">
+  <span style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; background:rgba(239,68,68,0.1); color:#ef4444; padding:4px 12px; border-radius:9999px; display:inline-block; margin-bottom:0.75rem;">Troubleshooting &amp; Diagnostics</span>
+  <h1>Interactive Android APK Error Solver</h1>
+  <p class="lead">Fix "Problem Parsing the Package", "App Not Installed", "Play Protect Blocked", and OBB errors in 3 clicks. Select your error and phone brand below for instant verified solutions.</p>
+</header>
+
+<div class="solver-layout" style="max-width:860px; margin:2rem auto;">
+  <!-- Step 1: Select Error -->
+  <div class="card solver-step-card" style="padding:1.5rem; margin-bottom:1.5rem; border:1px solid var(--border); border-radius:14px; background:var(--bg-surface);">
+    <h3 style="margin-top:0; font-size:1.15rem; display:flex; align-items:center; gap:8px;">
+      <span style="width:24px; height:24px; background:#2563eb; color:#fff; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:800;">1</span>
+      Select The Exact Error You Encountered:
+    </h3>
+    <div class="error-picker-grid" id="errorPicker" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin-top:1rem;">
+      <button type="button" class="btn-error-pill is-active" data-err="parse">
+        <span class="err-icon">⚠️</span>
+        <span class="err-label">"There was a problem parsing the package"</span>
+      </button>
+      <button type="button" class="btn-error-pill" data-err="corrupt">
+        <span class="err-icon">❌</span>
+        <span class="err-label">"App not installed as package appears to be corrupt"</span>
+      </button>
+      <button type="button" class="btn-error-pill" data-err="protect">
+        <span class="err-icon">🛡️</span>
+        <span class="err-label">"Blocked by Play Protect / Unsafe app"</span>
+      </button>
+      <button type="button" class="btn-error-pill" data-err="pending">
+        <span class="err-icon">⏳</span>
+        <span class="err-label">"Download pending / Stuck at 99%"</span>
+      </button>
+      <button type="button" class="btn-error-pill" data-err="obb">
+        <span class="err-icon">📦</span>
+        <span class="err-label">"XAPK / OBB Validation Failed"</span>
+      </button>
+      <button type="button" class="btn-error-pill" data-err="abi">
+        <span class="err-icon">⚙️</span>
+        <span class="err-label">"Incompatible Architecture (ARM/x86)"</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 2: Select Brand -->
+  <div class="card solver-step-card" style="padding:1.5rem; margin-bottom:1.5rem; border:1px solid var(--border); border-radius:14px; background:var(--bg-surface);">
+    <h3 style="margin-top:0; font-size:1.15rem; display:flex; align-items:center; gap:8px;">
+      <span style="width:24px; height:24px; background:#2563eb; color:#fff; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:800;">2</span>
+      Select Your Device Brand:
+    </h3>
+    <div class="brand-picker-row" id="brandPicker" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:1rem;">
+      <button type="button" class="btn-brand-pill is-active" data-brand="samsung">Samsung (One UI)</button>
+      <button type="button" class="btn-brand-pill" data-brand="xiaomi">Xiaomi / POCO (HyperOS / MIUI)</button>
+      <button type="button" class="btn-brand-pill" data-brand="oppo">Oppo / Realme (ColorOS)</button>
+      <button type="button" class="btn-brand-pill" data-brand="vivo">Vivo / iQOO (Funtouch)</button>
+      <button type="button" class="btn-brand-pill" data-brand="stock">Stock Android / Google Pixel</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Diagnostic Solution Panel -->
+  <div class="card solver-solution-card" id="solverSolution" style="padding:2rem; border:1.5px solid #10b981; border-radius:16px; background:var(--bg-surface); box-shadow:var(--shadow-md);">
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; border-bottom:1px solid var(--border); padding-bottom:1rem; margin-bottom:1.25rem;">
+      <div>
+        <span id="solBadge" style="font-size:0.75rem; font-weight:800; background:#ecfdf5; color:#059669; padding:3px 10px; border-radius:9999px; text-transform:uppercase;">Root Cause Verified</span>
+        <h2 id="solTitle" style="font-size:1.35rem; font-weight:800; margin:0.35rem 0 0 0;">How to Fix "Problem Parsing the Package"</h2>
+      </div>
+      <span id="solDeviceTag" style="font-size:0.85rem; font-weight:700; color:var(--text-muted); background:var(--bg-alt); padding:4px 12px; border-radius:8px; border:1px solid var(--border);">Samsung One UI Guide</span>
+    </div>
+
+    <div id="solContent" style="font-size:0.95rem; line-height:1.7; color:var(--text);">
+      <p><strong>Root Cause:</strong> This error occurs when the downloaded APK requires a newer Android version than the one installed on your phone, or if the download was interrupted before reaching 100%.</p>
+      
+      <div style="background:var(--bg-alt); padding:1.25rem; border-radius:10px; border:1px solid var(--border); margin:1rem 0;">
+        <h4 style="margin-top:0; font-size:1rem; color:#2563eb;">Step-by-Step Resolution:</h4>
+        <ol style="margin-bottom:0; padding-left:1.25rem;">
+          <li><strong>Check OS Compatibility:</strong> Compare your phone's Android version (Settings &gt; About Phone &gt; Software Information) against the app's minimum requirement on APKWorlds. If your Android is older, download a legacy build from our Version History.</li>
+          <li><strong>Re-download from Mirror 1:</strong> Interrupted Wi-Fi downloads create incomplete byte files. Tap the Download button again and ensure the file size matches the size recorded on our download page.</li>
+          <li><strong>Allow Unknown Sources in Samsung Settings:</strong> Open <em>Settings &gt; Security and Privacy &gt; Install Unknown Apps</em> &gt; find <em>Chrome</em> or <em>My Files</em> &gt; toggle <strong>Allow from this source</strong> to ON.</li>
+          <li><strong>Clear Package Installer Cache:</strong> Go to <em>Settings &gt; Apps &gt; Filter: Show System Apps &gt; Package Installer &gt; Storage &gt; Clear Cache</em>.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--border);">
+      <div style="font-size:0.85rem; color:var(--text-muted);">
+        Did this solve your issue? <button type="button" class="btn secondary" style="padding:4px 10px; font-size:0.8rem; margin-left:6px;">Yes, Solved! 👍</button>
+      </div>
+      <a href="/tools/apk-inspector/" class="btn primary" style="font-size:0.88rem; padding:0.6rem 1.2rem;">
+        Inspect APK Hash First &rarr;
+      </a>
+    </div>
+  </div>
+
+  <div style="margin:2.5rem 0;">
+    ${adNativeWidget()}
+  </div>
+</div>
+`;
+
+  return page({
+    title: 'Android APK Error Solver | Fix Problem Parsing & Install Failed Errors',
+    description: 'Fix common Android APK installation errors: "There was a problem parsing the package", "App not installed corrupt", Play Protect blocks, and OBB missing errors.',
+    path: '/tools/apk-error-solver/',
+    crumbs: [['Home', '/'], ['APK Error Solver', '/tools/apk-error-solver/']],
+    ld: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'How do I fix "There was a problem parsing the package" on Android?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'This error occurs when the APK requires a newer Android OS version or the file was corrupted during download. Check the app\'s minimum Android version requirement on APKWorlds, re-download the complete file, and enable Install Unknown Apps in your phone settings.'
+            }
+          },
+          {
+            '@type': 'Question',
+            name: 'Why does Android say "App not installed as package appears to be corrupt"?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'This is usually caused by an existing app signature conflict (an older version with a different key is already installed) or an incomplete download. Uninstall the previous version first, clear Package Installer cache, and re-install.'
+            }
+          },
+          {
+            '@type': 'Question',
+            name: 'How to bypass "Blocked by Play Protect" when installing safe APKs?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Tap "More details" on the warning dialog, then tap "Install anyway (unsafe)". To disable false alerts, open Google Play Store > Profile > Play Protect > Settings Gear > turn off "Scan apps with Play Protect".'
+            }
+          }
+        ]
+      }
+    ],
+    body,
+  });
+}
+

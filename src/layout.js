@@ -2,7 +2,7 @@ import { html, raw, esc, fmtDate, isoDate, fmtBytes } from './lib/html.js';
 import { config } from './config.js';
 
 export const abs = (p) => config.siteUrl + p;
-const ASSET_V = '11';
+const ASSET_V = '12';
 
 export function logoMark(size = 36) {
   return raw(`<svg class="logo-icon" width="${size}" height="${size}" viewBox="0 0 32 32" aria-hidden="true">
@@ -47,8 +47,7 @@ export function breadcrumbs(items) {
 }
 
 const NAV = [
-  ['/games/', 'Games'], ['/apps/', 'Apps'], ['/guides/', 'Articles & Guides'], ['/latest/', 'Latest'],
-  ['/updated/', 'Updated'], ['/popular/', 'Top Charts'], ['/categories/', 'Categories'], ['/developers/', 'Developers'],
+  ['/games/', 'Games'], ['/apps/', 'Apps'], ['/compare/', 'App Battles'], ['/collections/', 'Collections'], ['/guides/', 'Guides'], ['/popular/', 'Top Charts'], ['/categories/', 'Categories'],
 ];
 
 function header(path) {
@@ -109,7 +108,8 @@ function footer() {
     <div class="f-links-grid">
       ${col('Top Discoveries', [['/popular/', 'Top Charts'], ['/latest/', 'Latest Apps'], ['/updated/', 'Recently Updated'], ['/games/', 'Android Games'], ['/apps/', 'Android Apps']])}
       ${col('Categories', [['/categories/', 'All Categories'], ['/apps/communication/', 'Communication'], ['/apps/tools/', 'Tools & Utilities'], ['/apps/security/', 'VPN & Security'], ['/apps/productivity/', 'Productivity']])}
-      ${col('Articles & How-To', [['/guides/', 'Android Guides'], ['/guides/how-to-install-apk/', 'How to Install APK'], ['/guides/how-to-check-app-permissions/', 'App Permissions'], ['/guides/how-to-update-android-apps/', 'Update APK Files'], ['/tools/apk-inspector/', 'APK Hash Inspector']])}
+      ${col('Articles & How-To', [['/guides/', 'Android Guides'], ['/guides/how-to-install-apk/', 'How to Install APK'], ['/compare/', 'App Comparisons'], ['/collections/', 'Curated Collections'], ['/region-restricted/', 'Global Unlocked APKs']])}
+      ${col('Tools & Diagnostics', [['/tools/apk-error-solver/', 'APK Error Solver'], ['/tools/apk-inspector/', 'APK Hash Inspector'], ['/guides/how-to-check-app-permissions/', 'App Permissions'], ['/guides/how-to-update-android-apps/', 'Update APK Files']])}
       ${col('Company & Legal', [['/about/', 'About Us'], ['/editorial-policy/', 'Editorial Policy'], ['/download-policy/', 'Download Policy'], ['/copyright/', 'DMCA & Copyright'], ['/privacy/', 'Privacy Policy'], ['/contact/', 'Contact Support']])}
     </div>
   </div>

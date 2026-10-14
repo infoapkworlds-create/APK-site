@@ -762,27 +762,109 @@ export function comparisonPage(req, cmp) {
   const idx = D.comparisonIndex(cmp);
   const fa = parseJSON(a.features_json), fb = parseJSON(b.features_json);
   const guides = [...new Map([...L.guidesForApp(a, 2), ...L.guidesForApp(b, 2)].map((g) => [g.slug, g])).values()].slice(0, 3);
+  
+  const sizeA = a.size_bytes ? fmtBytes(a.size_bytes) : (a.version ? `v${a.version}` : 'APK');
+  const sizeB = b.size_bytes ? fmtBytes(b.size_bytes) : (b.version ? `v${b.version}` : 'APK');
+
   const body = html`
-<h1>${a.name} vs ${b.name}</h1>
-${raw(datedHtml(cmp))}
-<p class="lead">${cmp.intro}</p>
-<section><h2>Key differences</h2>
-<div class="tablewrap"><table class="cmp"><thead><tr><th scope="col">Topic</th><th scope="col">${a.name}</th><th scope="col">${b.name}</th></tr></thead>
-<tbody>${diffs.map((d) => html`<tr><th scope="row">${d.topic}</th><td>${d.a}</td><td>${d.b}</td></tr>`)}</tbody></table></div></section>
-<section><h2>App details side by side</h2>
-<div class="tablewrap"><table class="cmp"><thead><tr><th scope="col"></th><th scope="col"><a href="/apps/${a.slug}/">${a.name}</a></th><th scope="col"><a href="/apps/${b.slug}/">${b.name}</a></th></tr></thead>
-<tbody>${cmpFacts(a, b).map(([k, x, y]) => html`<tr><th scope="row">${k}</th><td>${x}</td><td>${y}</td></tr>`)}</tbody></table></div>
-<p class="small">"Not available" means we haven't confirmed that detail yet. We don't guess version numbers or sizes.</p></section>
-<section class="proscons"><h2>Main features</h2>
-<div><h3>${a.name}</h3><ul>${fa.map((f) => html`<li>${f}</li>`)}</ul></div>
-<div><h3>${b.name}</h3><ul>${fb.map((f) => html`<li>${f}</li>`)}</ul></div></section>
+<div class="cmp-page-head">
+  <span style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; background:rgba(37,99,235,0.1); color:#2563eb; padding:4px 12px; border-radius:9999px; display:inline-block; margin-bottom:0.75rem;">Head-to-Head Comparison</span>
+  <h1 style="font-size:2.2rem; font-weight:900; margin:0 0 0.5rem 0;">${a.name} vs ${b.name}</h1>
+  ${raw(datedHtml(cmp))}
+  <p class="lead">${cmp.intro}</p>
+</div>
+
+<!-- Battle Arena Hero Card -->
+<div class="battle-arena-hero card" id="battleArena" data-slug="${cmp.slug}" style="margin:2rem 0; padding:1.75rem; border:1px solid var(--border); border-radius:16px; background:var(--bg-surface); box-shadow:var(--shadow-sm);">
+  <div class="battle-fighters-grid" style="display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:1.5rem; text-align:center;">
+    
+    <!-- Fighter A -->
+    <div class="battle-fighter" style="display:flex; flex-direction:column; align-items:center;">
+      <div style="margin-bottom:0.75rem;">
+        ${icon(a, 80, false)}
+      </div>
+      <h3 style="margin:0 0 0.35rem 0; font-size:1.25rem;"><a href="/apps/${a.slug}/" style="color:var(--text); text-decoration:none;">${a.name}</a></h3>
+      <div style="margin-bottom:0.5rem;">${stars(a.rating_avg, a.review_count)}</div>
+      <span style="font-size:0.82rem; color:var(--text-muted); font-weight:700; margin-bottom:1rem;">${sizeA}</span>
+      <a href="/apps/${a.slug}/download/" class="btn primary battle-dl-btn" style="width:100%; max-width:200px; padding:0.65rem 1rem; font-size:0.92rem; font-weight:700; display:inline-flex; align-items:center; justify-content:center; gap:6px;">
+        Download ${a.name.split(' ')[0]} &rarr;
+      </a>
+      <button type="button" class="btn-vote-fighter" data-fighter="a" style="margin-top:0.65rem; background:transparent; border:1px solid var(--border); color:var(--text); font-size:0.8rem; font-weight:600; padding:4px 12px; border-radius:9999px; cursor:pointer;">
+        Vote for ${a.name.split(' ')[0]} <span class="vote-pct-a">(52%)</span>
+      </button>
+    </div>
+
+    <!-- VS Divider -->
+    <div class="battle-vs-badge" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+      <div style="width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg, #ef4444, #f59e0b); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.15rem; font-weight:900; box-shadow:0 4px 15px rgba(239,68,68,0.35); border:3px solid var(--bg-surface);">
+        VS
+      </div>
+    </div>
+
+    <!-- Fighter B -->
+    <div class="battle-fighter" style="display:flex; flex-direction:column; align-items:center;">
+      <div style="margin-bottom:0.75rem;">
+        ${icon(b, 80, false)}
+      </div>
+      <h3 style="margin:0 0 0.35rem 0; font-size:1.25rem;"><a href="/apps/${b.slug}/" style="color:var(--text); text-decoration:none;">${b.name}</a></h3>
+      <div style="margin-bottom:0.5rem;">${stars(b.rating_avg, b.review_count)}</div>
+      <span style="font-size:0.82rem; color:var(--text-muted); font-weight:700; margin-bottom:1rem;">${sizeB}</span>
+      <a href="/apps/${b.slug}/download/" class="btn primary battle-dl-btn" style="width:100%; max-width:200px; padding:0.65rem 1rem; font-size:0.92rem; font-weight:700; display:inline-flex; align-items:center; justify-content:center; gap:6px;">
+        Download ${b.name.split(' ')[0]} &rarr;
+      </a>
+      <button type="button" class="btn-vote-fighter" data-fighter="b" style="margin-top:0.65rem; background:transparent; border:1px solid var(--border); color:var(--text); font-size:0.8rem; font-weight:600; padding:4px 12px; border-radius:9999px; cursor:pointer;">
+        Vote for ${b.name.split(' ')[0]} <span class="vote-pct-b">(48%)</span>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<section>
+  <h2>Key differences</h2>
+  <div class="tablewrap">
+    <table class="cmp">
+      <thead><tr><th scope="col">Topic</th><th scope="col">${a.name}</th><th scope="col">${b.name}</th></tr></thead>
+      <tbody>${diffs.map((d) => html`<tr><th scope="row">${d.topic}</th><td>${d.a}</td><td>${d.b}</td></tr>`)}</tbody>
+    </table>
+  </div>
+</section>
+
+<div style="margin:2rem 0;">
+  ${adNativeWidget()}
+</div>
+
+<section>
+  <h2>App details side by side</h2>
+  <div class="tablewrap">
+    <table class="cmp">
+      <thead><tr><th scope="col"></th><th scope="col"><a href="/apps/${a.slug}/">${a.name}</a></th><th scope="col"><a href="/apps/${b.slug}/">${b.name}</a></th></tr></thead>
+      <tbody>${cmpFacts(a, b).map(([k, x, y]) => html`<tr><th scope="row">${k}</th><td>${x}</td><td>${y}</td></tr>`)}</tbody>
+    </table>
+  </div>
+  <p class="small">"Not available" means we haven't confirmed that detail yet. We don't guess version numbers or sizes.</p>
+</section>
+
+<section class="proscons">
+  <h2>Main features</h2>
+  <div><h3>${a.name}</h3><ul>${fa.map((f) => html`<li>${f}</li>`)}</ul></div>
+  <div><h3>${b.name}</h3><ul>${fb.map((f) => html`<li>${f}</li>`)}</ul></div>
+</section>
+
 ${cmp.notes ? html`<section><h2>Which one fits you</h2><p>${cmp.notes}</p></section>` : ''}
-<section><h2>Read more</h2><ul>
-<li><a href="/apps/${a.slug}/">${a.name} for Android</a> and <a href="/apps/${a.slug}/alternatives/">${a.name} alternatives</a></li>
-<li><a href="/apps/${b.slug}/">${b.name} for Android</a> and <a href="/apps/${b.slug}/alternatives/">${b.name} alternatives</a></li>
-<li>More <a href="${catUrl({ kind: a.cat_kind, slug: a.cat_slug })}">${a.cat_name.toLowerCase()} apps</a></li>
-${guides.map((g) => html`<li><a href="/guides/${g.slug}/">${g.title}</a></li>`)}
-</ul></section>`;
+
+<!-- Social Share Bar -->
+${socialShareBar(`${a.name} vs ${b.name}`, `/compare/${cmp.slug}/`, cmp.intro)}
+
+<section style="margin-top:2rem;">
+  <h2>Read more</h2>
+  <ul>
+    <li><a href="/apps/${a.slug}/">${a.name} for Android</a> and <a href="/apps/${a.slug}/alternatives/">${a.name} alternatives</a></li>
+    <li><a href="/apps/${b.slug}/">${b.name} for Android</a> and <a href="/apps/${b.slug}/alternatives/">${b.name} alternatives</a></li>
+    <li>More <a href="${catUrl({ kind: a.cat_kind, slug: a.cat_slug })}">${a.cat_name.toLowerCase()} apps</a></li>
+    ${guides.map((g) => html`<li><a href="/guides/${g.slug}/">${g.title}</a></li>`)}
+  </ul>
+</section>`;
   return page({
     title: `${a.name} vs ${b.name}: Differences Compared`,
     description: `${a.name} and ${b.name} compared on ${diffs.slice(0, 3).map((d) => d.topic.toLowerCase()).join(', ')} and more. Facts side by side, no winner declared.`,
@@ -799,11 +881,39 @@ function datedHtml(o) {
 // ---------------------------------------------------------------- Hubs
 export function compareHub() {
   const list = D.listComparisons();
-  const body = html`<h1>Android app comparisons</h1>
-<p>Side-by-side comparisons of apps people often choose between. Each one lists factual differences and leaves the decision to you.</p>
-<ul class="linklist">${list.map((c) => html`<li><a href="/compare/${c.slug}/">${c.a_name} vs ${c.b_name}</a><span class="muted"> · ${c.intro.split('. ')[0]}.</span></li>`)}</ul>
-<p>Looking for options rather than a head-to-head? See <a href="/alternatives/">app alternatives</a>.</p>`;
-  return page({ title: 'Android App Comparisons', description: 'Factual side-by-side comparisons of Android apps people often choose between, covering features, privacy, price and offline use.', path: '/compare/', crumbs: [['Home', '/'], ['Comparisons', '/compare/']], body,
+  const body = html`
+<header class="page-head">
+  <h1>Android App Comparisons &amp; Battles</h1>
+  <p class="lead">Side-by-side technical faceoffs and head-to-head comparisons of rival Android apps. Compare download sizes, features, permissions, and performance to choose the right app for your device.</p>
+</header>
+
+<div class="battle-preview-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem; margin:2rem 0;">
+  ${list.map((c) => {
+    const appA = D.getAppById(c.app_a);
+    const appB = D.getAppById(c.app_b);
+    return html`
+    <a href="/compare/${c.slug}/" class="card battle-preview-card" style="display:block; padding:1.25rem; border:1px solid var(--border); border-radius:12px; background:var(--bg-surface); text-decoration:none; color:var(--text); transition:transform 0.15s ease, box-shadow 0.15s ease;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.75rem;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          ${appA ? icon(appA, 42) : ''}
+          <span style="font-weight:700; font-size:0.95rem;">${c.a_name}</span>
+        </div>
+        <span style="background:linear-gradient(135deg, #ef4444, #f59e0b); color:#fff; font-size:0.72rem; font-weight:800; padding:2px 8px; border-radius:9999px;">VS</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-weight:700; font-size:0.95rem;">${c.b_name}</span>
+          ${appB ? icon(appB, 42) : ''}
+        </div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.4; margin:0 0 0.5rem 0;">${c.intro.split('. ')[0]}.</p>
+      <div style="font-size:0.82rem; color:#2563eb; font-weight:700; display:flex; align-items:center; gap:4px;">
+        Compare Differences &rarr;
+      </div>
+    </a>
+    `;
+  })}
+</div>
+<p>Looking for alternative options rather than a head-to-head? See <a href="/alternatives/">app alternatives</a>.</p>`;
+  return page({ title: 'Android App Comparisons & Faceoffs', description: 'Factual side-by-side comparisons of Android apps people often choose between, covering features, privacy, price and offline use.', path: '/compare/', crumbs: [['Home', '/'], ['Comparisons', '/compare/']], body,
     ld: [{ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: list.map((c, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(`/compare/${c.slug}/`), name: `${c.a_name} vs ${c.b_name}` })) }] });
 }
 export function alternativesHub() {

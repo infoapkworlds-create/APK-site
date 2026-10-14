@@ -40,6 +40,15 @@ export function getCategorizedUrls() {
   add(main, '/developers/', '2026-09-30', '0.8', 'weekly');
   add(main, '/compare/', '2026-09-20', '0.8', 'weekly');
   add(main, '/alternatives/', '2026-09-20', '0.8', 'weekly');
+  add(main, '/collections/', latestAppDate, '0.8', 'weekly');
+  add(main, '/collections/best-offline-games/', latestAppDate, '0.8', 'weekly');
+  add(main, '/collections/video-editors-no-watermark/', latestAppDate, '0.8', 'weekly');
+  add(main, '/collections/fast-free-vpn/', latestAppDate, '0.8', 'weekly');
+  add(main, '/collections/lite-apps-low-end-phones/', latestAppDate, '0.8', 'weekly');
+  add(main, '/collections/region-restricted-apps/', latestAppDate, '0.8', 'weekly');
+  add(main, '/region-restricted/', latestAppDate, '0.8', 'weekly');
+  add(main, '/tools/apk-inspector/', latestAppDate, '0.8', 'monthly');
+  add(main, '/tools/apk-error-solver/', latestAppDate, '0.8', 'monthly');
   add(main, '/sitemap/', '2026-10-02', '0.5', 'weekly');
 
   // Governance & Policy pages
