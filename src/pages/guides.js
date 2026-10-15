@@ -239,6 +239,9 @@ export function guideDetailPage(req, guide) {
   const coverImg = getGuideCoverImage(guide);
   const { tocHtml, bodyWithAnchors, headings = [] } = renderTableOfContents(guide.body_html);
 
+  const appSlugMatch = (guide.slug || '').match(/^how-to-download-(.+)-apk$/);
+  const matchedApp = appSlugMatch ? D.getApp(appSlugMatch[1]) : (relatedApps[0] || null);
+
   const articleLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -308,9 +311,87 @@ export function guideDetailPage(req, guide) {
 
   ${tocHtml}
 
+  ${matchedApp ? html`
+  <!-- Primary High-Converting Download CTA Block -->
+  <div class="guide-dl-cta-banner card" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 1.25rem 1.5rem; margin: 1.5rem 0 2rem 0; background: linear-gradient(135deg, rgba(37,99,235,0.06), rgba(16,185,129,0.06)); border: 1.5px solid var(--primary); border-radius: 12px;">
+    <div>
+      <div style="font-weight: 700; font-size: 1.15rem; color: var(--text); margin-bottom: 0.25rem;">
+        ⚡ Direct APK Download: ${matchedApp.name}
+      </div>
+      <p style="margin: 0; font-size: 0.9rem; color: var(--muted);">
+        Official verified SHA-256 signed package. Safe and tested for Android ${matchedApp.min_android ? matchedApp.min_android + '+' : '7.0+'}.
+      </p>
+    </div>
+    <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+      <a href="/apps/${matchedApp.slug}/download/" class="btn primary" style="font-weight: 700; padding: 0.7rem 1.4rem;">
+        Download ${matchedApp.name} APK &rarr;
+      </a>
+      <a href="/apps/${matchedApp.slug}/" class="btn" style="padding: 0.7rem 1rem;">
+        ${matchedApp.name} APK Overview
+      </a>
+    </div>
+  </div>` : ''}
+
   <div class="article-body">
     ${raw(bodyWithAnchors)}
   </div>
+
+  ${matchedApp ? html`
+  <!-- In-Content Related Pages Internal Linking Silo -->
+  <section class="guide-related-pages-silo card" style="margin: 2.25rem 0; padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px;">
+    <h3 style="margin-top: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+      <span>🔗</span> Essential ${matchedApp.name} Resources &amp; Downloads
+    </h3>
+    <p style="font-size: 0.92rem; color: var(--muted); margin-bottom: 1rem;">
+      Access verified downloads, full release changelogs, alternative options, and user feedback:
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;">
+      <a href="/apps/${matchedApp.slug}/download/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.7rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>⚡</span> Download ${matchedApp.name} APK
+      </a>
+      <a href="/apps/${matchedApp.slug}/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.7rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>📱</span> ${matchedApp.name} APK Overview
+      </a>
+      <a href="/apps/${matchedApp.slug}/versions/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.7rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>📦</span> Previous versions of ${matchedApp.name}
+      </a>
+      <a href="/apps/${matchedApp.slug}/alternatives/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.7rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>🔄</span> Best alternatives to ${matchedApp.name}
+      </a>
+      <a href="/apps/${matchedApp.slug}/reviews/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.7rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>⭐</span> ${matchedApp.name} user reviews
+      </a>
+      <a href="/tools/apk-error-solver/?app=${matchedApp.slug}" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.7rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>🛠️</span> Fix ${matchedApp.name} APK Errors
+      </a>
+    </div>
+  </section>` : html`
+  <!-- Generic Android Sideloading Hub -->
+  <section class="guide-related-pages-silo card" style="margin: 2.25rem 0; padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px;">
+    <h3 style="margin-top: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+      <span>📖</span> Essential Android APK Tools &amp; Popular Guides
+    </h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 0.75rem;">
+      <a href="/guides/how-to-install-apk/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.7rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>📖</span> How to Install APK on Android
+      </a>
+      <a href="/guides/how-to-install-xapk-files-on-android/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.7rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>📦</span> How to Install XAPK Files
+      </a>
+      <a href="/guides/how-to-backup-and-extract-apk-files/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.7rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>💾</span> Backup &amp; Extract APKs
+      </a>
+      <a href="/tools/apk-error-solver/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.7rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>🛠️</span> APK Error Solver Diagnostic Tool
+      </a>
+      <a href="/tools/apk-inspector/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.7rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>🔍</span> APK Package &amp; Hash Inspector
+      </a>
+      <a href="/popular/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.7rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>⭐</span> Popular Android Apps &amp; Games
+      </a>
+    </div>
+  </section>`}
 
   <!-- Mid-Article 728x90 Banner -->
   ${adBanner728x90()}

@@ -479,22 +479,25 @@ export function appPage(req, app) {
     </p>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.75rem;">
       <a href="/apps/${app.slug}/download/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
-        <span>⚡</span> Direct APK Download
+        <span>⚡</span> Download ${app.name} APK
       </a>
       <a href="/apps/${app.slug}/versions/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
-        <span>📦</span> All Old Versions Archive
+        <span>📦</span> ${app.name} APK old versions
       </a>
       <a href="/apps/${app.slug}/alternatives/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
-        <span>🔄</span> Best Similar Alternatives
+        <span>🔄</span> ${app.name} alternatives
+      </a>
+      <a href="/apps/${app.slug}/reviews/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>⭐</span> ${app.name} reviews
+      </a>
+      <a href="${guides.find(g => g.slug === `how-to-download-${app.slug}-apk`) ? `/guides/how-to-download-${app.slug}-apk/` : '/guides/how-to-install-apk/'}" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>📖</span> How to download ${app.name} APK
       </a>
       <a href="/tools/apk-error-solver/?app=${app.slug}" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
-        <span>🛠️</span> APK Error Solver Tool
+        <span>🛠️</span> Fix ${app.name} APK Errors
       </a>
       <a href="${catUrl({ kind: app.cat_kind, slug: app.cat_slug })}" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
         <span>📁</span> Top ${app.cat_name} Apps
-      </a>
-      <a href="/guides/how-to-install-apk/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
-        <span>📖</span> Step-by-Step Install Guide
       </a>
     </div>
   </section>
@@ -585,7 +588,26 @@ ${status === '1' ? html`<p class="notice ok" role="status">Thanks. Your review h
 ${pages > 1 ? html`<nav class="pager" aria-label="Review pages">${pageNo > 1 ? html`<a href="/apps/${app.slug}/reviews/${pageNo > 2 ? `?page=${pageNo - 1}` : ''}" rel="prev">Newer reviews</a>` : ''}<span>Page ${pageNo} of ${pages}</span>${pageNo < pages ? html`<a href="/apps/${app.slug}/reviews/?page=${pageNo + 1}" rel="next">Older reviews</a>` : ''}</nav>` : ''}
 </section>
 <section id="write"><h2>Write a review of ${app.name}</h2>${reviewForm(req, app)}</section>
-<p>Also see <a href="/apps/${app.slug}/alternatives/">${app.name} alternatives</a> and <a href="/apps/${app.slug}/versions/">${app.name} version history</a>.</p>`;
+
+<section class="related-pages-silo card" style="margin: 2rem 0; padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px;">
+  <h3 style="margin-top: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+    <span>🔗</span> Related ${app.name} Resources
+  </h3>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.75rem; margin-top: 0.75rem;">
+    <a href="/apps/${app.slug}/download/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>⚡</span> Download ${app.name} APK
+    </a>
+    <a href="/apps/${app.slug}/versions/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>📦</span> ${app.name} APK old versions
+    </a>
+    <a href="/apps/${app.slug}/alternatives/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>🔄</span> ${app.name} alternatives
+    </a>
+    <a href="/apps/${app.slug}/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>📱</span> ${app.name} app overview
+    </a>
+  </div>
+</section>`;
   return page({
     title: pageNo > 1 ? `${app.name} Reviews (Page ${pageNo})` : `${app.name} Reviews and User Ratings`,
     description: app.review_count ? `${app.review_count} moderated user reviews of ${app.name} for Android, with rating breakdown and developer responses.` : `Read and write user reviews of ${app.name} for Android. Reviews are moderated before publishing.`,
@@ -612,7 +634,29 @@ ${versions.length ? html`<div class="tablewrap"><table class="versions">
   ${v.changelog ? html`<tr class="log"><td colspan="6"><details><summary>Changes in ${v.version}</summary>${paras(v.changelog)}</details></td></tr>` : ''}`)}
 </tbody></table></div>`
     : html`<p class="notice">No version records yet for ${app.name}. ${app.play_url ? html`The ${ext(app.play_url, 'Google Play listing')} always shows the latest release for your device.` : ''}</p>`}
-<p>To see which version is on your phone, read <a href="/guides/how-to-find-app-version/">how to find an app's version number</a>. Need the latest? See the <a href="/apps/${app.slug}/download/">${app.name} download page</a>.</p>`;
+
+<section class="related-pages-silo card" style="margin: 2rem 0; padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px;">
+  <h3 style="margin-top: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+    <span>🔗</span> Related ${app.name} Pages
+  </h3>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.75rem; margin-top: 0.75rem;">
+    <a href="/apps/${app.slug}/download/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>⚡</span> Get ${app.name} APK (latest)
+    </a>
+    <a href="/apps/${app.slug}/alternatives/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>🔄</span> Apps like ${app.name}
+    </a>
+    <a href="/apps/${app.slug}/reviews/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>⭐</span> ${app.name} user reviews
+    </a>
+    <a href="/apps/${app.slug}/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>📱</span> ${app.name} app overview
+    </a>
+    <a href="/guides/how-to-find-app-version/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>📖</span> How to Check App Version
+    </a>
+  </div>
+</section>`;
   return page({
     title: `${app.name} Old Versions APK Download (All Historical Releases)`,
     description: `Download ${app.name} old versions APK for Android. Clean historical archive of verified older releases, release notes, and compatibility records.`.slice(0, 300),
@@ -639,6 +683,28 @@ ${alts.length ? html`<ol class="altlist">${alts.map((a) => html`<li class="card"
     ${cmpFor(a) ? html`<p><a href="/compare/${cmpFor(a).slug}/">${app.name} vs ${a.name} comparison</a></p>` : ''}
   </div></li>`)}</ol>`
     : html`<p class="notice">We haven't added alternatives for ${app.name} yet. Browse other <a href="${catUrl({ kind: app.cat_kind, slug: app.cat_slug })}">${app.cat_name.toLowerCase()} apps</a> instead.</p>`}
+<section class="related-pages-silo card" style="margin: 2rem 0; padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px;">
+  <h3 style="margin-top: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+    <span>🔗</span> Related ${app.name} Pages
+  </h3>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.75rem; margin-top: 0.75rem;">
+    <a href="/apps/${app.slug}/download/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>⚡</span> ${app.name} APK download
+    </a>
+    <a href="/apps/${app.slug}/versions/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>📦</span> All ${app.name} versions
+    </a>
+    <a href="/apps/${app.slug}/reviews/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>⭐</span> ${app.name} reviews
+    </a>
+    <a href="/apps/${app.slug}/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>📱</span> ${app.name} app overview
+    </a>
+    <a href="/guides/how-to-download-${app.slug}-apk/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>📖</span> How to download ${app.name} APK
+    </a>
+  </div>
+</section>
 <section><h2>Find more options</h2><p>See every app in <a href="${catUrl({ kind: app.cat_kind, slug: app.cat_slug })}">${app.cat_name}</a>${cmps.length ? html` or read our <a href="/compare/">app comparisons</a>` : ''}.</p>
 ${guides.length ? html`<ul>${guides.map((g) => html`<li><a href="/guides/${g.slug}/">${g.title}</a></li>`)}</ul>` : ''}</section>`;
   return page({
@@ -820,8 +886,32 @@ ${socialShareBar(`Download ${app.name} APK`, `/apps/${app.slug}/download/`)}
 </div>
 
 <!-- App Version Update Notification Subscription Box -->
-${appUpdateAlertBox(app)}
-<p><a href="/apps/${app.slug}/">Back to ${app.name} details</a> · <a href="/apps/${app.slug}/versions/">${app.name} version history</a> · <a href="/download-policy/">Our download policy</a></p>`;
+<section class="related-pages-silo card" style="margin: 2rem 0; padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px;">
+  <h3 style="margin-top: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+    <span>🔗</span> Related ${app.name} Pages &amp; Resources
+  </h3>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.75rem; margin-top: 0.75rem;">
+    <a href="/apps/${app.slug}/versions/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>📦</span> All ${app.name} versions
+    </a>
+    <a href="/apps/${app.slug}/alternatives/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>🔄</span> Best alternatives to ${app.name}
+    </a>
+    <a href="/apps/${app.slug}/reviews/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>⭐</span> ${app.name} user reviews
+    </a>
+    <a href="/apps/${app.slug}/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>📱</span> ${app.name} app overview
+    </a>
+    <a href="/guides/how-to-download-${app.slug}-apk/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>📖</span> How to download ${app.name} APK
+    </a>
+    <a href="/tools/apk-error-solver/?app=${app.slug}" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>🛠️</span> APK Error Solver
+    </a>
+  </div>
+</section>
+<p style="text-align: center; margin-top: 1.5rem;"><a href="/download-policy/">Our verified download policy</a></p>`;
 
   const downloadLd = [
     appLd(app),
@@ -1052,7 +1142,7 @@ export function alternativesHub() {
   const list = D.appsWithAlternatives();
   const body = html`<h1>Android app alternatives</h1>
 <p>Looking for something like an app you already know? Each page lists similar apps and explains how they differ.</p>
-<ul class="linklist">${list.map((a) => html`<li><a href="/apps/${a.slug}/alternatives/">${a.name} alternatives</a> <span class="muted">(${a.n})</span></li>`)}</ul>`;
+<ul class="linklist">${list.map((a) => html`<li><a href="/apps/${a.slug}/alternatives/">Apps like ${a.name} (${a.name} alternatives)</a> <span class="muted">(${a.n})</span></li>`)}</ul>`;
   return page({ title: 'Alternatives to Popular Android Apps', description: 'Find apps similar to the ones you already use, with notes on how each alternative differs.', path: '/alternatives/', crumbs: [['Home', '/'], ['Alternatives', '/alternatives/']], body });
 }
 export function versionsHub() {
@@ -1060,7 +1150,7 @@ export function versionsHub() {
   const withV = apps.map((a) => ({ a, n: D.versionsFor(a.id).length }));
   const body = html`<h1>Android app version history</h1>
 <p>Release records for apps listed here. We add version numbers, release dates and changelogs only after checking them against the developer's own release notes or store listing.</p>
-<ul class="linklist">${withV.map(({ a, n }) => html`<li><a href="/apps/${a.slug}/versions/">${a.name} versions</a> <span class="muted">· ${n ? `${n} recorded` : 'no records yet'}</span></li>`)}</ul>`;
+<ul class="linklist">${withV.map(({ a, n }) => html`<li><a href="/apps/${a.slug}/versions/">${a.name} APK old versions (All ${a.name} versions)</a> <span class="muted">· ${n ? `${n} recorded` : 'no records yet'}</span></li>`)}</ul>`;
   return page({ title: 'Android App Version History', description: 'Version numbers, release dates and changelogs for Android apps, added only after being checked against official sources.', path: '/versions/', crumbs: [['Home', '/'], ['Version history', '/versions/']],
     index: withV.some((x) => x.n >= T.minVersionsForIndex), body });
 }

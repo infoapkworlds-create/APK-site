@@ -373,7 +373,7 @@ export function popularAppsPage() {
   const body = html`
 <header class="page-head">
   <h1>Popular Android Apps</h1>
-  <p class="lead">Applications frequently visited and researched by users on our platform. Popularity is determined by genuine privacy-conscious page views and download referrals, never artificial metrics.</p>
+  <p class="lead">Applications frequently visited and researched by users on our platform. Popularity is determined by genuine privacy-conscious page views and download referrals. Explore community feedback in our <a href="/reviews/">Reviews</a> hub, discover <a href="/versions/">All Version Archives</a>, or compare <a href="/compare/">Head-to-Head App Battles</a>.</p>
 </header>
 ${appGrid(fallback)}`;
 
