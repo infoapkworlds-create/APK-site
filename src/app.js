@@ -202,6 +202,23 @@ export async function appHandler(req, res) {
     return res.end('self.options = {\n    "domain": "5gvci.com",\n    "zoneId": 12046330\n}\nself.lary = ""\nimportScripts(\'https://5gvci.com/act/files/service-worker.min.js?r=sw\')\n');
   }
 
+  // Authorized Digital Sellers: /ads.txt
+  if (pathname === '/ads.txt') {
+    res.writeHead(200, {
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Cache-Control': 'public, max-age=86400',
+    });
+    const adsPath = path.join(__dirname, '..', 'public', 'ads.txt');
+    if (fs.existsSync(adsPath)) {
+      return res.end(fs.readFileSync(adsPath, 'utf8'));
+    }
+    const rootAdsPath = path.join(__dirname, '..', 'ads.txt');
+    if (fs.existsSync(rootAdsPath)) {
+      return res.end(fs.readFileSync(rootAdsPath, 'utf8'));
+    }
+    return res.end('google.com, pub-4766868021895107, DIRECT, f08c47fec0942fa0\n');
+  }
+
   // Trailing slash normalization for content routes (except static files, API and downloads)
   if (!pathname.startsWith('/api/') && !pathname.startsWith('/dl/') && !pathname.startsWith('/action/') && !pathname.includes('.') && !pathname.endsWith('/') && pathname !== '') {
     res.writeHead(301, { Location: pathname + '/' + (parsedUrl.search || '') });
