@@ -303,8 +303,8 @@ export async function appHandler(req, res) {
     return res.end(getFavicon());
   }
 
-  // PWA Service Worker: /sw.js
-  if (pathname === '/sw.js') {
+  // PWA & Monetag Push Notification Service Worker: /sw.js & /service-worker.js
+  if (pathname === '/sw.js' || pathname === '/service-worker.js') {
     res.writeHead(200, {
       'Content-Type': 'application/javascript; charset=utf-8',
       'Cache-Control': 'public, max-age=0, must-revalidate',
@@ -314,7 +314,11 @@ export async function appHandler(req, res) {
     if (fs.existsSync(swPath)) {
       return res.end(fs.readFileSync(swPath, 'utf8'));
     }
-    return res.end('// Service worker active');
+    const rootSwPath = path.join(__dirname, '..', 'sw.js');
+    if (fs.existsSync(rootSwPath)) {
+      return res.end(fs.readFileSync(rootSwPath, 'utf8'));
+    }
+    return res.end('self.options = {\n    "domain": "5gvci.com",\n    "zoneId": 11989824\n}\nself.lary = ""\nimportScripts(\'https://5gvci.com/act/files/service-worker.min.js?r=sw\')\n');
   }
 
   // Web App Manifest: /manifest.json
