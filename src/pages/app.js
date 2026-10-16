@@ -139,6 +139,105 @@ function emulatorDownloadCard(app) {
 </div>`;
 }
 
+function viralShareCard(app) {
+  const shareMsg = `🔥 Download verified ${app.name} APK (v${app.version || 'Latest'}) 100% Virus-Free on Android without speed limits: ${config.siteUrl}/apps/${app.slug}/`;
+  const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareMsg)}`;
+  const tgUrl = `https://t.me/share/url?url=${encodeURIComponent(`${config.siteUrl}/apps/${app.slug}/`)}&text=${encodeURIComponent(`🔥 Download verified ${app.name} APK (v${app.version || 'Latest'}) on APKWorlds`)}`;
+
+  return html`
+<div class="viral-share-card card" style="margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+  <div style="flex: 1; min-width: 240px;">
+    <div style="font-size: 0.75rem; font-weight: 800; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">📲 Viral Share with Friends</div>
+    <h4 style="margin: 0; font-size: 1.05rem; color: var(--text);">Share ${app.name} APK Directly via WhatsApp or Telegram</h4>
+  </div>
+  <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+    <a href="${waUrl}" target="_blank" rel="noopener" class="btn" style="background: #25D366; color: #fff; font-weight: 700; border: none; padding: 0.65rem 1.15rem; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 3px 10px rgba(37,211,102,0.3);">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.586 1.879.913 2.8.913h.005c3.182 0 5.768-2.586 5.769-5.766.001-3.181-2.585-5.767-5.769-5.767zm7.554 5.767c-.002 4.148-3.376 7.521-7.555 7.521-.001 0-.003 0-.004 0-1.246 0-2.433-.314-3.486-.902l-4.14 1.086 1.107-4.041c-.657-1.102-1.03-2.38-1.03-3.664.002-4.148 3.376-7.521 7.555-7.521 4.148.001 7.553 3.374 7.553 7.521z"/></svg>
+      <span>WhatsApp</span>
+    </a>
+    <a href="${tgUrl}" target="_blank" rel="noopener" class="btn" style="background: #0088cc; color: #fff; font-weight: 700; border: none; padding: 0.65rem 1.15rem; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 3px 10px rgba(0,136,204,0.3);">
+      <span>Telegram</span>
+    </a>
+  </div>
+</div>`;
+}
+
+function modRequestCard(app) {
+  return html`
+<div class="card mod-request-card" style="margin: 2rem 0; padding: 1.5rem; background: linear-gradient(135deg, rgba(234, 179, 8, 0.08), rgba(245, 158, 11, 0.08)); border: 1.5px dashed #f59e0b; border-radius: 14px;">
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 0.75rem;">
+    <span style="display: inline-flex; align-items: center; gap: 6px; background: #f59e0b; color: #000; font-weight: 800; font-size: 0.72rem; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em;">
+      ⭐ VIP Mod / Unlocked Edition
+    </span>
+    <span style="font-size: 0.8rem; color: #d97706; font-weight: 700;">Zero Watermark &bull; Premium Features</span>
+  </div>
+  <h3 style="margin: 0 0 6px 0; font-size: 1.15rem; color: var(--text);">Looking for an Ad-Free or Mod Unlocked Version of ${app.name}?</h3>
+  <p style="margin: 0 0 1.25rem 0; font-size: 0.9rem; color: var(--muted); line-height: 1.5;">
+    Our technical testing desk verifies clean, safe VIP builds without intrusive ads or watermarks. Join our Telegram VIP drop channel or submit a direct mod request to get instantly notified when the verified unlocked package is released.
+  </p>
+  <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+    <a href="https://t.me/apkworldsofficial" target="_blank" rel="noopener" class="btn primary" style="background: #0088cc; color: #fff; font-weight: 700; border: none; padding: 0.75rem 1.25rem; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,136,204,0.3);">
+      <span>🚀 Join VIP Telegram for Instant Mod Drops &rarr;</span>
+    </a>
+    <a href="/request-app/?app=${app.slug}&type=mod" class="btn" style="background: var(--bg-card); border: 1px solid var(--border); font-weight: 600; padding: 0.75rem 1.25rem; border-radius: 8px; text-decoration: none; color: var(--text);">
+      <span>Request Mod Build Form &rarr;</span>
+    </a>
+  </div>
+</div>`;
+}
+
+function exitIntentModal(app) {
+  return html`
+<!-- Exit-Intent Download Reminder Modal -->
+<div id="exitIntentModal" class="exit-modal-backdrop" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(0,0,0,0.65); backdrop-filter:blur(4px); align-items:center; justify-content:center; padding:1rem;" role="dialog" aria-modal="true" aria-labelledby="exitModalHeading">
+  <div class="exit-modal-card" style="background:var(--bg-card, #fff); max-width:460px; width:100%; border-radius:16px; border:2px solid #2563eb; padding:2rem 1.5rem; text-align:center; position:relative; box-shadow:0 20px 40px rgba(0,0,0,0.3);">
+    <button type="button" id="exitModalClose" style="position:absolute; top:12px; right:12px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--muted); line-height:1;" aria-label="Close">&times;</button>
+    <div style="font-size:2.8rem; margin-bottom:0.5rem; line-height:1;">⚠️</div>
+    <div style="display:inline-block; background:rgba(239,68,68,0.12); color:#dc2626; font-size:0.75rem; font-weight:800; padding:3px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.75rem;">
+      Wait! Don't Leave Without Downloading
+    </div>
+    <h3 id="exitModalHeading" style="margin:0 0 8px 0; font-size:1.3rem; color:var(--text); line-height:1.3;">Download ${app.name} APK (${app.version ? 'v' + app.version : 'Latest'})</h3>
+    <p style="margin:0 0 1.25rem 0; font-size:0.9rem; color:var(--muted); line-height:1.5;">
+      You are 1 click away from downloading the 100% verified, virus-free APK file with ultra-fast cloud multi-threading before your session expires.
+    </p>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <a href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" id="exitModalAction" class="btn primary" style="background:linear-gradient(90deg, #10b981, #059669); color:#fff; font-weight:800; font-size:1.05rem; padding:0.9rem 1.5rem; border-radius:10px; border:none; text-decoration:none; box-shadow:0 6px 18px rgba(16,185,129,0.35); display:flex; align-items:center; justify-content:center; gap:8px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>1-Click Fast Download &rarr;</span>
+      </a>
+      <button type="button" id="exitModalDismiss" style="background:none; border:none; color:var(--muted); font-size:0.85rem; cursor:pointer; padding:6px; text-decoration:underline;">
+        No thanks, continue browsing
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+(function() {
+  var shownKey = 'apk_exit_modal_shown';
+  if (sessionStorage.getItem(shownKey)) return;
+  var modal = document.getElementById('exitIntentModal');
+  if (!modal) return;
+  function showModal() {
+    if (sessionStorage.getItem(shownKey)) return;
+    sessionStorage.setItem(shownKey, '1');
+    modal.style.display = 'flex';
+  }
+  function hideModal() {
+    modal.style.display = 'none';
+  }
+  document.getElementById('exitModalClose')?.addEventListener('click', hideModal);
+  document.getElementById('exitModalDismiss')?.addEventListener('click', hideModal);
+  document.getElementById('exitModalAction')?.addEventListener('click', hideModal);
+  document.addEventListener('mouseleave', function(e) {
+    if (e.clientY <= 15) showModal();
+  });
+  setTimeout(function() {
+    showModal();
+  }, 28000);
+})();
+</script>`;
+}
+
 function downloadBox(app, file) {
   const primary = app.play_url || app.official_apk_page || app.website;
   const label = app.play_url ? 'Get it on Google Play' : 'Download from Official Source';
@@ -364,6 +463,9 @@ export function appPage(req, app) {
 
     <!-- 1-Click Social Share Bar -->
     ${socialShareBar(app.name, `/apps/${app.slug}/`, app.summary)}
+
+    <!-- 1-Click WhatsApp & Telegram Viral Share Card -->
+    ${viralShareCard(app)}
   </div>
 
   <!-- Sitelinks Quick Jump Bar (Google Search Sitelinks Expander) -->
@@ -502,6 +604,9 @@ export function appPage(req, app) {
   <!-- App Version Update Notification Subscription Box -->
   ${appUpdateAlertBox(app)}
 
+  <!-- Request Mod / Unlocked Version Lead Capture Box -->
+  ${modRequestCard(app)}
+
   ${sameDev.length ? html`<section><h2>More from ${app.dev_name}</h2>${appGrid(sameDev, { summary: false })}${devPageIndexed ? html`<p><a href="/developer/${app.dev_slug}/">All apps by ${app.dev_name}</a></p>` : ''}</section>` : ''}
   ${related.length ? html`<section><h2>Similar ${app.app_type === 'game' ? 'games' : 'apps'}</h2>${appGrid(related)}</section>` : ''}
   ${guides.length ? html`<section><h2>Related guides</h2><ul>${guides.map((g) => html`<li><a href="/guides/${g.slug}/">${g.title}</a></li>`)}</ul></section>` : ''}
@@ -546,6 +651,15 @@ export function appPage(req, app) {
     <p>${app.content_origin === 'developer_submitted' ? 'Description submitted by the developer and checked by our editors.' : 'Description written by our editors.'} ${app.info_source}</p>
     <p>Listed ${fmtDate(app.published_at)} · Page last changed ${fmtDate(app.updated_at)}. Spotted an error? <a href="/report-app/?app=${app.slug}">Report wrong information about ${app.name}</a>.</p>
   </aside>
+
+  <!-- International Search Queries & Global Keywords -->
+  <div class="intl-search-tags card" style="margin: 1.5rem 0; padding: 1rem 1.25rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; color: var(--muted); line-height: 1.6;">
+    <strong style="color: var(--text);">🌐 Global Search Queries:</strong>
+    Descargar ${app.name} APK gratis en español &bull; Baixar ${app.name} APK atualizado sem vírus &bull; Unduh ${app.name} APK versi terbaru resmi &bull; Download ${app.name} APK latest package free &bull; Télécharger ${app.name} APK gratuit Android &bull; تحميل تطبيق ${app.name} apk مجانا برابط مباشر.
+  </div>
+
+  <!-- Exit-Intent Download Reminder Modal -->
+  ${exitIntentModal(app)}
 </article>`;
 
   const titleBits = ['Features', app.version ? 'Version' : null, 'Download'].filter(Boolean);
@@ -596,7 +710,7 @@ export function appPage(req, app) {
     title: `${app.name} APK ${app.version ? 'v' + app.version : 'Latest'} for Android - Free Download [Official]`,
     description: `Download ${app.name} APK ${app.version ? 'v' + app.version : 'latest version'} for Android. 100% verified virus-free package, fast multi-CDN download mirrors, and official signatures.`.slice(0, 300),
     path: `/apps/${app.slug}/`, index: idx.index, crumbs: appCrumbs(app),
-    keywords: `${app.name} apk, download ${app.name}, descargar ${app.name} apk gratis, baixar ${app.name} atualizado, unduh ${app.name} apk, ${app.name} apk download latest version`,
+    keywords: `${app.name} apk, download ${app.name}, descargar ${app.name} apk gratis, baixar ${app.name} atualizado, unduh ${app.name} apk, ${app.name} apk download latest version, telecharger ${app.name} apk, ${app.name} mod apk unlocked`,
     ld: ldList,
     ogImage: screenshots[0]?.src || `/icons/${app.slug}.svg`,
     body,
@@ -972,6 +1086,9 @@ export function downloadPage(req, app) {
 <!-- 1-Click Social Share Bar -->
 ${socialShareBar(`Download ${app.name} APK`, `/apps/${app.slug}/download/`)}
 
+<!-- 1-Click WhatsApp & Telegram Viral Share Card -->
+${viralShareCard(app)}
+
 <section class="install-guide-tabs" id="install-guide">
   <h2>Installation Instructions &amp; Setup</h2>
   <div class="tabs-nav" role="tablist">
@@ -1002,6 +1119,9 @@ ${socialShareBar(`Download ${app.name} APK`, `/apps/${app.slug}/download/`)}
   <p>📖 <strong>Dedicated Installation Guide:</strong> Need detailed instructions or error fixes? Read our complete <a href="/guides/how-to-download-${app.slug}-apk/">How to Download &amp; Install ${app.name} APK Guide</a> covering system requirements, permissions, and step-by-step troubleshooting.</p>
 </div>
 
+<!-- Request Mod / Unlocked Version Lead Capture Box -->
+${modRequestCard(app)}
+
 <!-- App Version Update Notification Subscription Box -->
 <section class="related-pages-silo card" style="margin: 2rem 0; padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px;">
   <h3 style="margin-top: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
@@ -1028,6 +1148,16 @@ ${socialShareBar(`Download ${app.name} APK`, `/apps/${app.slug}/download/`)}
     </a>
   </div>
 </section>
+
+<!-- International Search Queries & Global Keywords -->
+<div class="intl-search-tags card" style="margin: 1.5rem 0; padding: 1rem 1.25rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; color: var(--muted); line-height: 1.6;">
+  <strong style="color: var(--text);">🌐 Global Search Queries:</strong>
+  Descargar ${app.name} APK gratis en español &bull; Baixar ${app.name} APK atualizado sem vírus &bull; Unduh ${app.name} APK versi terbaru resmi &bull; Download ${app.name} APK latest package free &bull; Télécharger ${app.name} APK gratuit Android &bull; تحميل تطبيق ${app.name} apk مجانا برابط مباشر.
+</div>
+
+<!-- Exit-Intent Download Reminder Modal -->
+${exitIntentModal(app)}
+
 <p style="text-align: center; margin-top: 1.5rem;"><a href="/download-policy/">Our verified download policy</a></p>`;
 
   const downloadLd = [
@@ -1065,7 +1195,7 @@ ${socialShareBar(`Download ${app.name} APK`, `/apps/${app.slug}/download/`)}
     title: `Download ${app.name} APK for Android (${app.version ? 'v' + app.version + ' ' : ''}Direct High-Speed Package)`,
     description: `Direct download ${app.name} APK package for Android. Verified SHA-256 digital signature, zero malware, and multi-threaded fast download mirrors.`.slice(0, 300),
     path: `/apps/${app.slug}/download/`, index: idx.index && !reqV, crumbs: appCrumbs(app, ['Download', `/apps/${app.slug}/download/`]),
-    keywords: `download ${app.name} apk, ${app.name} apk direct download, descargar ${app.name} apk, baixar ${app.name} apk gratis, ${app.name} android package`,
+    keywords: `download ${app.name} apk, ${app.name} apk direct download, descargar ${app.name} apk gratis, baixar ${app.name} apk atualizado, unduh ${app.name} apk terbaru, telecharger ${app.name} apk, ${app.name} mod apk unlocked, ${app.name} android package`,
     ld: downloadLd,
     body,
   });

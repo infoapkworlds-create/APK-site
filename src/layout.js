@@ -110,7 +110,7 @@ function footer() {
       ${col('Categories', [['/categories/', 'All Categories'], ['/apps/communication/', 'Communication'], ['/apps/tools/', 'Tools & Utilities'], ['/apps/security/', 'VPN & Security'], ['/apps/productivity/', 'Productivity']])}
       ${col('Articles & How-To', [['/guides/', 'Android Guides'], ['/guides/how-to-install-apk/', 'How to Install APK'], ['/compare/', 'App Comparisons'], ['/collections/', 'Curated Collections'], ['/region-restricted/', 'Global Unlocked APKs']])}
       ${col('Tools & Diagnostics', [['/tools/apk-error-solver/', 'APK Error Solver'], ['/tools/apk-inspector/', 'APK Hash Inspector'], ['/guides/how-to-check-app-permissions/', 'App Permissions'], ['/guides/how-to-update-android-apps/', 'Update APK Files']])}
-      ${col('Company & Legal', [['/about/', 'About Us'], ['/editorial-policy/', 'Editorial Policy'], ['/download-policy/', 'Download Policy'], ['/copyright/', 'DMCA & Copyright'], ['/privacy/', 'Privacy Policy'], ['/contact/', 'Contact Support']])}
+      ${col('Company & Legal', [['/about/', 'About Us'], ['/advertise/', 'Advertise With Us'], ['/submit-app/', 'Developer Portal'], ['/editorial-policy/', 'Editorial Policy'], ['/download-policy/', 'Download Policy'], ['/copyright/', 'DMCA & Copyright'], ['/privacy/', 'Privacy Policy'], ['/contact/', 'Contact Support']])}
     </div>
   </div>
   <div class="wrap f-bottom">

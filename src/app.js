@@ -72,6 +72,7 @@ import {
   copyrightPage,
   disclaimerPage,
   sitemapHtmlPage,
+  advertisePage,
 } from './pages/static-pages.js';
 import {
   sitemapXml,
@@ -876,6 +877,8 @@ export async function appHandler(req, res) {
     result = aboutPage(req);
   } else if (pathname === '/contact/') {
     result = contactPage(req);
+  } else if (pathname === '/advertise/') {
+    result = advertisePage(req);
   } else if (pathname === '/submit-app/') {
     result = submitAppPage(req);
   } else if (pathname === '/request-app/') {

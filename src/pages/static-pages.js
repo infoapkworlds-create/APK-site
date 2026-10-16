@@ -819,3 +819,156 @@ export function sitemapHtmlPage() {
     body,
   });
 }
+
+// ============================================================================
+// 12. ADVERTISE WITH US PAGE (Direct Sponsorships & High-Value Inquiries)
+// ============================================================================
+export function advertisePage(req) {
+  const submitted = req?.query?.get('submitted') === '1';
+
+  const body = html`
+<header class="page-head">
+  <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.3); color: #2563eb; padding: 4px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.75rem;">
+    📢 Partner &amp; Sponsor Opportunities
+  </div>
+  <h1>Advertise on ${config.siteName}</h1>
+  <p class="lead">Connect your software, game studio, VPN service, or tech brand directly with over 100,000+ monthly active Android gamers, mobile enthusiasts, and tech power users worldwide.</p>
+</header>
+
+<div class="dev-directory-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0 2rem 0;">
+  <div class="dev-stat-badge" style="padding: 1.25rem; text-align: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;">
+    <strong style="display: block; font-size: 1.6rem; color: #2563eb; margin-bottom: 4px;">100k+</strong>
+    <span style="font-size: 0.88rem; color: var(--muted);">Monthly Active Visitors</span>
+  </div>
+  <div class="dev-stat-badge" style="padding: 1.25rem; text-align: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;">
+    <strong style="display: block; font-size: 1.6rem; color: #10b981; margin-bottom: 4px;">88%</strong>
+    <span style="font-size: 0.88rem; color: var(--muted);">Android Mobile Users</span>
+  </div>
+  <div class="dev-stat-badge" style="padding: 1.25rem; text-align: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;">
+    <strong style="display: block; font-size: 1.6rem; color: #f59e0b; margin-bottom: 4px;">Tier 1 &amp; Global</strong>
+    <span style="font-size: 0.88rem; color: var(--muted);">US, UK, EU, LATAM, SEA</span>
+  </div>
+  <div class="dev-stat-badge" style="padding: 1.25rem; text-align: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;">
+    <strong style="display: block; font-size: 1.6rem; color: #8b5cf6; margin-bottom: 4px;">High Intent</strong>
+    <span style="font-size: 0.88rem; color: var(--muted);">Active Sideloaders &amp; Gamers</span>
+  </div>
+</div>
+
+<section style="margin: 2.5rem 0;">
+  <h2 style="font-size: 1.4rem; margin-bottom: 1rem;">Direct Advertising &amp; Sponsorship Packages</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
+    <div class="card" style="padding: 1.5rem; background: var(--bg-card); border: 1.5px solid #2563eb; border-radius: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+      <div>
+        <span style="display: inline-block; background: #2563eb; color: #fff; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 12px; text-transform: uppercase; margin-bottom: 8px;">Top Banner</span>
+        <h3 style="margin: 0 0 6px 0; font-size: 1.2rem;">Header Billboard 728x90</h3>
+        <div style="font-size: 1.75rem; font-weight: 800; color: #2563eb; margin-bottom: 8px;">$99 <span style="font-size: 0.9rem; font-weight: normal; color: var(--muted);">/ month</span></div>
+        <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.5;">Fixed, prominent top-of-page banner rendered on every single page across desktop and tablet visitors. 50,000+ monthly impressions guaranteed.</p>
+      </div>
+      <a href="#inquiryForm" class="btn primary" style="margin-top: 1rem; text-align: center;">Book Header Slot &rarr;</a>
+    </div>
+
+    <div class="card" style="padding: 1.5rem; background: var(--bg-card); border: 1.5px solid #10b981; border-radius: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+      <div>
+        <span style="display: inline-block; background: #10b981; color: #fff; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 12px; text-transform: uppercase; margin-bottom: 8px;">High CTR</span>
+        <h3 style="margin: 0 0 6px 0; font-size: 1.2rem;">Sidebar Sticky 300x250</h3>
+        <div style="font-size: 1.75rem; font-weight: 800; color: #059669; margin-bottom: 8px;">$69 <span style="font-size: 0.9rem; font-weight: normal; color: var(--muted);">/ month</span></div>
+        <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.5;">Placed directly next to download actions and reviews. Sticky scrolling ensures maximum user focus and viewability.</p>
+      </div>
+      <a href="#inquiryForm" class="btn primary" style="background: #10b981; margin-top: 1rem; text-align: center;">Book Sidebar Slot &rarr;</a>
+    </div>
+
+    <div class="card" style="padding: 1.5rem; background: var(--bg-card); border: 1.5px solid #f59e0b; border-radius: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+      <div>
+        <span style="display: inline-block; background: #f59e0b; color: #000; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 12px; text-transform: uppercase; margin-bottom: 8px;">Permanent Feature</span>
+        <h3 style="margin: 0 0 6px 0; font-size: 1.2rem;">Sponsored App Review</h3>
+        <div style="font-size: 1.75rem; font-weight: 800; color: #d97706; margin-bottom: 8px;">$49 <span style="font-size: 0.9rem; font-weight: normal; color: var(--muted);">/ permanent</span></div>
+        <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.5;">Comprehensive 1,200+ word editorial evaluation of your Android application or game with permanent DoFollow link and high SEO ranking.</p>
+      </div>
+      <a href="#inquiryForm" class="btn primary" style="background: #f59e0b; color: #000; margin-top: 1rem; text-align: center;">Order Review &rarr;</a>
+    </div>
+
+    <div class="card" style="padding: 1.5rem; background: var(--bg-card); border: 1.5px solid #8b5cf6; border-radius: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+      <div>
+        <span style="display: inline-block; background: #8b5cf6; color: #fff; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 12px; text-transform: uppercase; margin-bottom: 8px;">Instant Reach</span>
+        <h3 style="margin: 0 0 6px 0; font-size: 1.2rem;">Push Notification Blast</h3>
+        <div style="font-size: 1.75rem; font-weight: 800; color: #8b5cf6; margin-bottom: 8px;">$79 <span style="font-size: 0.9rem; font-weight: normal; color: var(--muted);">/ broadcast</span></div>
+        <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.5;">Direct, instant push broadcast dispatched to over 50,000+ active device subscribers with custom icon, title, and link.</p>
+      </div>
+      <a href="#inquiryForm" class="btn primary" style="background: #8b5cf6; margin-top: 1rem; text-align: center;">Book Push Blast &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section id="inquiryForm" style="margin: 2.5rem 0; padding: 2rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;">
+  <h2 style="margin-top: 0;">Submit an Advertising Inquiry</h2>
+  <p style="color: var(--muted); font-size: 0.95rem;">Fill out the form below and our advertising desk will reply within 12 hours with availability, custom package options, and payment details (PayPal, Stripe, Wire, or Crypto accepted).</p>
+
+  ${submitted ? html`
+    <div class="notice ok" role="status" style="margin-top: 1.5rem;">
+      <h3>Inquiry Received!</h3>
+      <p>Thank you for reaching out. Our business team will contact you at your email address within 12 hours.</p>
+    </div>
+  ` : html`
+    <form class="form" action="https://api.web3forms.com/submit" method="POST" style="margin-top: 1.5rem;">
+      <input type="hidden" name="access_key" value="e057c862-4648-4afe-8195-724c07c1b26d">
+      <input type="hidden" name="from_name" value="${config.siteName} Advertising Desk">
+      <input type="hidden" name="subject" value="New Advertising / Sponsorship Inquiry">
+      <input type="hidden" name="redirect" value="${config.siteUrl}/advertise/?submitted=1">
+
+      <div class="form-row">
+        <div class="field">
+          <label for="adv_name">Your Name / Company Name <span class="req">*</span></label>
+          <input id="adv_name" name="name" type="text" required placeholder="e.g. John Doe / Nord Security">
+        </div>
+        <div class="field">
+          <label for="adv_email">Business Email <span class="req">*</span></label>
+          <input id="adv_email" name="email" type="email" required placeholder="partner@yourcompany.com">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="adv_package">Desired Sponsorship Slot <span class="req">*</span></label>
+          <select id="adv_package" name="package" required>
+            <option value="Header Billboard 728x90 ($99/mo)">Header Billboard 728x90 ($99/month)</option>
+            <option value="Sidebar Sticky 300x250 ($69/mo)">Sidebar Sticky 300x250 ($69/month)</option>
+            <option value="Sponsored Review Article ($49 permanent)">Sponsored App Review Article ($49 permanent)</option>
+            <option value="Push Notification Blast ($79)">VIP Push Notification Blast ($79)</option>
+            <option value="Custom Campaign / Bulk">Custom Campaign / Bulk Advertising</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="adv_url">Promoted URL / App Link <span class="req">*</span></label>
+          <input id="adv_url" name="url" type="url" required placeholder="https://example.com or Google Play link">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="adv_message">Campaign Details &amp; Timeline</label>
+        <textarea id="adv_message" name="message" rows="4" placeholder="Tell us about your campaign goals, target audience, preferred start date, or any specific requests."></textarea>
+      </div>
+
+      <button type="submit" class="btn primary" style="font-size: 1rem; padding: 0.8rem 1.5rem;">Submit Advertising Inquiry &rarr;</button>
+    </form>
+  `}
+
+  <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+    <div>
+      <span style="font-weight: 700; color: var(--text);">Direct Business Desk:</span>
+      <span style="color: var(--muted); margin-left: 6px;">contact@apkworlds.co.uk</span>
+    </div>
+    <div>
+      <span style="font-weight: 700; color: var(--text);">Telegram Support:</span>
+      <a href="https://t.me/apkworldsofficial" target="_blank" rel="noopener" style="margin-left: 6px; color: #0088cc; font-weight: 600;">@apkworldsofficial</a>
+    </div>
+  </div>
+</section>`;
+
+  return page({
+    title: `Advertise on ${config.siteName}: Reach 100k+ Android Users & Gamers`,
+    description: `Promote your Android application, mobile game, VPN tool, or tech service to over 100,000+ monthly active Android enthusiasts on ${config.siteName}. View banner, push blast, and sponsored review packages.`,
+    path: '/advertise/',
+    crumbs: [['Home', '/'], ['Advertise With Us', '/advertise/']],
+    body,
+  });
+}
