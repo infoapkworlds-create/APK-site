@@ -142,21 +142,17 @@ function emulatorDownloadCard(app) {
 function viralShareCard(app) {
   const shareMsg = `🔥 Download verified ${app.name} APK (v${app.version || 'Latest'}) 100% Virus-Free on Android without speed limits: ${config.siteUrl}/apps/${app.slug}/`;
   const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareMsg)}`;
-  const tgUrl = `https://t.me/share/url?url=${encodeURIComponent(`${config.siteUrl}/apps/${app.slug}/`)}&text=${encodeURIComponent(`🔥 Download verified ${app.name} APK (v${app.version || 'Latest'}) on APKWorlds`)}`;
 
   return html`
 <div class="viral-share-card card" style="margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
   <div style="flex: 1; min-width: 240px;">
-    <div style="font-size: 0.75rem; font-weight: 800; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">📲 Viral Share with Friends</div>
-    <h4 style="margin: 0; font-size: 1.05rem; color: var(--text);">Share ${app.name} APK Directly via WhatsApp or Telegram</h4>
+    <div style="font-size: 0.75rem; font-weight: 800; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">📲 Share with Friends</div>
+    <h4 style="margin: 0; font-size: 1.05rem; color: var(--text);">Share ${app.name} APK Directly via WhatsApp</h4>
   </div>
   <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-    <a href="${waUrl}" target="_blank" rel="noopener" class="btn" style="background: #25D366; color: #fff; font-weight: 700; border: none; padding: 0.65rem 1.15rem; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 3px 10px rgba(37,211,102,0.3);">
+    <a href="${waUrl}" target="_blank" rel="noopener" class="btn" style="background: #25D366; color: #fff; font-weight: 700; border: none; padding: 0.65rem 1.25rem; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 3px 10px rgba(37,211,102,0.3);">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.586 1.879.913 2.8.913h.005c3.182 0 5.768-2.586 5.769-5.766.001-3.181-2.585-5.767-5.769-5.767zm7.554 5.767c-.002 4.148-3.376 7.521-7.555 7.521-.001 0-.003 0-.004 0-1.246 0-2.433-.314-3.486-.902l-4.14 1.086 1.107-4.041c-.657-1.102-1.03-2.38-1.03-3.664.002-4.148 3.376-7.521 7.555-7.521 4.148.001 7.553 3.374 7.553 7.521z"/></svg>
-      <span>WhatsApp</span>
-    </a>
-    <a href="${tgUrl}" target="_blank" rel="noopener" class="btn" style="background: #0088cc; color: #fff; font-weight: 700; border: none; padding: 0.65rem 1.15rem; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 3px 10px rgba(0,136,204,0.3);">
-      <span>Telegram</span>
+      <span>Share on WhatsApp</span>
     </a>
   </div>
 </div>`;
@@ -173,14 +169,14 @@ function modRequestCard(app) {
   </div>
   <h3 style="margin: 0 0 6px 0; font-size: 1.15rem; color: var(--text);">Looking for an Ad-Free or Mod Unlocked Version of ${app.name}?</h3>
   <p style="margin: 0 0 1.25rem 0; font-size: 0.9rem; color: var(--muted); line-height: 1.5;">
-    Our technical testing desk verifies clean, safe VIP builds without intrusive ads or watermarks. Join our Telegram VIP drop channel or submit a direct mod request to get instantly notified when the verified unlocked package is released.
+    Our technical testing desk verifies clean, safe VIP builds without intrusive ads or watermarks. Submit a direct mod request or contact our team to get notified when the verified unlocked package is released.
   </p>
   <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-    <a href="https://t.me/apkworldsofficial" target="_blank" rel="noopener" class="btn primary" style="background: #0088cc; color: #fff; font-weight: 700; border: none; padding: 0.75rem 1.25rem; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,136,204,0.3);">
-      <span>🚀 Join VIP Telegram for Instant Mod Drops &rarr;</span>
+    <a href="/request-app/?app=${app.slug}&type=mod" class="btn primary" style="font-weight: 700; padding: 0.75rem 1.25rem; border-radius: 8px; text-decoration: none;">
+      <span>🚀 Request Mod Build Form &rarr;</span>
     </a>
-    <a href="/request-app/?app=${app.slug}&type=mod" class="btn" style="background: var(--bg-card); border: 1px solid var(--border); font-weight: 600; padding: 0.75rem 1.25rem; border-radius: 8px; text-decoration: none; color: var(--text);">
-      <span>Request Mod Build Form &rarr;</span>
+    <a href="mailto:info.apkworlds@gmail.com?subject=Mod%20Request%20for%20${encodeURIComponent(app.name)}" class="btn" style="background: var(--bg-card); border: 1px solid var(--border); font-weight: 600; padding: 0.75rem 1.25rem; border-radius: 8px; text-decoration: none; color: var(--text);">
+      <span>Contact Desk (info.apkworlds@gmail.com)</span>
     </a>
   </div>
 </div>`;
@@ -1058,23 +1054,7 @@ export function downloadPage(req, app) {
     </div>
   </div>
 
-  <!-- VIP Telegram Community & Direct Cloud Channel -->
-  <div class="telegram-vip-card" style="background: linear-gradient(135deg, #0088cc 0%, #006699 100%); color: #fff; border-radius: 12px; padding: 1.25rem 1.5rem; margin: 1.75rem 0; box-shadow: 0 4px 15px rgba(0,136,204,0.2);">
-    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-      <div style="display: flex; align-items: center; gap: 14px; flex: 1; min-width: 250px;">
-        <div style="font-size: 2.2rem; line-height: 1;">✈️</div>
-        <div>
-          <h4 style="margin: 0; font-size: 1.15rem; color: #fff; font-weight: 700;">Join APKWorlds VIP Telegram Channel</h4>
-          <p style="margin: 4px 0 0 0; color: rgba(255,255,255,0.88); font-size: 0.88rem; line-height: 1.4;">
-            Get instant notifications for new mod drops, direct Google Drive mirrors, and zero-ad APK updates right on your phone.
-          </p>
-        </div>
-      </div>
-      <a href="https://t.me/apkworldsofficial" target="_blank" rel="noopener" class="btn" style="background: #fff; color: #0088cc; font-weight: 700; white-space: nowrap; padding: 0.75rem 1.25rem; border-radius: 8px; text-decoration: none; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
-        Join VIP Channel &rarr;
-      </a>
-    </div>
-  </div>
+
 
   <!-- PC / Windows Emulator High-Paying CPA Recommendation -->
   ${emulatorDownloadCard(app)}

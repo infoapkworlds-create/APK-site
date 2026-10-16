@@ -952,14 +952,10 @@ export function advertisePage(req) {
     </form>
   `}
 
-  <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+  <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: flex-start; flex-wrap: wrap; gap: 1rem;">
     <div>
       <span style="font-weight: 700; color: var(--text);">Direct Business Desk:</span>
-      <span style="color: var(--muted); margin-left: 6px;">contact@apkworlds.co.uk</span>
-    </div>
-    <div>
-      <span style="font-weight: 700; color: var(--text);">Telegram Support:</span>
-      <a href="https://t.me/apkworldsofficial" target="_blank" rel="noopener" style="margin-left: 6px; color: #0088cc; font-weight: 600;">@apkworldsofficial</a>
+      <a href="mailto:info.apkworlds@gmail.com" style="color: var(--primary); margin-left: 6px; font-weight: 600; text-decoration: underline;">info.apkworlds@gmail.com</a>
     </div>
   </div>
 </section>`;
