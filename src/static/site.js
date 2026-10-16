@@ -934,5 +934,50 @@
       });
     });
   }
+
+  // 11. Download Page: Real Interactive 5-Second Countdown Timer & Mirror Unlocker
+  const dlWrap = document.getElementById('dl-countdown-wrap');
+  if (dlWrap) {
+    const numEl = document.getElementById('dl-countdown-num');
+    const msgEl = document.getElementById('dl-timer-msg');
+    const fillEl = document.getElementById('dl-progress-fill');
+    const actionEl = document.getElementById('dl-action-area');
+    const waitingEl = document.getElementById('dl-waiting-box');
+
+    let timeLeft = 5;
+    if (fillEl) {
+      fillEl.style.width = '0%';
+    }
+
+    const timer = setInterval(() => {
+      timeLeft -= 1;
+      if (numEl) numEl.textContent = String(Math.max(0, timeLeft));
+      if (fillEl) {
+        const percent = Math.min(100, Math.round(((5 - timeLeft) / 5) * 100));
+        fillEl.style.width = percent + '%';
+      }
+
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        if (numEl) numEl.textContent = '0';
+        if (msgEl) {
+          msgEl.innerHTML = '✅ <span style="color:#10b981;">Verified Package Ready! Select Your Download Mirror:</span>';
+        }
+        if (waitingEl) {
+          waitingEl.style.display = 'none';
+        }
+        if (actionEl) {
+          actionEl.style.display = 'block';
+          actionEl.style.opacity = '0';
+          actionEl.style.transform = 'translateY(12px)';
+          actionEl.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          requestAnimationFrame(() => {
+            actionEl.style.opacity = '1';
+            actionEl.style.transform = 'translateY(0)';
+          });
+        }
+      }
+    }, 1000);
+  }
 })();
 

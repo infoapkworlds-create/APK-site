@@ -674,6 +674,26 @@ export function alternativesPage(req, app) {
   const body = html`
 <h1>${app.name} alternatives</h1>
 <p>Apps that do a similar job to <a href="/apps/${app.slug}/">${app.name}</a>, with a short note on how each one differs. None of them is better for everyone; it depends on what you need.</p>
+
+<!-- Editor's Sponsored Top Choice Alternative Card -->
+<div class="card editor-choice-card" style="border: 2px solid #eab308; background: linear-gradient(135deg, rgba(234,179,8,0.06) 0%, rgba(245,158,11,0.03) 100%); border-radius: 12px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; box-shadow: 0 4px 16px rgba(234,179,8,0.12);">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem; flex-wrap: wrap; gap: 8px;">
+    <span style="display: inline-flex; align-items: center; gap: 6px; background: #eab308; color: #000; font-weight: 800; font-size: 0.72rem; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em;">
+      ⭐ Editor's Choice Alternative
+    </span>
+    <span style="font-size: 0.8rem; color: var(--muted); font-weight: 600;">⚡ Ranked #1 for High-Speed &amp; Unlimited Sideloads</span>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+    <div style="flex: 1; min-width: 240px;">
+      <h3 style="margin: 0 0 4px 0; font-size: 1.15rem; color: var(--text);">Looking for a faster, unrestricted alternative to ${app.name}?</h3>
+      <p style="margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.45;">Get our verified top-recommended alternative with zero speed throttling, direct cloud routes, and complete Android device compatibility.</p>
+    </div>
+    <a href="https://www.profitableratecpmnetwork.com/kjxe5ve2?key=6a1ca707b7a4c8be813dfff5b8321342" target="_blank" rel="noopener sponsored" class="btn primary" style="background: linear-gradient(90deg, #eab308, #f59e0b); color: #000; font-weight: 700; border: none; white-space: nowrap; padding: 0.75rem 1.25rem; box-shadow: 0 4px 12px rgba(234,179,8,0.3);">
+      🚀 Try Top Alternative &rarr;
+    </a>
+  </div>
+</div>
+
 ${alts.length ? html`<ol class="altlist">${alts.map((a) => html`<li class="card">
   ${icon(a, 48)}
   <div>
@@ -783,14 +803,24 @@ export function downloadPage(req, app) {
 
   <!-- Interactive 5-Second Download Countdown Timer -->
   <div id="dl-countdown-wrap" style="text-align: center; padding: 1.5rem; background: var(--bg-surface); border-radius: 12px; border: 1px solid var(--border); margin: 1.25rem 0;">
-    <div id="dl-timer-msg" style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">
-      Your verified secure download will start in <span id="dl-countdown-num" style="color: #2563eb; font-size: 1.4rem; font-weight: 800;">5</span> seconds...
+    <div id="dl-timer-msg" style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text);">
+      Your verified secure download will start in <span id="dl-countdown-num" style="color: #2563eb; font-size: 1.5rem; font-weight: 800;">5</span> seconds...
     </div>
-    <div class="dl-progress-bar" style="height: 6px; width: 100%; max-width: 320px; background: rgba(0,0,0,0.08); border-radius: 4px; margin: 0.75rem auto 1.25rem auto; overflow: hidden;">
-      <div id="dl-progress-fill" style="height: 100%; width: 100%; background: linear-gradient(90deg, #10b981, #2563eb); transition: width 5s linear; border-radius: 4px;"></div>
+    <div class="dl-progress-bar" style="height: 8px; width: 100%; max-width: 340px; background: rgba(0,0,0,0.08); border-radius: 6px; margin: 0.75rem auto 1.25rem auto; overflow: hidden;">
+      <div id="dl-progress-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #10b981, #2563eb); transition: width 1s linear; border-radius: 6px;"></div>
     </div>
     
-    <div id="dl-action-area">
+    <!-- Waiting Ad Box (Displayed during 5s countdown for 90%+ ad viewability) -->
+    <div id="dl-waiting-box" style="margin: 1.25rem 0; padding: 1.25rem; background: var(--bg-card); border-radius: 10px; border: 1px dashed var(--border);">
+      <div style="font-size: 0.85rem; color: var(--muted); margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
+        <span class="pulse-dot" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#10b981;"></span>
+        <span>Verifying SHA-256 integrity &amp; establishing secure SSL CDN mirror connections...</span>
+      </div>
+      ${adNativeWidget()}
+    </div>
+
+    <!-- Action Area (Revealed smoothly when timer finishes) -->
+    <div id="dl-action-area" style="display: none; margin-top: 1.25rem;">
       <div class="mirrors-card">
         <div class="mirrors-header">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -844,6 +874,44 @@ export function downloadPage(req, app) {
       <a href="/request-app/?app=${app.slug}" class="btn-help-link" rel="nofollow">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
         <span>Request newer version</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- High-Paying VPN & Security CPA Affiliate Card -->
+  <div class="vpn-cpa-card card" style="background: linear-gradient(135deg, rgba(37,99,235,0.06) 0%, rgba(16,185,129,0.06) 100%); border: 1.5px solid #2563eb; border-radius: 12px; padding: 1.25rem 1.5rem; margin: 1.75rem 0;">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+      <div style="flex: 1; min-width: 250px;">
+        <div style="display: inline-flex; align-items: center; gap: 6px; background: #2563eb; color: #fff; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">
+          🛡️ Recommended Security Partner
+        </div>
+        <h4 style="margin: 0 0 6px 0; font-size: 1.15rem; color: var(--text);">Zero-Lag Gaming &amp; 100% Virus-Free Sideloading Protection</h4>
+        <p style="margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5;">
+          Bypass ISP throttling, protect your phone IP while downloading sideloaded APKs, and enjoy unlimited high-speed bandwidth with no latency. <strong>Exclusive: 70% Off + 3 Months Free</strong>.
+        </p>
+      </div>
+      <div>
+        <a href="https://www.profitableratecpmnetwork.com/kjxe5ve2?key=6a1ca707b7a4c8be813dfff5b8321342" target="_blank" rel="noopener sponsored" class="btn primary" style="white-space: nowrap; font-weight: 700; padding: 0.75rem 1.25rem; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(37,99,235,0.25);">
+          ⚡ Get High-Speed Protection &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIP Telegram Community & Direct Cloud Channel -->
+  <div class="telegram-vip-card" style="background: linear-gradient(135deg, #0088cc 0%, #006699 100%); color: #fff; border-radius: 12px; padding: 1.25rem 1.5rem; margin: 1.75rem 0; box-shadow: 0 4px 15px rgba(0,136,204,0.2);">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 14px; flex: 1; min-width: 250px;">
+        <div style="font-size: 2.2rem; line-height: 1;">✈️</div>
+        <div>
+          <h4 style="margin: 0; font-size: 1.15rem; color: #fff; font-weight: 700;">Join APKWorlds VIP Telegram Channel</h4>
+          <p style="margin: 4px 0 0 0; color: rgba(255,255,255,0.88); font-size: 0.88rem; line-height: 1.4;">
+            Get instant notifications for new mod drops, direct Google Drive mirrors, and zero-ad APK updates right on your phone.
+          </p>
+        </div>
+      </div>
+      <a href="https://t.me/apkworldsofficial" target="_blank" rel="noopener" class="btn" style="background: #fff; color: #0088cc; font-weight: 700; white-space: nowrap; padding: 0.75rem 1.25rem; border-radius: 8px; text-decoration: none; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+        Join VIP Channel &rarr;
       </a>
     </div>
   </div>
@@ -1075,6 +1143,24 @@ export function comparisonPage(req, cmp) {
 
 ${cmp.notes ? html`<section><h2>Which one fits you</h2><p>${cmp.notes}</p></section>` : ''}
 
+<!-- High-Converting Sideload Security & Speed Card -->
+<div class="vpn-cpa-card card" style="background: linear-gradient(135deg, rgba(37,99,235,0.06) 0%, rgba(16,185,129,0.06) 100%); border: 1.5px solid #2563eb; border-radius: 12px; padding: 1.25rem 1.5rem; margin: 2rem 0;">
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+    <div style="flex: 1; min-width: 250px;">
+      <div style="display: inline-flex; align-items: center; gap: 6px; background: #2563eb; color: #fff; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">
+        🛡️ Sideload Performance Recommendation
+      </div>
+      <h3 style="margin: 6px 0 4px 0; font-size: 1.15rem; color: var(--text);">Speed Up Both ${a.name} &amp; ${b.name} Downloads</h3>
+      <p style="margin: 0; color: var(--muted); font-size: 0.9rem;">
+        Prevent ISP bandwidth throttling, eliminate gaming ping spikes, and safeguard APK sideloading. <strong>Exclusive: 70% Off + 3 Months Free</strong>.
+      </p>
+    </div>
+    <a href="https://www.profitableratecpmnetwork.com/kjxe5ve2?key=6a1ca707b7a4c8be813dfff5b8321342" target="_blank" rel="noopener sponsored" class="btn primary" style="font-weight: 700; white-space: nowrap; padding: 0.75rem 1.25rem; box-shadow: 0 4px 12px rgba(37,99,235,0.25);">
+      ⚡ Unlock Turbo Speed &rarr;
+    </a>
+  </div>
+</div>
+
 <!-- Social Share Bar -->
 ${socialShareBar(`${a.name} vs ${b.name}`, `/compare/${cmp.slug}/`, cmp.intro)}
 
@@ -1108,6 +1194,25 @@ export function compareHub() {
   <h1>Android App Comparisons &amp; Battles</h1>
   <p class="lead">Side-by-side technical faceoffs and head-to-head comparisons of rival Android apps. Compare download sizes, features, permissions, and performance to choose the right app for your device.</p>
 </header>
+
+<!-- Featured Comparison Accelerator -->
+<div class="card editor-choice-card" style="border: 2px solid #eab308; background: linear-gradient(135deg, rgba(234,179,8,0.06) 0%, rgba(245,158,11,0.03) 100%); border-radius: 12px; padding: 1.25rem 1.5rem; margin: 1.75rem 0; box-shadow: 0 4px 16px rgba(234,179,8,0.12);">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem; flex-wrap: wrap; gap: 8px;">
+    <span style="display: inline-flex; align-items: center; gap: 6px; background: #eab308; color: #000; font-weight: 800; font-size: 0.72rem; padding: 3px 10px; border-radius: 20px; text-transform: uppercase;">
+      ⭐ Editor's Choice Tool
+    </span>
+    <span style="font-size: 0.8rem; color: var(--muted); font-weight: 600;">⚡ Uncapped Speed &amp; Sideload Security</span>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+    <div style="flex: 1; min-width: 240px;">
+      <h3 style="margin: 0 0 4px 0; font-size: 1.15rem; color: var(--text);">Speed Up Android Sideloads &amp; Unlock Geo-Locked Apps</h3>
+      <p style="margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.45;">Whichever app you pick from our faceoffs, bypass ISP throttling and secure your device with our verified #1 speed partner.</p>
+    </div>
+    <a href="https://www.profitableratecpmnetwork.com/kjxe5ve2?key=6a1ca707b7a4c8be813dfff5b8321342" target="_blank" rel="noopener sponsored" class="btn primary" style="background: linear-gradient(90deg, #eab308, #f59e0b); color: #000; font-weight: 700; border: none; white-space: nowrap; padding: 0.75rem 1.25rem; box-shadow: 0 4px 12px rgba(234,179,8,0.3);">
+      🚀 Unlock Turbo Accelerator &rarr;
+    </a>
+  </div>
+</div>
 
 <div class="battle-preview-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem; margin:2rem 0;">
   ${list.map((c) => {
