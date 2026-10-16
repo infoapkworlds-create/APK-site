@@ -199,7 +199,7 @@ export async function appHandler(req, res) {
     if (fs.existsSync(rootSwPath)) {
       return res.end(fs.readFileSync(rootSwPath, 'utf8'));
     }
-    return res.end('self.options = {\n    "domain": "5gvci.com",\n    "zoneId": 11989824\n}\nself.lary = ""\nimportScripts(\'https://5gvci.com/act/files/service-worker.min.js?r=sw\')\n');
+    return res.end('self.options = {\n    "domain": "5gvci.com",\n    "zoneId": 12046330\n}\nself.lary = ""\nimportScripts(\'https://5gvci.com/act/files/service-worker.min.js?r=sw\')\n');
   }
 
   // Trailing slash normalization for content routes (except static files, API and downloads)
