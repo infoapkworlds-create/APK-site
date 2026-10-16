@@ -150,6 +150,8 @@ export function page(o) {
 <!-- Core Web Vitals Preconnect & DNS-Prefetch Optimization -->
 <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
 <link rel="dns-prefetch" href="//www.googletagmanager.com">
+<link rel="dns-prefetch" href="//quge5.com">
+<link rel="dns-prefetch" href="//5gvci.com">
 <link rel="dns-prefetch" href="//pl31752776.profitableratecpmnetwork.com">
 <link rel="dns-prefetch" href="//pl31752774.profitableratecpmnetwork.com">
 <link rel="dns-prefetch" href="//pl31752773.profitableratecpmnetwork.com">
@@ -185,6 +187,8 @@ ${index ? raw('<meta name="robots" content="index, follow, max-image-preview:lar
 <link rel="stylesheet" href="/static/site.css?v=${ASSET_V}">
 <script src="/static/site.js?v=${ASSET_V}" defer></script>
 ${ld.map(jsonld)}
+<!-- Monetag MultiTag Integration -->
+<script src="https://quge5.com/88/tag.min.js" data-zone="296697" async data-cfasync="false"></script>
 <!-- Popunder / Smart Ad Tag -->
 <script src="https://pl31752776.profitableratecpmnetwork.com/59/a2/f5/59a2f5922773e31544c805d48d508364.js"></script>
 </head>
