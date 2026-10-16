@@ -688,7 +688,7 @@ export function alternativesPage(req, app) {
       <h3 style="margin: 0 0 4px 0; font-size: 1.15rem; color: var(--text);">Looking for a faster, unrestricted alternative to ${app.name}?</h3>
       <p style="margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.45;">Get our verified top-recommended alternative with zero speed throttling, direct cloud routes, and complete Android device compatibility.</p>
     </div>
-    <a href="https://www.profitableratecpmnetwork.com/kjxe5ve2?key=6a1ca707b7a4c8be813dfff5b8321342" target="_blank" rel="noopener sponsored" class="btn primary" style="background: linear-gradient(90deg, #eab308, #f59e0b); color: #000; font-weight: 700; border: none; white-space: nowrap; padding: 0.75rem 1.25rem; box-shadow: 0 4px 12px rgba(234,179,8,0.3);">
+    <a href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" class="btn primary" style="background: linear-gradient(90deg, #eab308, #f59e0b); color: #000; font-weight: 700; border: none; white-space: nowrap; padding: 0.75rem 1.25rem; box-shadow: 0 4px 12px rgba(234,179,8,0.3);">
       🚀 Try Top Alternative &rarr;
     </a>
   </div>
@@ -836,7 +836,7 @@ export function downloadPage(req, app) {
             <span class="mirror-tag tag-fast">Fastest</span>
           </a>
 
-          <a class="mirror-item mirror-sponsored" href="https://www.profitableratecpmnetwork.com/kjxe5ve2?key=6a1ca707b7a4c8be813dfff5b8321342" target="_blank" rel="noopener sponsored" data-evt="mirror_cdn2">
+          <a class="mirror-item mirror-sponsored" href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" data-evt="mirror_cdn2">
             <div class="mirror-icon-box">🚀</div>
             <div class="mirror-meta">
               <span class="mirror-title">Mirror 2: High-Speed Direct Mirror</span>
@@ -891,7 +891,7 @@ export function downloadPage(req, app) {
         </p>
       </div>
       <div>
-        <a href="https://www.profitableratecpmnetwork.com/kjxe5ve2?key=6a1ca707b7a4c8be813dfff5b8321342" target="_blank" rel="noopener sponsored" class="btn primary" style="white-space: nowrap; font-weight: 700; padding: 0.75rem 1.25rem; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(37,99,235,0.25);">
+        <a href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" class="btn primary" style="white-space: nowrap; font-weight: 700; padding: 0.75rem 1.25rem; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(37,99,235,0.25);">
           ⚡ Get High-Speed Protection &rarr;
         </a>
       </div>
@@ -1155,7 +1155,7 @@ ${cmp.notes ? html`<section><h2>Which one fits you</h2><p>${cmp.notes}</p></sect
         Prevent ISP bandwidth throttling, eliminate gaming ping spikes, and safeguard APK sideloading. <strong>Exclusive: 70% Off + 3 Months Free</strong>.
       </p>
     </div>
-    <a href="https://www.profitableratecpmnetwork.com/kjxe5ve2?key=6a1ca707b7a4c8be813dfff5b8321342" target="_blank" rel="noopener sponsored" class="btn primary" style="font-weight: 700; white-space: nowrap; padding: 0.75rem 1.25rem; box-shadow: 0 4px 12px rgba(37,99,235,0.25);">
+    <a href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" class="btn primary" style="font-weight: 700; white-space: nowrap; padding: 0.75rem 1.25rem; box-shadow: 0 4px 12px rgba(37,99,235,0.25);">
       ⚡ Unlock Turbo Speed &rarr;
     </a>
   </div>
@@ -1208,7 +1208,7 @@ export function compareHub() {
       <h3 style="margin: 0 0 4px 0; font-size: 1.15rem; color: var(--text);">Speed Up Android Sideloads &amp; Unlock Geo-Locked Apps</h3>
       <p style="margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.45;">Whichever app you pick from our faceoffs, bypass ISP throttling and secure your device with our verified #1 speed partner.</p>
     </div>
-    <a href="https://www.profitableratecpmnetwork.com/kjxe5ve2?key=6a1ca707b7a4c8be813dfff5b8321342" target="_blank" rel="noopener sponsored" class="btn primary" style="background: linear-gradient(90deg, #eab308, #f59e0b); color: #000; font-weight: 700; border: none; white-space: nowrap; padding: 0.75rem 1.25rem; box-shadow: 0 4px 12px rgba(234,179,8,0.3);">
+    <a href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" class="btn primary" style="background: linear-gradient(90deg, #eab308, #f59e0b); color: #000; font-weight: 700; border: none; white-space: nowrap; padding: 0.75rem 1.25rem; box-shadow: 0 4px 12px rgba(234,179,8,0.3);">
       🚀 Unlock Turbo Accelerator &rarr;
     </a>
   </div>

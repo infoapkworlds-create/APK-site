@@ -447,7 +447,7 @@ export function homePage(req) {
       <span style="display: inline-block; font-size: 0.65rem; font-weight: 800; background: var(--primary); color: #0d131f; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; margin-bottom: 0.5rem;">Sponsored Special</span>
       <h3 style="font-size: 1.05rem; margin: 0 0 0.4rem; color: #fff; font-weight: 800;">Fast Direct Downloads</h3>
       <p style="font-size: 0.8rem; color: #94a3b8; margin: 0 0 0.85rem; line-height: 1.4;">Access top trending games & verified premium software at maximum speed.</p>
-      <a href="https://www.profitableratecpmnetwork.com/kjxe5ve2?key=6a1ca707b7a4c8be813dfff5b8321342" target="_blank" rel="noopener sponsored" class="btn primary" style="display: block; width: 100%; box-sizing: border-box; text-align: center; font-size: 0.88rem; font-weight: 700; padding: 0.6rem 1rem;">Explore Now &rarr;</a>
+      <a href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" class="btn primary" style="display: block; width: 100%; box-sizing: border-box; text-align: center; font-size: 0.88rem; font-weight: 700; padding: 0.6rem 1rem;">Explore Now &rarr;</a>
     </div>
 
     <!-- Sidebar Widget 2: Weekly Editor's Recommendation -->
