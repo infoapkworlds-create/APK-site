@@ -3,6 +3,7 @@ import { page, icon, catUrl, abs, orgLd, adBanner728x90, adNativeWidget } from '
 import * as D from '../lib/data.js';
 import { all } from '../db.js';
 import { config } from '../config.js';
+import { getDailyUpdatedGames, getDailyUpdatedApps } from '../lib/freshness.js';
 
 const SHORT_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 function formatShortDate(d) {
@@ -95,23 +96,11 @@ export function homePage(req) {
     LIMIT 10
   `);
 
-  // 5. Latest Updated Games (3 columns x 3 rows = 9 games)
-  const latestUpdatedGames = all(`
-    SELECT a.name, a.slug, a.version, a.updated_at, a.version_updated_on
-    FROM apps a
-    WHERE a.app_type='game' AND a.status='published'
-    ORDER BY a.updated_at DESC, a.id DESC
-    LIMIT 9
-  `);
+  // 5. Latest Updated Games (Dynamic Daily Rotation)
+  const latestUpdatedGames = getDailyUpdatedGames(9);
 
-  // 6. Latest Updated Apps (3 columns x 3 rows = 9 apps)
-  const latestUpdatedApps = all(`
-    SELECT a.name, a.slug, a.version, a.updated_at, a.version_updated_on
-    FROM apps a
-    WHERE a.app_type='app' AND a.status='published'
-    ORDER BY a.updated_at DESC, a.id DESC
-    LIMIT 9
-  `);
+  // 6. Latest Updated Apps (Dynamic Daily Rotation)
+  const latestUpdatedApps = getDailyUpdatedApps(9);
 
   // 7. Popular Articles in Last 24 Hours (featured guides with real screenshots)
   const popularArticles = all(`
@@ -340,8 +329,9 @@ export function homePage(req) {
 
     <!-- Section 4: Latest Updated Games -->
     <section class="pure-shelf-sec">
-      <div class="pure-sec-hdr">
+      <div class="pure-sec-hdr" style="display: flex; align-items: center; justify-content: space-between;">
         <h2 class="pure-sec-title"><a href="/updated/">Latest Updated Games <span class="arrow">&rsaquo;</span></a></h2>
+        <span style="font-size: 0.78rem; font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 3px 8px; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.25);">● Auto-Updated Daily</span>
       </div>
       <div class="pure-tri-grid">
         ${latestUpdatedGames.map((a) => html`
@@ -349,8 +339,11 @@ export function homePage(req) {
             ${icon(a, 50)}
             <div class="pure-mini-meta">
               <h3 class="pure-mini-title">${a.name}</h3>
-              <p class="pure-mini-ver">v ${a.version || '1.0.0'}</p>
-              <p class="pure-mini-date">Update Date: ${formatShortDate(a.updated_at || a.version_updated_on)}</p>
+              <p class="pure-mini-ver" style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                <span>v ${a.version || '1.0.0'}</span>
+                <span style="font-size: 0.68rem; padding: 1px 6px; border-radius: 4px; font-weight: 700; background: ${a.is_today ? 'rgba(16, 185, 129, 0.15)' : 'rgba(234, 179, 8, 0.15)'}; color: ${a.is_today ? '#059669' : '#d97706'};">${a.fresh_badge}</span>
+              </p>
+              <p class="pure-mini-date">Updated: ${a.fresh_display_date}</p>
             </div>
           </a>
         `)}
@@ -359,8 +352,9 @@ export function homePage(req) {
 
     <!-- Section 5: Latest Updated Apps -->
     <section class="pure-shelf-sec">
-      <div class="pure-sec-hdr">
+      <div class="pure-sec-hdr" style="display: flex; align-items: center; justify-content: space-between;">
         <h2 class="pure-sec-title"><a href="/updated/">Latest Updated Apps <span class="arrow">&rsaquo;</span></a></h2>
+        <span style="font-size: 0.78rem; font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 3px 8px; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.25);">● Auto-Updated Daily</span>
       </div>
       <div class="pure-tri-grid">
         ${latestUpdatedApps.map((a) => html`
@@ -368,8 +362,11 @@ export function homePage(req) {
             ${icon(a, 50)}
             <div class="pure-mini-meta">
               <h3 class="pure-mini-title">${a.name}</h3>
-              <p class="pure-mini-ver">v ${a.version || '2.0.0'}</p>
-              <p class="pure-mini-date">Update Date: ${formatShortDate(a.updated_at || a.version_updated_on)}</p>
+              <p class="pure-mini-ver" style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                <span>v ${a.version || '2.0.0'}</span>
+                <span style="font-size: 0.68rem; padding: 1px 6px; border-radius: 4px; font-weight: 700; background: ${a.is_today ? 'rgba(16, 185, 129, 0.15)' : 'rgba(234, 179, 8, 0.15)'}; color: ${a.is_today ? '#059669' : '#d97706'};">${a.fresh_badge}</span>
+              </p>
+              <p class="pure-mini-date">Updated: ${a.fresh_display_date}</p>
             </div>
           </a>
         `)}

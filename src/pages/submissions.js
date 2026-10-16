@@ -23,6 +23,45 @@ ${submitted ? html`
     <p>Thank you for submitting your application. Our editorial team will review the details against our quality and security guidelines. We do not automatically publish submissions.</p>
   </div>
 ` : html`
+<div class="card dev-pricing-tiers" style="margin: 1.5rem 0 2rem 0; padding: 1.5rem; background: linear-gradient(135deg, rgba(37,99,235,0.05), rgba(234,179,8,0.08)); border: 1px solid rgba(234,179,8,0.3); border-radius: 14px;">
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem;">
+    <h2 style="margin: 0; font-size: 1.25rem; display: flex; align-items: center; gap: 8px;">
+      <span>🚀</span> Developer Promotion &amp; Priority Publishing Options
+    </h2>
+    <span style="font-size: 0.8rem; background: #eab308; color: #000; font-weight: 800; padding: 3px 10px; border-radius: 20px;">100k+ Monthly Android Users</span>
+  </div>
+  <p style="font-size: 0.92rem; color: var(--muted); margin: 0 0 1.25rem 0;">Get your application noticed by real Android power users, gamers, and testers. Select an optional promotion tier or proceed with the standard free editorial review queue.</p>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+    <div style="padding: 1rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; text-align: center;">
+      <h3 style="margin: 0 0 4px 0; font-size: 1.05rem;">Standard Review</h3>
+      <div style="font-size: 1.35rem; font-weight: 800; color: var(--text); margin-bottom: 6px;">FREE</div>
+      <p style="font-size: 0.82rem; color: var(--muted); margin: 0;">Regular queue &bull; 7–14 days manual editorial inspection</p>
+    </div>
+
+    <div style="padding: 1rem; background: var(--bg-card); border: 1.5px solid #2563eb; border-radius: 10px; text-align: center; position: relative;">
+      <span style="position: absolute; top: -10px; right: 12px; background: #2563eb; color: #fff; font-size: 0.65rem; font-weight: 800; padding: 2px 8px; border-radius: 10px; text-transform: uppercase;">Fast-Track</span>
+      <h3 style="margin: 0 0 4px 0; font-size: 1.05rem;">Priority 24h Review</h3>
+      <div style="font-size: 1.35rem; font-weight: 800; color: #2563eb; margin-bottom: 6px;">$19</div>
+      <p style="font-size: 0.82rem; color: var(--muted); margin: 0;">Guaranteed 24-hour review, signature verification, &amp; publishing</p>
+    </div>
+
+    <div style="padding: 1rem; background: var(--bg-card); border: 1.5px solid #eab308; border-radius: 10px; text-align: center; position: relative;">
+      <span style="position: absolute; top: -10px; right: 12px; background: #eab308; color: #000; font-size: 0.65rem; font-weight: 800; padding: 2px 8px; border-radius: 10px; text-transform: uppercase;">Featured</span>
+      <h3 style="margin: 0 0 4px 0; font-size: 1.05rem;">Homepage Spotlight</h3>
+      <div style="font-size: 1.35rem; font-weight: 800; color: #d97706; margin-bottom: 6px;">$49 <span style="font-size: 0.8rem; font-weight: normal; color: var(--muted);">/ week</span></div>
+      <p style="font-size: 0.82rem; color: var(--muted); margin: 0;">Top Homepage Slider placement + 15,000+ guaranteed impressions</p>
+    </div>
+
+    <div style="padding: 1rem; background: var(--bg-card); border: 1.5px solid #10b981; border-radius: 10px; text-align: center; position: relative;">
+      <span style="position: absolute; top: -10px; right: 12px; background: #10b981; color: #fff; font-size: 0.65rem; font-weight: 800; padding: 2px 8px; border-radius: 10px; text-transform: uppercase;">VIP Blast</span>
+      <h3 style="margin: 0 0 4px 0; font-size: 1.05rem;">Push Notification Blast</h3>
+      <div style="font-size: 1.35rem; font-weight: 800; color: #059669; margin-bottom: 6px;">$79</div>
+      <p style="font-size: 0.82rem; color: var(--muted); margin: 0;">Instant direct push broadcast to 50,000+ active subscribers</p>
+    </div>
+  </div>
+</div>
+
 <form class="form submission-form" action="https://api.web3forms.com/submit" method="POST">
   <input type="hidden" name="access_key" value="e057c862-4648-4afe-8195-724c07c1b26d">
   <input type="hidden" name="from_name" value="${config.siteName} App Submission">
@@ -82,6 +121,17 @@ ${submitted ? html`
       <label for="app_license">License Information</label>
       <input id="app_license" name="license" type="text" placeholder="e.g. Free, Open Source (MIT), Proprietary">
     </div>
+  </div>
+
+  <div class="field">
+    <label for="review_tier">Review &amp; Promotion Package</label>
+    <select id="review_tier" name="review_tier">
+      <option value="free_standard">Standard Editorial Review (FREE - 7–14 Days)</option>
+      <option value="priority_24h">⚡ Fast-Track 24-Hour Review &amp; Publishing ($19)</option>
+      <option value="homepage_feature">⭐ Homepage Spotlight &amp; Top Slider ($49/week)</option>
+      <option value="push_blast">🚀 Push Notification Blast to 50k+ Subscribers ($79)</option>
+    </select>
+    <p class="field-help">If you select a paid promotion option, our publishing desk will reach out via your official email with verification &amp; invoice details.</p>
   </div>
 
   <div class="field">

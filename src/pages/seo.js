@@ -1,6 +1,7 @@
 import { config } from '../config.js';
 import * as D from '../lib/data.js';
 import { run, all } from '../db.js';
+import { getTodayMeta } from '../lib/freshness.js';
 
 export function getCategorizedUrls() {
   const base = config.siteUrl;
@@ -9,14 +10,13 @@ export function getCategorizedUrls() {
   const games = [];
   const guides = [];
 
-  const latestAppDateRow = all(`SELECT MAX(updated_at) as latest_upd, MAX(published_at) as latest_pub FROM apps WHERE status='published'`)[0];
-  const latestAppDate = (latestAppDateRow?.latest_upd || '2026-10-02').slice(0, 10);
+  const meta = getTodayMeta();
+  const latestAppDate = meta.todayStr;
+  const latestGameDate = meta.todayStr;
   const latestGuideDateRow = all(`SELECT MAX(COALESCE(updated_at, published_at)) as latest FROM guides WHERE status='published'`)[0];
   const latestGuideDate = (latestGuideDateRow?.latest || '2026-09-28').slice(0, 10);
   const latestReviewDateRow = all(`SELECT MAX(created_at) as latest FROM reviews WHERE status='approved'`)[0];
   const latestReviewDate = (latestReviewDateRow?.latest || '2026-09-25').slice(0, 10);
-  const latestGameDateRow = all(`SELECT MAX(a.updated_at) as latest FROM apps a JOIN categories c ON c.id=a.category_id WHERE a.status='published' AND (a.app_type='game' OR c.kind='game')`)[0];
-  const latestGameDate = (latestGameDateRow?.latest || '2026-10-01').slice(0, 10);
 
   const add = (targetList, path, lastmod, priority = '0.7', changefreq = 'weekly') => {
     targetList.push({

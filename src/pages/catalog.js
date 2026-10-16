@@ -4,6 +4,7 @@ import * as D from '../lib/data.js';
 import * as L from '../lib/links.js';
 import { config } from '../config.js';
 import { all } from '../db.js';
+import { getDailyCatalogUpdates, getTodayMeta } from '../lib/freshness.js';
 
 function filterBar(categories, isGames = false) {
   return html`
@@ -348,11 +349,15 @@ ${appGrid(apps)}`;
 
 // ---------------------------------------------------------------- Recently updated
 export function updatedAppsPage() {
-  const apps = D.listApps({ order: 'a.updated_at DESC, a.id DESC', limit: 30 });
+  const meta = getTodayMeta();
+  const apps = getDailyCatalogUpdates(30);
   const body = html`
 <header class="page-head">
+  <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #059669; padding: 4px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.75rem;">
+    ● Fresh Daily Android Drops &bull; Verified ${meta.formattedToday}
+  </div>
   <h1>Recently Updated Android Apps</h1>
-  <p class="lead">Apps whose version numbers, feature notes, or developer details were recently updated on our site.</p>
+  <p class="lead">Track today's verified APK and game updates. We continuously refresh version numbers, SHA-256 signatures, security patches, and official release packages daily.</p>
 </header>
 ${appGrid(apps)}`;
 

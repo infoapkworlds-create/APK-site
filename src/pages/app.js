@@ -5,6 +5,7 @@ import * as L from '../lib/links.js';
 import { getAppScreenshots } from '../screenshots.js';
 import { config } from '../config.js';
 import { reviewForm, reviewActions } from './forms.js';
+import { getAppFreshness } from '../lib/freshness.js';
 
 const T = config.thresholds;
 const LD_CAT = {
@@ -71,7 +72,12 @@ export function appLd(app, { reviews = [], withRating = true, screenshots = [] }
   if (app.size_bytes) o.fileSize = fmtBytes(app.size_bytes);
   if (app.min_android) o.operatingSystem = `Android ${app.min_android}+`;
   if (app.published_at) o.datePublished = isoDate(app.published_at);
-  if (app.version_updated_on || app.updated_at) o.dateModified = isoDate(app.version_updated_on || app.updated_at);
+  const freshMeta = getAppFreshness(app);
+  if (freshMeta && (freshMeta.isToday || freshMeta.isYesterday)) {
+    o.dateModified = freshMeta.isoDate;
+  } else if (app.version_updated_on || app.updated_at) {
+    o.dateModified = isoDate(app.version_updated_on || app.updated_at);
+  }
   if (app.play_url) o.installUrl = app.play_url;
   if (app.price_model === 'free' || app.price_model === 'freemium') o.offers = { '@type': 'Offer', price: '0', priceCurrency: 'USD' };
   // Only when the same rating is visible on the page and based on enough real reviews.
@@ -90,12 +96,17 @@ export function appLd(app, { reviews = [], withRating = true, screenshots = [] }
 
 function factsTable(app) {
   const row = (k, v) => html`<div><dt>${k}</dt><dd>${v}</dd></div>`;
+  const fresh = getAppFreshness(app);
+  const versionUpdatedVal = fresh?.badgeText
+    ? html`<span style="color: #059669; font-weight: 700;">${fresh.badgeText} (${fresh.dateStr})</span>`
+    : orNA(fmtDate(app.version_updated_on || app.updated_at));
+
   return html`<dl class="facts">
     ${row('Developer', html`<a href="/developer/${app.dev_slug}/">${app.dev_name}</a>`)}
     ${row('Current version', orNA(app.version))}
     ${row('File size', orNA(fmtBytes(app.size_bytes)))}
     ${row('Requires Android', app.min_android ? `${app.min_android} or later` : NA)}
-    ${row('Version updated', orNA(fmtDate(app.version_updated_on)))}
+    ${row('Version updated', versionUpdatedVal)}
     ${row('Category', html`<a href="${catUrl({ kind: app.cat_kind, slug: app.cat_slug })}">${app.cat_name}</a>`)}
     ${row('Price', orNA(PRICE[app.price_model]))}
     ${row('License', orNA(app.license))}
@@ -104,6 +115,28 @@ function factsTable(app) {
     ${row('User rating', stars(app.rating_avg, app.review_count))}
     ${row('Official website', app.website ? ext(app.website, new URL(app.website).hostname.replace(/^www\./, ''), '', 'official_click') : NA)}
   </dl>`;
+}
+
+function emulatorDownloadCard(app) {
+  return html`
+<div class="card emulator-cpa-box" style="margin: 1.5rem 0; padding: 1.5rem; background: linear-gradient(135deg, rgba(37, 99, 235, 0.07), rgba(16, 185, 129, 0.07)); border: 1px solid rgba(37, 99, 235, 0.25); border-radius: 14px;">
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 0.75rem;">
+    <span style="display: inline-flex; align-items: center; gap: 6px; background: #2563eb; color: #fff; font-weight: 800; font-size: 0.72rem; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em;">
+      💻 PC / Windows Edition
+    </span>
+    <span style="font-size: 0.8rem; color: #10b981; font-weight: 700;">✓ 60FPS Ultra &bull; Keyboard &amp; Mouse Support</span>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.25rem;">
+    <div style="flex: 1; min-width: 250px;">
+      <h3 style="margin: 0 0 6px 0; font-size: 1.15rem; color: var(--text);">Play ${app.name} on PC / Laptop (Windows 11/10/8/7)</h3>
+      <p style="margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.5;">Experience ${app.name} on a high-resolution desktop screen with smooth 60FPS frame rates, dedicated keyboard/mouse controls, multi-window gameplay, and zero mobile battery drain with the official Android PC emulator engine.</p>
+    </div>
+    <a href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" class="btn primary" style="background: linear-gradient(90deg, #2563eb, #1d4ed8); color: #fff; font-weight: 700; border: none; padding: 0.8rem 1.3rem; border-radius: 8px; box-shadow: 0 4px 14px rgba(37,99,235,0.3); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      <span>Download for PC (Free) &rarr;</span>
+    </a>
+  </div>
+</div>`;
 }
 
 function downloadBox(app, file) {
@@ -173,6 +206,7 @@ export function appPage(req, app) {
   const screenshots = getAppScreenshots(app);
 
   const sizeText = file?.size_bytes ? fmtBytes(file.size_bytes) : (app.size_bytes ? fmtBytes(app.size_bytes) : 'Free APK');
+  const fresh = getAppFreshness(app);
 
   // Deduplicate distinct versions
   const distinctVersions = [];
@@ -269,7 +303,7 @@ export function appPage(req, app) {
       </div>
       <div class="spec-item">
         <span class="spec-label">Last Updated</span>
-        <span class="spec-val">${fmtDate(app.version_updated_on || app.updated_at) || 'Recently'}</span>
+        <span class="spec-val">${fresh?.badgeText ? html`<span style="color: #10b981; font-weight: 700;">${fresh.badgeText}</span>` : (fmtDate(app.version_updated_on || app.updated_at) || 'Recently')}</span>
       </div>
     </div>
 
@@ -347,6 +381,9 @@ export function appPage(req, app) {
     ${downloadBox(app, file)}
     ${factsTable(app)}
   </div>
+
+  <!-- PC Emulator High-Paying CPA Recommendation -->
+  ${emulatorDownloadCard(app)}
 
   <!-- Screenshots Carousel Section -->
   <section class="apk-screenshots-sec" id="screenshots">
@@ -855,6 +892,15 @@ export function downloadPage(req, app) {
             <span class="mirror-tag tag-google">Google</span>
           </a>
           ` : ''}
+
+          <a class="mirror-item mirror-pc" href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" data-evt="mirror_pc">
+            <div class="mirror-icon-box">💻</div>
+            <div class="mirror-meta">
+              <span class="mirror-title">Mirror 4: Play on PC / Windows Edition (60FPS)</span>
+              <span class="mirror-sub">Free Android 11 PC Engine &bull; Keyboard &amp; Mouse Controls &bull; Zero Battery Drain</span>
+            </div>
+            <span class="mirror-tag tag-turbo" style="background: #2563eb; color: #fff;">PC Edition</span>
+          </a>
         </div>
       </div>
     </div>
@@ -915,6 +961,9 @@ export function downloadPage(req, app) {
       </a>
     </div>
   </div>
+
+  <!-- PC / Windows Emulator High-Paying CPA Recommendation -->
+  ${emulatorDownloadCard(app)}
 
   ${app.official_apk_page && app.official_apk_page !== app.play_url ? html`<p class="small">Developer direct APK portal: ${ext(app.official_apk_page, 'Visit Official Release Page', '', 'official_click')}.</p>` : ''}
   <p class="small" style="color: var(--muted); margin-bottom: 0;">✓ Verified genuine developer cryptographic signature. Zero altered binaries or repackaged adware.</p>
