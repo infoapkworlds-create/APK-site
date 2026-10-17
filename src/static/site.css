@@ -5080,3 +5080,54 @@ tr:last-child td { border-bottom: none; }
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(16, 185, 129, 0.08)) !important;
 }
 
+/* QR Code Scan to Phone Modal */
+.qr-modal-backdrop {
+  animation: fadeInModal 0.2s ease-out;
+}
+.qr-modal-card {
+  animation: slideUpModal 0.25s ease-out;
+}
+.btn-hero-qr {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-hero-qr:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25) !important;
+}
+
+/* Privacy & Permission Risk Score Card */
+.privacy-score-card {
+  transition: transform 0.15s ease;
+}
+.privacy-score-card:hover {
+  transform: translateY(-1px);
+}
+[data-theme="dark"] .privacy-score-card {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(37, 99, 235, 0.08)) !important;
+}
+
+/* App Performance & RAM Footprint Benchmark */
+.app-benchmark-card {
+  transition: transform 0.15s ease;
+}
+[data-theme="dark"] .app-benchmark-card {
+  background: #111827 !important;
+}
+
+/* ADB Installer Card */
+.adb-installer-card {
+  transition: transform 0.15s ease;
+}
+[data-theme="dark"] .adb-installer-card {
+  background: #111827 !important;
+}
+
+/* Version Diff Engine Card */
+.version-diff-card {
+  transition: transform 0.15s ease;
+}
+[data-theme="dark"] .version-diff-card {
+  background: #111827 !important;
+}
+
+

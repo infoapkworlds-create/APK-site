@@ -1503,5 +1503,130 @@
       });
     });
   }
+
+  // 19. Scan to Phone QR Code Modal & Clipboard Copy
+  const qrModal = document.getElementById('qrCodeModal');
+  if (qrModal) {
+    const qrClose = document.getElementById('qrModalClose');
+    const copyLinkBtn = document.getElementById('btnCopyMobileLink');
+    const copyLinkText = document.getElementById('copyMobileLinkText');
+
+    function openQrModal() {
+      qrModal.style.display = 'flex';
+    }
+    function closeQrModal() {
+      qrModal.style.display = 'none';
+    }
+
+    document.querySelectorAll('.btnOpenQrModal').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openQrModal();
+      });
+    });
+
+    if (qrClose) qrClose.addEventListener('click', closeQrModal);
+    qrModal.addEventListener('click', (e) => {
+      if (e.target === qrModal) closeQrModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && qrModal.style.display === 'flex') {
+        closeQrModal();
+      }
+    });
+
+    if (copyLinkBtn && copyLinkText) {
+      copyLinkBtn.addEventListener('click', async () => {
+        const link = copyLinkBtn.getAttribute('data-link');
+        try {
+          await navigator.clipboard.writeText(link);
+          copyLinkText.textContent = '✓ Copied to Clipboard!';
+          setTimeout(() => {
+            copyLinkText.textContent = 'Copy Mobile Download Link';
+          }, 2500);
+        } catch {
+          // fallback
+        }
+      });
+    }
+  }
+
+  // 20. 1-Click ADB Installer Command Copy
+  const btnCopyAdb = document.getElementById('btnCopyAdbCmd');
+  const copyAdbText = document.getElementById('copyAdbBtnText');
+  if (btnCopyAdb && copyAdbText) {
+    btnCopyAdb.addEventListener('click', async () => {
+      const cmd = btnCopyAdb.getAttribute('data-cmd');
+      try {
+        await navigator.clipboard.writeText(cmd);
+        copyAdbText.textContent = '✓ Copied!';
+        btnCopyAdb.style.background = '#10b981';
+        setTimeout(() => {
+          copyAdbText.textContent = '📋 Copy Command';
+          btnCopyAdb.style.background = '#2563eb';
+        }, 2500);
+      } catch {
+        // fallback
+      }
+    });
+  }
+
+  // 21. Interactive Version Diff & Changelog Comparison Engine
+  const diffBox = document.getElementById('versionDiffCard');
+  if (diffBox) {
+    const selA = document.getElementById('diffVerA');
+    const selB = document.getElementById('diffVerB');
+    const headA = document.getElementById('diffHeadingA');
+    const headB = document.getElementById('diffHeadingB');
+    const metaA = document.getElementById('diffMetaA');
+    const metaB = document.getElementById('diffMetaB');
+    const summary = document.getElementById('diffDeltaSummary');
+
+    function fmtBytesJs(b) {
+      if (!b || b === 0) return 'Standard';
+      const k = 1024;
+      const sizes = ['B', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(b) / Math.log(k));
+      return parseFloat((b / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+    }
+
+    function updateDiff() {
+      if (!selA || !selB) return;
+      const optA = selA.options[selA.selectedIndex];
+      const optB = selB.options[selB.selectedIndex];
+      if (!optA || !optB) return;
+
+      const verA = optA.value;
+      const verB = optB.value;
+      const sizeA = parseInt(optA.getAttribute('data-size')) || 0;
+      const sizeB = parseInt(optB.getAttribute('data-size')) || 0;
+      const minA = optA.getAttribute('data-min-ver') || '7.0';
+      const minB = optB.getAttribute('data-min-ver') || '7.0';
+
+      if (headA) headA.textContent = 'v' + verA;
+      if (headB) headB.textContent = 'v' + verB;
+      if (metaA) metaA.textContent = `Size: ${fmtBytesJs(sizeA)} • Android ${minA}+`;
+      if (metaB) metaB.textContent = `Size: ${fmtBytesJs(sizeB)} • Android ${minB}+`;
+
+      if (summary) {
+        if (sizeA && sizeB) {
+          const delta = sizeB - sizeA;
+          const mbDelta = (delta / (1024 * 1024)).toFixed(1);
+          if (delta > 0) {
+            summary.innerHTML = `<span style="color:#d97706;">📈 v${verB} is +${mbDelta} MB heavier than v${verA} (New features &amp; graphics assets added)</span>`;
+          } else if (delta < 0) {
+            summary.innerHTML = `<span style="color:#10b981;">⚡ v${verB} is ${Math.abs(mbDelta)} MB more lightweight &amp; optimized than v${verA}</span>`;
+          } else {
+            summary.innerHTML = `<span style="color:#2563eb;">⚖️ Both releases have identical package sizes &amp; compatibility profile</span>`;
+          }
+        } else {
+          summary.textContent = `⚡ Version comparison active: v${verA} vs v${verB}`;
+        }
+      }
+    }
+
+    if (selA) selA.addEventListener('change', updateDiff);
+    if (selB) selB.addEventListener('change', updateDiff);
+  }
 })();
 

@@ -68,13 +68,18 @@ setTimeout(async () => {
     if (!verifier.body.includes('apkDropzone')) throw new Error('Verifier missing apkDropzone');
     if (!app.body.includes('vip-mod-matrix')) throw new Error('App page missing vip-mod-matrix');
     if (!app.body.includes('regionUnlocker')) throw new Error('App page missing regionUnlocker');
+    if (!app.body.includes('privacy-score-card')) throw new Error('App page missing privacy-score-card');
+    if (!app.body.includes('app-benchmark-card')) throw new Error('App page missing app-benchmark-card');
+    if (!app.body.includes('qrCodeModal')) throw new Error('App page missing qrCodeModal');
     if (!dlPage.body.includes('userDeviceCompatBadge')) throw new Error('Download page missing userDeviceCompatBadge');
     if (!dlPage.body.includes('regionUnlocker')) throw new Error('Download page missing regionUnlocker');
     if (!dlPage.body.includes('antivirusCertModal')) throw new Error('Download page missing antivirusCertModal');
     if (!dlPage.body.includes('communityPulseCard')) throw new Error('Download page missing communityPulseCard');
+    if (!dlPage.body.includes('adb-installer-card')) throw new Error('Download page missing adb-installer-card');
     if (!payback.body.includes('cloud-phone-cpa-box')) throw new Error('Payback 2 missing cloud-phone-cpa-box');
     if (!xapkPage.body.includes('xapkDropzone')) throw new Error('XAPK converter missing xapkDropzone');
     if (!verPage.body.includes('ver-filter-bar')) throw new Error('Versions page missing ver-filter-bar');
+    if (!verPage.body.includes('versionDiffCard')) throw new Error('Versions page missing versionDiffCard');
 
     console.log('All endpoints responding correctly!');
     process.exit(0);
