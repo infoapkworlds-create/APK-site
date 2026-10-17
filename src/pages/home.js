@@ -3,7 +3,13 @@ import { page, icon, catUrl, abs, orgLd, adBanner728x90, adNativeWidget } from '
 import * as D from '../lib/data.js';
 import { all } from '../db.js';
 import { config } from '../config.js';
-import { getDailyUpdatedGames, getDailyUpdatedApps } from '../lib/freshness.js';
+import {
+  getDailyUpdatedGames,
+  getDailyUpdatedApps,
+  getDailyHeroSlides,
+  getDailyDiscoverApps,
+  getDailyEditorRecommendation
+} from '../lib/freshness.js';
 
 const SHORT_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 function formatShortDate(d) {
@@ -33,37 +39,11 @@ function getArticleThumb(art) {
 }
 
 export function homePage(req) {
-  // 1. Featured Top Slider Items with authentic 1080p in-game screenshots
-  const heroApp = D.getApp('bike-race-motorcycle-games') || D.getApp('grid-autosport') || D.listApps({ limit: 1 })[0];
-  const slideApps = [
-    {
-      app: D.getApp('bike-race-motorcycle-games') || heroApp,
-      banner: '/screenshots/bike-race-motorcycle-games/1.webp',
-      subtitle: 'Physics-based motorcycle stunt & racing game'
-    },
-    {
-      app: D.getApp('grid-autosport') || heroApp,
-      banner: '/screenshots/grid-autosport/1.webp',
-      subtitle: 'Console-quality AAA pro circuit racing simulator'
-    },
-    {
-      app: D.getApp('pubg-mobile') || heroApp,
-      banner: '/screenshots/pubg-mobile/1.webp',
-      subtitle: 'Original battle royale mobile game with intense tactical combat'
-    },
-    {
-      app: D.getApp('among-us') || heroApp,
-      banner: '/screenshots/among-us/1.webp',
-      subtitle: 'Multiplayer social deduction hit game on spaceship Skeld'
-    }
-  ];
+  // 1. Featured Top Slider Items (Dynamic Daily Rotation across 28 top games & apps)
+  const slideApps = getDailyHeroSlides(4);
 
-  // 2. Discover Shelf (8 diverse apps)
-  const discoverApps = D.listApps({
-    where: "a.slug IN ('tiktok', 'any-do', 'among-us', 'canva', 'inshot', 'capcut', 'shizuku', 'newpipe')",
-    limit: 8
-  });
-  const fallbackDiscover = discoverApps.length >= 8 ? discoverApps : D.listApps({ limit: 8 });
+  // 2. Discover Shelf (Dynamic Daily Rotation across 40 diverse apps & games)
+  const fallbackDiscover = getDailyDiscoverApps(8);
 
   // 3. Popular Games in Last 24 Hours (8 games with ratings)
   const popularGames = all(`
@@ -139,16 +119,8 @@ export function homePage(req) {
     LIMIT 6
   `);
 
-  // 10. Sidebar: Weekly Editor's Recommendation (1 Hero + 8 List items)
-  const editorHero = D.getApp('drag-racing-classic') || popularGames[0];
-  const editorRecs = all(`
-    SELECT a.name, a.slug, c.name AS cat_name, COALESCE(a.rating_score, 4.8) AS rating_avg
-    FROM apps a
-    JOIN categories c ON c.id=a.category_id
-    WHERE a.status='published' AND a.slug != ?
-    ORDER BY a.rating_votes DESC, a.rating_score DESC
-    LIMIT 8
-  `, editorHero?.slug || '');
+  // 10. Sidebar: Editor's Recommendation (Dynamic Daily Rotation)
+  const { hero: editorHero, list: editorRecs } = getDailyEditorRecommendation();
 
   // 11. Sidebar: Games on Sale (8 games with prices/free tag)
   const gamesOnSale = all(`
@@ -204,6 +176,7 @@ export function homePage(req) {
               <div class="pure-banner-app">
                 ${icon(s.app, 54, false)}
                 <div class="pure-banner-info">
+                  <span class="hero-daily-tag" style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.65rem; font-weight: 800; background: var(--primary); color: #0d131f; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.4px;">⚡ Daily Spotlight</span>
                   <h2 class="pure-banner-title"><a href="/apps/${s.app.slug}/">${s.app.name}</a></h2>
                   <p class="pure-banner-sub">${s.subtitle}</p>
                 </div>
@@ -246,8 +219,9 @@ export function homePage(req) {
 
     <!-- Section 1: Discover -->
     <section class="pure-shelf-sec">
-      <div class="pure-sec-hdr">
+      <div class="pure-sec-hdr" style="display: flex; align-items: center; justify-content: space-between;">
         <h2 class="pure-sec-title"><a href="/popular/">Discover <span class="arrow">&rsaquo;</span></a></h2>
+        <span class="daily-badge-sub" style="font-size: 0.75rem; font-weight: 700; color: var(--primary); display: inline-flex; align-items: center; gap: 4px;">🟢 Refreshed Daily</span>
       </div>
       <div class="pure-icon-shelf">
         ${fallbackDiscover.map((a) => html`
@@ -496,10 +470,11 @@ export function homePage(req) {
       <a href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" class="btn primary" style="display: block; width: 100%; box-sizing: border-box; text-align: center; font-size: 0.88rem; font-weight: 700; padding: 0.6rem 1rem;">Explore Now &rarr;</a>
     </div>
 
-    <!-- Sidebar Widget 2: Weekly Editor's Recommendation -->
+    <!-- Sidebar Widget 2: Editor's Recommendation (Daily Rotation) -->
     <div class="pure-side-sec">
-      <div class="pure-side-hdr">
-        <h2 class="pure-side-title"><a href="/popular/">Weekly Editor's Recommendation <span class="arrow">&rsaquo;</span></a></h2>
+      <div class="pure-side-hdr" style="display: flex; align-items: baseline; justify-content: space-between;">
+        <h2 class="pure-side-title"><a href="/popular/">Today's Editor's Pick <span class="arrow">&rsaquo;</span></a></h2>
+        <span style="font-size: 0.72rem; font-weight: 800; color: var(--primary); text-transform: uppercase;">Daily</span>
       </div>
       <!-- Top Hero Feature Card in Sidebar -->
       <a href="/apps/${editorHero.slug}/" class="pure-rec-hero">
@@ -511,7 +486,7 @@ export function homePage(req) {
             <div class="pure-rec-name">${editorHero.name}</div>
             <span class="pure-rec-rating"><span class="pure-star">★</span> ${(editorHero.rating_score || 4.7).toFixed(1)}</span>
           </div>
-          <p class="pure-rec-sub">Drag racing is a classic nitro racing game with 100M+ drivers.</p>
+          <p class="pure-rec-sub">${editorHero.editorial_sub || editorHero.summary || 'Editor choice award-winning Android highlight.'}</p>
         </div>
       </a>
       <!-- Ranked List Items -->
