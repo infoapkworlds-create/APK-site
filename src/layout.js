@@ -331,7 +331,8 @@ export function stars(avg, count, min = config.thresholds.minReviewsForAverage) 
 
 export function appCard(a, opts = {}) {
   const sizeText = a.size_bytes ? fmtBytes(a.size_bytes) : (a.version ? `v${a.version}` : '');
-  return html`<li class="card app-card" data-cat="${a.cat_slug}" data-price="${a.price_model || ''}" data-type="${a.app_type}" data-rating="${a.review_count >= config.thresholds.minReviewsForAverage ? (a.rating_avg || 0).toFixed(1) : 0}" data-dev="${a.dev_slug}" data-dl="${a.download_type}" data-updated="${a.updated_at}" data-name="${a.name.toLowerCase()}">
+  const isOffline = (a.summary || '').toLowerCase().includes('offline') || (a.cat_name || '').toLowerCase().includes('offline') || (a.name || '').toLowerCase().includes('offline');
+  return html`<li class="card app-card" data-cat="${a.cat_slug}" data-price="${a.price_model || ''}" data-type="${a.app_type}" data-rating="${a.review_count >= config.thresholds.minReviewsForAverage ? (a.rating_avg || 0).toFixed(1) : 0}" data-dev="${a.dev_slug}" data-dl="${a.download_type}" data-updated="${a.updated_at}" data-name="${a.name.toLowerCase()}" data-bytes="${a.size_bytes || 0}" data-offline="${isOffline ? '1' : '0'}">
   ${icon(a, 56)}
   <div class="app-card-body">
     <h3 class="app-card-title"><a href="/apps/${a.slug}/">${a.name}</a></h3>

@@ -166,6 +166,17 @@
     const status = document.querySelector('[data-filter-status]');
     const grid = document.querySelector('.catalog-results ul.grid');
     const cards = grid ? Array.from(grid.querySelectorAll('li.app-card')) : [];
+    let activeSizeFilter = 'all';
+
+    const sizeChips = document.querySelectorAll('.size-chip');
+    sizeChips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        sizeChips.forEach((c) => c.classList.remove('is-active'));
+        chip.classList.add('is-active');
+        activeSizeFilter = chip.dataset.sizeFilter || 'all';
+        applyFilter();
+      });
+    });
 
     function applyFilter() {
       if (!grid) return;
@@ -179,11 +190,26 @@
         const name = card.dataset.name || '';
         const cCat = card.dataset.cat || '';
         const cPrice = card.dataset.price || '';
+        const bytes = Number(card.dataset.bytes || 0);
+        const rating = Number(card.dataset.rating || 0);
+        const isOffline = card.dataset.offline === '1';
 
         let match = true;
         if (q && !name.includes(q)) match = false;
         if (cat && cCat !== cat) match = false;
         if (price && cPrice !== price) match = false;
+
+        if (activeSizeFilter === '25') {
+          if (bytes > 25 * 1024 * 1024 || bytes === 0) match = false;
+        } else if (activeSizeFilter === '50') {
+          if (bytes > 50 * 1024 * 1024 || bytes === 0) match = false;
+        } else if (activeSizeFilter === '100') {
+          if (bytes > 100 * 1024 * 1024 || bytes === 0) match = false;
+        } else if (activeSizeFilter === 'offline') {
+          if (!isOffline && !name.includes('offline')) match = false;
+        } else if (activeSizeFilter === 'top') {
+          if (rating < 4.5) match = false;
+        }
 
         card.style.display = match ? '' : 'none';
         if (match) visible++;

@@ -38,6 +38,15 @@ function filterBar(categories, isGames = false) {
     </select>
   </div>
 </div>
+<div class="size-filter-chips" style="display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 6px 0; align-items: center;">
+  <span style="font-size: 0.78rem; font-weight: 800; color: var(--muted); text-transform: uppercase;">⚡ Quick Filter:</span>
+  <button type="button" class="size-chip is-active" data-size-filter="all">All Sizes</button>
+  <button type="button" class="size-chip" data-size-filter="25">⚡ Under 25 MB</button>
+  <button type="button" class="size-chip" data-size-filter="50">⚡ Under 50 MB</button>
+  <button type="button" class="size-chip" data-size-filter="100">⚡ Under 100 MB</button>
+  <button type="button" class="size-chip" data-size-filter="offline">🎮 100% Offline</button>
+  <button type="button" class="size-chip" data-size-filter="top">⭐ Top Rated 4.5+</button>
+</div>
 <p class="filter-count small muted" data-filter-status aria-live="polite"></p>`;
 }
 

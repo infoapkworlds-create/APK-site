@@ -87,6 +87,7 @@ import {
   robotsTxt,
 } from './pages/seo.js';
 import { adminDashboardPage, adminLoginPage, adminAuditPage } from './pages/admin.js';
+import { getDailyUpdatedGames, getDailyUpdatedApps } from './lib/freshness.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -519,27 +520,72 @@ export async function appHandler(req, res) {
     return res.end(suggestApi(req));
   }
 
-  // API: IndexNow Push Trigger
+  // API: IndexNow Push Trigger (Comprehensive Automated Search Engine Ping)
   if (pathname === '/api/indexnow-ping') {
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    const host = 'www.apkworlds.co.uk';
-    const key = config.indexNowKey || 'adda586927efa645e1386f736c7fa549';
-    fetch('https://api.indexnow.org/indexnow', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      body: JSON.stringify({
-        host,
-        key,
-        keyLocation: `https://${host}/${key}.txt`,
-        urlList: [
-          `https://${host}/`,
-          `https://${host}/compare/`,
-          `https://${host}/collections/`,
-          `https://${host}/tools/apk-error-solver/`
-        ]
+    const host = config.canonicalHost || 'www.apkworlds.co.uk';
+    const key = config.indexNowKey || 'apkworlds-indexnow-key-2026';
+
+    const urls = new Set([
+      `https://${host}/`,
+      `https://${host}/apps/`,
+      `https://${host}/games/`,
+      `https://${host}/popular/`,
+      `https://${host}/updated/`,
+      `https://${host}/compare/`,
+      `https://${host}/collections/`,
+      `https://${host}/collections/best-offline-games/`,
+      `https://${host}/collections/video-editors-no-watermark/`,
+      `https://${host}/collections/fast-free-vpn/`,
+      `https://${host}/collections/lite-apps-low-end-phones/`,
+      `https://${host}/tools/apk-error-solver/`,
+      `https://${host}/advertise/`,
+    ]);
+
+    try {
+      const dailyApps = getDailyUpdatedApps ? getDailyUpdatedApps() : [];
+      const dailyGames = getDailyUpdatedGames ? getDailyUpdatedGames() : [];
+      [...dailyApps, ...dailyGames].forEach((a) => {
+        urls.add(`https://${host}/apps/${a.slug}/`);
+        urls.add(`https://${host}/apps/${a.slug}/download/`);
+      });
+
+      const topApps = D.listApps({ limit: 40 });
+      topApps.forEach((a) => {
+        urls.add(`https://${host}/apps/${a.slug}/`);
+        urls.add(`https://${host}/apps/${a.slug}/download/`);
+      });
+    } catch {}
+
+    const urlList = Array.from(urls).slice(0, 100);
+
+    const payload = {
+      host,
+      key,
+      keyLocation: `https://${host}/${key}.txt`,
+      urlList,
+    };
+
+    Promise.allSettled([
+      fetch('https://api.indexnow.org/indexnow', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        body: JSON.stringify(payload),
+      }),
+      fetch('https://www.bing.com/indexnow', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        body: JSON.stringify(payload),
       })
+    ]).then(() => {
+      try {
+        for (const u of urlList) {
+          run(`INSERT INTO indexnow_log (url, reason, response_status) VALUES (?, ?, ?)`, u, 'daily_auto_ping', 200);
+        }
+      } catch {}
     }).catch(() => {});
-    return res.end(JSON.stringify({ ok: true, message: 'Ping sent to IndexNow' }));
+
+    return res.end(JSON.stringify({ ok: true, submittedUrls: urlList.length, message: `Ping sent to IndexNow and Bing for ${urlList.length} priority URLs` }));
   }
 
   // API: Anonymous Beacon Event

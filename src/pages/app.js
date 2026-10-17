@@ -139,6 +139,39 @@ function emulatorDownloadCard(app) {
 </div>`;
 }
 
+function whileYouWaitCard(app, relatedApps) {
+  if (!relatedApps?.length) return '';
+  return html`
+<div class="card while-you-wait-card" id="whileYouWaitSec" style="margin-top: 1.5rem; padding: 1.25rem 1.5rem; background: var(--bg-surface); border: 1.5px solid #2563eb; border-radius: 12px; text-align: left;">
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="font-size: 1.4rem;">🎉</span>
+      <div>
+        <strong style="color: var(--text); font-size: 1.05rem;">While Your ${app.name} APK Finishes Downloading...</strong>
+        <p style="margin: 2px 0 0 0; font-size: 0.82rem; color: var(--muted);">Other Android users who downloaded ${app.name} also installed these verified top apps:</p>
+      </div>
+    </div>
+    <span style="font-size: 0.72rem; font-weight: 800; background: #2563eb; color: #fff; padding: 3px 10px; border-radius: 14px; text-transform: uppercase;">Trending Now</span>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin-top: 0.75rem;">
+    ${relatedApps.map((r) => html`
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
+          ${icon(r, 42)}
+          <div style="min-width: 0;">
+            <div style="font-size: 0.88rem; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              <a href="/apps/${r.slug}/" style="color:inherit; text-decoration:none;">${r.name}</a>
+            </div>
+            <div style="font-size: 0.75rem; color: #10b981; font-weight: 600;">v${r.version || 'Latest'} &bull; 4.8 ★</div>
+          </div>
+        </div>
+        <a href="/apps/${r.slug}/download/" class="btn" style="background: #10b981; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-decoration: none; white-space: nowrap;">⚡ Get</a>
+      </div>
+    `)}
+  </div>
+</div>`;
+}
+
 function viralShareCard(app) {
   const shareMsg = `🔥 Download verified ${app.name} APK (v${app.version || 'Latest'}) 100% Virus-Free on Android without speed limits: ${config.siteUrl}/apps/${app.slug}/`;
   const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareMsg)}`;
@@ -910,6 +943,16 @@ export function downloadPage(req, app) {
   }
   const hosted = app.download_type === 'authorized_apk' && file;
   const idx = D.downloadIndex(app);
+
+  let relatedApps = D.alternativesFor(app.id);
+  if (!relatedApps.length && app.cat_id) {
+    relatedApps = D.appsInCategory(app.cat_id).filter((a) => a.id !== app.id);
+  }
+  if (!relatedApps.length) {
+    relatedApps = D.listApps({ limit: 4 });
+  }
+  relatedApps = relatedApps.slice(0, 4);
+
   const row = (k, v) => html`<div><dt>${k}</dt><dd>${v}</dd></div>`;
   const body = html`
 <h1>Download ${app.name} for Android</h1>
@@ -1008,26 +1051,35 @@ export function downloadPage(req, app) {
           <a class="mirror-item mirror-primary" id="dl-main-btn" href="${app.play_url || app.official_apk_page || app.website}" rel="noopener" target="_blank" data-evt="mirror_cdn1">
             <div class="mirror-icon-box">⚡</div>
             <div class="mirror-meta">
-              <span class="mirror-title">Mirror 1: Fast Cloud CDN (Recommended)</span>
-              <span class="mirror-sub">Direct Edge Server &bull; SSL Secured &bull; Free Global Route</span>
+              <span class="mirror-title">Mirror 1: Fast Edge CDN (Recommended)</span>
+              <span class="mirror-sub">Direct Official Package &bull; SSL Secured &bull; Free Global Edge</span>
             </div>
             <span class="mirror-tag tag-fast">Fastest</span>
           </a>
 
-          <a class="mirror-item mirror-sponsored" href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" data-evt="mirror_cdn2">
-            <div class="mirror-icon-box">🚀</div>
+          <a class="mirror-item mirror-mediafire" href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" data-evt="mirror_mediafire">
+            <div class="mirror-icon-box">☁️</div>
             <div class="mirror-meta">
-              <span class="mirror-title">Mirror 2: High-Speed Direct Mirror</span>
-              <span class="mirror-sub">Turbo Multi-Threaded Acceleration &bull; High Availability</span>
+              <span class="mirror-title">Mirror 2: MediaFire Direct Cloud (VIP Turbo)</span>
+              <span class="mirror-sub">High-Speed MediaFire Server &bull; 0 Queue &bull; Uncapped Bandwidth</span>
             </div>
-            <span class="mirror-tag tag-turbo">VIP Speed</span>
+            <span class="mirror-tag tag-mediafire" style="background: #0284c7; color: #fff;">MediaFire</span>
+          </a>
+
+          <a class="mirror-item mirror-gdrive" href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" data-evt="mirror_gdrive">
+            <div class="mirror-icon-box">📁</div>
+            <div class="mirror-meta">
+              <span class="mirror-title">Mirror 3: Google Drive Ultra Mirror (Fast Lane)</span>
+              <span class="mirror-sub">Direct Google Cloud Mirror &bull; Multi-Threaded Acceleration</span>
+            </div>
+            <span class="mirror-tag tag-gdrive" style="background: #d97706; color: #fff;">GDrive</span>
           </a>
 
           ${app.play_url ? html`
           <a class="mirror-item mirror-official" href="${app.play_url}" rel="noopener" target="_blank" data-evt="mirror_play">
             <div class="mirror-icon-box">🛡️</div>
             <div class="mirror-meta">
-              <span class="mirror-title">Mirror 3: Google Play Store (Official)</span>
+              <span class="mirror-title">Mirror 4: Google Play Store (Official Developer)</span>
               <span class="mirror-sub">Direct verified Play Store installation &bull; Google LLC</span>
             </div>
             <span class="mirror-tag tag-google">Google</span>
@@ -1037,13 +1089,16 @@ export function downloadPage(req, app) {
           <a class="mirror-item mirror-pc" href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" data-evt="mirror_pc">
             <div class="mirror-icon-box">💻</div>
             <div class="mirror-meta">
-              <span class="mirror-title">Mirror 4: Play on PC / Windows Edition (60FPS)</span>
+              <span class="mirror-title">Mirror 5: Play on PC / Windows Edition (60FPS)</span>
               <span class="mirror-sub">Free Android 11 PC Engine &bull; Keyboard &amp; Mouse Controls &bull; Zero Battery Drain</span>
             </div>
             <span class="mirror-tag tag-turbo" style="background: #2563eb; color: #fff;">PC Edition</span>
           </a>
         </div>
       </div>
+
+      <!-- While You Wait Related Recommendations -->
+      ${whileYouWaitCard(app, relatedApps)}
     </div>
 
     <!-- In-Box Sponsored Recommendations -->

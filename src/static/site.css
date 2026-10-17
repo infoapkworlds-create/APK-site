@@ -4908,6 +4908,53 @@ tr:last-child td { border-bottom: none; }
   cursor: pointer;
 }
 
+/* Size Filter Chips in Catalog */
+.size-filter-chips {
+  margin: 12px 0 8px 0;
+}
+.size-chip {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border, #cbd5e1);
+  color: var(--text, #1e293b);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.size-chip:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+.size-chip.is-active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+}
+[data-theme="dark"] .size-chip {
+  background: #1e293b;
+  border-color: #334155;
+  color: #f1f5f9;
+}
+[data-theme="dark"] .size-chip.is-active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+/* Mirror Badges */
+.tag-mediafire {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+}
+.tag-gdrive {
+  background: #d97706 !important;
+  color: #ffffff !important;
+}
+
 
 
 
