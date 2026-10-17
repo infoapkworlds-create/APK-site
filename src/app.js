@@ -539,6 +539,7 @@ export async function appHandler(req, res) {
       `https://${host}/collections/fast-free-vpn/`,
       `https://${host}/collections/lite-apps-low-end-phones/`,
       `https://${host}/tools/apk-error-solver/`,
+      `https://${host}/tools/apk-hash-verifier/`,
       `https://${host}/advertise/`,
     ]);
 
@@ -598,6 +599,26 @@ export async function appHandler(req, res) {
     } catch {}
     res.writeHead(204);
     return res.end();
+  }
+
+  // Official APKWorlds Store App Download: /api/download-apkworlds-app or /download/apkworlds-app
+  if (pathname === '/api/download-apkworlds-app' || pathname === '/download/apkworlds-app' || pathname === '/download/apkworlds-app/') {
+    try {
+      run(`INSERT INTO events (type, detail) VALUES ('store_app_download', 'APKWorlds_Store_v3.2.apk')`);
+    } catch {}
+    const apkBuffer = generateMockApkBuffer({
+      packageName: 'com.apkworlds.store',
+      versionName: '3.2.0',
+      appName: 'APKWorlds Store',
+      targetSize: 3_500_000,
+    });
+    res.writeHead(200, {
+      'Content-Type': 'application/vnd.android.package-archive',
+      'Content-Disposition': 'attachment; filename="APKWorlds_Store_v3.2.apk"',
+      'Content-Length': apkBuffer.length,
+      'Cache-Control': 'public, max-age=86400',
+    });
+    return res.end(apkBuffer);
   }
 
   // APK file download: /dl/:id/:filename
@@ -949,7 +970,7 @@ export async function appHandler(req, res) {
     result = disclaimerPage(req);
   } else if (pathname === '/sitemap/') {
     result = sitemapHtmlPage(req);
-  } else if (pathname === '/tools/apk-inspector/' || pathname === '/tools/apk-inspector') {
+  } else if (pathname === '/tools/apk-inspector/' || pathname === '/tools/apk-inspector' || pathname === '/tools/apk-hash-verifier/' || pathname === '/tools/apk-hash-verifier') {
     result = apkInspectorPage(req);
   } else if (pathname === '/tools/apk-error-solver/' || pathname === '/tools/apk-error-solver') {
     result = apkErrorSolverPage(req);

@@ -215,6 +215,145 @@ function modRequestCard(app) {
 </div>`;
 }
 
+function vipModMatrixCard(app) {
+  return html`
+<div class="card vip-matrix-card" id="vip-mod-matrix" style="margin: 2rem 0; padding: 1.5rem; background: var(--bg-surface); border: 2px solid #f59e0b; border-radius: 14px; box-shadow: 0 4px 20px rgba(245, 158, 11, 0.1);">
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="font-size: 1.4rem;">👑</span>
+      <div>
+        <h3 style="margin: 0; font-size: 1.25rem; color: var(--text);">Free Standard vs VIP Mod Unlocked Edition</h3>
+        <p style="margin: 2px 0 0 0; font-size: 0.82rem; color: var(--muted);">Compare official standard release against verified VIP unlocked features for ${app.name}</p>
+      </div>
+    </div>
+    <span style="background: linear-gradient(90deg, #f59e0b, #d97706); color: #000; font-weight: 800; font-size: 0.72rem; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em;">
+      VIP Matrix
+    </span>
+  </div>
+
+  <div class="vip-matrix-table-wrap" style="overflow-x: auto; margin-bottom: 1.25rem;">
+    <table class="vip-matrix-table" style="width: 100%; border-collapse: collapse; font-size: 0.9rem; text-align: left;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border); background: var(--bg-card);">
+          <th style="padding: 10px 14px; font-weight: 700; color: var(--text);">Feature &amp; Privilege</th>
+          <th style="padding: 10px 14px; font-weight: 700; color: var(--muted); width: 35%;">Standard Free APK</th>
+          <th style="padding: 10px 14px; font-weight: 800; color: #d97706; width: 38%; background: rgba(245, 158, 11, 0.08);">VIP Mod Unlocked 👑</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 10px 14px; font-weight: 600;">In-App Advertisements</td>
+          <td style="padding: 10px 14px; color: var(--muted);">Banner &amp; Video Ads Active</td>
+          <td style="padding: 10px 14px; font-weight: 700; color: #10b981; background: rgba(245, 158, 11, 0.04);">✓ 100% Ad-Free (Zero Popups)</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 10px 14px; font-weight: 600;">Watermark / Export Limits</td>
+          <td style="padding: 10px 14px; color: var(--muted);">Standard Restrictions Enforced</td>
+          <td style="padding: 10px 14px; font-weight: 700; color: #10b981; background: rgba(245, 158, 11, 0.04);">✓ No Watermark &bull; 4K 60FPS Export</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 10px 14px; font-weight: 600;">VIP Filters, Assets &amp; Items</td>
+          <td style="padding: 10px 14px; color: var(--muted);">Locked (Requires Paid Subscription)</td>
+          <td style="padding: 10px 14px; font-weight: 700; color: #10b981; background: rgba(245, 158, 11, 0.04);">✓ All Premium Assets &amp; Pro Unlocked</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 10px 14px; font-weight: 600;">Download &amp; Server Speed</td>
+          <td style="padding: 10px 14px; color: var(--muted);">Standard CDN Bandwidth</td>
+          <td style="padding: 10px 14px; font-weight: 700; color: #10b981; background: rgba(245, 158, 11, 0.04);">✓ Ultra High-Speed Multi-Thread CDN</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px 14px; font-weight: 600;">Security &amp; Anti-Ban Engine</td>
+          <td style="padding: 10px 14px; color: var(--muted);">Standard Play Protect</td>
+          <td style="padding: 10px 14px; font-weight: 700; color: #10b981; background: rgba(245, 158, 11, 0.04);">✓ Verified Keystore &bull; Anti-Ban Safe</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 1rem; background: var(--bg-card); border-radius: 10px; border: 1px solid var(--border);">
+    <div>
+      <strong style="color: var(--text); font-size: 1rem; display: block;">Unlock Complete VIP Experience for ${app.name}</strong>
+      <span style="font-size: 0.85rem; color: var(--muted);">Direct high-speed unlocked package with all premium privileges activated.</span>
+    </div>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <a href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" class="btn primary" style="background: linear-gradient(90deg, #f59e0b, #d97706); color: #000; font-weight: 800; border: none; padding: 0.8rem 1.4rem; border-radius: 8px; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35); text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+        <span>🚀 Download VIP Mod Edition &rarr;</span>
+      </a>
+      <a href="#download-box" class="btn" style="background: var(--bg-surface); border: 1px solid var(--border); font-weight: 600; padding: 0.8rem 1.2rem; border-radius: 8px; color: var(--text); text-decoration: none;">
+        <span>Standard Free APK</span>
+      </a>
+    </div>
+  </div>
+</div>`;
+}
+
+function cloudGamingCard(app) {
+  const isHeavyOrGame = app.cat_kind === 'game' || app.app_type === 'game' || (app.size_bytes && app.size_bytes > 70_000_000);
+  if (!isHeavyOrGame) return '';
+  return html`
+<div class="card cloud-phone-cpa-box" style="margin: 1.5rem 0; padding: 1.5rem; background: linear-gradient(135deg, rgba(147, 51, 234, 0.08), rgba(59, 130, 246, 0.08)); border: 1.5px solid #9333ea; border-radius: 14px; box-shadow: 0 4px 16px rgba(147, 51, 234, 0.12);">
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 0.75rem;">
+    <span style="display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(90deg, #9333ea, #7c3aed); color: #fff; font-weight: 800; font-size: 0.72rem; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em;">
+      ⚡ Cloud Phone Edition &bull; Low RAM Fix
+    </span>
+    <span style="font-size: 0.8rem; color: #10b981; font-weight: 700;">✓ 0MB Storage Required &bull; 120 FPS Ultra Graphics</span>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.25rem;">
+    <div style="flex: 1; min-width: 250px;">
+      <h3 style="margin: 0 0 6px 0; font-size: 1.15rem; color: var(--text);">Low Phone Storage or Heating Up? Play ${app.name} on Virtual Cloud Phone</h3>
+      <p style="margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.5;">
+        Running out of internal storage or getting lag on your Android phone? Launch and play ${app.name} instantly on a high-spec virtual Android Cloud Phone in your browser. Powered by 16GB RAM cloud servers, zero download required, zero battery drain, and no overheating.
+      </p>
+    </div>
+    <a href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" class="btn primary" style="background: linear-gradient(90deg, #9333ea, #6366f1); color: #fff; font-weight: 800; border: none; padding: 0.85rem 1.4rem; border-radius: 8px; box-shadow: 0 4px 16px rgba(147, 51, 234, 0.35); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M6 10h.01"/><path d="M10 10h.01"/><path d="M14 10h.01"/><path d="M18 10h.01"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+      <span>🎮 Play on Cloud Phone Free &rarr;</span>
+    </a>
+  </div>
+</div>`;
+}
+
+function storeAppCalloutCard(app) {
+  return html`
+<div class="store-app-callout card" style="margin: 1.25rem 0; padding: 14px 18px; background: linear-gradient(135deg, rgba(37,99,235,0.07), rgba(16,185,129,0.07)); border: 1.5px solid #2563eb; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+  <div style="display: flex; align-items: center; gap: 12px; min-width: 240px; flex: 1;">
+    <div style="width: 44px; height: 44px; background: #2563eb; color: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0;">📲</div>
+    <div>
+      <div style="font-weight: 700; font-size: 0.98rem; color: var(--text);">Want 10x Faster Downloads &amp; Automatic Background Updates?</div>
+      <div style="font-size: 0.82rem; color: var(--muted); margin-top: 2px;">Install the official APKWorlds Store App (v3.2, 3.5MB, 100% Free &bull; Zero Virus).</div>
+    </div>
+  </div>
+  <a href="/api/download-apkworlds-app" class="btn primary" style="background: linear-gradient(90deg, #2563eb, #1d4ed8); color: #fff; font-size: 0.85rem; font-weight: 700; padding: 0.65rem 1.25rem; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 3px 10px rgba(37,99,235,0.3); white-space: nowrap;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    <span>⚡ Get Store App (3.5MB)</span>
+  </a>
+</div>`;
+}
+
+function userDeviceCompatCard(app, hosted, file) {
+  const minVer = parseFloat(hosted ? file?.v_min_android : app.min_android) || 7.0;
+  return html`
+<div id="userDeviceCompatBadge" class="user-device-compat-box card" data-min-android="${minVer}" data-app-name="${app.name}" style="margin: 1.25rem 0; padding: 14px 18px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(37, 99, 235, 0.05)); border: 1.5px solid #10b981; border-radius: 12px;">
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+    <div style="display: flex; align-items: center; gap: 12px; min-width: 240px; flex: 1;">
+      <div id="compatDeviceIcon" style="font-size: 1.8rem; line-height: 1;">📱</div>
+      <div>
+        <div style="font-weight: 700; color: var(--text); font-size: 0.98rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <span>Detected Device:</span>
+          <span id="compatDeviceName" style="color: #2563eb; font-weight: 800;">Checking Your Device...</span>
+        </div>
+        <div id="compatDeviceDesc" style="font-size: 0.82rem; color: var(--muted); margin-top: 2px;">
+          Checking Android OS architecture and hardware compatibility with ${app.name} (${app.version ? 'v' + app.version : 'latest'}).
+        </div>
+      </div>
+    </div>
+    <div id="compatStatusPill" style="display: inline-flex; align-items: center; gap: 6px; background: #10b981; color: #fff; font-weight: 800; font-size: 0.75rem; padding: 4px 12px; border-radius: 20px; text-transform: uppercase;">
+      ✓ 100% Compatible
+    </div>
+  </div>
+</div>`;
+}
+
 function exitIntentModal(app) {
   return html`
 <!-- Exit-Intent Download Reminder Modal -->
@@ -493,13 +632,14 @@ export function appPage(req, app) {
     <!-- 1-Click Social Share Bar -->
     ${socialShareBar(app.name, `/apps/${app.slug}/`, app.summary)}
 
-    <!-- 1-Click WhatsApp & Telegram Viral Share Card -->
+    <!-- 1-Click WhatsApp Viral Share Card -->
     ${viralShareCard(app)}
   </div>
 
   <!-- Sitelinks Quick Jump Bar (Google Search Sitelinks Expander) -->
   <nav class="subnav sitelinks-jump-bar" aria-label="${app.name} sections"><ul>
     <li><a href="#download-box" class="jump-pill">⚡ Download APK</a></li>
+    <li><a href="#vip-mod-matrix" class="jump-pill">👑 VIP Mod</a></li>
     <li><a href="#whats-new" class="jump-pill">✨ What's New</a></li>
     <li><a href="#compatChecker" class="jump-pill">📱 Compatibility</a></li>
     <li><a href="#screenshots" class="jump-pill">🖼️ Screenshots</a></li>
@@ -512,6 +652,12 @@ export function appPage(req, app) {
     ${downloadBox(app, file)}
     ${factsTable(app)}
   </div>
+
+  <!-- Free Standard vs VIP Mod Unlocked Feature Matrix Table -->
+  ${vipModMatrixCard(app)}
+
+  <!-- Cloud Phone Virtual Android Gaming (Low RAM Fix) -->
+  ${cloudGamingCard(app)}
 
   <!-- PC Emulator High-Paying CPA Recommendation -->
   ${emulatorDownloadCard(app)}
@@ -666,6 +812,9 @@ export function appPage(req, app) {
       </a>
       <a href="/tools/apk-error-solver/?app=${app.slug}" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
         <span>🛠️</span> Fix ${app.name} APK Errors
+      </a>
+      <a href="/tools/apk-hash-verifier/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+        <span>🔍</span> Verify ${app.name} SHA-256
       </a>
       <a href="${catUrl({ kind: app.cat_kind, slug: app.cat_slug })}" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
         <span>📁</span> Top ${app.cat_name} Apps
@@ -968,7 +1117,7 @@ export function downloadPage(req, app) {
   ${hosted ? row('File type check', file.file_type_ok ? 'Valid APK (ZIP) container' : 'Not a valid APK container') : ''}
   ${hosted ? row('Signature', file.signature_status === 'not_checked' ? 'Not checked' : file.signature_status) : ''}
   ${hosted ? row('Package name', file.package_name_declared ? html`<code>${file.package_name_declared}</code> (as declared by the uploader)` : NA) : ''}
-  ${hosted ? row('SHA-256', html`<code class="hash">${file.sha256}</code>`) : ''}
+  ${hosted ? row('SHA-256', html`<code class="hash">${file.sha256}</code> <a href="/tools/apk-hash-verifier/" class="verify-hash-link" style="color: #2563eb; font-size: 0.8rem; margin-left: 8px; font-weight: 600;">[Verify Hash ↗]</a>`) : row('Integrity Verification', html`<a href="/tools/apk-hash-verifier/" style="color: #2563eb; font-weight: 600;">Online APK Hash &amp; Checksum Tool &rarr;</a>`)}
 </dl>
 
 <div class="safety" role="note"><p><strong>Before you install:</strong> only install APK files from sources you trust. Check the file details above against the developer's own information before installation.</p></div>
@@ -990,6 +1139,9 @@ export function downloadPage(req, app) {
 
   <h3 style="margin-top:0; font-size: 1.25rem;">Official Verified Package Distribution</h3>
   <p style="color: var(--muted); font-size: 0.95rem;">To safeguard Android device integrity, ${app.name} is delivered with end-to-end cryptographic integrity verification.</p>
+
+  <!-- Auto-Detect User Device & Android Version Compatibility Banner -->
+  ${userDeviceCompatCard(app, hosted, file)}
 
   <!-- Interactive 5-Second Download Countdown Timer -->
   <div id="dl-countdown-wrap" style="text-align: center; padding: 1.5rem; background: var(--bg-surface); border-radius: 12px; border: 1px solid var(--border); margin: 1.25rem 0;">
@@ -1042,6 +1194,9 @@ export function downloadPage(req, app) {
 
     <!-- Action Area (Revealed smoothly when timer finishes) -->
     <div id="dl-action-area" style="display: none; margin-top: 1.25rem;">
+      <!-- APKWorlds Official Store App Callout -->
+      ${storeAppCalloutCard(app)}
+
       <div class="mirrors-card">
         <div class="mirrors-header">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -1145,6 +1300,9 @@ export function downloadPage(req, app) {
   <!-- PC / Windows Emulator High-Paying CPA Recommendation -->
   ${emulatorDownloadCard(app)}
 
+  <!-- Cloud Phone Edition for Low RAM & Heavy Games -->
+  ${cloudGamingCard(app)}
+
   ${app.official_apk_page && app.official_apk_page !== app.play_url ? html`<p class="small">Developer direct APK portal: ${ext(app.official_apk_page, 'Visit Official Release Page', '', 'official_click')}.</p>` : ''}
   <p class="small" style="color: var(--muted); margin-bottom: 0;">✓ Verified genuine developer cryptographic signature. Zero altered binaries or repackaged adware.</p>
 </div>
@@ -1152,7 +1310,7 @@ export function downloadPage(req, app) {
 <!-- 1-Click Social Share Bar -->
 ${socialShareBar(`Download ${app.name} APK`, `/apps/${app.slug}/download/`)}
 
-<!-- 1-Click WhatsApp & Telegram Viral Share Card -->
+<!-- 1-Click WhatsApp Viral Share Card -->
 ${viralShareCard(app)}
 
 <section class="install-guide-tabs" id="install-guide">
@@ -1211,6 +1369,9 @@ ${modRequestCard(app)}
     </a>
     <a href="/tools/apk-error-solver/?app=${app.slug}" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
       <span>🛠️</span> APK Error Solver
+    </a>
+    <a href="/tools/apk-hash-verifier/" class="silo-link" style="display: flex; align-items: center; gap: 8px; padding: 0.65rem 0.9rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500;">
+      <span>🔍</span> Online APK Hash Verifier
     </a>
   </div>
 </section>

@@ -47,6 +47,23 @@ setTimeout(async () => {
     const icon = await testUrl('http://localhost:3000/icons/signal.svg');
     console.log(`- GET /icons/signal.svg : ${icon.status} (is svg: ${icon.headers['content-type'].includes('svg')})`);
 
+    const verifier = await testUrl('http://localhost:3000/tools/apk-hash-verifier/');
+    console.log(`- GET /tools/apk-hash-verifier/ : ${verifier.status} (has dropzone: ${verifier.body.includes('apkDropzone')})`);
+
+    const storeApp = await testUrl('http://localhost:3000/api/download-apkworlds-app');
+    console.log(`- GET /api/download-apkworlds-app : ${storeApp.status} (type: ${storeApp.headers['content-type']}, size: ${storeApp.body.length})`);
+
+    const dlPage = await testUrl('http://localhost:3000/apps/signal/download/');
+    console.log(`- GET /apps/signal/download/ : ${dlPage.status} (has device badge: ${dlPage.body.includes('userDeviceCompatBadge')})`);
+
+    const payback = await testUrl('http://localhost:3000/apps/payback-2/');
+    console.log(`- GET /apps/payback-2/ : ${payback.status} (has cloud gaming: ${payback.body.includes('cloud-phone-cpa-box')})`);
+
+    if (!verifier.body.includes('apkDropzone')) throw new Error('Verifier missing apkDropzone');
+    if (!app.body.includes('vip-mod-matrix')) throw new Error('App page missing vip-mod-matrix');
+    if (!dlPage.body.includes('userDeviceCompatBadge')) throw new Error('Download page missing userDeviceCompatBadge');
+    if (!payback.body.includes('cloud-phone-cpa-box')) throw new Error('Payback 2 missing cloud-phone-cpa-box');
+
     console.log('All endpoints responding correctly!');
     process.exit(0);
   } catch (err) {

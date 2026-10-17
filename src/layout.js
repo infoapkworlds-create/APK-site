@@ -66,6 +66,10 @@ function header(path) {
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg>
           <span>Install</span>
         </button>
+        <a href="/api/download-apkworlds-app" class="btn-hdr-app" title="Download Official APKWorlds Store App (3.5MB)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg>
+          <span>Get App</span>
+        </a>
         <button type="button" id="themeToggleBtn" class="btn-theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
           <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -109,7 +113,7 @@ function footer() {
       ${col('Top Discoveries', [['/popular/', 'Top Charts'], ['/latest/', 'Latest Apps'], ['/updated/', 'Recently Updated'], ['/games/', 'Android Games'], ['/apps/', 'Android Apps']])}
       ${col('Categories', [['/categories/', 'All Categories'], ['/apps/communication/', 'Communication'], ['/apps/tools/', 'Tools & Utilities'], ['/apps/security/', 'VPN & Security'], ['/apps/productivity/', 'Productivity']])}
       ${col('Articles & How-To', [['/guides/', 'Android Guides'], ['/guides/how-to-install-apk/', 'How to Install APK'], ['/compare/', 'App Comparisons'], ['/collections/', 'Curated Collections'], ['/region-restricted/', 'Global Unlocked APKs']])}
-      ${col('Tools & Diagnostics', [['/tools/apk-error-solver/', 'APK Error Solver'], ['/tools/apk-inspector/', 'APK Hash Inspector'], ['/guides/how-to-check-app-permissions/', 'App Permissions'], ['/guides/how-to-update-android-apps/', 'Update APK Files']])}
+      ${col('Tools & Diagnostics', [['/tools/apk-error-solver/', 'APK Error Solver'], ['/tools/apk-hash-verifier/', 'APK Hash Verifier'], ['/tools/apk-inspector/', 'APK Inspector'], ['/guides/how-to-check-app-permissions/', 'App Permissions']])}
       ${col('Company & Legal', [['/about/', 'About Us'], ['/advertise/', 'Advertise With Us'], ['/submit-app/', 'Developer Portal'], ['/editorial-policy/', 'Editorial Policy'], ['/download-policy/', 'Download Policy'], ['/copyright/', 'DMCA & Copyright'], ['/privacy/', 'Privacy Policy'], ['/contact/', 'Contact Support']])}
     </div>
   </div>

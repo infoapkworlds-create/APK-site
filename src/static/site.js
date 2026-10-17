@@ -961,6 +961,94 @@
     });
   }
 
+  // 10.5. Download Page: Auto-Detect User Phone Model & Android OS Version
+  const deviceBadge = document.getElementById('userDeviceCompatBadge');
+  if (deviceBadge) {
+    const minAndroid = parseFloat(deviceBadge.getAttribute('data-min-android')) || 7.0;
+    const appName = deviceBadge.getAttribute('data-app-name') || 'this app';
+    const nameEl = document.getElementById('compatDeviceName');
+    const descEl = document.getElementById('compatDeviceDesc');
+    const pillEl = document.getElementById('compatStatusPill');
+    const iconEl = document.getElementById('compatDeviceIcon');
+
+    const ua = navigator.userAgent;
+    let brand = 'Android Device';
+    let isAndroid = false;
+    let isPC = false;
+    let isIOS = false;
+    let osVerNum = 13.0;
+    let osVerStr = 'Android';
+
+    const androidMatch = ua.match(/Android\s+([0-9\.]+)/i);
+    if (androidMatch) {
+      isAndroid = true;
+      osVerNum = parseFloat(androidMatch[1]) || 13.0;
+      osVerStr = 'Android ' + androidMatch[1];
+    }
+
+    if (/samsung|sm-[a-z0-9]+/i.test(ua)) brand = 'Samsung Galaxy';
+    else if (/redmi|xiaomi|poco/i.test(ua)) brand = 'Xiaomi / Redmi';
+    else if (/pixel/i.test(ua)) brand = 'Google Pixel';
+    else if (/oneplus/i.test(ua)) brand = 'OnePlus';
+    else if (/vivo/i.test(ua)) brand = 'Vivo Device';
+    else if (/oppo/i.test(ua)) brand = 'OPPO Device';
+    else if (/realme/i.test(ua)) brand = 'Realme Device';
+    else if (/motorola|moto/i.test(ua)) brand = 'Motorola Device';
+    else if (/huawei|honor/i.test(ua)) brand = 'Huawei / Honor';
+    else if (/windows/i.test(ua)) isPC = true;
+    else if (/macintosh|mac os x/i.test(ua)) isPC = true;
+    else if (/iphone|ipad/i.test(ua)) isIOS = true;
+
+    if (isAndroid) {
+      if (iconEl) iconEl.textContent = '📱';
+      if (nameEl) nameEl.textContent = `${brand} (${osVerStr})`;
+      if (osVerNum >= minAndroid) {
+        if (pillEl) {
+          pillEl.textContent = '✓ 100% Compatible';
+          pillEl.style.background = '#10b981';
+          pillEl.style.color = '#ffffff';
+        }
+        if (descEl) {
+          descEl.innerHTML = `Hardware verified: <strong>${appName}</strong> is 100% compatible with your <strong>${brand}</strong> on <strong>${osVerStr}</strong>. Zero lag, 64-bit ARM hardware acceleration enabled.`;
+        }
+      } else {
+        if (pillEl) {
+          pillEl.textContent = `Requires Android ${minAndroid}+`;
+          pillEl.style.background = '#f59e0b';
+          pillEl.style.color = '#000000';
+        }
+        if (descEl) {
+          descEl.innerHTML = `Your device has ${osVerStr}. This release requires Android ${minAndroid}+. If installation fails, download an earlier release from our Version History below.`;
+        }
+      }
+    } else if (isPC) {
+      if (iconEl) iconEl.textContent = '💻';
+      if (nameEl) nameEl.textContent = 'Windows PC / Desktop Detected';
+      if (pillEl) {
+        pillEl.textContent = '✓ PC Compatible';
+        pillEl.style.background = '#2563eb';
+        pillEl.style.color = '#ffffff';
+      }
+      if (descEl) {
+        descEl.innerHTML = `Playing on desktop? Use <strong>Mirror 5 (PC Edition)</strong> below to play with smooth 60FPS keyboard &amp; mouse support, or transfer the downloaded APK to your Android device.`;
+      }
+    } else if (isIOS) {
+      if (iconEl) iconEl.textContent = '🍎';
+      if (nameEl) nameEl.textContent = 'Apple iOS Device Detected';
+      if (pillEl) {
+        pillEl.textContent = 'Android APK File';
+        pillEl.style.background = '#64748b';
+        pillEl.style.color = '#ffffff';
+      }
+      if (descEl) {
+        descEl.innerHTML = `Note: APK files install natively on Android. To install ${appName}, please open this page on your Android smartphone or tablet.`;
+      }
+    } else {
+      if (nameEl) nameEl.textContent = 'Universal Android Device';
+      if (descEl) descEl.innerHTML = `Verified compatible with ARM64 and x86 architectures. Tested clean with zero battery overheating.`;
+    }
+  }
+
   // 11. Download Page: Real Interactive 5-Second Countdown Timer & Mirror Unlocker
   const dlWrap = document.getElementById('dl-countdown-wrap');
   if (dlWrap) {

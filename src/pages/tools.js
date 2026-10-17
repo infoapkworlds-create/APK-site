@@ -3,17 +3,25 @@ import { page, adNativeWidget } from '../layout.js';
 import { config } from '../config.js';
 
 export function apkInspectorPage(req) {
+  const isVerifier = req?.path?.includes('apk-hash-verifier');
+  const path = isVerifier ? '/tools/apk-hash-verifier/' : '/tools/apk-inspector/';
+  const pageTitle = isVerifier
+    ? 'Online APK Hash Verifier & SHA-256 Checksum Tool | Free Security Inspector'
+    : 'Online APK Hash & Security Inspector | Free SHA-256 Analyzer';
+  const pageDesc = 'Verify genuine Android APK packages client-side in your browser. Inspect authentic SHA-256 cryptographic checksums, calculate hashes, verify file sizes, and cross-reference with VirusTotal databases.';
+
   const body = html`
 <header class="page-head">
-  <h1>Online APK Hash &amp; Security Inspector</h1>
-  <p class="lead">Verify genuine Android APK packages client-side in your browser. Inspect authentic SHA-256 cryptographic checksums, file sizes, and cross-reference with VirusTotal databases.</p>
+  <span style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; background:rgba(16,185,129,0.12); color:#10b981; padding:4px 12px; border-radius:9999px; display:inline-block; margin-bottom:0.75rem;">Instant Browser Tool &bull; Web Crypto API</span>
+  <h1>Online APK Hash Verifier &amp; Security Inspector</h1>
+  <p class="lead">${pageDesc}</p>
 </header>
 
 <div class="tools-layout" style="max-width: 860px; margin: 1.5rem auto;">
   <!-- Drag and drop zone -->
   <div class="apk-dropzone card" id="apkDropzone">
     <div class="dropzone-icon">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     </div>
     <h2 class="dropzone-title">Drag &amp; Drop Any .APK File Here</h2>
     <p class="dropzone-sub">or click below to choose a file from your computer or Android device</p>
@@ -22,7 +30,7 @@ export function apkInspectorPage(req) {
       Select APK File
     </label>
     <input type="file" id="apkFileInput" accept=".apk" style="display:none;">
-    <p class="dropzone-privacy-badge">🔒 100% Private &amp; Client-Side: File never leaves your browser. Computation is processed locally using Web Crypto API.</p>
+    <p class="dropzone-privacy-badge">🔒 100% Private &amp; Client-Side: File never leaves your device. Computation is processed locally using Web Crypto API.</p>
   </div>
 
   <!-- Loading Progress Bar -->
@@ -95,10 +103,10 @@ export function apkInspectorPage(req) {
 `;
 
   return page({
-    title: 'Online APK Hash & Security Inspector | Free SHA-256 Analyzer',
-    description: 'Inspect Android APK files in your browser. Calculate authentic SHA-256 checksums, verify package integrity, and check VirusTotal signatures client-side.',
-    path: '/tools/apk-inspector/',
-    crumbs: [['Home', '/'], ['APK Security Inspector', '/tools/apk-inspector/']],
+    title: pageTitle,
+    description: pageDesc,
+    path,
+    crumbs: [['Home', '/'], [isVerifier ? 'APK Hash Verifier' : 'APK Security Inspector', path]],
     body,
   });
 }
