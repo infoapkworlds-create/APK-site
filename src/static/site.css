@@ -4730,6 +4730,185 @@ tr:last-child td { border-bottom: none; }
   border-color: #24344d !important;
 }
 
+/* ==========================================================================
+   Mobile Floating Action Bar (Sticky Bottom Bar)
+   ========================================================================== */
+.mobile-floating-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 2px solid #2563eb;
+  padding: 8px 14px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.35);
+  animation: slideUpFloat 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes slideUpFloat {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.mobile-floating-content {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.mobile-floating-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+.mobile-floating-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.mobile-floating-meta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.mobile-floating-name {
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+.mobile-floating-sub {
+  color: #10b981;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.mobile-floating-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.mobile-floating-action-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff !important;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+  transition: transform 0.15s ease;
+}
+.mobile-floating-action-btn:active {
+  transform: scale(0.96);
+}
+.mobile-floating-close {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+.mobile-floating-close:hover {
+  color: #ffffff;
+}
+@media (min-width: 900px) {
+  .mobile-floating-bar {
+    left: auto;
+    right: 20px;
+    bottom: 20px;
+    border-radius: 14px;
+    border: 1.5px solid #2563eb;
+    max-width: 420px;
+    padding: 10px 16px;
+  }
+}
+
+/* ==========================================================================
+   Web Push Notification Opt-in Prompt Banner
+   ========================================================================== */
+.push-optin-prompt {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 10000;
+  max-width: 400px;
+  width: calc(100% - 32px);
+  background: var(--bg-card, #ffffff);
+  border: 1.5px solid #2563eb;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 14px 16px;
+  animation: slideDownPrompt 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes slideDownPrompt {
+  from { transform: translateY(-30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.push-optin-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.push-optin-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+.push-optin-text strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text, #1e293b);
+  margin-bottom: 2px;
+}
+.push-optin-text span {
+  font-size: 0.82rem;
+  color: var(--muted, #64748b);
+  line-height: 1.4;
+  display: block;
+}
+.push-optin-btns {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.push-optin-btn {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.push-optin-dismiss {
+  background: transparent;
+  border: 1px solid var(--border, #cbd5e1);
+  color: var(--muted, #64748b);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
 
 
 

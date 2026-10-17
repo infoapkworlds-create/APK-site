@@ -373,6 +373,55 @@ export function homePage(req) {
       </div>
     </section>
 
+    <!-- Section: Featured Curated Collections (High Intent Keywords) -->
+    <section class="pure-shelf-sec" id="curated-collections">
+      <div class="pure-sec-hdr" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+        <h2 class="pure-sec-title"><a href="/collections/">Featured Curated Collections <span class="arrow">&rsaquo;</span></a></h2>
+        <a href="/collections/" style="font-size: 0.85rem; font-weight: 700; color: var(--primary); text-decoration: none;">View All 4+ Collections &rarr;</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 0.85rem;">
+        <a href="/collections/best-offline-games/" class="card" style="padding: 1.25rem; border-radius: 12px; text-decoration: none; color: var(--text); border: 1.5px solid #10b981; background: var(--bg-card); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-size: 1.8rem; margin-bottom: 0.4rem;">🎮</div>
+            <span style="font-size: 0.7rem; font-weight: 800; background: #10b981; color: #fff; padding: 2px 8px; border-radius: 10px; text-transform: uppercase;">Top 10 Ranked</span>
+            <h3 style="margin: 6px 0 4px 0; font-size: 1.05rem; line-height: 1.3;">Best Offline Android Games</h3>
+            <p style="margin: 0; font-size: 0.82rem; color: var(--muted); line-height: 1.4;">Zero Wi-Fi or cellular data required. Fast endless runners, arcade racers, and action RPGs.</p>
+          </div>
+          <span style="margin-top: 1rem; font-size: 0.82rem; font-weight: 700; color: #10b981;">Browse Top 10 Games &rarr;</span>
+        </a>
+
+        <a href="/collections/video-editors-no-watermark/" class="card" style="padding: 1.25rem; border-radius: 12px; text-decoration: none; color: var(--text); border: 1.5px solid #2563eb; background: var(--bg-card); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-size: 1.8rem; margin-bottom: 0.4rem;">🎬</div>
+            <span style="font-size: 0.7rem; font-weight: 800; background: #2563eb; color: #fff; padding: 2px 8px; border-radius: 10px; text-transform: uppercase;">Creator Picks</span>
+            <h3 style="margin: 6px 0 4px 0; font-size: 1.05rem; line-height: 1.3;">Video Editors (No Watermark)</h3>
+            <p style="margin: 0; font-size: 0.82rem; color: var(--muted); line-height: 1.4;">Clean 4K 60FPS exports for TikToks, YouTube Shorts, and Instagram Reels.</p>
+          </div>
+          <span style="margin-top: 1rem; font-size: 0.82rem; font-weight: 700; color: #2563eb;">Explore Video Editors &rarr;</span>
+        </a>
+
+        <a href="/collections/fast-free-vpn/" class="card" style="padding: 1.25rem; border-radius: 12px; text-decoration: none; color: var(--text); border: 1.5px solid #8b5cf6; background: var(--bg-card); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-size: 1.8rem; margin-bottom: 0.4rem;">🛡️</div>
+            <span style="font-size: 0.7rem; font-weight: 800; background: #8b5cf6; color: #fff; padding: 2px 8px; border-radius: 10px; text-transform: uppercase;">High Speed</span>
+            <h3 style="margin: 6px 0 4px 0; font-size: 1.05rem; line-height: 1.3;">Fast Free Unlimited VPNs</h3>
+            <p style="margin: 0; font-size: 0.82rem; color: var(--muted); line-height: 1.4;">Bypass ISP throttling, low-ping gaming tunnels, and unblocked streaming.</p>
+          </div>
+          <span style="margin-top: 1rem; font-size: 0.82rem; font-weight: 700; color: #8b5cf6;">View Top VPNs &rarr;</span>
+        </a>
+
+        <a href="/collections/lite-apps-low-end-phones/" class="card" style="padding: 1.25rem; border-radius: 12px; text-decoration: none; color: var(--text); border: 1.5px solid #f59e0b; background: var(--bg-card); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-size: 1.8rem; margin-bottom: 0.4rem;">⚡</div>
+            <span style="font-size: 0.7rem; font-weight: 800; background: #f59e0b; color: #000; padding: 2px 8px; border-radius: 10px; text-transform: uppercase;">Under 25MB</span>
+            <h3 style="margin: 6px 0 4px 0; font-size: 1.05rem; line-height: 1.3;">Lite Apps for Low RAM Phones</h3>
+            <p style="margin: 0; font-size: 0.82rem; color: var(--muted); line-height: 1.4;">Save storage and RAM on 1GB/2GB budget Android smartphones.</p>
+          </div>
+          <span style="margin-top: 1rem; font-size: 0.82rem; font-weight: 700; color: #d97706;">See Lightweight Apps &rarr;</span>
+        </a>
+      </div>
+    </section>
+
     <!-- Section 6: Popular Articles in Last 24 Hours -->
     <section class="pure-shelf-sec">
       <div class="pure-sec-hdr">

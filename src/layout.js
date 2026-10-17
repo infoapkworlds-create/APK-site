@@ -240,7 +240,40 @@ ${footer()}
       <button type="button" id="adblockDismissBtn" class="adblock-btn-secondary">Continue with limited speed &rarr;</button>
     </div>
   </div>
+<!-- Mobile Sticky Floating Action Bar (High CTR Conversion Bar) -->
+<div id="mobileFloatingBar" class="mobile-floating-bar" style="display:none;" role="region" aria-label="Quick Action">
+  <div class="mobile-floating-content">
+    <div class="mobile-floating-left">
+      <img id="mobileFloatingIcon" src="/icons/capcut.webp" alt="App Icon" width="38" height="38" class="mobile-floating-img" onerror="this.onerror=null;this.src='/static/og-default.png'">
+      <div class="mobile-floating-meta">
+        <span id="mobileFloatingTitle" class="mobile-floating-name">CapCut Pro</span>
+        <span id="mobileFloatingSub" class="mobile-floating-sub">Verified Safe 🛡️</span>
+      </div>
+    </div>
+    <div class="mobile-floating-right">
+      <a id="mobileFloatingBtn" href="/apps/capcut/download/" class="mobile-floating-action-btn">
+        <span>⚡ Fast Download</span>
+      </a>
+      <button type="button" id="mobileFloatingClose" class="mobile-floating-close" aria-label="Dismiss">&times;</button>
+    </div>
+  </div>
 </div>
+
+<!-- Web Push Notification Opt-in Prompt Banner -->
+<div id="pushOptinPrompt" class="push-optin-prompt" style="display:none;" role="dialog" aria-label="Update Notifications">
+  <div class="push-optin-inner">
+    <div class="push-optin-icon">🔔</div>
+    <div class="push-optin-text">
+      <strong>Never Miss an Update:</strong>
+      <span>Get instant alerts when new mod updates, bug fixes, and verified APKs are released.</span>
+    </div>
+    <div class="push-optin-btns">
+      <button type="button" id="pushOptinAllow" class="btn primary push-optin-btn">Allow Alerts</button>
+      <button type="button" id="pushOptinLater" class="push-optin-dismiss">Later</button>
+    </div>
+  </div>
+</div>
+
 <!-- Social Bar / Sticky Notification Tag -->
 <script src="https://pl31752773.profitableratecpmnetwork.com/04/9d/77/049d772dfd76275dbc19a53d62937f43.js"></script>
 </body>

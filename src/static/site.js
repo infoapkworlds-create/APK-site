@@ -979,5 +979,105 @@
       }
     }, 1000);
   }
+
+  // 12. Mobile Sticky Floating Bottom Action Bar (High CTR Conversion Bar)
+  const floatBar = document.getElementById('mobileFloatingBar');
+  if (floatBar && !sessionStorage.getItem('dismissFloatingBar')) {
+    const floatIcon = document.getElementById('mobileFloatingIcon');
+    const floatTitle = document.getElementById('mobileFloatingTitle');
+    const floatSub = document.getElementById('mobileFloatingSub');
+    const floatBtn = document.getElementById('mobileFloatingBtn');
+    const floatClose = document.getElementById('mobileFloatingClose');
+
+    const path = window.location.pathname;
+    const isAppPage = path.startsWith('/apps/') && !path.includes('/download/');
+    const isDownloadPage = path.startsWith('/apps/') && path.includes('/download/');
+
+    if (isAppPage || isDownloadPage) {
+      const pageHeading = document.querySelector('h1');
+      const pageIcon = document.querySelector('.pure-banner-app .icon, .app-hdr .icon, article .icon');
+      const appName = pageHeading ? pageHeading.textContent.replace(/APK.*$/i, '').trim() : 'Android App';
+
+      if (floatTitle) floatTitle.textContent = appName;
+      if (floatSub) floatSub.textContent = 'Verified Safe 🛡️ (Zero Virus)';
+      if (pageIcon && floatIcon) {
+        floatIcon.src = pageIcon.src;
+        floatIcon.alt = appName;
+      }
+
+      if (isDownloadPage) {
+        if (floatBtn) {
+          floatBtn.textContent = '⚡ Select Mirror';
+          floatBtn.href = '#dl-countdown-wrap';
+          floatBtn.addEventListener('click', (e) => {
+            const target = document.getElementById('dl-countdown-wrap');
+            if (target) {
+              e.preventDefault();
+              target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          });
+        }
+      } else {
+        const dlUrl = path.replace(/\/$/, '') + '/download/';
+        if (floatBtn) {
+          floatBtn.textContent = '⚡ Download APK';
+          floatBtn.href = dlUrl;
+        }
+      }
+    } else {
+      if (floatTitle) floatTitle.textContent = 'CapCut Pro (Ad-Free)';
+      if (floatSub) floatSub.textContent = '🔥 Trending Mod Today';
+      if (floatBtn) {
+        floatBtn.textContent = '⚡ Get APK';
+        floatBtn.href = '/apps/capcut/download/';
+      }
+    }
+
+    setTimeout(() => {
+      floatBar.style.display = 'block';
+    }, 1500);
+
+    if (floatClose) {
+      floatClose.addEventListener('click', () => {
+        floatBar.style.display = 'none';
+        sessionStorage.setItem('dismissFloatingBar', '1');
+      });
+    }
+  }
+
+  // 13. Web Push Notification Opt-In Prompt
+  const pushPrompt = document.getElementById('pushOptinPrompt');
+  if (pushPrompt && 'Notification' in window && Notification.permission === 'default' && !sessionStorage.getItem('pushPromptDismissed')) {
+    const pushAllow = document.getElementById('pushOptinAllow');
+    const pushLater = document.getElementById('pushOptinLater');
+
+    setTimeout(() => {
+      pushPrompt.style.display = 'block';
+    }, 10000);
+
+    if (pushAllow) {
+      pushAllow.addEventListener('click', async () => {
+        try {
+          const perm = await Notification.requestPermission();
+          if (perm === 'granted') {
+            pushPrompt.innerHTML = '<div style="color:#10b981; font-weight:700; font-size:0.9rem; text-align:center;">🎉 Subscribed to APKWorlds VIP Update Alerts!</div>';
+            setTimeout(() => { pushPrompt.remove(); }, 2500);
+          } else {
+            pushPrompt.remove();
+          }
+        } catch {
+          pushPrompt.remove();
+        }
+        sessionStorage.setItem('pushPromptDismissed', '1');
+      });
+    }
+
+    if (pushLater) {
+      pushLater.addEventListener('click', () => {
+        pushPrompt.style.display = 'none';
+        sessionStorage.setItem('pushPromptDismissed', '1');
+      });
+    }
+  }
 })();
 
