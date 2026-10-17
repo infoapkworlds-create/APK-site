@@ -59,10 +59,22 @@ setTimeout(async () => {
     const payback = await testUrl('http://localhost:3000/apps/payback-2/');
     console.log(`- GET /apps/payback-2/ : ${payback.status} (has cloud gaming: ${payback.body.includes('cloud-phone-cpa-box')})`);
 
+    const xapkPage = await testUrl('http://localhost:3000/tools/xapk-to-apk-converter/');
+    console.log(`- GET /tools/xapk-to-apk-converter/ : ${xapkPage.status} (has xapkDropzone: ${xapkPage.body.includes('xapkDropzone')})`);
+
+    const verPage = await testUrl('http://localhost:3000/apps/signal/versions/');
+    console.log(`- GET /apps/signal/versions/ : ${verPage.status} (has ver-filter-bar: ${verPage.body.includes('ver-filter-bar')})`);
+
     if (!verifier.body.includes('apkDropzone')) throw new Error('Verifier missing apkDropzone');
     if (!app.body.includes('vip-mod-matrix')) throw new Error('App page missing vip-mod-matrix');
+    if (!app.body.includes('regionUnlocker')) throw new Error('App page missing regionUnlocker');
     if (!dlPage.body.includes('userDeviceCompatBadge')) throw new Error('Download page missing userDeviceCompatBadge');
+    if (!dlPage.body.includes('regionUnlocker')) throw new Error('Download page missing regionUnlocker');
+    if (!dlPage.body.includes('antivirusCertModal')) throw new Error('Download page missing antivirusCertModal');
+    if (!dlPage.body.includes('communityPulseCard')) throw new Error('Download page missing communityPulseCard');
     if (!payback.body.includes('cloud-phone-cpa-box')) throw new Error('Payback 2 missing cloud-phone-cpa-box');
+    if (!xapkPage.body.includes('xapkDropzone')) throw new Error('XAPK converter missing xapkDropzone');
+    if (!verPage.body.includes('ver-filter-bar')) throw new Error('Versions page missing ver-filter-bar');
 
     console.log('All endpoints responding correctly!');
     process.exit(0);

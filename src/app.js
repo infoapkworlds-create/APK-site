@@ -58,7 +58,7 @@ import {
 import { guidesHubPage, guideDetailPage } from './pages/guides.js';
 import { searchPage, suggestApi } from './pages/search.js';
 import { submitAppPage, requestAppPage, reportAppPage } from './pages/submissions.js';
-import { apkInspectorPage, apkErrorSolverPage } from './pages/tools.js';
+import { apkInspectorPage, apkErrorSolverPage, xapkConverterPage } from './pages/tools.js';
 import { collectionsHubPage, collectionDetailPage } from './pages/collections.js';
 import {
   aboutPage,
@@ -540,6 +540,7 @@ export async function appHandler(req, res) {
       `https://${host}/collections/lite-apps-low-end-phones/`,
       `https://${host}/tools/apk-error-solver/`,
       `https://${host}/tools/apk-hash-verifier/`,
+      `https://${host}/tools/xapk-to-apk-converter/`,
       `https://${host}/advertise/`,
     ]);
 
@@ -974,6 +975,8 @@ export async function appHandler(req, res) {
     result = apkInspectorPage(req);
   } else if (pathname === '/tools/apk-error-solver/' || pathname === '/tools/apk-error-solver') {
     result = apkErrorSolverPage(req);
+  } else if (pathname === '/tools/xapk-to-apk-converter/' || pathname === '/tools/xapk-to-apk-converter' || pathname === '/tools/xapk-converter/' || pathname === '/tools/xapk-converter') {
+    result = xapkConverterPage(req);
   } else if (pathname === '/collections/' || pathname === '/collections') {
     result = collectionsHubPage(req);
   } else if (pathname === '/region-restricted/' || pathname === '/region-restricted') {

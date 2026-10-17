@@ -113,7 +113,7 @@ function footer() {
       ${col('Top Discoveries', [['/popular/', 'Top Charts'], ['/latest/', 'Latest Apps'], ['/updated/', 'Recently Updated'], ['/games/', 'Android Games'], ['/apps/', 'Android Apps']])}
       ${col('Categories', [['/categories/', 'All Categories'], ['/apps/communication/', 'Communication'], ['/apps/tools/', 'Tools & Utilities'], ['/apps/security/', 'VPN & Security'], ['/apps/productivity/', 'Productivity']])}
       ${col('Articles & How-To', [['/guides/', 'Android Guides'], ['/guides/how-to-install-apk/', 'How to Install APK'], ['/compare/', 'App Comparisons'], ['/collections/', 'Curated Collections'], ['/region-restricted/', 'Global Unlocked APKs']])}
-      ${col('Tools & Diagnostics', [['/tools/apk-error-solver/', 'APK Error Solver'], ['/tools/apk-hash-verifier/', 'APK Hash Verifier'], ['/tools/apk-inspector/', 'APK Inspector'], ['/guides/how-to-check-app-permissions/', 'App Permissions']])}
+      ${col('Tools & Diagnostics', [['/tools/xapk-to-apk-converter/', 'XAPK Extractor'], ['/tools/apk-error-solver/', 'APK Error Solver'], ['/tools/apk-hash-verifier/', 'APK Hash Verifier'], ['/tools/apk-inspector/', 'APK Inspector'], ['/guides/how-to-check-app-permissions/', 'App Permissions']])}
       ${col('Company & Legal', [['/about/', 'About Us'], ['/advertise/', 'Advertise With Us'], ['/submit-app/', 'Developer Portal'], ['/editorial-policy/', 'Editorial Policy'], ['/download-policy/', 'Download Policy'], ['/copyright/', 'DMCA & Copyright'], ['/privacy/', 'Privacy Policy'], ['/contact/', 'Contact Support']])}
     </div>
   </div>

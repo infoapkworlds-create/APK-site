@@ -250,3 +250,131 @@ export function apkErrorSolverPage(req) {
   });
 }
 
+export function xapkConverterPage(req) {
+  const body = html`
+<header class="page-head">
+  <span style="font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; background:rgba(37,99,235,0.1); color:#2563eb; padding:4px 12px; border-radius:9999px; display:inline-block; margin-bottom:0.75rem;">1-Click Browser Extractor &bull; 0MB Upload Needed</span>
+  <h1>Online XAPK to APK &amp; OBB Extractor</h1>
+  <p class="lead">Extract standalone <code>.APK</code> installers and <code>.OBB</code> cache folders from any <code>.XAPK</code> or <code>.APKS</code> bundle directly in your browser. 100% private, client-side extraction with zero upload data usage.</p>
+</header>
+
+<div class="tools-layout" style="max-width: 860px; margin: 1.5rem auto;">
+  <!-- Dropzone -->
+  <div class="apk-dropzone card" id="xapkDropzone" style="border: 2px dashed #2563eb; padding: 2.5rem 1.5rem; text-align: center; border-radius: 16px; background: var(--bg-surface);">
+    <div class="dropzone-icon" style="font-size: 3rem; margin-bottom: 0.5rem;">📦</div>
+    <h2 class="dropzone-title" style="margin: 0 0 8px 0; font-size: 1.35rem;">Drag &amp; Drop Your .XAPK or .APKS File Here</h2>
+    <p class="dropzone-sub" style="color: var(--muted); margin: 0 0 1.25rem 0; font-size: 0.95rem;">or click below to select a file from your phone or PC</p>
+    <label class="btn primary" for="xapkFileInput" style="cursor:pointer; display:inline-flex; align-items:center; gap:8px; font-weight: 700; padding: 0.75rem 1.5rem; border-radius: 8px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Select .XAPK File
+    </label>
+    <input type="file" id="xapkFileInput" accept=".xapk,.apks,.zip,.apkm" style="display:none;">
+    <p class="dropzone-privacy-badge" style="font-size: 0.8rem; color: #10b981; margin-top: 1rem; font-weight: 600;">🔒 100% Private &amp; In-Browser: Your file is never uploaded to any remote server. It is unzipped locally inside your browser memory.</p>
+  </div>
+
+  <!-- Progress Bar -->
+  <div id="xapkProgress" style="display:none; margin: 1.5rem 0;" class="card">
+    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-weight:700;">
+      <span id="xapkProgressLabel">Unpacking XAPK Container...</span>
+      <span id="xapkProgressText">0%</span>
+    </div>
+    <div style="height:8px; background:rgba(0,0,0,0.08); border-radius:4px; overflow:hidden;">
+      <div id="xapkProgressBar" style="width:0%; height:100%; background:linear-gradient(90deg, #2563eb, #10b981); transition:width 0.2s ease;"></div>
+    </div>
+  </div>
+
+  <!-- Extraction Results -->
+  <div id="xapkResults" class="card" style="display:none; margin-top: 1.5rem; padding: 1.5rem; border: 1.5px solid #10b981; border-radius: 14px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:1.5rem;">🎉</span>
+        <h3 style="margin:0; font-size:1.25rem;">Extracted Packages Ready for Download</h3>
+      </div>
+      <span style="background:#10b981; color:#fff; font-size:0.75rem; padding:3px 10px; border-radius:20px; font-weight:800; text-transform:uppercase;">✓ Extraction Complete</span>
+    </div>
+
+    <div id="xapkFileList" style="display:flex; flex-direction:column; gap:12px; margin-bottom:1.5rem;">
+      <!-- Dynamic list of extracted APK and OBB files -->
+    </div>
+
+    <!-- How to install OBB Visual Helper -->
+    <div style="padding:1rem 1.25rem; background:rgba(37,99,235,0.06); border:1px solid rgba(37,99,235,0.25); border-radius:10px;">
+      <strong style="color:#2563eb; font-size:0.95rem; display:block; margin-bottom:4px;">📁 Quick Guide: Where to Copy Extracted OBB Cache?</strong>
+      <ol style="margin:0; padding-left:1.25rem; font-size:0.88rem; color:var(--muted); line-height:1.6;">
+        <li>Install the extracted <strong>Base APK</strong> first, but do not open the app yet.</li>
+        <li>Open your Android File Manager (e.g., ZArchiver, Files by Google).</li>
+        <li>Move the extracted <code>.obb</code> file into: <br><code>Internal Storage &gt; Android &gt; obb &gt; [Game Package Name] &gt;</code></li>
+        <li>Launch the game. It will load immediately without download or license errors!</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- High-Paying 1-Click Auto Installer CPA recommendation -->
+  <div class="card" style="margin: 2rem 0; padding: 1.5rem; background: linear-gradient(135deg, rgba(234,179,8,0.08), rgba(245,158,11,0.08)); border: 1.5px solid #f59e0b; border-radius: 14px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:0.75rem;">
+      <span style="background:#f59e0b; color:#000; font-weight:800; font-size:0.72rem; padding:3px 10px; border-radius:20px; text-transform:uppercase;">⚡ 1-Click Automated Solution</span>
+      <span style="color:#d97706; font-size:0.8rem; font-weight:700;">Skip Manual Extraction</span>
+    </div>
+    <h3 style="margin:0 0 6px 0; font-size:1.15rem; color:var(--text);">Don't Want to Manually Copy OBB Files?</h3>
+    <p style="margin:0 0 1rem 0; font-size:0.9rem; color:var(--muted); line-height:1.5;">
+      Install our official 1-Click XAPK Installer tool to automatically unzip, place OBB files into the correct directory, and launch your games with zero errors.
+    </p>
+    <a href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" class="btn primary" style="background:linear-gradient(90deg, #f59e0b, #d97706); color:#000; font-weight:800; border:none; padding:0.75rem 1.4rem; border-radius:8px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+      <span>🚀 Download 1-Click XAPK Installer (Free) &rarr;</span>
+    </a>
+  </div>
+
+  <!-- Educational & FAQ Section -->
+  <section class="card" style="margin-top: 2rem;">
+    <h2>Everything You Need to Know About XAPK Files</h2>
+    <h3>What is an XAPK File?</h3>
+    <p>An XAPK file is a compressed standard ZIP package designed specifically for Android. It contains the base APK installer along with graphics cache data (OBB files) or split configuration APKs (different screen densities, CPU architectures like ARM64/ARMv7, and localized language packs). Android's default package installer cannot open XAPK files directly without extracting them first.</p>
+
+    <h3>Why Convert XAPK to APK Online with APKWorlds?</h3>
+    <ul>
+      <li><strong>100% In-Browser Privacy:</strong> Your files never upload to a server; unzipping occurs locally in your device's RAM.</li>
+      <li><strong>Direct APK &amp; OBB Downloads:</strong> Separate the game executable and large expansion cache with 1 click.</li>
+      <li><strong>Compatible with Any File Manager:</strong> Works flawlessly with ZArchiver, Solid Explorer, MT Manager, and Files by Google.</li>
+    </ul>
+  </section>
+</div>
+`;
+
+  return page({
+    title: 'Online XAPK to APK & OBB Extractor | Free Split APK Converter',
+    description: 'Convert XAPK to APK online for free. Extract base APK and OBB cache folders directly in your browser without installing third-party apps.',
+    path: '/tools/xapk-to-apk-converter/',
+    crumbs: [['Home', '/'], ['XAPK to APK Converter', '/tools/xapk-to-apk-converter/']],
+    ld: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: 'How to Convert and Install XAPK Files on Android',
+        description: 'Step-by-step instructions to extract XAPK files into APK and OBB and install them on Android.',
+        step: [
+          {
+            '@type': 'HowToStep',
+            position: 1,
+            name: 'Upload XAPK File to Converter',
+            text: 'Drag and drop your .xapk file into the online converter box on APKWorlds.',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 2,
+            name: 'Download Extracted APK and OBB',
+            text: 'Click the download buttons to save the standalone base.apk and main.obb files.',
+          },
+          {
+            '@type': 'HowToStep',
+            position: 3,
+            name: 'Copy OBB and Install APK',
+            text: 'Move the .obb file to Internal Storage/Android/obb/[package_name]/ and install the APK.',
+          },
+        ],
+      },
+    ],
+    body,
+  });
+}
+
+
