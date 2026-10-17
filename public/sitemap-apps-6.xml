@@ -1,54 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.apkworlds.co.uk/apps/tiktok/</loc>
-    <lastmod>2026-10-09</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/tiktok/versions/</loc>
-    <lastmod>2026-07-15</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/tiktok/alternatives/</loc>
-    <lastmod>2026-10-09</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/tiktok/download/</loc>
-    <lastmod>2026-10-09</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/tiktok-asia/</loc>
-    <lastmod>2026-07-27</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/tiktok-asia/versions/</loc>
-    <lastmod>2026-07-27</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/tiktok-asia/alternatives/</loc>
-    <lastmod>2026-07-27</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/tiktok-asia/download/</loc>
-    <lastmod>2026-07-27</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/tiktok-lite/</loc>
-    <lastmod>2026-02-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/tiktok-lite/versions/</loc>
-    <lastmod>2026-02-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/tiktok-lite/alternatives/</loc>
-    <lastmod>2026-02-20</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/tiktok-lite/download/</loc>
-    <lastmod>2026-02-20</lastmod>
-  </url>
-  <url>
     <loc>https://www.apkworlds.co.uk/apps/tinder/</loc>
     <lastmod>2026-09-19</lastmod>
   </url>
@@ -137,6 +89,18 @@
     <lastmod>2026-09-04</lastmod>
   </url>
   <url>
+    <loc>https://www.apkworlds.co.uk/apps/touch-vpn/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/touch-vpn/versions/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/touch-vpn/download/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
     <loc>https://www.apkworlds.co.uk/apps/trello/</loc>
     <lastmod>2026-07-02</lastmod>
   </url>
@@ -223,6 +187,18 @@
   <url>
     <loc>https://www.apkworlds.co.uk/apps/tumblr/download/</loc>
     <lastmod>2026-08-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/tunnelbear-vpn/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/tunnelbear-vpn/versions/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/tunnelbear-vpn/download/</loc>
+    <lastmod>2026-10-17</lastmod>
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/turbo-vpn/</loc>
@@ -353,6 +329,18 @@
     <lastmod>2026-07-03</lastmod>
   </url>
   <url>
+    <loc>https://www.apkworlds.co.uk/apps/videoshow-video-editor/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/videoshow-video-editor/versions/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/videoshow-video-editor/download/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
     <loc>https://www.apkworlds.co.uk/apps/vidmate/</loc>
     <lastmod>2026-07-25</lastmod>
   </url>
@@ -383,6 +371,18 @@
   <url>
     <loc>https://www.apkworlds.co.uk/apps/vivacut/download/</loc>
     <lastmod>2026-05-05</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/vivavideo-video-editor/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/vivavideo-video-editor/versions/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/vivavideo-video-editor/download/</loc>
+    <lastmod>2026-10-17</lastmod>
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/vk/</loc>
@@ -579,6 +579,30 @@
   <url>
     <loc>https://www.apkworlds.co.uk/apps/whatsapp-plus/download/</loc>
     <lastmod>2026-07-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/windscribe-vpn/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/windscribe-vpn/versions/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/windscribe-vpn/download/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/wireguard/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/wireguard/versions/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/wireguard/download/</loc>
+    <lastmod>2026-10-17</lastmod>
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/wise/</loc>

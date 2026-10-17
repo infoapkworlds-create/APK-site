@@ -1,30 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.apkworlds.co.uk/apps/rar/</loc>
-    <lastmod>2026-04-09</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/rar/download/</loc>
-    <lastmod>2026-04-09</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/rar-for-android/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/rar-for-android/versions/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/rar-for-android/alternatives/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/rar-for-android/download/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
     <loc>https://www.apkworlds.co.uk/apps/reddit/</loc>
     <lastmod>2026-05-08</lastmod>
   </url>
@@ -207,6 +183,18 @@
   <url>
     <loc>https://www.apkworlds.co.uk/apps/sd-maid-pro/download/</loc>
     <lastmod>2026-09-14</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/secure-vpn/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/secure-vpn/versions/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/secure-vpn/download/</loc>
+    <lastmod>2026-10-17</lastmod>
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/shareit/</loc>
@@ -531,6 +519,18 @@
   <url>
     <loc>https://www.apkworlds.co.uk/apps/spark-mail/download/</loc>
     <lastmod>2026-01-26</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/speedify-vpn/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/speedify-vpn/versions/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/speedify-vpn/download/</loc>
+    <lastmod>2026-10-17</lastmod>
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/speedtest-ookla/</loc>
@@ -939,5 +939,53 @@
   <url>
     <loc>https://www.apkworlds.co.uk/apps/tidal/download/</loc>
     <lastmod>2026-07-28</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/tiktok/</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/tiktok/versions/</loc>
+    <lastmod>2026-07-15</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/tiktok/alternatives/</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/tiktok/download/</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/tiktok-asia/</loc>
+    <lastmod>2026-07-27</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/tiktok-asia/versions/</loc>
+    <lastmod>2026-07-27</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/tiktok-asia/alternatives/</loc>
+    <lastmod>2026-07-27</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/tiktok-asia/download/</loc>
+    <lastmod>2026-07-27</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/tiktok-lite/</loc>
+    <lastmod>2026-02-20</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/tiktok-lite/versions/</loc>
+    <lastmod>2026-02-20</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/tiktok-lite/alternatives/</loc>
+    <lastmod>2026-02-20</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/tiktok-lite/download/</loc>
+    <lastmod>2026-02-20</lastmod>
   </url>
 </urlset>
