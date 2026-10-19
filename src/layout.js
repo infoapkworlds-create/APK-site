@@ -194,30 +194,8 @@ ${index ? raw('<meta name="robots" content="index, follow, max-image-preview:lar
 <link rel="stylesheet" href="/static/site.css?v=${ASSET_V}">
 <script src="/static/site.js?v=${ASSET_V}" defer></script>
 ${ld.map(jsonld)}
-<!-- Monetag MultiTag Integration (Static for crawler verification & 100% presence) -->
-<script src="https://quge5.com/88/tag.min.js" data-zone="296697" async data-cfasync="false"></script>
-<!-- Controlled Adsterra Popunder Engine (Active only on 30% designated Adsterra sessions) -->
-<script>
-(function() {
-  try {
-    var net = sessionStorage.getItem('apk_ad_net');
-    if (!net) {
-      // 70% Monetag priority to ensure Monetag impressions & earnings dominate, 30% Adsterra
-      net = (Math.random() < 0.70) ? 'monetag' : 'adsterra';
-      sessionStorage.setItem('apk_ad_net', net);
-    }
-    window.__activeAdNetwork = net;
-
-    if (net === 'adsterra') {
-      // Load Adsterra Popunder Engine only on adsterra sessions
-      var s = document.createElement('script');
-      s.src = 'https://pl31752776.profitableratecpmnetwork.com/59/a2/f5/59a2f5922773e31544c805d48d508364.js';
-      s.async = true;
-      document.head.appendChild(s);
-    }
-  } catch (e) {}
-})();
-</script>
+<!-- Monetag MultiTag (100% Active: OnClick Popunder, In-Page Push, Vignette Interstitial, Web Push) -->
+<script src="https://quge5.com/88/tag.min.js?zone=296697" data-zone="296697" async data-cfasync="false"></script>
 </head>
 <body>
 ${header(o.path)}
@@ -300,17 +278,6 @@ ${footer()}
   </div>
 </div>
 
-<!-- Adsterra Social Bar (Rotated: fires only when Adsterra is chosen so Monetag In-Page Push is unblocked) -->
-<script>
-(function() {
-  if (window.__activeAdNetwork === 'adsterra') {
-    var s = document.createElement('script');
-    s.src = 'https://pl31752773.profitableratecpmnetwork.com/04/9d/77/049d772dfd76275dbc19a53d62937f43.js';
-    s.async = true;
-    document.body.appendChild(s);
-  }
-})();
-</script>
 </body>
 </html>`;
   return { status: o.status || 200, html: doc.s, index };

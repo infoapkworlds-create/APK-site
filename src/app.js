@@ -263,7 +263,7 @@ export async function appHandler(req, res) {
     res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
     res.setHeader(
       'Content-Security-Policy',
-      "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://www.highrevenueformat.com https://*.highrevenueformat.com https://*.profitableratecpmnetwork.com; connect-src 'self' https:; frame-src 'self' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.highrevenueformat.com https://*.highrevenueformat.com https://*.profitableratecpmnetwork.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com;"
+      "default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https:; connect-src 'self' https: wss:; frame-src 'self' blob: https:; worker-src 'self' blob: https:; child-src 'self' blob: https:; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com;"
     );
   };
   setSecurityHeaders();
