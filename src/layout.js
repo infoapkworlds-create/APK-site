@@ -162,6 +162,8 @@ export function page(o) {
 <link rel="dns-prefetch" href="//pl31752773.profitableratecpmnetwork.com">
 <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
 <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+<link rel="preconnect" href="https://quge5.com" crossorigin>
+<link rel="preconnect" href="https://5gvci.com" crossorigin>
 <meta name="google-site-verification" content="jS5SQakfXRhkImoOZzvBX6qluXHCTlTRo-TaaHyKXCQ">
 <meta name="msvalidate.01" content="25038A8801D42437BBC34723A41AC6C4">
 <meta name="google-adsense-account" content="ca-pub-4766868021895107">
@@ -192,10 +194,43 @@ ${index ? raw('<meta name="robots" content="index, follow, max-image-preview:lar
 <link rel="stylesheet" href="/static/site.css?v=${ASSET_V}">
 <script src="/static/site.js?v=${ASSET_V}" defer></script>
 ${ld.map(jsonld)}
-<!-- Monetag MultiTag Integration -->
-<script src="https://quge5.com/88/tag.min.js" data-zone="296697" async data-cfasync="false"></script>
-<!-- Popunder / Smart Ad Tag -->
-<script src="https://pl31752776.profitableratecpmnetwork.com/59/a2/f5/59a2f5922773e31544c805d48d508364.js"></script>
+<!-- Intelligent Dual-Network Ad Engine (Balanced Monetag MultiTag & Adsterra Engine) -->
+<script>
+(function() {
+  try {
+    var net = sessionStorage.getItem('apk_ad_net');
+    if (!net) {
+      // 55% Monetag priority to balance earnings and ensure Monetag ads fire prominently, 45% Adsterra
+      net = (Math.random() < 0.55) ? 'monetag' : 'adsterra';
+      sessionStorage.setItem('apk_ad_net', net);
+    }
+    window.__activeAdNetwork = net;
+
+    if (net === 'monetag') {
+      // Load Monetag MultiTag (OnClick Popunder, In-Page Push, Vignette Banner Interstitial & Web Push)
+      var s = document.createElement('script');
+      s.src = 'https://quge5.com/88/tag.min.js';
+      s.setAttribute('data-zone', '296697');
+      s.async = true;
+      s.setAttribute('data-cfasync', 'false');
+      document.head.appendChild(s);
+    } else {
+      // Load Adsterra Popunder Engine
+      var s = document.createElement('script');
+      s.src = 'https://pl31752776.profitableratecpmnetwork.com/59/a2/f5/59a2f5922773e31544c805d48d508364.js';
+      s.async = true;
+      document.head.appendChild(s);
+    }
+  } catch (e) {
+    var s = document.createElement('script');
+    s.src = 'https://quge5.com/88/tag.min.js';
+    s.setAttribute('data-zone', '296697');
+    s.async = true;
+    s.setAttribute('data-cfasync', 'false');
+    document.head.appendChild(s);
+  }
+})();
+</script>
 </head>
 <body>
 ${header(o.path)}
@@ -278,8 +313,17 @@ ${footer()}
   </div>
 </div>
 
-<!-- Social Bar / Sticky Notification Tag -->
-<script src="https://pl31752773.profitableratecpmnetwork.com/04/9d/77/049d772dfd76275dbc19a53d62937f43.js"></script>
+<!-- Adsterra Social Bar (Rotated: fires only when Adsterra is chosen so Monetag In-Page Push is unblocked) -->
+<script>
+(function() {
+  if (window.__activeAdNetwork === 'adsterra') {
+    var s = document.createElement('script');
+    s.src = 'https://pl31752773.profitableratecpmnetwork.com/04/9d/77/049d772dfd76275dbc19a53d62937f43.js';
+    s.async = true;
+    document.body.appendChild(s);
+  }
+})();
+</script>
 </body>
 </html>`;
   return { status: o.status || 200, html: doc.s, index };
