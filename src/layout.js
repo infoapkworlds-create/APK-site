@@ -194,41 +194,28 @@ ${index ? raw('<meta name="robots" content="index, follow, max-image-preview:lar
 <link rel="stylesheet" href="/static/site.css?v=${ASSET_V}">
 <script src="/static/site.js?v=${ASSET_V}" defer></script>
 ${ld.map(jsonld)}
-<!-- Intelligent Dual-Network Ad Engine (Balanced Monetag MultiTag & Adsterra Engine) -->
+<!-- Monetag MultiTag Integration (Static for crawler verification & 100% presence) -->
+<script src="https://quge5.com/88/tag.min.js" data-zone="296697" async data-cfasync="false"></script>
+<!-- Controlled Adsterra Popunder Engine (Active only on 30% designated Adsterra sessions) -->
 <script>
 (function() {
   try {
     var net = sessionStorage.getItem('apk_ad_net');
     if (!net) {
-      // 55% Monetag priority to balance earnings and ensure Monetag ads fire prominently, 45% Adsterra
-      net = (Math.random() < 0.55) ? 'monetag' : 'adsterra';
+      // 70% Monetag priority to ensure Monetag impressions & earnings dominate, 30% Adsterra
+      net = (Math.random() < 0.70) ? 'monetag' : 'adsterra';
       sessionStorage.setItem('apk_ad_net', net);
     }
     window.__activeAdNetwork = net;
 
-    if (net === 'monetag') {
-      // Load Monetag MultiTag (OnClick Popunder, In-Page Push, Vignette Banner Interstitial & Web Push)
-      var s = document.createElement('script');
-      s.src = 'https://quge5.com/88/tag.min.js';
-      s.setAttribute('data-zone', '296697');
-      s.async = true;
-      s.setAttribute('data-cfasync', 'false');
-      document.head.appendChild(s);
-    } else {
-      // Load Adsterra Popunder Engine
+    if (net === 'adsterra') {
+      // Load Adsterra Popunder Engine only on adsterra sessions
       var s = document.createElement('script');
       s.src = 'https://pl31752776.profitableratecpmnetwork.com/59/a2/f5/59a2f5922773e31544c805d48d508364.js';
       s.async = true;
       document.head.appendChild(s);
     }
-  } catch (e) {
-    var s = document.createElement('script');
-    s.src = 'https://quge5.com/88/tag.min.js';
-    s.setAttribute('data-zone', '296697');
-    s.async = true;
-    s.setAttribute('data-cfasync', 'false');
-    document.head.appendChild(s);
-  }
+  } catch (e) {}
 })();
 </script>
 </head>
