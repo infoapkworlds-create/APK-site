@@ -1565,6 +1565,9 @@ export function downloadPage(req, app) {
             <span>📱 Scan QR to Phone</span>
           </button>
         </div>
+        <div style="background: linear-gradient(90deg, rgba(37,99,235,0.08), rgba(16,185,129,0.08)); border-left: 4px solid #2563eb; padding: 10px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.86rem; color: var(--text);">
+          ⚡ <strong>High-Speed Tip:</strong> Select <strong>Mirror 2 (MediaFire VIP)</strong> or <strong>Mirror 3 (Google Drive Ultra)</strong> below for uncapped multi-threaded speed.
+        </div>
         <div class="mirrors-list">
           <a class="mirror-item mirror-primary" id="dl-main-btn" href="${app.play_url || app.official_apk_page || app.website}" rel="noopener" target="_blank" data-evt="mirror_cdn1">
             <div class="mirror-icon-box">⚡</div>
@@ -1581,7 +1584,7 @@ export function downloadPage(req, app) {
               <span class="mirror-title">Mirror 2: MediaFire Direct Cloud (VIP Turbo)</span>
               <span class="mirror-sub">High-Speed MediaFire Server &bull; 0 Queue &bull; Uncapped Bandwidth</span>
             </div>
-            <span class="mirror-tag tag-mediafire" style="background: #0284c7; color: #fff;">MediaFire</span>
+            <span class="mirror-tag tag-mediafire" style="background: linear-gradient(90deg, #0284c7, #0369a1); color: #fff; font-weight: 700; box-shadow: 0 2px 8px rgba(2,132,199,0.3);">⚡ Instant Cloud</span>
           </a>
 
           <a class="mirror-item mirror-gdrive" href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" data-evt="mirror_gdrive">
@@ -1590,7 +1593,7 @@ export function downloadPage(req, app) {
               <span class="mirror-title">Mirror 3: Google Drive Ultra Mirror (Fast Lane)</span>
               <span class="mirror-sub">Direct Google Cloud Mirror &bull; Multi-Threaded Acceleration</span>
             </div>
-            <span class="mirror-tag tag-gdrive" style="background: #d97706; color: #fff;">GDrive</span>
+            <span class="mirror-tag tag-gdrive" style="background: linear-gradient(90deg, #d97706, #b45309); color: #fff; font-weight: 700; box-shadow: 0 2px 8px rgba(217,119,6,0.3);">🚀 Turbo GDrive</span>
           </a>
 
           ${app.play_url ? html`

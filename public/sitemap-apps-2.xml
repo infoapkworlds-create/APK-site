@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.apkworlds.co.uk/apps/citymapper/</loc>
-    <lastmod>2026-04-07</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/citymapper/download/</loc>
-    <lastmod>2026-04-07</lastmod>
-  </url>
-  <url>
     <loc>https://www.apkworlds.co.uk/apps/clean-master/</loc>
     <lastmod>2026-07-25</lastmod>
   </url>
@@ -975,5 +967,37 @@
   <url>
     <loc>https://www.apkworlds.co.uk/apps/google-sheets/download/</loc>
     <lastmod>2026-07-31</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/google-slides/</loc>
+    <lastmod>2026-08-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/google-slides/versions/</loc>
+    <lastmod>2026-08-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/google-slides/alternatives/</loc>
+    <lastmod>2026-08-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/google-slides/download/</loc>
+    <lastmod>2026-08-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/google-translate/</loc>
+    <lastmod>2026-04-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/google-translate/versions/</loc>
+    <lastmod>2026-04-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/google-translate/alternatives/</loc>
+    <lastmod>2026-04-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/google-translate/download/</loc>
+    <lastmod>2026-04-24</lastmod>
   </url>
 </urlset>
