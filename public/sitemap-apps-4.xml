@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.apkworlds.co.uk/apps/microsoft-365-office/</loc>
+    <lastmod>2025-11-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/microsoft-365-office/download/</loc>
+    <lastmod>2025-11-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/microsoft-365-copilot/</loc>
+    <lastmod>2026-09-19</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/microsoft-365-copilot/versions/</loc>
+    <lastmod>2026-09-19</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/microsoft-365-copilot/alternatives/</loc>
+    <lastmod>2026-09-19</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/microsoft-365-copilot/download/</loc>
+    <lastmod>2026-09-19</lastmod>
+  </url>
+  <url>
     <loc>https://www.apkworlds.co.uk/apps/microsoft-edge/</loc>
     <lastmod>2026-10-17</lastmod>
   </url>
@@ -883,45 +907,5 @@
   <url>
     <loc>https://www.apkworlds.co.uk/apps/quickedit/download/</loc>
     <lastmod>2026-09-27</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/quizlet/</loc>
-    <lastmod>2026-09-24</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/quizlet/versions/</loc>
-    <lastmod>2026-09-24</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/quizlet/alternatives/</loc>
-    <lastmod>2026-09-24</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/quizlet/download/</loc>
-    <lastmod>2026-09-24</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/rar/</loc>
-    <lastmod>2026-04-09</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/rar/download/</loc>
-    <lastmod>2026-04-09</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/rar-for-android/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/rar-for-android/versions/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/rar-for-android/alternatives/</loc>
-    <lastmod>2026-09-21</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/rar-for-android/download/</loc>
-    <lastmod>2026-09-21</lastmod>
   </url>
 </urlset>

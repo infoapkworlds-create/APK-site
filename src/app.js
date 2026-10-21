@@ -244,11 +244,14 @@ export async function appHandler(req, res) {
     return res.end();
   }
 
-  // Check 410 gone table
+  // Check 410 gone table or permanent DMCA removal
   const gone = one('SELECT reason FROM gone WHERE path=?', pathname);
-  if (gone) {
-    res.writeHead(410, { 'Content-Type': 'text/plain; charset=utf-8' });
-    return res.end(`410 Gone: ${gone.reason || 'This resource has been permanently removed.'}`);
+  if (gone || pathname.startsWith('/apps/flo-period-tracker') || pathname.startsWith('/compare/samsung-health-vs-flo-period-tracker') || pathname.startsWith('/developer/flo-health')) {
+    res.writeHead(410, {
+      'Content-Type': 'text/html; charset=utf-8',
+      'X-Robots-Tag': 'noindex, nofollow, noarchive'
+    });
+    return res.end(`<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>410 Gone - Permanently Removed</title><meta name="robots" content="noindex, nofollow, noarchive"></head><body style="font-family:system-ui,-apple-system,sans-serif;background:#0d131f;color:#e2e8f0;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;"><div style="text-align:center;max-width:540px;padding:2rem;"><h1 style="font-size:3rem;margin:0 0 1rem;color:#f43f5e;">410 Gone</h1><p style="font-size:1.1rem;color:#94a3b8;line-height:1.6;">This content has been permanently removed from APKworlds in compliance with copyright and DMCA policies.</p><a href="/" style="display:inline-block;margin-top:1.5rem;padding:0.75rem 1.5rem;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;font-weight:700;">&larr; Return to Homepage</a></div></body></html>`);
   }
 
   req.cookies = parseCookies(req.headers.cookie);

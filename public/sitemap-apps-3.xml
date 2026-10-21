@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.apkworlds.co.uk/apps/google-slides/</loc>
+    <lastmod>2026-08-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/google-slides/versions/</loc>
+    <lastmod>2026-08-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/google-slides/alternatives/</loc>
+    <lastmod>2026-08-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.apkworlds.co.uk/apps/google-slides/download/</loc>
+    <lastmod>2026-08-21</lastmod>
+  </url>
+  <url>
     <loc>https://www.apkworlds.co.uk/apps/google-translate/</loc>
     <lastmod>2026-04-24</lastmod>
   </url>
@@ -947,29 +963,5 @@
   <url>
     <loc>https://www.apkworlds.co.uk/apps/mico/download/</loc>
     <lastmod>2026-10-02</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/microsoft-365-office/</loc>
-    <lastmod>2025-11-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/microsoft-365-office/download/</loc>
-    <lastmod>2025-11-11</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/microsoft-365-copilot/</loc>
-    <lastmod>2026-09-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/microsoft-365-copilot/versions/</loc>
-    <lastmod>2026-09-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/microsoft-365-copilot/alternatives/</loc>
-    <lastmod>2026-09-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/microsoft-365-copilot/download/</loc>
-    <lastmod>2026-09-19</lastmod>
   </url>
 </urlset>

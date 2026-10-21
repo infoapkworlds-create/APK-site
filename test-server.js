@@ -65,6 +65,10 @@ setTimeout(async () => {
     const verPage = await testUrl('http://localhost:3000/apps/signal/versions/');
     console.log(`- GET /apps/signal/versions/ : ${verPage.status} (has ver-filter-bar: ${verPage.body.includes('ver-filter-bar')})`);
 
+    const floCheck = await testUrl('http://localhost:3000/apps/flo-period-tracker/');
+    console.log(`- GET /apps/flo-period-tracker/ : ${floCheck.status} (is 410: ${floCheck.status === 410})`);
+    if (floCheck.status !== 410) throw new Error('Expected 410 Gone for flo-period-tracker');
+
     if (!verifier.body.includes('apkDropzone')) throw new Error('Verifier missing apkDropzone');
     if (!app.body.includes('vip-mod-matrix')) throw new Error('App page missing vip-mod-matrix');
     if (!app.body.includes('regionUnlocker')) throw new Error('App page missing regionUnlocker');
