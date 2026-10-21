@@ -1071,7 +1071,13 @@ export async function appHandler(req, res) {
     result = render404(req);
   }
 
-  res.writeHead(result.status || 200, { 'Content-Type': 'text/html; charset=utf-8' });
+  const isOk = (result.status || 200) === 200;
+  res.writeHead(result.status || 200, {
+    'Content-Type': 'text/html; charset=utf-8',
+    'Cache-Control': isOk
+      ? 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800'
+      : 'public, max-age=60, s-maxage=300'
+  });
   res.end(result.html);
 }
 
