@@ -46,11 +46,11 @@
   ],
   "functions": {
     "src/app.js": {
-      "includeFiles": "{data/{site.db,icons/**,screenshots/{among-us,pubg-mobile,asphalt-9-legends,brawl-stars,subway-surfers}/**},src/static/**}",
+      "includeFiles": "{data/{site.db,icons/**,screenshots/{among-us,pubg-mobile,asphalt-9-legends,brawl-stars,subway-surfers}/**},src/static/**,public/**,ads.txt}",
       "maxDuration": 15
     },
     "src/server.js": {
-      "includeFiles": "{data/{site.db,icons/**,screenshots/{among-us,pubg-mobile,asphalt-9-legends,brawl-stars,subway-surfers}/**},src/static/**}",
+      "includeFiles": "{data/{site.db,icons/**,screenshots/{among-us,pubg-mobile,asphalt-9-legends,brawl-stars,subway-surfers}/**},src/static/**,public/**,ads.txt}",
       "maxDuration": 15
     }
   }

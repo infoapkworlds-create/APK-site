@@ -359,11 +359,18 @@ Allow: /
 Allow: /static/
 Allow: /icons/
 Allow: /screenshots/
+Allow: /ads.txt
 Disallow: /admin/
 Disallow: /action/
 Disallow: /search/
 Disallow: /dl/
 Disallow: /api/
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: Google-adstxt
+Allow: /
 
 Sitemap: ${config.siteUrl}/sitemap.xml
 `;
