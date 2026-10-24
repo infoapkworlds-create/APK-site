@@ -656,45 +656,6 @@
     });
   }
 
-  // 15. Polite Anti-AdBlock Shield Modal
-  const adblockBackdrop = document.getElementById('adblockBackdrop');
-  const adblockReloadBtn = document.getElementById('adblockReloadBtn');
-  const adblockDismissBtn = document.getElementById('adblockDismissBtn');
-
-  if (adblockBackdrop && !sessionStorage.getItem('adblock_dismissed')) {
-    setTimeout(() => {
-      // Check if ad test element was collapsed or blocked
-      const testAd = document.querySelector('.pub_300x250');
-      let isBlocked = false;
-      if (testAd) {
-        const computed = window.getComputedStyle(testAd);
-        if (computed.display === 'none' || computed.visibility === 'hidden' || testAd.clientHeight === 0 || testAd.offsetParent === null) {
-          isBlocked = true;
-        }
-      }
-      // Also check if adsbygoogle script or network ads failed
-      if (!isBlocked && typeof window.adsbygoogle === 'undefined' && !document.querySelector('script[src*="pagead2"]')) {
-        isBlocked = true;
-      }
-
-      if (isBlocked) {
-        adblockBackdrop.style.display = 'flex';
-      }
-    }, 1200);
-
-    if (adblockReloadBtn) {
-      adblockReloadBtn.addEventListener('click', () => {
-        location.reload();
-      });
-    }
-    if (adblockDismissBtn) {
-      adblockDismissBtn.addEventListener('click', () => {
-        adblockBackdrop.style.display = 'none';
-        sessionStorage.setItem('adblock_dismissed', '1');
-      });
-    }
-  }
-
   // 16. Phone Compatibility Checker Widget
   const compatCard = document.getElementById('compatChecker');
   if (compatCard) {

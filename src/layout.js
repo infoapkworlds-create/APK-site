@@ -47,7 +47,7 @@ export function breadcrumbs(items) {
 }
 
 const NAV = [
-  ['/games/', 'Games'], ['/apps/', 'Apps'], ['/compare/', 'App Battles'], ['/collections/', 'Collections'], ['/guides/', 'Guides'], ['/popular/', 'Top Charts'], ['/categories/', 'Categories'],
+  ['/games/', 'Games'], ['/apps/', 'Apps'], ['/tools/apk-inspector/', 'Tools'], ['/compare/', 'App Battles'], ['/collections/', 'Collections'], ['/guides/', 'Guides'], ['/popular/', 'Top Charts'], ['/categories/', 'Categories'],
 ];
 
 function header(path) {
@@ -154,16 +154,8 @@ export function page(o) {
 <!-- Core Web Vitals Preconnect & DNS-Prefetch Optimization -->
 <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
 <link rel="dns-prefetch" href="//www.googletagmanager.com">
-<link rel="dns-prefetch" href="//quge5.com">
-<link rel="dns-prefetch" href="//5gvci.com">
-<link rel="dns-prefetch" href="//uplcm.com">
-<link rel="dns-prefetch" href="//pl31752776.profitableratecpmnetwork.com">
-<link rel="dns-prefetch" href="//pl31752774.profitableratecpmnetwork.com">
-<link rel="dns-prefetch" href="//pl31752773.profitableratecpmnetwork.com">
 <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
 <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-<link rel="preconnect" href="https://quge5.com" crossorigin>
-<link rel="preconnect" href="https://5gvci.com" crossorigin>
 <meta name="google-site-verification" content="jS5SQakfXRhkImoOZzvBX6qluXHCTlTRo-TaaHyKXCQ">
 <meta name="msvalidate.01" content="25038A8801D42437BBC34723A41AC6C4">
 <meta name="google-adsense-account" content="ca-pub-4766868021895107">
@@ -194,8 +186,6 @@ ${index ? raw('<meta name="robots" content="index, follow, max-image-preview:lar
 <link rel="stylesheet" href="/static/site.css?v=${ASSET_V}">
 <script src="/static/site.js?v=${ASSET_V}" defer></script>
 ${ld.map(jsonld)}
-<!-- Monetag MultiTag (100% Active: OnClick Popunder, In-Page Push, Vignette Interstitial, Web Push) -->
-<script src="https://quge5.com/88/tag.min.js?zone=296697" data-zone="296697" async data-cfasync="false"></script>
 </head>
 <body>
 ${header(o.path)}
@@ -204,72 +194,13 @@ ${o.crumbs ? breadcrumbs(o.crumbs) : ''}
 ${o.body}
 </main>
 ${footer()}
-<!-- Mobile Closeable Sticky Bottom Ad Banner -->
-<div class="sticky-bottom-ad" id="stickyBottomAd">
-  <div class="sticky-ad-bar">
-    <span class="sticky-ad-tag">Sponsored</span>
-    <button type="button" class="sticky-ad-close" id="stickyAdClose" aria-label="Close Advertisement">&times;</button>
-  </div>
-  <div class="sticky-ad-body">
-    ${adBanner728x90()}
-  </div>
-</div>
-<!-- Anti-AdBlock Honeypot Element -->
-<div class="pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links ad-text" style="position:absolute!important; top:-9999px!important; left:-9999px!important; width:1px!important; height:1px!important;" aria-hidden="true"></div>
-<!-- Polite Anti-AdBlock Shield Modal -->
-<div id="adblockBackdrop" class="adblock-modal-backdrop" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="adblockTitle">
-  <div class="adblock-modal-card">
-    <div class="adblock-modal-icon">🛡️</div>
-    <h3 id="adblockTitle" class="adblock-modal-title">Please Support APKWorlds</h3>
-    <p class="adblock-modal-desc">
-      We noticed you are using an <strong>AdBlocker</strong>. APKWorlds provides 100% free, high-speed, and verified virus-free Android APK downloads.
-      Advertising keeps our high-speed global CDN servers running 24/7 without requiring paid subscriptions.
-    </p>
-    <div class="adblock-modal-steps">
-      <div class="adblock-step">
-        <span class="adblock-step-num">1</span>
-        <span>Click on your AdBlock extension icon in browser toolbar</span>
-      </div>
-      <div class="adblock-step">
-        <span class="adblock-step-num">2</span>
-        <span>Select <strong>"Pause on this site"</strong> or disable for <code>apkworlds.co.uk</code></span>
-      </div>
-      <div class="adblock-step">
-        <span class="adblock-step-num">3</span>
-        <span>Refresh the page to continue fast downloads</span>
-      </div>
-    </div>
-    <div class="adblock-modal-actions">
-      <button type="button" id="adblockReloadBtn" class="btn primary adblock-btn">I've Whitelisted APKWorlds &bull; Refresh</button>
-      <button type="button" id="adblockDismissBtn" class="adblock-btn-secondary">Continue with limited speed &rarr;</button>
-    </div>
-  </div>
-<!-- Mobile Sticky Floating Action Bar (High CTR Conversion Bar) -->
-<div id="mobileFloatingBar" class="mobile-floating-bar" style="display:none;" role="region" aria-label="Quick Action">
-  <div class="mobile-floating-content">
-    <div class="mobile-floating-left">
-      <img id="mobileFloatingIcon" src="/icons/capcut.webp" alt="App Icon" width="38" height="38" class="mobile-floating-img" onerror="this.onerror=null;this.src='/static/og-default.png'">
-      <div class="mobile-floating-meta">
-        <span id="mobileFloatingTitle" class="mobile-floating-name">CapCut Pro</span>
-        <span id="mobileFloatingSub" class="mobile-floating-sub">Verified Safe 🛡️</span>
-      </div>
-    </div>
-    <div class="mobile-floating-right">
-      <a id="mobileFloatingBtn" href="/apps/capcut/download/" class="mobile-floating-action-btn">
-        <span>⚡ Fast Download</span>
-      </a>
-      <button type="button" id="mobileFloatingClose" class="mobile-floating-close" aria-label="Dismiss">&times;</button>
-    </div>
-  </div>
-</div>
-
 <!-- Web Push Notification Opt-in Prompt Banner -->
 <div id="pushOptinPrompt" class="push-optin-prompt" style="display:none;" role="dialog" aria-label="Update Notifications">
   <div class="push-optin-inner">
     <div class="push-optin-icon">🔔</div>
     <div class="push-optin-text">
       <strong>Never Miss an Update:</strong>
-      <span>Get instant alerts when new mod updates, bug fixes, and verified APKs are released.</span>
+      <span>Get instant alerts when official version updates, security patches, and new APK releases are published.</span>
     </div>
     <div class="push-optin-btns">
       <button type="button" id="pushOptinAllow" class="btn primary push-optin-btn">Allow Alerts</button>
@@ -285,29 +216,32 @@ ${footer()}
 
 export function adBanner728x90() {
   return html`
-<div class="ad-container-728" style="margin: 1.5rem auto; text-align: center; max-width: 728px; min-height: 90px; overflow: hidden; background: rgba(0,0,0,0.03); border-radius: 8px; padding: 6px 0;">
-  <div style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Advertisement</div>
-  ${raw(`
-    <script>
-      atOptions = {
-        'key' : '054ba0db8eafe0b7180d6ff25715f17e',
-        'format' : 'iframe',
-        'height' : 90,
-        'width' : 728,
-        'params' : {}
-      };
-    </script>
-    <script src="https://www.highrevenueformat.com/054ba0db8eafe0b7180d6ff25715f17e/invoke.js"></script>
-  `)}
+<div class="ad-container-728" style="margin: 1.5rem auto; text-align: center; max-width: 728px; min-height: 90px; overflow: hidden; border-radius: 8px;">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-4766868021895107"
+       data-ad-slot="auto"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
 </div>`;
 }
 
 export function adNativeWidget() {
   return html`
-<div class="ad-native-container" style="margin: 2rem auto; max-width: 100%; overflow: hidden; background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 1rem; box-shadow: var(--shadow-sm);">
-  <div style="font-size: 0.7rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">Sponsored Recommendations</div>
-  <div id="container-5b163803fff9244d297b0b5b7becb8ba"></div>
-  ${raw(`<script async="async" data-cfasync="false" src="https://pl31752774.profitableratecpmnetwork.com/5b163803fff9244d297b0b5b7becb8ba/invoke.js"></script>`)}
+<div class="ad-native-container" style="margin: 2rem auto; max-width: 100%; overflow: hidden; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem;">
+  <div style="font-size: 0.7rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">Advertisement</div>
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-4766868021895107"
+       data-ad-slot="auto"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
 </div>`;
 }
 

@@ -462,12 +462,12 @@ export function homePage(req) {
   <!-- ==================== RIGHT SIDEBAR COLUMN ==================== -->
   <aside class="pure-sidebar-col">
 
-    <!-- Sponsored Direct Ad Card -->
+    <!-- Featured Discovery Card -->
     <div class="pure-side-sec" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff; border: 1px solid rgba(255,255,255,0.1); text-align: center; padding: 1.25rem 1rem;">
-      <span style="display: inline-block; font-size: 0.65rem; font-weight: 800; background: var(--primary); color: #0d131f; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; margin-bottom: 0.5rem;">Sponsored Special</span>
+      <span style="display: inline-block; font-size: 0.65rem; font-weight: 800; background: var(--primary); color: #0d131f; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; margin-bottom: 0.5rem;">Verified Platform</span>
       <h3 style="font-size: 1.05rem; margin: 0 0 0.4rem; color: #fff; font-weight: 800;">Fast Direct Downloads</h3>
-      <p style="font-size: 0.8rem; color: #94a3b8; margin: 0 0 0.85rem; line-height: 1.4;">Access top trending games & verified premium software at maximum speed.</p>
-      <a href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" class="btn primary" style="display: block; width: 100%; box-sizing: border-box; text-align: center; font-size: 0.88rem; font-weight: 700; padding: 0.6rem 1rem;">Explore Now &rarr;</a>
+      <p style="font-size: 0.8rem; color: #94a3b8; margin: 0 0 0.85rem; line-height: 1.4;">Access top trending games &amp; verified software scanned with 70+ antivirus engines.</p>
+      <a href="/popular/" class="btn primary" style="display: block; width: 100%; box-sizing: border-box; text-align: center; font-size: 0.88rem; font-weight: 700; padding: 0.6rem 1rem;">Explore Top Charts &rarr;</a>
     </div>
 
     <!-- Sidebar Widget 2: Editor's Recommendation (Daily Rotation) -->

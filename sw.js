@@ -1,6 +1,12 @@
-self.options = {
-    "domain": "5gvci.com",
-    "zoneId": 12046330
-}
-self.lary = ""
-importScripts('https://5gvci.com/act/files/service-worker.min.js?r=sw')
+// APKWorlds PWA Service Worker
+self.addEventListener('install', (e) => {
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (e) => {
+  e.waitUntil(self.clients.claim());
+});
+
+self.addEventListener('fetch', (e) => {
+  // Pass through fetch
+});

@@ -70,7 +70,7 @@ setTimeout(async () => {
     if (floCheck.status !== 410) throw new Error('Expected 410 Gone for flo-period-tracker');
 
     if (!verifier.body.includes('apkDropzone')) throw new Error('Verifier missing apkDropzone');
-    if (!app.body.includes('vip-mod-matrix')) throw new Error('App page missing vip-mod-matrix');
+    if (!app.body.includes('security-audit')) throw new Error('App page missing security-audit');
     if (!app.body.includes('regionUnlocker')) throw new Error('App page missing regionUnlocker');
     if (!app.body.includes('privacy-score-card')) throw new Error('App page missing privacy-score-card');
     if (!app.body.includes('app-benchmark-card')) throw new Error('App page missing app-benchmark-card');

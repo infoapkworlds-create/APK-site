@@ -201,7 +201,7 @@ export async function appHandler(req, res) {
     if (fs.existsSync(rootSwPath)) {
       return res.end(fs.readFileSync(rootSwPath, 'utf8'));
     }
-    return res.end('self.options = {\n    "domain": "5gvci.com",\n    "zoneId": 12046330\n}\nself.lary = ""\nimportScripts(\'https://5gvci.com/act/files/service-worker.min.js?r=sw\')\n');
+    return res.end('self.addEventListener("install",()=>self.skipWaiting());self.addEventListener("activate",(e)=>e.waitUntil(self.clients.claim()));\n');
   }
 
   // Authorized Digital Sellers: /ads.txt

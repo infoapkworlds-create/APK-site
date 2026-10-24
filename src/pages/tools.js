@@ -319,8 +319,8 @@ export function xapkConverterPage(req) {
     <p style="margin:0 0 1rem 0; font-size:0.9rem; color:var(--muted); line-height:1.5;">
       Install our official 1-Click XAPK Installer tool to automatically unzip, place OBB files into the correct directory, and launch your games with zero errors.
     </p>
-    <a href="https://uplcm.com/4/12046508" target="_blank" rel="noopener sponsored" class="btn primary" style="background:linear-gradient(90deg, #f59e0b, #d97706); color:#000; font-weight:800; border:none; padding:0.75rem 1.4rem; border-radius:8px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
-      <span>🚀 Download 1-Click XAPK Installer (Free) &rarr;</span>
+    <a href="/tools/xapk-to-apk-converter/" class="btn primary" style="background:linear-gradient(90deg, #10b981, #059669); color:#fff; font-weight:800; border:none; padding:0.75rem 1.4rem; border-radius:8px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+      <span>🔧 Open XAPK Extractor Tool &rarr;</span>
     </a>
   </div>
 
