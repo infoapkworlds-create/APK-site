@@ -195,15 +195,17 @@ export async function handleScreenshotRequest(req, res, slug, filename) {
   const appDir = path.join(SCREENSHOTS_DIR, slug);
   let filePath = path.join(appDir, filename);
 
-  // If file doesn't exist, try to scrape in real-time
+  // If file doesn't exist, try to scrape in real-time (ONLY on standalone local/VPS server, NEVER on serverless!)
   if (!fs.existsSync(filePath)) {
-    try {
-      const app = one(`SELECT package_name, play_url FROM apps WHERE slug=?`, slug);
-      const pkg = app?.package_name || (app?.play_url ? new URL(app.play_url).searchParams.get('id') : null);
-      if (pkg) {
-        await ensureRealScreenshots(slug, pkg);
-      }
-    } catch {}
+    if (!process.env.VERCEL && !process.env.AWS_LAMBDA_FUNCTION_NAME) {
+      try {
+        const app = one(`SELECT package_name, play_url FROM apps WHERE slug=?`, slug);
+        const pkg = app?.package_name || (app?.play_url ? new URL(app.play_url).searchParams.get('id') : null);
+        if (pkg) {
+          await ensureRealScreenshots(slug, pkg);
+        }
+      } catch {}
+    }
   }
 
   // Check if file exists after scrape

@@ -91,6 +91,39 @@ import { getDailyUpdatedGames, getDailyUpdatedApps } from './lib/freshness.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// In-Memory Page and Icon Caches for ultra-low CPU execution on serverless
+const pageCache = new Map();
+const iconCache = new Map();
+const MAX_PAGE_CACHE = 500;
+const MAX_ICON_CACHE = 1000;
+const CACHE_TTL_MS = 3600_000; // 1 hour
+
+function pageNeedsCsrf(pathname) {
+  return (
+    pathname.startsWith('/action/') ||
+    pathname.startsWith('/admin') ||
+    pathname === '/submit-app/' ||
+    pathname === '/request-app/' ||
+    pathname === '/report-app/' ||
+    pathname === '/contact/' ||
+    pathname.endsWith('/reviews/')
+  );
+}
+
+function isCacheable(pathname) {
+  return (
+    !pathname.startsWith('/admin') &&
+    !pathname.startsWith('/action/') &&
+    !pathname.startsWith('/api/') &&
+    !pathname.startsWith('/search') &&
+    pathname !== '/submit-app/' &&
+    pathname !== '/request-app/' &&
+    pathname !== '/report-app/' &&
+    pathname !== '/contact/' &&
+    !pathname.endsWith('/reviews/')
+  );
+}
+
 function parseCookies(cookieHeader) {
   const cookies = {};
   if (!cookieHeader) return cookies;
@@ -271,8 +304,8 @@ export async function appHandler(req, res) {
   };
   setSecurityHeaders();
 
-  // Set CSRF cookie if not present
-  if (!req.cookies.csrf) {
+  // Set CSRF cookie ONLY on interactive form / admin pages (NEVER on public cached content)
+  if (pageNeedsCsrf(pathname) && !req.cookies.csrf) {
     const seed = newCsrfSeed();
     res.setHeader('Set-Cookie', `csrf=${seed}; Path=/; HttpOnly; SameSite=Lax${config.forceHttps ? '; Secure' : ''}`);
     req.cookies.csrf = seed;
@@ -318,10 +351,14 @@ export async function appHandler(req, res) {
       }
     }
 
-    const svg = getAppIcon(slug);
+    let svg = iconCache.get(slug);
+    if (!svg) {
+      svg = getAppIcon(slug);
+      if (iconCache.size < MAX_ICON_CACHE) iconCache.set(slug, svg);
+    }
     res.writeHead(200, {
       'Content-Type': 'image/svg+xml',
-      'Cache-Control': 'public, max-age=604800',
+      'Cache-Control': 'public, max-age=604800, stale-while-revalidate=2592000',
     });
     return res.end(svg);
   }
@@ -907,6 +944,16 @@ export async function appHandler(req, res) {
   // ==========================================
   // GET ROUTE DISPATCHER
   // ==========================================
+  // Check in-memory page cache (instant response, zero CPU)
+  const cacheKey = pathname;
+  if (req.method === 'GET' && isCacheable(pathname)) {
+    const cached = pageCache.get(cacheKey);
+    if (cached && Date.now() < cached.exp) {
+      res.writeHead(cached.status, cached.headers);
+      return res.end(cached.html);
+    }
+  }
+
   let result = null;
 
   // 1. Home
@@ -1048,10 +1095,6 @@ export async function appHandler(req, res) {
         const app = D.getApp(first);
         if (app) {
           result = appPage(req, app);
-          // Log app page view event
-          try {
-            run(`INSERT INTO events (type, app_id) VALUES ('app_view', ?)`, app.id);
-          } catch {}
         }
       }
     } else if (segments.length === 2) {
@@ -1072,12 +1115,29 @@ export async function appHandler(req, res) {
   }
 
   const isOk = (result.status || 200) === 200;
-  res.writeHead(result.status || 200, {
+  const status = result.status || 200;
+  const headers = {
     'Content-Type': 'text/html; charset=utf-8',
     'Cache-Control': isOk
       ? 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800'
       : 'public, max-age=60, s-maxage=300'
-  });
+  };
+
+  // Populate in-memory page cache (warm container re-uses rendered HTML with zero CPU)
+  if (req.method === 'GET' && isOk && isCacheable(pathname)) {
+    if (pageCache.size >= MAX_PAGE_CACHE) {
+      const firstKey = pageCache.keys().next().value;
+      pageCache.delete(firstKey);
+    }
+    pageCache.set(cacheKey, {
+      status,
+      headers,
+      html: result.html,
+      exp: Date.now() + CACHE_TTL_MS,
+    });
+  }
+
+  res.writeHead(status, headers);
   res.end(result.html);
 }
 
