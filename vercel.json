@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/(static/.*)",
+      "source": "/static/:path*",
       "headers": [
         {
           "key": "Cache-Control",
@@ -10,7 +10,7 @@
       ]
     },
     {
-      "source": "/(icons/.*)",
+      "source": "/icons/:path*",
       "headers": [
         {
           "key": "Cache-Control",
@@ -19,7 +19,7 @@
       ]
     },
     {
-      "source": "/(screenshots/.*)",
+      "source": "/screenshots/:path*",
       "headers": [
         {
           "key": "Cache-Control",
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "source": "/(favicon\\.(svg|ico))",
+      "source": "/favicon.ico",
       "headers": [
         {
           "key": "Cache-Control",
@@ -37,7 +37,16 @@
       ]
     },
     {
-      "source": "/(sitemap.*\\.xml)",
+      "source": "/favicon.svg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/sitemap:path*.xml",
       "headers": [
         {
           "key": "Content-Type",
@@ -50,7 +59,7 @@
       ]
     },
     {
-      "source": "/(sw\\.js|service-worker\\.js)",
+      "source": "/sw.js",
       "headers": [
         {
           "key": "Content-Type",
@@ -67,7 +76,24 @@
       ]
     },
     {
-      "source": "/(ads\\.txt)",
+      "source": "/service-worker.js",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/javascript; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Service-Worker-Allowed",
+          "value": "/"
+        }
+      ]
+    },
+    {
+      "source": "/ads.txt",
       "headers": [
         {
           "key": "Content-Type",
