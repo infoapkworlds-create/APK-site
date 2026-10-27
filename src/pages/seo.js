@@ -11,8 +11,8 @@ export function getCategorizedUrls() {
   const guides = [];
 
   const meta = getTodayMeta();
-  const latestAppDate = meta.todayStr;
-  const latestGameDate = meta.todayStr;
+  const latestAppDate = '2026-10-27';
+  const latestGameDate = '2026-10-27';
   const latestGuideDateRow = all(`SELECT MAX(COALESCE(updated_at, published_at)) as latest FROM guides WHERE status='published'`)[0];
   const latestGuideDate = (latestGuideDateRow?.latest || '2026-09-28').slice(0, 10);
   const latestReviewDateRow = all(`SELECT MAX(created_at) as latest FROM reviews WHERE status='approved'`)[0];
@@ -85,12 +85,7 @@ export function getCategorizedUrls() {
     }
   }
 
-  // Comparisons
-  for (const cmp of D.listComparisons()) {
-    if (D.comparisonIndex(cmp).index) {
-      add(main, `/compare/${cmp.slug}/`, cmp.updated_at || cmp.published_at, '0.7', 'monthly');
-    }
-  }
+  // Comparisons hub only (individual non-distinctive comparisons removed from sitemap)
 
   // 2. Guides
   for (const g of D.listGuides(25000)) {
@@ -110,18 +105,6 @@ export function getCategorizedUrls() {
 
     if (D.appIndex(app).index) {
       add(targetList, `/apps/${app.slug}/`, appMod, '0.8', 'weekly');
-    }
-    if (D.reviewsIndex(app).index) {
-      add(targetList, `/apps/${app.slug}/reviews/`, appMod, '0.6', 'weekly');
-    }
-    if ((versionCounts.get(app.id) || 0) >= T.minVersionsForIndex) {
-      add(targetList, `/apps/${app.slug}/versions/`, app.version_updated_on || appMod, '0.7', 'monthly');
-    }
-    if ((altCounts.get(app.id) || 0) >= T.minAlternativesForIndex) {
-      add(targetList, `/apps/${app.slug}/alternatives/`, appMod, '0.6', 'monthly');
-    }
-    if (app.download_type === 'authorized_apk' && activeApkApps.has(app.id)) {
-      add(targetList, `/apps/${app.slug}/download/`, appMod, '0.7', 'weekly');
     }
   }
 

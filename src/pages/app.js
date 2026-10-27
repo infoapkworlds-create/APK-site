@@ -173,7 +173,7 @@ function whileYouWaitCard(app, relatedApps) {
 }
 
 function viralShareCard(app) {
-  const shareMsg = `🔥 Download verified ${app.name} APK (v${app.version || 'Latest'}) 100% Virus-Free on Android without speed limits: ${config.siteUrl}/apps/${app.slug}/`;
+  const shareMsg = `🔥 Download verified ${app.name} APK (v${app.version || 'Latest'}) Verified Package on Android without speed limits: ${config.siteUrl}/apps/${app.slug}/`;
   const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareMsg)}`;
 
   return html`
@@ -242,7 +242,7 @@ function packageSecurityCard(app) {
       </thead>
       <tbody>
         <tr style="border-bottom: 1px solid var(--border);">
-          <td style="padding: 10px 14px; font-weight: 600;">Developer Signature Keystore</td>
+          <td style="padding: 10px 14px; font-weight: 600;">Application Signature</td>
           <td style="padding: 10px 14px; font-weight: 700; color: #10b981;">✓ Matched Official Certificate</td>
           <td style="padding: 10px 14px; color: var(--muted); background: rgba(16, 185, 129, 0.04);">Original signing key unaltered</td>
         </tr>
@@ -258,7 +258,7 @@ function packageSecurityCard(app) {
         </tr>
         <tr style="border-bottom: 1px solid var(--border);">
           <td style="padding: 10px 14px; font-weight: 600;">Google Play Protect Compliance</td>
-          <td style="padding: 10px 14px; font-weight: 700; color: #10b981;">✓ Play Protect Certified</td>
+          <td style="padding: 10px 14px; font-weight: 700; color: #10b981;">✓ Standard Android Package</td>
           <td style="padding: 10px 14px; color: var(--muted); background: rgba(16, 185, 129, 0.04);">Complies with Android app safety standards</td>
         </tr>
         <tr>
@@ -276,7 +276,7 @@ function packageSecurityCard(app) {
       <span style="font-size: 0.85rem; color: var(--muted);">Direct installation archive with untouched digital signature.</span>
     </div>
     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-      <a href="#download-box" class="btn primary" style="background: linear-gradient(90deg, #10b981, #059669); color: #fff; font-weight: 800; border: none; padding: 0.8rem 1.4rem; border-radius: 8px; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35); text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+      <a href="/apps/${app.slug}/download/" class="btn primary" style="background: linear-gradient(90deg, #10b981, #059669); color: #fff; font-weight: 800; border: none; padding: 0.8rem 1.4rem; border-radius: 8px; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35); text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
         <span>🛡️ Download Verified APK &rarr;</span>
       </a>
       ${app.play_url ? html`
@@ -289,29 +289,7 @@ function packageSecurityCard(app) {
 }
 
 function cloudGamingCard(app) {
-  const isHeavyOrGame = app.cat_kind === 'game' || app.app_type === 'game' || (app.size_bytes && app.size_bytes > 70_000_000);
-  if (!isHeavyOrGame) return '';
-  return html`
-<div class="card cloud-phone-cpa-box" style="margin: 1.5rem 0; padding: 1.5rem; background: linear-gradient(135deg, rgba(147, 51, 234, 0.08), rgba(59, 130, 246, 0.08)); border: 1.5px solid #9333ea; border-radius: 14px; box-shadow: 0 4px 16px rgba(147, 51, 234, 0.12);">
-  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 0.75rem;">
-    <span style="display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(90deg, #9333ea, #7c3aed); color: #fff; font-weight: 800; font-size: 0.72rem; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em;">
-      ⚡ Cloud Phone Edition &bull; Low RAM Fix
-    </span>
-    <span style="font-size: 0.8rem; color: #10b981; font-weight: 700;">✓ 0MB Storage Required &bull; 120 FPS Ultra Graphics</span>
-  </div>
-  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.25rem;">
-    <div style="flex: 1; min-width: 250px;">
-      <h3 style="margin: 0 0 6px 0; font-size: 1.15rem; color: var(--text);">Low Phone Storage or Heating Up? Play ${app.name} on Virtual Cloud Phone</h3>
-      <p style="margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.5;">
-        Running out of internal storage or getting lag on your Android phone? Launch and play ${app.name} instantly on a high-spec virtual Android Cloud Phone in your browser. Powered by 16GB RAM cloud servers, zero download required, zero battery drain, and no overheating.
-      </p>
-    </div>
-    <a href="/guides/how-to-install-apk/" class="btn primary" style="background: linear-gradient(90deg, #9333ea, #6366f1); color: #fff; font-weight: 800; border: none; padding: 0.85rem 1.4rem; border-radius: 8px; box-shadow: 0 4px 16px rgba(147, 51, 234, 0.35); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M6 10h.01"/><path d="M10 10h.01"/><path d="M14 10h.01"/><path d="M18 10h.01"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
-      <span>Android Setup Guide &rarr;</span>
-    </a>
-  </div>
-</div>`;
+  return '';
 }
 
 function storeAppCalloutCard(app) {
@@ -321,7 +299,7 @@ function storeAppCalloutCard(app) {
     <div style="width: 44px; height: 44px; background: #2563eb; color: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0;">📲</div>
     <div>
       <div style="font-weight: 700; font-size: 0.98rem; color: var(--text);">Want 10x Faster Downloads &amp; Automatic Background Updates?</div>
-      <div style="font-size: 0.82rem; color: var(--muted); margin-top: 2px;">Install the official APKWorlds Store App (v3.2, 3.5MB, 100% Free &bull; Zero Virus).</div>
+      <div style="font-size: 0.82rem; color: var(--muted); margin-top: 2px;">Install the official APKWorlds Store App (v3.2, 3.5MB, Official APKWorlds Utility).</div>
     </div>
   </div>
   <a href="/api/download-apkworlds-app" class="btn primary" style="background: linear-gradient(90deg, #2563eb, #1d4ed8); color: #fff; font-size: 0.85rem; font-weight: 700; padding: 0.65rem 1.25rem; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 3px 10px rgba(37,99,235,0.3); white-space: nowrap;">
@@ -356,26 +334,7 @@ function userDeviceCompatCard(app, hosted, file) {
 }
 
 function regionUnlockerCard(app) {
-  return html`
-<div class="card region-unlocker-card" id="regionUnlocker" style="margin: 1.25rem 0; padding: 1.15rem 1.4rem; background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(16, 185, 129, 0.06)); border: 1.5px solid #2563eb; border-radius: 12px;">
-  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-    <div style="display: flex; align-items: center; gap: 12px; min-width: 250px; flex: 1;">
-      <div style="font-size: 1.7rem; line-height: 1;">🌐</div>
-      <div>
-        <div style="font-weight: 700; color: var(--text); font-size: 0.98rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-          <span>Geo-Restriction Status:</span>
-          <span id="regionCountryBadge" style="color: #10b981; font-weight: 800; background: rgba(16, 185, 129, 0.12); padding: 2px 8px; border-radius: 6px; font-size: 0.85rem;">Global Sideload Active</span>
-        </div>
-        <div style="font-size: 0.83rem; color: var(--muted); margin-top: 3px; line-height: 1.45;">
-          Getting <em>"This item isn't available in your country"</em> on Google Play? Sideload the authentic ${app.name} APK from APKWorlds to bypass regional locks without needing a VPN.
-        </div>
-      </div>
-    </div>
-    <a href="/apps/${app.slug}/download/" class="btn primary" style="background: linear-gradient(90deg, #2563eb, #1d4ed8); color: #fff; font-size: 0.85rem; font-weight: 700; padding: 0.65rem 1.2rem; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">
-      <span>🌍 Download Unlocked APK &rarr;</span>
-    </a>
-  </div>
-</div>`;
+  return '';
 }
 
 function antivirusCertModal(app) {
@@ -431,7 +390,7 @@ function antivirusCertModal(app) {
     <div style="background:var(--bg-surface); border:1px solid var(--border); border-radius:8px; padding:10px 14px; font-size:0.82rem; margin-bottom:1.25rem;">
       <div style="margin-bottom:4px;"><strong>Package Name:</strong> <code>${app.package_name || 'verified.apk'}</code></div>
       <div style="margin-bottom:4px; word-break:break-all;"><strong>SHA-256 Digest:</strong> <code style="font-size:0.75rem;">${sha}</code></div>
-      <div><strong>Keystore Origin:</strong> Verified Official Developer Key (${app.dev_name})</div>
+      <div><strong>Keystore Origin:</strong> Original Developer Signature (${app.dev_name})</div>
     </div>
 
     <div style="text-align:center;">
@@ -499,42 +458,7 @@ function qrCodeModal(app) {
 }
 
 function privacyRiskScoreCard(app) {
-  return html`
-<div class="card privacy-score-card" style="margin: 1.5rem 0; padding: 1.35rem 1.5rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(37, 99, 235, 0.05)); border: 1.5px solid #10b981; border-radius: 12px;">
-  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 0.85rem; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <div style="width: 42px; height: 42px; border-radius: 10px; background: #10b981; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 900;">A+</div>
-      <div>
-        <h3 style="margin: 0; font-size: 1.15rem; color: var(--text);">Privacy &amp; Permission Safety Audit</h3>
-        <span style="font-size: 0.8rem; color: #10b981; font-weight: 700;">Exodus Static Analysis Grade &bull; 98 / 100 Safe</span>
-      </div>
-    </div>
-    <span style="background: #10b981; color: #fff; font-size: 0.72rem; font-weight: 800; padding: 3px 10px; border-radius: 20px; text-transform: uppercase;">0 Trackers Found</span>
-  </div>
-
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 1rem;">
-    <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; font-size: 0.82rem;">
-      <div style="font-weight: 700; color: var(--text);">🔒 Network Traffic</div>
-      <div style="color: #10b981; font-weight: 600; margin-top: 2px;">Enforced HTTPS / TLS 1.3</div>
-    </div>
-    <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; font-size: 0.82rem;">
-      <div style="font-weight: 700; color: var(--text);">🚫 Background SMS/Call</div>
-      <div style="color: #10b981; font-weight: 600; margin-top: 2px;">Zero Access (Safe)</div>
-    </div>
-    <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; font-size: 0.82rem;">
-      <div style="font-weight: 700; color: var(--text);">🛡️ Analytics Trackers</div>
-      <div style="color: #10b981; font-weight: 600; margin-top: 2px;">0 Aggressive Data Brokers</div>
-    </div>
-    <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; font-size: 0.82rem;">
-      <div style="font-weight: 700; color: var(--text);">📁 Storage Sandbox</div>
-      <div style="color: #10b981; font-weight: 600; margin-top: 2px;">Scoped App Sandbox</div>
-    </div>
-  </div>
-
-  <p style="margin: 0; font-size: 0.82rem; color: var(--muted); line-height: 1.5;">
-    Audited using APKWorlds Automated Static Bytecode Sandbox. The <code>${app.package_name || 'app'}</code> binary does not contain hidden adware libraries, invasive location pingers, or unauthorized data transmission.
-  </p>
-</div>`;
+  return '';
 }
 
 function appPerformanceBenchmarkCard(app) {
@@ -623,18 +547,21 @@ function downloadBox(app, file) {
       ${label}${vText}${sizeText} &rarr;
     </a>
     <a class="btn" href="/apps/${app.slug}/download/">File Verification &amp; Details</a>
-    <p class="small">✓ 100% Verified Official Source. Directed straight to official developer release (Google Play / Official Developer Mirror) without altered or broken files.</p>
+    <p class="small">✓ Clean developer distribution. Links directed to official store and verified mirror channels.</p>
     ${app.official_apk_page && app.official_apk_page !== primary ? html`<p class="small">${app.dev_name} also publishes an official APK on ${ext(app.official_apk_page, 'its verified download portal', '', 'official_click')}.</p>` : ''}
   </div>`;
 }
 
 function ratingBars(app) {
   const dist = D.ratingDistribution(app.id, app);
-  const total = app.review_count || 0;
+  const total = app.site_review_count || 0;
+  if (!total) {
+    return html`<p class="muted" style="margin: 0.5rem 0;">No community rating distribution submitted yet.</p>`;
+  }
   return html`<div class="dist" aria-label="Rating distribution">${[5, 4, 3, 2, 1].map((n) => {
-    const pct = total ? Math.round((dist[n] / total) * 100) : 0;
-    const countDisplay = typeof dist[n] === 'number' ? dist[n].toLocaleString('en-US') : dist[n];
-    return html`<div class="bar"><span>${n} star${n > 1 ? 's' : ''}</span><meter min="0" max="100" value="${pct}" aria-label="${n} stars: ${countDisplay} reviews"></meter><span class="muted">${countDisplay}</span></div>`;
+    const count = dist[n] || 0;
+    const pct = total ? Math.round((count / total) * 100) : 0;
+    return html`<div class="bar"><span>${n} star${n > 1 ? 's' : ''}</span><meter min="0" max="100" value="${pct}" aria-label="${n} stars: ${count} reviews"></meter><span class="muted">${count}</span></div>`;
   })}</div>`;
 }
 
@@ -691,7 +618,7 @@ export function appPage(req, app) {
     ...(faqs || []),
     {
       q: `Is ${app.name} APK safe and free from malware?`,
-      a: `Yes, ${app.name} APK on APKWorlds is verified against 70+ antivirus engines through VirusTotal with 0 detections. The file matches the official cryptographic signature from ${app.dev_name}.`
+      a: `Yes, ${app.name} APK packages on APKWorlds are verified against original developer checksums and examined for safety before listing.`
     },
     {
       q: `How do I install ${app.name} APK on Android?`,
@@ -739,7 +666,7 @@ export function appPage(req, app) {
         </div>
         <p class="apk-hero-summary">${app.summary}</p>
         <div class="apk-hero-actions">
-          <a href="#download-box" class="btn-apk-hero-dl">
+          <a href="/apps/${app.slug}/download/" class="btn-apk-hero-dl">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             <span>Download APK</span>
             <span class="btn-size-tag">(${sizeText})</span>
@@ -750,7 +677,7 @@ export function appPage(req, app) {
           </button>
           <div class="apk-safety-tag">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#24c78d" stroke-width="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-            <span>100% Virus-Free &amp; Verified Official Source</span>
+            <span>Verified Android Package</span>
           </div>
         </div>
       </div>
@@ -784,11 +711,11 @@ export function appPage(req, app) {
       <div class="security-seal-icon">🛡️</div>
       <div class="security-seal-info">
         <div class="security-seal-heading">
-          <strong>100% Virus-Free &bull; 0/70 Antivirus Detections</strong>
+          <strong>Package Checksum &amp; Integrity Verified</strong>
           <span class="seal-green-pill">Passed Clean</span>
         </div>
         <p class="security-seal-desc">
-          Cryptographic SHA-256 checksum verified against official developer keystore. Zero malware, adware, or modified byte streams.
+          Cryptographic SHA-256 checksum verified against developer release to ensure an authentic, unmodified package.
         </p>
       </div>
     </div>
@@ -799,24 +726,25 @@ export function appPage(req, app) {
     <!-- App Performance & RAM Footprint Benchmark -->
     ${appPerformanceBenchmarkCard(app)}
 
-    <!-- What's New in Latest Update Card (Google QDF Freshness Signal) -->
-    <div class="whats-new-card" id="whats-new">
-      <div class="whats-new-hdr">
-        <div class="whats-new-title">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          <span>What's New in ${app.version ? 'v' + app.version : 'Latest Version'}</span>
+    ${(() => {
+      const versions = D.versionsFor(app.id);
+      const latestV = versions[0];
+      const cl = latestV?.changelog || '';
+      if (!cl || cl.includes('Maintenance release addressing stability fixes') || cl.includes('Earlier release with core features')) return '';
+      return html`
+      <div class="whats-new-card" id="whats-new">
+        <div class="whats-new-hdr">
+          <div class="whats-new-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>What's New in ${latestV.version ? 'v' + latestV.version : (app.version ? 'v' + app.version : 'Latest Update')}</span>
+          </div>
+          <span class="whats-new-badge">${latestV.released_on ? fmtDate(latestV.released_on) : 'Latest'}</span>
         </div>
-        <span class="whats-new-badge">Updated October 2026</span>
-      </div>
-      <div class="whats-new-body">
-        <ul class="whats-new-list">
-          <li><strong>Performance Optimization:</strong> Enhanced 64-bit ARM execution with reduced background RAM footprint.</li>
-          <li><strong>Security &amp; Privacy:</strong> Verified genuine digital signature with latest Google Play Integrity API compliance.</li>
-          <li><strong>Stability Fixes:</strong> Resolved background synchronization issues and improved battery efficiency.</li>
-          <li><strong>UI Responsiveness:</strong> Smoother transition animations on Android 14 and Android 15 devices.</li>
-        </ul>
-      </div>
-    </div>
+        <div class="whats-new-body">
+          <p style="margin: 0; line-height: 1.6; color: var(--text);">${cl}</p>
+        </div>
+      </div>`;
+    })()}
 
     <!-- Phone Compatibility Checker Widget -->
     <div class="compat-checker-card" id="compatChecker" data-min-android="${parseFloat(app.min_android) || 7.0}" data-app-name="${app.name}">
@@ -920,7 +848,7 @@ export function appPage(req, app) {
     ${app.version ? ` The current version we've recorded is ${app.version}${app.version_updated_on ? `, released ${fmtDate(app.version_updated_on)}` : ''}.` : ''}
     ${app.offline_note ? ` Offline use: ${app.offline_note.toLowerCase()}.` : ''}</p>
     <p>${app.download_type === 'authorized_apk' && file
-      ? html`An APK is hosted here with the developer's permission. See the <a href="/apps/${app.slug}/download/">${app.name} APK download details</a> for file size, SHA-256 hash and check results.`
+      ? html`Direct package and mirror links are listed below. See the <a href="/apps/${app.slug}/download/">${app.name} APK download details</a> for file size, SHA-256 hash and check results.`
       : html`We don't host ${app.name} files. Use the official links on this page. If you install from an APK, follow our <a href="/guides/how-to-install-apk/">APK installation guide</a>.`}</p>
   </section>
 
@@ -1044,11 +972,7 @@ export function appPage(req, app) {
     <p>Listed ${fmtDate(app.published_at)} · Page last changed ${fmtDate(app.updated_at)}. Spotted an error? <a href="/report-app/?app=${app.slug}">Report wrong information about ${app.name}</a>.</p>
   </aside>
 
-  <!-- International Search Queries & Global Keywords -->
-  <div class="intl-search-tags card" style="margin: 1.5rem 0; padding: 1rem 1.25rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; color: var(--muted); line-height: 1.6;">
-    <strong style="color: var(--text);">🌐 Global Search Queries:</strong>
-    Descargar ${app.name} APK gratis en español &bull; Baixar ${app.name} APK atualizado sem vírus &bull; Unduh ${app.name} APK versi terbaru resmi &bull; Download ${app.name} APK latest package free &bull; Télécharger ${app.name} APK gratuit Android &bull; تحميل تطبيق ${app.name} apk مجانا برابط مباشر.
-  </div>
+  
 
   <!-- Scan to Phone QR Code Modal -->
   ${qrCodeModal(app)}
@@ -1103,9 +1027,9 @@ export function appPage(req, app) {
 
   return page({
     title: `${app.name} APK ${app.version ? 'v' + app.version : 'Latest'} for Android - Free Download [Official]`,
-    description: `Download ${app.name} APK ${app.version ? 'v' + app.version : 'latest version'} for Android. 100% verified virus-free package, fast multi-CDN download mirrors, and official signatures.`.slice(0, 300),
+    description: `Download ${app.name} APK ${app.version ? 'v' + app.version : 'latest version'} for Android. verified Android package details, direct mirrors, and technical specifications.`.slice(0, 300),
     path: `/apps/${app.slug}/`, index: idx.index, crumbs: appCrumbs(app),
-    keywords: `${app.name} apk, download ${app.name}, descargar ${app.name} apk gratis, baixar ${app.name} atualizado, unduh ${app.name} apk, ${app.name} apk download latest version, telecharger ${app.name} apk, ${app.name} mod apk unlocked`,
+    keywords: `${app.name} apk, download ${app.name}, descargar ${app.name} apk gratis, baixar ${app.name} atualizado, unduh ${app.name} apk, ${app.name} apk download latest version, telecharger ${app.name} apk`,
     ld: ldList,
     ogImage: screenshots[0]?.src || `/icons/${app.slug}.svg`,
     body,
@@ -1118,7 +1042,8 @@ export function reviewsPage(req, app) {
   const per = 20;
   const reviews = D.approvedReviews(app.id, per, (pageNo - 1) * per);
   const idx = D.reviewsIndex(app);
-  const pages = Math.max(1, Math.ceil(app.review_count / per));
+  const realCount = app.site_review_count || 0;
+  const pages = realCount > 0 ? Math.ceil(realCount / per) : 0;
   const path = `/apps/${app.slug}/reviews/${pageNo > 1 ? `?page=${pageNo}` : ''}`;
   const status = req.query.get('submitted');
   const body = html`
@@ -1131,7 +1056,7 @@ ${status === '1' ? html`<p class="notice ok" role="status">Thanks. Your review h
   ${ratingBars(app)}
 </section>
 <section><h2>Recent reviews</h2>${reviewList(reviews, req, app)}
-${pages > 1 ? html`<nav class="pager" aria-label="Review pages">${pageNo > 1 ? html`<a href="/apps/${app.slug}/reviews/${pageNo > 2 ? `?page=${pageNo - 1}` : ''}" rel="prev">Newer reviews</a>` : ''}<span>Page ${pageNo} of ${pages}</span>${pageNo < pages ? html`<a href="/apps/${app.slug}/reviews/?page=${pageNo + 1}" rel="next">Older reviews</a>` : ''}</nav>` : ''}
+${pages > 1 && reviews.length > 0 ? html`<nav class="pager" aria-label="Review pages">${pageNo > 1 ? html`<a href="/apps/${app.slug}/reviews/${pageNo > 2 ? `?page=${pageNo - 1}` : ''}" rel="prev">Newer reviews</a>` : ''}<span>Page ${pageNo} of ${pages}</span>${pageNo < pages ? html`<a href="/apps/${app.slug}/reviews/?page=${pageNo + 1}" rel="next">Older reviews</a>` : ''}</nav>` : ''}
 </section>
 <section id="write"><h2>Write a review of ${app.name}</h2>${reviewForm(req, app)}</section>
 
@@ -1157,7 +1082,10 @@ ${pages > 1 ? html`<nav class="pager" aria-label="Review pages">${pageNo > 1 ? h
   return page({
     title: pageNo > 1 ? `${app.name} Reviews (Page ${pageNo})` : `${app.name} Reviews and User Ratings`,
     description: app.review_count ? `${app.review_count} moderated user reviews of ${app.name} for Android, with rating breakdown and developer responses.` : `Read and write user reviews of ${app.name} for Android. Reviews are moderated before publishing.`,
-    path, index: idx.index && !status, crumbs: appCrumbs(app, ['Reviews', `/apps/${app.slug}/reviews/`]),
+    path,
+    canonical: `/apps/${app.slug}/`,
+    index: false,
+    crumbs: appCrumbs(app, ['Reviews', `/apps/${app.slug}/reviews/`]),
     ld: idx.index ? [appLd(app, { reviews })] : [], body,
   });
 }
@@ -1290,7 +1218,10 @@ ${versions.length >= 2 ? html`
   return page({
     title: `${app.name} Old Versions APK Download (All Historical Releases)`,
     description: `Download ${app.name} old versions APK for Android. Clean historical archive of verified older releases, release notes, and compatibility records.`.slice(0, 300),
-    path: `/apps/${app.slug}/versions/`, index: idx.index, crumbs: appCrumbs(app, ['Versions', `/apps/${app.slug}/versions/`]), body,
+    path: `/apps/${app.slug}/versions/`,
+    canonical: `/apps/${app.slug}/`,
+    index: false,
+    crumbs: appCrumbs(app, ['Versions', `/apps/${app.slug}/versions/`]), body,
   });
 }
 
@@ -1360,7 +1291,10 @@ ${guides.length ? html`<ul>${guides.map((g) => html`<li><a href="/guides/${g.slu
   return page({
     title: `Best ${app.name} Alternatives for Android (Top Similar Apps Compared)`,
     description: `Discover the best apps similar to ${app.name} for Android. Detailed feature comparison, pros & cons, and verified APK download links.`.slice(0, 300),
-    path: `/apps/${app.slug}/alternatives/`, index: idx.index, crumbs: appCrumbs(app, ['Alternatives', `/apps/${app.slug}/alternatives/`]),
+    path: `/apps/${app.slug}/alternatives/`,
+    canonical: `/apps/${app.slug}/`,
+    index: false,
+    crumbs: appCrumbs(app, ['Alternatives', `/apps/${app.slug}/alternatives/`]),
     ld: alts.length ? [{ '@context': 'https://schema.org', '@type': 'ItemList', name: `${app.name} alternatives`, itemListElement: alts.map((a, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(`/apps/${a.slug}/`), name: a.name })) }] : [],
     body,
   });
@@ -1424,22 +1358,8 @@ export function downloadPage(req, app) {
 <div class="safety" role="note"><p><strong>Before you install:</strong> only install APK files from sources you trust. Check the file details above against the developer's own information before installation.</p></div>
 
 <div class="dlbox" style="margin: 2rem 0; padding: 1.75rem; background: var(--bg-card); border-radius: 14px; border: 1px solid var(--border); box-shadow: var(--shadow-sm);">
-  <!-- VirusTotal Safety Shield -->
-  <div class="security-badge" style="display: flex; align-items: flex-start; gap: 14px; padding: 14px 18px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 10px; margin-bottom: 1.5rem;">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 2px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-    <div>
-      <div style="font-weight: 700; color: #10b981; font-size: 0.98rem; display: flex; align-items: center; gap: 6px;">
-        <span>Verified Clean by Multi-Engine VirusTotal Scanners</span>
-        <span style="font-size: 0.72rem; background: #10b981; color: #fff; padding: 1px 6px; border-radius: 4px; font-weight: 600;">0/72 Detections</span>
-      </div>
-      <div style="font-size: 0.83rem; color: var(--muted); margin-top: 4px; line-height: 1.45;">
-        Authentic cryptographic signature matched with original developer certificate. Zero repackaged adware, trackers, or modified DEX binaries.
-      </div>
-    </div>
-  </div>
-
-  <h3 style="margin-top:0; font-size: 1.25rem;">Official Verified Package Distribution</h3>
-  <p style="color: var(--muted); font-size: 0.95rem;">To safeguard Android device integrity, ${app.name} is delivered with end-to-end cryptographic integrity verification.</p>
+  <h3 style="margin-top:0; font-size: 1.25rem;">Official Package Distribution</h3>
+  <p style="color: var(--muted); font-size: 0.95rem;">Download official release packages directly from verified developer distribution endpoints.</p>
 
   <!-- Auto-Detect User Device & Android Version Compatibility Banner -->
   ${userDeviceCompatCard(app, hosted, file)}
@@ -1447,63 +1367,14 @@ export function downloadPage(req, app) {
   <!-- Auto Country Bypass / Region Restriction Unlocker -->
   ${regionUnlockerCard(app)}
 
-  <!-- Interactive 5-Second Download Countdown Timer -->
-  <div id="dl-countdown-wrap" style="text-align: center; padding: 1.5rem; background: var(--bg-surface); border-radius: 12px; border: 1px solid var(--border); margin: 1.25rem 0;">
-    <div id="dl-timer-msg" style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text);">
-      Your verified secure download will start in <span id="dl-countdown-num" style="color: #2563eb; font-size: 1.5rem; font-weight: 800;">5</span> seconds...
+  <!-- Action Area -->
+  ${app.download_type === 'paused' ? html`
+    <div class="card" style="margin: 1.5rem 0; padding: 1.5rem; background: rgba(239, 68, 68, 0.08); border: 1.5px solid rgba(239, 68, 68, 0.35); border-radius: 12px; text-align: center;">
+      <h3 style="color: #dc2626; margin: 0 0 8px 0; font-size: 1.15rem;">⚠️ Downloads Temporarily Paused</h3>
+      <p style="color: var(--text); margin: 0; font-size: 0.95rem; line-height: 1.5;">Downloads for this listing are temporarily paused pending developer safety &amp; compliance verification. Please check back later or visit the official developer portal.</p>
     </div>
-    <div class="dl-progress-bar" style="height: 8px; width: 100%; max-width: 340px; background: rgba(0,0,0,0.08); border-radius: 6px; margin: 0.75rem auto 1.25rem auto; overflow: hidden;">
-      <div id="dl-progress-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #10b981, #2563eb); transition: width 1s linear; border-radius: 6px;"></div>
-    </div>
-
-    <!-- 68-Engine Antivirus Security Verification Report (VirusTotal Style) -->
-    <div class="card security-report-card" style="margin: 1rem auto 1.25rem auto; max-width: 680px; padding: 1.1rem 1.4rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(37, 99, 235, 0.05)); border: 1.5px solid #10b981; border-radius: 12px; text-align: left;">
-      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 0.6rem;">
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <span style="font-size: 1.35rem;">🛡️</span>
-          <div>
-            <strong style="color: var(--text); font-size: 1rem;">Security Scan Report: 100% Virus-Free</strong>
-            <div style="font-size: 0.78rem; color: #10b981; font-weight: 700;">0/68 Security Vendors Flagged As Clean</div>
-          </div>
-        </div>
-        <span style="background: #10b981; color: #fff; font-size: 0.7rem; font-weight: 800; padding: 3px 10px; border-radius: 20px; text-transform: uppercase;">Verified Safe</span>
-      </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin: 0.6rem 0;">
-        <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 5px 9px; border-radius: 6px; font-size: 0.76rem; display: flex; align-items: center; gap: 6px;">
-          <span style="color: #10b981; font-weight: 800;">✓</span> Google Play Protect
-        </div>
-        <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 5px 9px; border-radius: 6px; font-size: 0.76rem; display: flex; align-items: center; gap: 6px;">
-          <span style="color: #10b981; font-weight: 800;">✓</span> Kaspersky Mobile
-        </div>
-        <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 5px 9px; border-radius: 6px; font-size: 0.76rem; display: flex; align-items: center; gap: 6px;">
-          <span style="color: #10b981; font-weight: 800;">✓</span> Bitdefender Core
-        </div>
-        <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 5px 9px; border-radius: 6px; font-size: 0.76rem; display: flex; align-items: center; gap: 6px;">
-          <span style="color: #10b981; font-weight: 800;">✓</span> Avast Antivirus
-        </div>
-      </div>
-      <p style="margin: 0 0 10px 0; font-size: 0.8rem; color: var(--muted); line-height: 1.4;">
-        Cryptographic SHA-256 signature verified against official developer keystore. Zero altered binary, zero root required, and anti-ban checked.
-      </p>
-      <div style="border-top: 1px dashed rgba(16,185,129,0.3); padding-top: 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-        <span style="font-size: 0.78rem; color: #10b981; font-weight: 700;">Zero Malware &bull; Official Keystore Signature</span>
-        <button type="button" id="btnOpenAntivirusCert" class="btn" style="background: rgba(16,185,129,0.15); color: #065f46; border: 1px solid #10b981; font-weight: 700; font-size: 0.8rem; padding: 5px 12px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
-          <span>🔍 View 70+ Antivirus Inspection Certificate &rarr;</span>
-        </button>
-      </div>
-    </div>
-    
-    <!-- Waiting Ad Box (Displayed during 5s countdown for 90%+ ad viewability) -->
-    <div id="dl-waiting-box" style="margin: 1.25rem 0; padding: 1.25rem; background: var(--bg-card); border-radius: 10px; border: 1px dashed var(--border);">
-      <div style="font-size: 0.85rem; color: var(--muted); margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 6px;">
-        <span class="pulse-dot" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#10b981;"></span>
-        <span>Verifying SHA-256 integrity &amp; establishing secure SSL CDN mirror connections...</span>
-      </div>
-      ${adNativeWidget()}
-    </div>
-
-    <!-- Action Area (Revealed smoothly when timer finishes) -->
-    <div id="dl-action-area" style="display: none; margin-top: 1.25rem;">
+  ` : html`
+    <div id="dl-action-area" style="display: block; margin-top: 1.25rem;">
       <!-- APKWorlds Official Store App Callout -->
       ${storeAppCalloutCard(app)}
 
@@ -1525,7 +1396,7 @@ export function downloadPage(req, app) {
           <a class="mirror-item mirror-primary" id="dl-main-btn" href="${app.play_url || app.official_apk_page || app.website || '#'}" rel="noopener" target="_blank" data-evt="mirror_cdn1">
             <div class="mirror-icon-box">⚡</div>
             <div class="mirror-meta">
-              <span class="mirror-title">Mirror 1: Primary Developer CDN (Recommended)</span>
+              <span class="mirror-title">Mirror 1: Primary Developer Source (Recommended)</span>
               <span class="mirror-sub">Direct Official Package &bull; SSL Secured &bull; Free Global Edge</span>
             </div>
             <span class="mirror-tag tag-fast">Fastest</span>
@@ -1567,6 +1438,7 @@ export function downloadPage(req, app) {
       <!-- While You Wait Related Recommendations -->
       ${whileYouWaitCard(app, relatedApps)}
     </div>
+  `}
 
     <!-- In-Box Sponsored Recommendations -->
     <div style="margin-top: 1.5rem;">
@@ -1594,7 +1466,7 @@ export function downloadPage(req, app) {
         <div style="display: inline-flex; align-items: center; gap: 6px; background: #2563eb; color: #fff; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">
           🛡️ Recommended Security Partner
         </div>
-        <h4 style="margin: 0 0 6px 0; font-size: 1.15rem; color: var(--text);">Zero-Lag Gaming &amp; 100% Virus-Free Sideloading Protection</h4>
+        <h4 style="margin: 0 0 6px 0; font-size: 1.15rem; color: var(--text);">Zero-Lag Gaming &amp; Verified Package Sideloading Protection</h4>
         <p style="margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5;">
           Bypass ISP throttling, protect your phone IP while downloading sideloaded APKs, and enjoy unlimited high-speed bandwidth with no latency. <strong>Exclusive: 70% Off + 3 Months Free</strong>.
         </p>
@@ -1697,11 +1569,7 @@ ${updateRequestCard(app)}
   </div>
 </section>
 
-<!-- International Search Queries & Global Keywords -->
-<div class="intl-search-tags card" style="margin: 1.5rem 0; padding: 1rem 1.25rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px; font-size: 0.8rem; color: var(--muted); line-height: 1.6;">
-  <strong style="color: var(--text);">🌐 Global Search Queries:</strong>
-  Descargar ${app.name} APK gratis en español &bull; Baixar ${app.name} APK atualizado sem vírus &bull; Unduh ${app.name} APK versi terbaru resmi &bull; Download ${app.name} APK latest package free &bull; Télécharger ${app.name} APK gratuit Android &bull; تحميل تطبيق ${app.name} apk مجانا برابط مباشر.
-</div>
+
 
 <!-- Interactive VirusTotal 70+ Antivirus Inspection Certificate Modal -->
 ${antivirusCertModal(app)}
@@ -1747,9 +1615,12 @@ ${exitIntentModal(app)}
 
   return page({
     title: `Download ${app.name} APK for Android (${app.version ? 'v' + app.version + ' ' : ''}Direct High-Speed Package)`,
-    description: `Direct download ${app.name} APK package for Android. Verified SHA-256 digital signature, zero malware, and multi-threaded fast download mirrors.`.slice(0, 300),
-    path: `/apps/${app.slug}/download/`, index: idx.index && !reqV, crumbs: appCrumbs(app, ['Download', `/apps/${app.slug}/download/`]),
-    keywords: `download ${app.name} apk, ${app.name} apk direct download, descargar ${app.name} apk gratis, baixar ${app.name} apk atualizado, unduh ${app.name} apk terbaru, telecharger ${app.name} apk, ${app.name} mod apk unlocked, ${app.name} android package`,
+    description: `Direct download ${app.name} APK package for Android. Verified official signature and direct fast download mirrors.`.slice(0, 300),
+    path: `/apps/${app.slug}/download/`,
+    canonical: `/apps/${app.slug}/`,
+    index: false,
+    crumbs: appCrumbs(app, ['Download', `/apps/${app.slug}/download/`]),
+    keywords: `download ${app.name} apk, ${app.name} apk direct download, descargar ${app.name} apk gratis, baixar ${app.name} apk atualizado, unduh ${app.name} apk terbaru, telecharger ${app.name} apk, ${app.name} android package`,
     ld: downloadLd,
     body,
   });
@@ -1762,7 +1633,7 @@ function one_file(id) {
 // ---------------------------------------------------------------- Comparison page
 function cmpFacts(a, b) {
   const yesNo = (x) => (x ? 'Yes' : 'No');
-  const apkAvail = (x) => (x.download_type === 'authorized_apk' ? 'Hosted here (authorised)' : x.official_apk_page ? 'From developer website' : 'Google Play only');
+  const apkAvail = (x) => (x.download_type === 'authorized_apk' ? 'Direct download' : x.official_apk_page ? 'From developer website' : 'Google Play only');
   return [
     ['Developer', html`<a href="/developer/${a.dev_slug}/">${a.dev_name}</a>`, html`<a href="/developer/${b.dev_slug}/">${b.dev_name}</a>`],
     ['Price', orNA(PRICE[a.price_model]), orNA(PRICE[b.price_model])],

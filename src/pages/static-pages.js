@@ -10,65 +10,58 @@ import * as D from '../lib/data.js';
 export function aboutPage() {
   const body = html`
 <header class="page-head">
-  <h1>About ${config.siteName}: Independent Android App Discovery &amp; Safety Verification Laboratory</h1>
-  <p class="lead">An independent, laboratory-tested Android catalog dedicated to transparent software discovery, physical hardware performance analysis, impartial comparisons, and verified distribution channels.</p>
-  <p class="meta" style="margin-top: 0.75rem; color: var(--muted); font-size: 0.9rem;">Established November 2025 · Last Editorial Revision: August 25, 2026 · Technical Safety Lab</p>
+  <h1>About ${config.siteName}: Independent Android App Directory &amp; Information Resource</h1>
+  <p class="lead">An independent Android catalog providing clear package specifications, developer information, checksum details, and verified download destinations.</p>
+  <p class="meta" style="margin-top: 0.75rem; color: var(--muted); font-size: 0.9rem;">Last Editorial Review: October 2026 &bull; Independent Android Reference</p>
 </header>
 
 <section class="static-content">
-  <h2>1. The Founding Mission of ${config.siteName}: Reforming Third-Party Sideloading</h2>
-  <p>The Android operating system was architected on principles of open computing, user sovereignty, and developer freedom. Android has always empowered users to install software outside centralized marketplaces - a native capability termed sideloading. However, over the past decade, the third-party APK ecosystem devolved into an untrusted digital environment. Many aggregation portals emerged prioritizing ad revenue over security, wrapping legitimate software in aggressive adware, injecting telemetry trackers, distributing cracked binaries, and republishing promotional store blurbs without testing.</p>
+  <h2>1. The Mission of ${config.siteName}</h2>
+  <p>Android is built on open foundations, giving users the freedom to explore applications from diverse sources. However, finding reliable information about Android software can be challenging. Many download portals publish unverified claims or obscure file details.</p>
   
-  <p>Founded in November 2025, <strong>${config.siteName}</strong> was established as a direct response to this crisis of trust. Our founding mandate is singular: to build an authoritative, transparent, and human-curated Android repository treating device security, factual reporting, and cryptographic integrity as non-negotiable fundamentals. Rather than operating as an unvetted crawler, we execute a rigorous evaluation process for every package in our <a href="/apps/">Android Apps Directory</a> and <a href="/games/">Mobile Games Catalog</a>. Users deserve clarity regarding package provenance, cryptographic certificates, hardware resource consumption, and background permissions before installing software.</p>
+  <p><strong>${config.siteName}</strong> provides a clean, transparent, and structured Android catalog. Our goal is straightforward: to catalog popular applications and games alongside verifiable technical specifications, accurate developer attribution, minimum Android requirements, and direct official links. Users deserve clear information before installing any package onto their device.</p>
 
-  <h2>2. Our Core Editorial Philosophy: Human Analysis Over Automation</h2>
-  <p>In an era dominated by automated scraping scripts and generic synthetic summaries, ${config.siteName} maintains an absolute dedication to authentic human journalism and hands-on laboratory evaluation. Every application profile, category taxonomy, and comparison article published on our platform is authored, reviewed, and maintained by experienced mobile analysts who understand Android runtime environments. We do not syndicate unmodified marketing descriptions from Google Play or employ automated tools to fabricate artificial positive impressions. Our editorial charter is governed by our strict <a href="/editorial-policy/">Editorial Policy</a>, ensuring complete objectivity, verifiable claims, and transparent pros and cons for every listing.</p>
+  <h2>2. Our Editorial &amp; Information Approach</h2>
+  <p>Rather than republishing unedited promotional store text, ${config.siteName} summarizes applications based on their real functional capabilities and user utility. Our listings in the <a href="/apps/">Android Apps Directory</a> and <a href="/games/">Mobile Games Section</a> highlight key features, system requirements, permissions requested, and known drawbacks.</p>
 
-  <p>When our team inspects a popular communication client like <a href="/apps/whatsapp/">WhatsApp Messenger</a>, a mobile multiplayer title like <a href="/apps/among-us/">Among Us</a>, or a privacy utility like <a href="/apps/signal/">Signal Private Messenger</a>, we do not merely test installation success. We analyze the binary structure, identify target SDK versions, review manifest permissions, and evaluate real-world system impact under battery and cellular constraints. If a utility claims offline support but initiates network connections to telemetry servers, our editorial overview explicitly highlights that behavior. If an application demands invasive background permissions exceeding its functional scope, we alert users before they proceed to our verified <a href="/download-policy/">Download Policy</a> distribution channels.</p>
+  <p>Our editorial approach is guided by our <a href="/editorial-policy/">Editorial Policy</a>, emphasizing factual accuracy, transparent pros and cons, and verifiable package specifications.</p>
 
-  <h2>3. The 5-Stage Security &amp; Binary Integrity Testing Pipeline</h2>
-  <p>Every software package associated with ${config.siteName} passes through an exhaustive, multi-phase technical verification workflow designed to prevent malicious or altered software from ever reaching end-user devices. Our technical safety lab adheres to a standardized five-stage inspection pipeline:</p>
-
-  <ul>
-    <li><strong>Stage 1: Provenance &amp; Licensing Verification:</strong> Prior to listing, we verify the distribution status of the software. Under our strict distribution charter, we operate under two distinct distribution models. When a publisher grants explicit authorization or releases under recognized open-source licenses (such as Apache 2.0, MIT, or GPL), we host verified mirrors. When direct hosting is not explicitly authorized, we direct users cleanly to Google Play or the publisher's official domain without intermediate redirects.</li>
-    <li><strong>Stage 2: Cryptographic SHA-256 Hash Generation:</strong> Every APK file hosted on our infrastructure is processed through cryptographic checksum algorithms to generate an immutable SHA-256 digital fingerprint. This unique hash is published openly on the application's dedicated download verification screen (for instance, on the <a href="/apps/subway-surfers/download/">Subway Surfers Download Details Page</a>). Visitors can independently verify downloaded files using standard command-line tools or mobile hash checkers before executing package installation. For an in-depth walkthrough on verification, consult our guide on <a href="/guides/how-to-check-apk-file/">How to Check and Verify APK Files</a>.</li>
-    <li><strong>Stage 3: Multi-Engine Threat Intelligence Auditing:</strong> Hosted binaries undergo automated multi-engine antivirus scanning against more than seventy industry-standard malware definition databases. We scan for known trojans, banking overlays, commercial spyware, remote access tools (RATs), and aggressive advertising SDKs. Furthermore, we maintain transparent disclosure: if an automated report is pending, the file is clearly labeled as unverified rather than falsely claimed to be completely risk-free.</li>
-    <li><strong>Stage 4: Physical Device Hardware Execution Lab:</strong> Emulators alone cannot accurately simulate the performance of modern mobile chipsets. Our team maintains a physical testing lab equipped with authentic Android smartphones spanning Android 10, 11, 12, 13, 14, and early Android 15 developer previews. We test on varied hardware profiles - from entry-level Snapdragon and MediaTek architectures with 3GB of RAM to flagship multi-core configurations - to observe real-world thermal performance, frame stability, and memory footprints.</li>
-    <li><strong>Stage 5: Manifest Permission &amp; Telemetry Audits:</strong> We decompile and inspect each application's <code>AndroidManifest.xml</code> to evaluate requested Android permissions against our safety baseline. When utilities request sensitive capabilities - such as accessibility services, device administration, SMS reading, or background location - we subject those declarations to intense scrutiny. To learn how to audit your own installed packages, read our comprehensive tutorial on <a href="/guides/how-to-check-app-permissions/">How to Check and Manage App Permissions</a>.</li>
-  </ul>
-
-  <h2>4. Navigating the Catalog: Discovery Across Categories &amp; Charts</h2>
-  <p>To help users locate verified Android software effortlessly, ${config.siteName} organizes applications into focused categories. Visitors can browse dedicated hubs in our <a href="/categories/">Categories Directory</a>:</p>
+  <h2>3. Package Integrity &amp; Safe Sideloading</h2>
+  <p>Security and transparency are essential when installing applications outside default app stores. We observe clean distribution practices:</p>
 
   <ul>
-    <li><strong>Utilities &amp; Productivity:</strong> Essential tools for organization and file handling in our <a href="/apps/tools/">Tools Category</a> and <a href="/apps/productivity/">Productivity Hub</a>.</li>
-    <li><strong>Secure Communication:</strong> Encrypted messaging and calling in our <a href="/apps/communication/">Communication Apps Directory</a>.</li>
-    <li><strong>Privacy &amp; System Protection:</strong> Network security in our <a href="/apps/security/">VPN &amp; Security Tools Section</a>.</li>
-    <li><strong>Multimedia Creators:</strong> Editing suites in our <a href="/apps/video-players-editors/">Video Players &amp; Editors</a> and <a href="/apps/photography/">Photography Collection</a>.</li>
-    <li><strong>Mobile Gaming:</strong> Hundreds of titles across <a href="/games/action-games/">Action Games</a>, <a href="/games/rpg/">Role-Playing Games</a>, and <a href="/games/casual-arcade-games/">Casual Arcade Games</a>.</li>
+    <li><strong>Authentic Developer Attribution:</strong> Every listed app is mapped to its recognized creator or studio in our <a href="/developers/">Developers Directory</a> with links to their official presence.</li>
+    <li><strong>Cryptographic SHA-256 Checksums:</strong> Where package downloads are provided, we publish the file's SHA-256 checksum so users can verify file integrity prior to installation using standard tools. Consult our <a href="/guides/how-to-check-apk-file/">Guide to Verifying APK Files</a> for practical instructions.</li>
+    <li><strong>Permission Transparency:</strong> We document requested Android permissions so users understand what hardware or system capabilities an app accesses before installing.</li>
+    <li><strong>Direct Official Mirrors:</strong> Whenever an app is hosted directly by its developer or available via Google Play, we provide clean, direct links without deceptive intermediate redirect chains. See our <a href="/download-policy/">Download Policy</a> for full details.</li>
   </ul>
 
-  <p>Track software trends via our dynamic charts: browse <a href="/popular/">Top Charts</a> for daily favorites, check our <a href="/updated/">Recently Updated Hub</a> for fresh security patches, or view our <a href="/latest/">Latest Catalog Releases</a> for newly verified software.</p>
+  <h2>4. Comprehensive Catalog &amp; Curated Collections</h2>
+  <p>Our platform covers diverse mobile computing needs:</p>
+  <ul>
+    <li><strong>Productivity &amp; File Management:</strong> Browse utilities in our <a href="/apps/tools/">Tools Category</a> and <a href="/apps/productivity/">Productivity Hub</a>.</li>
+    <li><strong>Communication:</strong> Messaging and VoIP applications in our <a href="/apps/communication/">Communication Apps Section</a>.</li>
+    <li><strong>Media &amp; Creativity:</strong> Photo and video editors in <a href="/apps/photography/">Photography</a> and <a href="/apps/video-players-editors/">Video Players &amp; Editors</a>.</li>
+    <li><strong>Mobile Games:</strong> Casual, arcade, action, and puzzle titles across our <a href="/games/">Games Library</a>.</li>
+  </ul>
 
-  <h2>5. Comparative Research &amp; Architectural Alternatives</h2>
-  <p>Selecting software often requires comparing options. ${config.siteName} features an <a href="/compare/">App Comparisons Engine</a> pitting leading applications in side-by-side technical showdowns - including <a href="/compare/signal-vs-whatsapp/">Signal vs WhatsApp</a>, <a href="/compare/signal-vs-telegram/">Signal vs Telegram</a>, and <a href="/compare/organic-maps-vs-google-maps/">Organic Maps vs Google Maps</a>.</p>
+  <p>Explore curated selections such as our <a href="/collections/best-offline-games/">Best Offline Android Games</a> and <a href="/collections/lite-apps-low-end-phones/">Lite Apps for Low-RAM Phones</a>.</p>
 
-  <p>For users seeking to replace heavy commercial tools, our <a href="/alternatives/">App Alternatives Directory</a> offers lightweight substitutes, while our <a href="/versions/">Version History Archive</a> documents changelogs across historical builds.</p>
+  <h2>5. Comparative Research &amp; Version Archives</h2>
+  <p>To help users make informed decisions, our <a href="/compare/">App Comparisons</a> section highlights functional differences between frequently compared apps, while our <a href="/versions/">Version History Archive</a> keeps a factual record of releases and changelogs.</p>
 
-  <h2>6. Community Participation &amp; Developer Relations</h2>
-  <p>User ratings on ${config.siteName} are submitted exclusively by actual community members. Under our strict <a href="/review-policy/">User Review Policy</a>, we prohibit paid endorsements, automated bot submissions, promotional referral spam, and astroturfing campaigns. All incoming reviews undergo human moderation to ensure respectful, constructive community discussions while preserving honest critique. Each review displays the contributor's device model, software build used, and submission date to provide authentic context for prospective downloaders.</p>
+  <h2>6. Community Feedback &amp; Review Moderation</h2>
+  <p>Users can submit ratings and feedback for applications they use. To prevent spam and abusive content, all submitted reviews undergo editorial review before appearing on the site. See our <a href="/review-policy/">User Review Policy</a> for information on how community feedback is evaluated.</p>
 
-  <p>We also maintain active partnerships with software creators through our <a href="/developers/">Verified Developers Directory</a>. Software publishers and indie engineers are invited to claim their profiles, submit verified application builds via our <a href="/submit-app/">Submit App Portal</a>, and provide official public responses to community reviews. When developers address reported bugs or release performance improvements, our editorial team promptly reflects the enhancements in our live directory.</p>
+  <h2>7. Legal Independence &amp; Contact</h2>
+  <p>${config.siteName} is an independent website operated by ${config.ownerName}. We are not affiliated with, endorsed by, or sponsored by Google LLC, Meta Platforms, Inc., Apple Inc., or any commercial application publisher featured in our catalog. Android is a trademark of Google LLC. All trademarks, app names, and logos belong to their respective owners and are used purely for factual identification.</p>
 
-  <h2>7. Governance, Legal Independence &amp; Reaching Out</h2>
-  <p>${config.siteName} is operated independently by ${config.ownerName}. We maintain complete commercial independence: our platform is not owned by, subsidised by, or affiliated with Google LLC, Alphabet Inc., Meta Platforms, Apple Inc., or any commercial application publisher featured in our catalog. Android is a registered trademark of Google LLC. All logos, company names, and package identifiers displayed across our catalog are the intellectual property of their respective trademark holders, utilized purely for factual identification purposes under fair use doctrines.</p>
-
-  <p>We take copyright enforcement and community safety seriously. If you are an intellectual property holder and wish to submit a takedown request, please review our statutory procedures on our <a href="/copyright/">Copyright &amp; DMCA Policy Page</a>. If you encounter a corrupted download, technical glitch, or suspicious security anomaly, please report it immediately through our <a href="/report-app/">Report Broken or Unsafe App Tool</a>. For general editorial suggestions, partnership inquiries, or press communications, our team can be reached directly via our <a href="/contact/">Contact Us Page</a>.</p>
+  <p>For DMCA notices, visit our <a href="/copyright/">Copyright &amp; DMCA Policy</a>. To report incorrect technical details or broken links, please use our <a href="/report-app/">Report Form</a>. For editorial inquiries, reach us through our <a href="/contact/">Contact Us Page</a>.</p>
 </section>`;
 
   return page({
-    title: `About ${config.siteName}: Independent Android App Information & Safety Lab`,
-    description: `Learn about ${config.siteName}, our mission to provide authentic Android app details, our 5-stage cryptographic testing lab, and our commitment to safe distribution.`,
+    title: `About ${config.siteName}: Independent Android App Directory & Specifications`,
+    description: `Learn about ${config.siteName}, our mission to provide transparent Android app specifications, verified developer attribution, and safe sideloading guides.`,
     path: '/about/',
     crumbs: [['Home', '/'], ['About', '/about/']],
     ld: [orgLd()],
@@ -411,7 +404,7 @@ export function downloadPolicyPage() {
     <li><strong>"Flagged":</strong> Any file that triggers credible security detections is automatically quarantined, removed from public download availability, and flagged for technical review.</li>
   </ul>
 
-  <p>Unlike unscrupulous download aggregators that display deceptive "100% Virus Free" marketing stickers without substance, ${config.siteName} emphasizes verified cryptographic proof and transparent threat telemetry. Review our <a href="/about/">About Us Page</a> to learn more about our 5-stage laboratory verification pipeline.</p>
+  <p>Unlike unscrupulous download aggregators that display deceptive "100% Virus Free" marketing stickers without substance, ${config.siteName} emphasizes verified cryptographic proof and transparent threat telemetry. Review our <a href="/about/">About Us Page</a> to learn more about our verification standards.</p>
 
   <h2>5. Safe Sideloading Hygiene &amp; Android Permission Safeguards</h2>
   <p>Modern Android versions (Android 8.0 Oreo through Android 15) handle sideloading securely through per-app permissions. When installing an APK downloaded through a mobile browser, Android prompts you to grant "Install Unknown Apps" permission specifically for that browser. While this mechanism protects against drive-by downloads, users must remain vigilant regarding runtime permissions requested by installed software.</p>
@@ -465,7 +458,7 @@ export function privacyPolicyPage() {
   <h2>1. Privacy as an Inalienable Human Right &amp; The Anti-Surveillance Pledge</h2>
   <p>At <strong>${config.siteName}</strong>, we consider digital privacy to be a fundamental human right, not an optional convenience or a premium tier. Over the past decade, the broader consumer web - and mobile download websites in particular - became dominated by invasive surveillance capitalism. Commercial portals routinely deploy covert fingerprinting scripts, track browsing history across unrelated websites, monetize user device identifiers, and sell access to third-party data broker networks.</p>
 
-  <p>${config.siteName} was founded in November 2025 on the absolute rejection of surveillance capitalism. Our operational pledge is simple, binding, and transparent: <strong>we do not sell, rent, barter, license, or monetize your personal data to anyone, ever.</strong> We do not deploy invasive third-party analytics trackers (such as Google Analytics or Meta Pixel), we do not run behavioral advertising SDKs, and we do not compile cross-site user profiles. You are free to discover, research, and download verified software across our <a href="/apps/">Apps Catalog</a> and <a href="/games/">Games Library</a> with complete anonymity.</p>
+  <p>${config.siteName} is built on strict data privacy principles. Our operational pledge is simple, binding, and transparent: <strong>we do not sell, rent, barter, license, or monetize your personal data to anyone, ever.</strong> We do not deploy invasive third-party analytics trackers (such as Google Analytics or Meta Pixel), we do not run behavioral advertising SDKs, and we do not compile cross-site user profiles. You are free to discover, research, and download verified software across our <a href="/apps/">Apps Catalog</a> and <a href="/games/">Games Library</a> with complete anonymity.</p>
 
   <h2>2. Explicit Inventory of Data We Do NOT Collect</h2>
   <p>To provide unambiguous clarity regarding our privacy posture, we publish an explicit inventory of the personal data points that ${config.siteName} deliberately does <strong>not</strong> collect, process, or store:</p>

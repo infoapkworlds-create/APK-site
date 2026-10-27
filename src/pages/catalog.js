@@ -52,8 +52,13 @@ function filterBar(categories, isGames = false) {
 
 // ---------------------------------------------------------------- Apps directory
 export function appsDirectory(req) {
-  const apps = D.listApps({ where: "a.app_type = 'app'" });
+  const allApps = D.listApps({ where: "a.app_type = 'app'" });
   const cats = D.listCategories('app');
+  const pageNo = Math.max(1, Number(req?.query?.get('page')) || 1);
+  const perPage = 36;
+  const total = allApps.length;
+  const totalPages = Math.ceil(total / perPage);
+  const apps = allApps.slice((pageNo - 1) * perPage, pageNo * perPage);
 
   const body = html`
 <header class="page-head">
@@ -65,6 +70,12 @@ ${filterBar(cats, false)}
 
 <section class="catalog-results">
   ${appGrid(apps)}
+  ${totalPages > 1 ? html`
+  <nav class="pager" aria-label="Apps catalog pages" style="display:flex; justify-content:center; align-items:center; gap:12px; margin:2rem 0;">
+    ${pageNo > 1 ? html`<a href="/apps/${pageNo > 2 ? `?page=${pageNo - 1}` : ''}" class="btn" rel="prev">&larr; Previous Page</a>` : ''}
+    <span style="font-weight:600; color:var(--text);">Page ${pageNo} of ${totalPages}</span>
+    ${pageNo < totalPages ? html`<a href="/apps/?page=${pageNo + 1}" class="btn" rel="next">Next Page &rarr;</a>` : ''}
+  </nav>` : ''}
 </section>
 
 <section class="catalog-info">
@@ -80,9 +91,10 @@ ${filterBar(cats, false)}
 </section>`;
 
   return page({
-    title: 'Android Apps Directory: Discover Quality Applications',
+    title: pageNo > 1 ? `Android Apps Directory (Page ${pageNo})` : 'Android Apps Directory: Discover Quality Applications',
     description: 'Explore verified Android apps across productivity, tools, communication, and security categories with authentic details and direct sources.',
-    path: '/apps/',
+    path: pageNo > 1 ? `/apps/?page=${pageNo}` : '/apps/',
+    canonical: '/apps/',
     crumbs: [['Home', '/'], ['Apps', '/apps/']],
     body,
   });
@@ -90,8 +102,13 @@ ${filterBar(cats, false)}
 
 // ---------------------------------------------------------------- Games directory
 export function gamesDirectory(req) {
-  const games = D.listApps({ where: "a.app_type = 'game'" });
+  const allGames = D.listApps({ where: "a.app_type = 'game'" });
   const cats = D.listCategories('game');
+  const pageNo = Math.max(1, Number(req?.query?.get('page')) || 1);
+  const perPage = 36;
+  const total = allGames.length;
+  const totalPages = Math.ceil(total / perPage);
+  const games = allGames.slice((pageNo - 1) * perPage, pageNo * perPage);
 
   const body = html`
 <header class="page-head">
@@ -103,6 +120,12 @@ ${filterBar(cats, true)}
 
 <section class="catalog-results">
   ${appGrid(games)}
+  ${totalPages > 1 ? html`
+  <nav class="pager" aria-label="Games catalog pages" style="display:flex; justify-content:center; align-items:center; gap:12px; margin:2rem 0;">
+    ${pageNo > 1 ? html`<a href="/games/${pageNo > 2 ? `?page=${pageNo - 1}` : ''}" class="btn" rel="prev">&larr; Previous Page</a>` : ''}
+    <span style="font-weight:600; color:var(--text);">Page ${pageNo} of ${totalPages}</span>
+    ${pageNo < totalPages ? html`<a href="/games/?page=${pageNo + 1}" class="btn" rel="next">Next Page &rarr;</a>` : ''}
+  </nav>` : ''}
 </section>
 
 <section class="catalog-info">
@@ -118,9 +141,10 @@ ${filterBar(cats, true)}
 </section>`;
 
   return page({
-    title: 'Android Games Directory: Factual Reviews and Safe Downloads',
+    title: pageNo > 1 ? `Android Games Directory (Page ${pageNo})` : 'Android Games Directory: Factual Reviews and Safe Downloads',
     description: 'Browse tested Android games including puzzle and RPG titles with factual offline availability and gameplay summaries.',
-    path: '/games/',
+    path: pageNo > 1 ? `/games/?page=${pageNo}` : '/games/',
+    canonical: '/games/',
     crumbs: [['Home', '/'], ['Games', '/games/']],
     body,
   });
@@ -128,12 +152,13 @@ ${filterBar(cats, true)}
 
 // ---------------------------------------------------------------- Category page
 export function categoryPage(req, cat) {
+  const catWithC = D.catWithCount(cat.slug) || cat;
   const apps = D.appsInCategory(cat.id);
   const popular = apps.slice(0, 4);
   const updated = [...apps].sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || '')).slice(0, 4);
   const guides = L.guidesForCategory(cat, 3);
   const cmps = L.comparisonsForCategory(cat.id, 3);
-  const idx = D.categoryIndex(cat);
+  const idx = D.categoryIndex(catWithC);
   const faqs = JSON.parse(cat.faq_json || '[]');
   const relatedSlugs = JSON.parse(cat.related_json || '[]');
   const relatedCats = relatedSlugs.map((s) => D.getCategory(s)).filter(Boolean);
@@ -345,7 +370,7 @@ export function latestAppsPage() {
   <h1>Latest Android Apps and Games</h1>
   <p class="lead">Recently cataloged additions to our directory. Every new entry undergoes editorial checks for developer authenticity, package integrity, and legitimate distribution options.</p>
 </header>
-${appGrid(apps)}`;
+${appGrid(apps, { showDate: true })}`;
 
   return page({
     title: 'Latest Android Apps and Games Cataloged',
@@ -368,7 +393,7 @@ export function updatedAppsPage() {
   <h1>Recently Updated Android Apps</h1>
   <p class="lead">Track today's verified APK and game updates. We continuously refresh version numbers, SHA-256 signatures, security patches, and official release packages daily.</p>
 </header>
-${appGrid(apps)}`;
+${appGrid(apps, { showDate: true })}`;
 
   return page({
     title: 'Recently Updated Android Apps: Fresh Releases and Changes',
@@ -381,8 +406,8 @@ ${appGrid(apps)}`;
 
 // ---------------------------------------------------------------- Popular apps
 export function popularAppsPage() {
-  const apps = D.popularApps(30);
-  const fallback = apps.length >= 4 ? apps : D.listApps({ limit: 30 });
+  const apps = D.listApps({ order: 'a.rating_votes DESC, a.id ASC', limit: 30 });
+  const fallback = apps;
 
   const body = html`
 <header class="page-head">

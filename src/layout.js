@@ -106,8 +106,8 @@ function footer() {
         ${logoMark(32)}
         <span class="f-brand-title"><span class="brand-apk">APK</span><span class="brand-worlds">worlds</span></span>
       </div>
-      <p class="f-desc">Discover and download safe Android APKs with authentic developer verification, virus scans, and comprehensive guides.</p>
-      <div class="f-badge">100% Virus-Free &amp; Verified APKs</div>
+      <p class="f-desc">Discover and download safe Android APKs with authentic developer verification, clean package details, and comprehensive guides.</p>
+      <div class="f-badge">Verified APK Details &amp; Direct Sources</div>
     </div>
     <div class="f-links-grid">
       ${col('Top Discoveries', [['/popular/', 'Top Charts'], ['/latest/', 'Latest Apps'], ['/updated/', 'Recently Updated'], ['/games/', 'Android Games'], ['/apps/', 'Android Apps']])}
@@ -139,7 +139,7 @@ function footer() {
  */
 export function page(o) {
   const index = o.index !== false;
-  const canonical = abs(o.path);
+  const canonical = abs(o.canonical || o.path);
   const img = o.ogImage ? abs(o.ogImage) : abs('/static/og-default.png');
   const ld = [...(o.ld || [])];
   if (o.crumbs?.length > 1) ld.push(breadcrumbLd(o.crumbs));
@@ -168,7 +168,7 @@ export function page(o) {
   gtag('config', 'G-K601WNC1HR');
 </script>
 <link rel="canonical" href="${canonical}">
-${index ? raw('<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">\n') : raw('<meta name="robots" content="noindex, follow">\n')}<meta property="og:type" content="${o.ogType || 'website'}">
+${o.robots ? raw(`<meta name="robots" content="${o.robots}">\n`) : (index ? raw('<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">\n') : raw('<meta name="robots" content="noindex, follow">\n'))}<meta property="og:type" content="${o.ogType || 'website'}">
 <meta property="og:site_name" content="${config.siteName}">
 <meta property="og:title" content="${o.title}">
 <meta property="og:description" content="${o.description}">
@@ -266,17 +266,21 @@ export function stars(avg, count, min = config.thresholds.minReviewsForAverage) 
 }
 
 export function appCard(a, opts = {}) {
-  const sizeText = a.size_bytes ? fmtBytes(a.size_bytes) : (a.version ? `v${a.version}` : '');
+  const verText = a.version ? ('v' + a.version) : '';
+  const sizeText = a.size_bytes ? fmtBytes(a.size_bytes) : '';
+  const dateText = a.version_updated_on || (a.published_at ? fmtDate(a.published_at) : '');
   const isOffline = (a.summary || '').toLowerCase().includes('offline') || (a.cat_name || '').toLowerCase().includes('offline') || (a.name || '').toLowerCase().includes('offline');
   return html`<li class="card app-card" data-cat="${a.cat_slug}" data-price="${a.price_model || ''}" data-type="${a.app_type}" data-rating="${a.review_count >= config.thresholds.minReviewsForAverage ? (a.rating_avg || 0).toFixed(1) : 0}" data-dev="${a.dev_slug}" data-dl="${a.download_type}" data-updated="${a.updated_at}" data-name="${a.name.toLowerCase()}" data-bytes="${a.size_bytes || 0}" data-offline="${isOffline ? '1' : '0'}">
   ${icon(a, 56)}
   <div class="app-card-body">
     <h3 class="app-card-title"><a href="/apps/${a.slug}/">${a.name}</a></h3>
-    <p class="app-card-meta"><a href="/developer/${a.dev_slug}/" class="dev">${a.dev_name}</a> · <a href="${catUrl({ kind: a.cat_kind, slug: a.cat_slug })}" class="cat">${a.cat_name}</a></p>
+    <p class="app-card-meta"><a href="/developer/${a.dev_slug}/" class="dev">${a.dev_name}</a> &bull; <a href="${catUrl({ kind: a.cat_kind, slug: a.cat_slug })}" class="cat">${a.cat_name}</a></p>
     ${opts.summary ? html`<p class="sum">${a.summary}</p>` : ''}
     <div class="app-card-bottom">
       ${stars(a.rating_avg, a.review_count)}
-      ${sizeText ? html`<span class="app-card-sep">·</span><span class="app-card-size">${sizeText}</span>` : ''}
+      ${verText ? html`<span class="app-card-sep">&bull;</span><span class="app-card-version" style="font-weight: 600; color: var(--text); font-size: 0.82rem;">${verText}</span>` : ''}
+      ${sizeText ? html`<span class="app-card-sep">&bull;</span><span class="app-card-size">${sizeText}</span>` : ''}
+      ${opts.showDate && dateText ? html`<span class="app-card-sep">&bull;</span><span class="app-card-date" style="color: var(--muted); font-size: 0.8rem;">${dateText}</span>` : ''}
     </div>
   </div>
   <a href="/apps/${a.slug}/" class="btn-apk-dl" aria-label="Download ${a.name} APK">Download</a>

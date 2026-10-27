@@ -1066,11 +1066,19 @@ export async function appHandler(req, res) {
     if (guide) result = guideDetailPage(req, guide);
   }
 
-  // 7. Games category: /games/:slug/
+  // 7. Games category or old /games/:app_slug/ redirect to /apps/:slug/
   else if (pathname.startsWith('/games/')) {
     const slug = pathname.slice(7).replace(/\/$/, '');
     const cat = D.getCategory(slug);
-    if (cat && cat.kind === 'game') result = categoryPage(req, cat);
+    if (cat && cat.kind === 'game') {
+      result = categoryPage(req, cat);
+    } else {
+      const app = D.getApp(slug);
+      if (app) {
+        res.writeHead(301, { Location: `/apps/${app.slug}/` });
+        return res.end();
+      }
+    }
   }
 
   // 8. Apps routes:
