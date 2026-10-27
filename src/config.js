@@ -52,10 +52,10 @@ export const config = {
   isProd: process.env.NODE_ENV === 'production',
   // Thresholds that decide whether a page is useful enough to be indexed.
   thresholds: {
-    minReviewsForIndex: 3,
-    minReviewsForAverage: 3,
-    minVersionsForIndex: 2,
-    minAlternativesForIndex: 2,
+    minReviewsForIndex: 1,
+    minReviewsForAverage: 1,
+    minVersionsForIndex: 1,
+    minAlternativesForIndex: 1,
     minAppsForCategory: 2,
     minAppsForDeveloper: 2,
     minDeveloperBioChars: 280,
