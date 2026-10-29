@@ -170,7 +170,7 @@
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/bitwarden/</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/blokada/</loc>
@@ -222,7 +222,7 @@
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/canva/</loc>
-    <lastmod>2026-06-16</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/canva-pro/</loc>
@@ -230,7 +230,7 @@
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/capcut/</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/carousell/</loc>
@@ -249,6 +249,10 @@
     <lastmod>2026-05-27</lastmod>
   </url>
   <url>
+    <loc>https://www.apkworlds.co.uk/apps/chatgpt/</loc>
+    <lastmod>2026-10-29</lastmod>
+  </url>
+  <url>
     <loc>https://www.apkworlds.co.uk/apps/chime/</loc>
     <lastmod>2026-09-26</lastmod>
   </url>
@@ -259,9 +263,5 @@
   <url>
     <loc>https://www.apkworlds.co.uk/apps/chrome-canary/</loc>
     <lastmod>2026-07-13</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/cinema-hd/</loc>
-    <lastmod>2026-09-27</lastmod>
   </url>
 </urlset>

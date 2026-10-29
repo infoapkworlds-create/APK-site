@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.apkworlds.co.uk/apps/rar-for-android/</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
     <loc>https://www.apkworlds.co.uk/apps/reddit/</loc>
     <lastmod>2026-05-08</lastmod>
   </url>
@@ -78,7 +82,7 @@
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/signal/</loc>
-    <lastmod>2026-09-25</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/sketchbook/</loc>
@@ -146,7 +150,7 @@
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/spotify/</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/spotify-lite/</loc>
@@ -218,7 +222,7 @@
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/telegram/</loc>
-    <lastmod>2026-08-02</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/telegram-x/</loc>
@@ -259,9 +263,5 @@
   <url>
     <loc>https://www.apkworlds.co.uk/apps/tiktok/</loc>
     <lastmod>2026-10-09</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/tiktok-asia/</loc>
-    <lastmod>2026-07-27</lastmod>
   </url>
 </urlset>

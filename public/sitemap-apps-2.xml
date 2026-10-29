@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.apkworlds.co.uk/apps/cinema-hd/</loc>
+    <lastmod>2026-09-27</lastmod>
+  </url>
+  <url>
     <loc>https://www.apkworlds.co.uk/apps/citymapper/</loc>
     <lastmod>2026-04-07</lastmod>
   </url>
@@ -94,7 +98,7 @@
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/duolingo/</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/easypaisa/</loc>
@@ -174,7 +178,7 @@
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/firefox/</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://www.apkworlds.co.uk/apps/fitbit/</loc>
@@ -259,9 +263,5 @@
   <url>
     <loc>https://www.apkworlds.co.uk/apps/google-slides/</loc>
     <lastmod>2026-08-21</lastmod>
-  </url>
-  <url>
-    <loc>https://www.apkworlds.co.uk/apps/google-translate/</loc>
-    <lastmod>2026-04-24</lastmod>
   </url>
 </urlset>
